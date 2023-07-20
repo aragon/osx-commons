@@ -11,16 +11,15 @@ yarn add @aragon/osx-commons-subgraph
 ```
 
 ## Nohoist Configuration
+
 If this package is intended to be used with Matchstick in a mono repo, you might need to configure it to not hoist its dependencies.
 
 This can be done by adding the following configuration to your project's root package.json file:
+
 ```json
 {
   "workspaces": {
-    "nohoist": [
-        "**/@aragon/osx-commons-subgraph",
-        "**/@aragon/osx-commons-subgraph/**"
-        ]
+    "nohoist": ["**/@aragon/osx-commons-subgraph", "**/@aragon/osx-commons-subgraph/**"]
   }
 }
 ```
