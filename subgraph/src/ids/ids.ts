@@ -1,13 +1,7 @@
 import {Address} from '@graphprotocol/graph-ts';
+import {getIdFromAddress, getIdFromStringArray} from '../utils';
 
-export function getIdFromStringArray(inputs: string[]): string {
-  return inputs.join('_');
-}
-
-export function getIdFromAddress(address: Address): string {
-  return address.toHexString();
-}
-
+// DAO
 export function getDaoId(dao: Address): string {
   return getIdFromAddress(dao);
 }
