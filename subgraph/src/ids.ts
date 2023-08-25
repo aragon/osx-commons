@@ -1,5 +1,5 @@
 import {Address} from '@graphprotocol/graph-ts';
 
-export function getDaoId(dao: Address): string {
-  return dao.toHexString();
+export function getDaoId(daoAddress: Address): string {
+  return daoAddress.toHexString();
 }

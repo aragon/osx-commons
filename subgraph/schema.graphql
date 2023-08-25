@@ -1,0 +1,4 @@
+"DO NOT DELET OR EDIT. This file needs to be parsed by matchsitck before the test so this is the minimal valid file."
+type Test {
+  id: ID!
+}
