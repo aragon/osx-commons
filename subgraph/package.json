@@ -16,10 +16,15 @@
   },
   "homepage": "https://github.com/aragon/osx#readme",
   "scripts": {
-    "test": ""
+    "test": "graph test",
+    "lint": "prettier --write  ./**/*.ts"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-ts": "0.31.0"
   },
   "devDependencies": {
-    "@graphprotocol/graph-ts": "^0.27.0",
+    "matchstick-as": "0.5.2",
+    "@graphprotocol/graph-cli": "0.56.0",
     "@types/node": "^18.7.15",
     "typescript": "^4.9.5"
   }

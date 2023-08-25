@@ -26,3 +26,5 @@ yarn-error.log*
 # generated
 generated
 .bin
+
+.latest.json
