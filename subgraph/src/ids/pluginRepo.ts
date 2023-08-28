@@ -5,16 +5,15 @@ import {
   crypto,
   ethereum,
 } from '@graphprotocol/graph-ts';
-import {getIdFromAddress, getIdFromStringArray} from '../utils/ids';
 import {PERMISSION_OPERATIONS} from '../utils/constants';
 
 // PluginRepo
 export function getPluginRepoId(pluginRepo: Address): string {
-  return getIdFromAddress(pluginRepo);
+  return pluginRepo.toHexString();
 }
 
 export function getPluginSetupId(pluginSetup: Address): string {
-  return getIdFromAddress(pluginSetup);
+  return pluginSetup.toHexString();
 }
 
 export function getPluginInstallationId(
@@ -46,17 +45,16 @@ export function getPluginPreparationId(
   pluginInstallationId: string,
   pluginSetupId: string
 ): string {
-  return getIdFromStringArray([pluginInstallationId, pluginSetupId]);
+  const ids = [pluginInstallationId, pluginSetupId];
+  return ids.join('_');
 }
 
 export function getPluginReleaseId(
   pluginRepo: Address,
   release: Number
 ): string {
-  return getIdFromStringArray([
-    getPluginRepoId(pluginRepo),
-    release.toString(),
-  ]);
+  const ids = [getPluginRepoId(pluginRepo), release.toString()];
+  return ids.join('_');
 }
 
 export function getPluginVersionId(
@@ -64,11 +62,12 @@ export function getPluginVersionId(
   release: Number,
   build: number
 ) {
-  return getIdFromStringArray([
+  const ids = [
     getPluginRepoId(pluginRepo),
     release.toString(),
     build.toString(),
-  ]);
+  ];
+  return ids.join('_');
 }
 
 export function getPluginPermissionId(
@@ -79,14 +78,13 @@ export function getPluginPermissionId(
   permissionId: Bytes
 ) {
   const operationId = PERMISSION_OPERATIONS.get(operation);
-  const whereId = getIdFromAddress(where);
-  const whoId = getIdFromAddress(who);
-
-  return getIdFromStringArray([
+  const ids = [
     pluginPreparationId,
     operationId,
-    whereId,
-    whoId,
+    where.toHexString(),
+    who.toHexString(),
     permissionId.toHexString(),
-  ]);
+  ];
+
+  return ids.join('_');
 }
