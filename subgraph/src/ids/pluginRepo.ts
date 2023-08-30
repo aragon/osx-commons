@@ -37,12 +37,11 @@ export function getPluginSetupId(pluginSetup: Address): string {
 export function getPluginInstallationId(
   dao: Address,
   plugin: Address
-): Bytes | null {
-  let installationIdTupleArray = new ethereum.Tuple();
-  installationIdTupleArray.push(ethereum.Value.fromAddress(dao));
-  installationIdTupleArray.push(ethereum.Value.fromAddress(plugin));
+): string | null {
+  let installationIdTuple = new ethereum.Tuple();
+  installationIdTuple.push(ethereum.Value.fromAddress(dao));
+  installationIdTuple.push(ethereum.Value.fromAddress(plugin));
 
-  let installationIdTuple = installationIdTupleArray as ethereum.Tuple;
   let installationIdTupleEncoded = ethereum.encode(
     ethereum.Value.fromTuple(installationIdTuple)
   );
@@ -54,7 +53,7 @@ export function getPluginInstallationId(
           ByteArray.fromHexString(installationIdTupleEncoded.toHexString())
         )
         .toHexString()
-    );
+    ).toHexString();
   }
   return null;
 }
@@ -68,13 +67,10 @@ export function getPluginInstallationId(
  * @returns A concatenated ID string for plugin preparation.
  */
 export function getPluginPreparationId(
-  pluginInstallationId: Bytes,
+  pluginInstallationId: string,
   prepareSetupId: Bytes
 ): string {
-  const ids = [
-    pluginInstallationId.toHexString(),
-    prepareSetupId.toHexString()
-  ];
+  const ids = [pluginInstallationId, prepareSetupId.toHexString()];
   return ids.join('_');
 }
 

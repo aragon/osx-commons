@@ -50,9 +50,9 @@ describe('PluginRepo ID generation', () => {
 
       const expectedId = Bytes.fromHexString(
         crypto.keccak256(expectedEncodedBytes).toHexString()
-      );
+      ).toHexString();
 
-      assert.bytesEquals(pluginInstallationId, expectedId);
+      assert.stringEquals(pluginInstallationId, expectedId);
 
       // The test is done.
       return;
@@ -83,7 +83,7 @@ describe('PluginRepo ID generation', () => {
       );
 
       // Expected result
-      const expectedPreparationId = `${pluginInstallationId.toHexString()}_${DUMMY_BYTES32_HEX}`;
+      const expectedPreparationId = `${pluginInstallationId}_${DUMMY_BYTES32_HEX}`;
 
       assert.stringEquals(pluginPreparationId, expectedPreparationId);
 
@@ -136,7 +136,7 @@ describe('PluginRepo ID generation', () => {
     const WHO_ADDRESS = Address.fromString(ADDRESS_TWO);
     const PERMISSION_ID = Bytes.fromHexString(DUMMY_BYTES32_HEX);
     const PLUGIN_PREPARATION_ID = getPluginPreparationId(
-      Bytes.fromHexString(DUMMY_BYTES32_HEX),
+      DUMMY_BYTES32_HEX,
       Bytes.fromHexString(DUMMY_BYTES32_HEX)
     );
 
