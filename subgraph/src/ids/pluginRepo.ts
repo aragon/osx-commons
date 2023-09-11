@@ -5,7 +5,6 @@ import {
   crypto,
   ethereum
 } from '@graphprotocol/graph-ts';
-import {PERMISSION_OPERATIONS} from '../utils/constants';
 
 /**
  * Generates the plugin repository's ID using its address in hexadecimal format.
@@ -104,34 +103,5 @@ export function getPluginVersionId(
     release.toString(),
     build.toString()
   ];
-  return ids.join('_');
-}
-
-/**
- * Generates a unique permission ID for a plugin based on multiple attributes including operation, addresses, and existing permission ID.
- *
- * @param pluginPreparationId - The ID from plugin preparation.
- * @param operation - The numerical code for the operation type.
- * @param where - The address specifying the location of the permission.
- * @param who - The address specifying the entity of the permission.
- * @param permissionId - An existing permission ID.
- * @returns A concatenated unique ID string for the plugin permission.
- */
-export function getPluginPermissionId(
-  pluginPreparationId: string,
-  operation: i32,
-  where: Address,
-  who: Address,
-  permissionId: Bytes
-): string {
-  const operationId = PERMISSION_OPERATIONS.get(operation);
-  const ids = [
-    pluginPreparationId,
-    operationId,
-    where.toHexString(),
-    who.toHexString(),
-    permissionId.toHexString()
-  ];
-
   return ids.join('_');
 }

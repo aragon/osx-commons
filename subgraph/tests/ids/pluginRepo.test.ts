@@ -128,31 +128,4 @@ describe('PluginRepo ID generation', () => {
 
     assert.stringEquals(pluginVersionId, expectedId);
   });
-
-  test('`getPluginPermissionId` should return a concatenated unique ID string for the plugin permission', () => {
-    // Constants
-    const OPERATION: i32 = 1;
-    const WHERE_ADDRESS = Address.fromString(ADDRESS_ONE);
-    const WHO_ADDRESS = Address.fromString(ADDRESS_TWO);
-    const PERMISSION_ID = Bytes.fromHexString(DUMMY_BYTES32_HEX);
-    const PLUGIN_PREPARATION_ID = getPluginPreparationId(
-      DUMMY_BYTES32_HEX,
-      Bytes.fromHexString(DUMMY_BYTES32_HEX)
-    );
-
-    // Generate the pluginPermissionId
-    const pluginPermissionId = getPluginPermissionId(
-      PLUGIN_PREPARATION_ID,
-      OPERATION,
-      WHERE_ADDRESS,
-      WHO_ADDRESS,
-      PERMISSION_ID
-    );
-
-    const expectedId = `${PLUGIN_PREPARATION_ID}_${PERMISSION_OPERATIONS.get(
-      OPERATION
-    )}_${WHERE_ADDRESS.toHexString()}_${WHO_ADDRESS.toHexString()}_${PERMISSION_ID.toHexString()}`;
-
-    assert.stringEquals(pluginPermissionId, expectedId);
-  });
 });
