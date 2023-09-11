@@ -1,0 +1,26 @@
+name: Subgraph Tests
+on:
+  push:
+    paths:
+      - 'subgraph/**'
+      - '.github/workflows/subgraph-*.yml'
+
+env:
+  working-directory: subgraph
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{env.working-directory}}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install dependencies
+        run: yarn install --pure-lockfile
+      - name: Run Tests
+        run: yarn run test

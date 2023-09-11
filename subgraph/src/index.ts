@@ -1,1 +1,2 @@
-export * from './ids';
+export * from './ids/dao';
+export * from './ids/pluginRepo';
