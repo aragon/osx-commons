@@ -2,36 +2,24 @@ import {Address, Bytes} from '@graphprotocol/graph-ts';
 import {PERMISSION_OPERATIONS} from '../utils/constants';
 
 /**
- * Generates the ContractPermissionId ID using the given parameters.
- *
- * @param where - The address of the target contract for which a permission is granted.
- * @param permissionId - The permission identifier.
- * @returns A concatenated ID string for ContractPermissionId entity.
- */
-export function getContractPermissionId(
-  where: Address,
-  permissionId: Bytes
-): string {
-  const ids = [where.toHexString(), permissionId.toHexString()];
-  return ids.join('_');
-}
-
-/**
  * Generates a unique permission ID using the given parameters.
  *
+ * @param emittingContract - The address of the contract where the event is emitted.
  * @param where - The address of the target contract for which a permission is granted.
  * @param permissionId - The permission identifier in byte format.
  * @param who - The address of the entity to which the permission is granted.
  * @returns A concatenated ID string for the Permission entity.
  */
 export function getPermissionId(
-  where: Address,
+  emittingContract: Address,
   permissionId: Bytes,
+  where: Address,
   who: Address
 ): string {
   const ids = [
-    where.toHexString(),
+    emittingContract.toHexString(),
     permissionId.toHexString(),
+    where.toHexString(),
     who.toHexString()
   ];
   return ids.join('_');

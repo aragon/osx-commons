@@ -1,38 +1,34 @@
 import {Address, Bytes} from '@graphprotocol/graph-ts';
 import {
-  getContractPermissionId,
   getPermissionId,
   getPluginPermissionId,
   getPluginPreparationId
 } from '../../src';
 import {assert, describe, test} from 'matchstick-as/assembly/index';
-import {ADDRESS_ONE, ADDRESS_TWO, DUMMY_BYTES32_HEX} from '../constants';
+import {
+  ADDRESS_ZERO,
+  ADDRESS_ONE,
+  ADDRESS_TWO,
+  DUMMY_BYTES32_HEX
+} from '../constants';
 import {PERMISSION_OPERATIONS} from '../../src/utils/constants';
 
 // Tests structure (matchstick-as >=0.5.0)
 // https://thegraph.com/docs/en/developer/matchstick/#tests-structure-0-5-0
 
 describe('Permissions ID generation', () => {
-  test('`getContractPermissionId` should return the id representation of a ContractPermissionId', () => {
-    const where = Address.fromString(ADDRESS_ONE);
-    const permissionId = Bytes.fromHexString(DUMMY_BYTES32_HEX);
-
-    const expectedId = `${where.toHexString()}_${permissionId.toHexString()}`;
-
-    assert.stringEquals(
-      getContractPermissionId(where, permissionId),
-      expectedId
-    );
-  });
-
   test('`getPermissionId` should return the id representation of a permission', () => {
-    const where = Address.fromString(ADDRESS_ONE);
+    const emittingContract = Address.fromString(ADDRESS_ZERO);
     const permissionId = Bytes.fromHexString(DUMMY_BYTES32_HEX);
+    const where = Address.fromString(ADDRESS_ONE);
     const who = Address.fromString(ADDRESS_TWO);
 
-    const expectedId = `${where.toHexString()}_${permissionId.toHexString()}_${who.toHexString()}`;
+    const expectedId = `${emittingContract.toHexString()}_${permissionId.toHexString()}_${where.toHexString()}_${who.toHexString()}`;
 
-    assert.stringEquals(getPermissionId(where, permissionId, who), expectedId);
+    assert.stringEquals(
+      getPermissionId(emittingContract, permissionId, where, who),
+      expectedId
+    );
   });
 
   test('`getPluginPermissionId` should return a concatenated unique ID string for the plugin permission', () => {
