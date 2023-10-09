@@ -5,7 +5,7 @@ import {PERMISSION_OPERATIONS} from '../utils/constants';
  * Generates the ContractPermissionId ID using the given parameters.
  *
  * @param where - The address of the target contract for which a permission is granted.
- * * @param permissionId - The permission identifier.
+ * @param permissionId - The permission identifier.
  * @returns A concatenated ID string for ContractPermissionId entity.
  */
 export function getContractPermissionId(
