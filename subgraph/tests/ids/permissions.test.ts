@@ -16,7 +16,7 @@ import {PERMISSION_OPERATIONS} from '../../src/utils/constants';
 // Tests structure (matchstick-as >=0.5.0)
 // https://thegraph.com/docs/en/developer/matchstick/#tests-structure-0-5-0
 
-describe('Permissions ID generation', () => {
+describe('DAO Permissions ID generation', () => {
   test('`getPermissionId` should return the id representation of a permission', () => {
     const emittingContract = Address.fromString(ADDRESS_ZERO);
     const permissionId = Bytes.fromHexString(DUMMY_BYTES32_HEX);
@@ -30,7 +30,9 @@ describe('Permissions ID generation', () => {
       expectedId
     );
   });
+});
 
+describe('Plugin Permissions ID generation', () => {
   test('`getPluginPermissionId` should return a concatenated unique ID string for the plugin permission', () => {
     // Constants
     const OPERATION: i32 = 1;
