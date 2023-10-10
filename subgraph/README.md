@@ -33,10 +33,10 @@ After installing @aragon/osx-subgraph-commons, you can import and use its functi
 Example:
 
 ```ts
-import {getDaoId} from '@aragon/osx-commons-subgraph';
+import {generateDaoEntityId} from '@aragon/osx-commons-subgraph';
 
-const daoId = getDaoId(<some-dao-address>);
-console.log(`The DAO ID is: ${daoId}`);
+const daoEntityId = generateDaoEntityId(<some-dao-address>);
+console.log(`The DAO ID is: ${daoEntityId}`);
 ```
 
-In this example, the getDaoId function is used to generate a DAO ID from a given Ethereum address.
+In this example, the generateDaoEntityId function is used to generate a DAO ID from a given Ethereum address.
