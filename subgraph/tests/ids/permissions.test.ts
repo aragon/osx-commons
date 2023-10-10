@@ -1,8 +1,8 @@
 import {Address, Bytes} from '@graphprotocol/graph-ts';
 import {
-  getPermissionId,
-  getPluginPermissionId,
-  getPluginPreparationId
+  generatePermissionEntityId,
+  generatePluginPermissionEntityId,
+  generatePluginPreparationEntityId
 } from '../../src';
 import {assert, describe, test} from 'matchstick-as/assembly/index';
 import {
@@ -17,7 +17,7 @@ import {PERMISSION_OPERATIONS} from '../../src/utils/constants';
 // https://thegraph.com/docs/en/developer/matchstick/#tests-structure-0-5-0
 
 describe('DAO Permissions ID generation', () => {
-  test('`getPermissionId` should return the id representation of a permission', () => {
+  test('`generatePermissionEntityId` should return the id representation of a permission', () => {
     const emittingContract = Address.fromString(ADDRESS_ZERO);
     const permissionId = Bytes.fromHexString(DUMMY_BYTES32_HEX);
     const where = Address.fromString(ADDRESS_ONE);
@@ -26,26 +26,26 @@ describe('DAO Permissions ID generation', () => {
     const expectedId = `${emittingContract.toHexString()}_${permissionId.toHexString()}_${where.toHexString()}_${who.toHexString()}`;
 
     assert.stringEquals(
-      getPermissionId(emittingContract, permissionId, where, who),
+      generatePermissionEntityId(emittingContract, permissionId, where, who),
       expectedId
     );
   });
 });
 
 describe('Plugin Permissions ID generation', () => {
-  test('`getPluginPermissionId` should return a concatenated unique ID string for the plugin permission', () => {
+  test('`generatePluginPermissionEntityId` should return a concatenated unique ID string for the plugin permission', () => {
     // Constants
     const OPERATION: i32 = 1;
     const WHERE_ADDRESS = Address.fromString(ADDRESS_ONE);
     const WHO_ADDRESS = Address.fromString(ADDRESS_TWO);
     const PERMISSION_ID = Bytes.fromHexString(DUMMY_BYTES32_HEX);
-    const PLUGIN_PREPARATION_ID = getPluginPreparationId(
+    const PLUGIN_PREPARATION_ID = generatePluginPreparationEntityId(
       DUMMY_BYTES32_HEX,
       Bytes.fromHexString(DUMMY_BYTES32_HEX)
     );
 
-    // Generate the pluginPermissionId
-    const pluginPermissionId = getPluginPermissionId(
+    // Generate the pluginPermissionEntityId
+    const pluginPermissionEntityId = generatePluginPermissionEntityId(
       PLUGIN_PREPARATION_ID,
       OPERATION,
       WHERE_ADDRESS,
@@ -57,6 +57,6 @@ describe('Plugin Permissions ID generation', () => {
       OPERATION
     )}_${WHERE_ADDRESS.toHexString()}_${WHO_ADDRESS.toHexString()}_${PERMISSION_ID.toHexString()}`;
 
-    assert.stringEquals(pluginPermissionId, expectedId);
+    assert.stringEquals(pluginPermissionEntityId, expectedId);
   });
 });
