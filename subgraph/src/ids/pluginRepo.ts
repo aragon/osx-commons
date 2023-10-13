@@ -1,11 +1,11 @@
+import {PERMISSION_OPERATIONS} from '../utils/constants';
 import {
   Address,
   ByteArray,
   Bytes,
   crypto,
-  ethereum
+  ethereum,
 } from '@graphprotocol/graph-ts';
-import {PERMISSION_OPERATIONS} from '../utils/constants';
 
 /**
  * Generates the plugin repository's ID using its address in hexadecimal format.
@@ -36,23 +36,23 @@ export function getPluginSetupId(pluginSetup: Address): string {
  */
 export function getPluginInstallationId(
   dao: Address,
-  plugin: Address
+  plugin: Address,
 ): string | null {
-  let installationIdTuple = new ethereum.Tuple();
+  const installationIdTuple = new ethereum.Tuple();
   installationIdTuple.push(ethereum.Value.fromAddress(dao));
   installationIdTuple.push(ethereum.Value.fromAddress(plugin));
 
-  let installationIdTupleEncoded = ethereum.encode(
-    ethereum.Value.fromTuple(installationIdTuple)
+  const installationIdTupleEncoded = ethereum.encode(
+    ethereum.Value.fromTuple(installationIdTuple),
   );
 
   if (installationIdTupleEncoded) {
     return Bytes.fromHexString(
       crypto
         .keccak256(
-          ByteArray.fromHexString(installationIdTupleEncoded.toHexString())
+          ByteArray.fromHexString(installationIdTupleEncoded.toHexString()),
         )
-        .toHexString()
+        .toHexString(),
     ).toHexString();
   }
   return null;
@@ -68,7 +68,7 @@ export function getPluginInstallationId(
  */
 export function getPluginPreparationId(
   pluginInstallationId: string,
-  prepareSetupId: Bytes
+  prepareSetupId: Bytes,
 ): string {
   const ids = [pluginInstallationId, prepareSetupId.toHexString()];
   return ids.join('_');
@@ -97,12 +97,12 @@ export function getPluginReleaseId(pluginRepo: Address, release: i32): string {
 export function getPluginVersionId(
   pluginRepo: Address,
   release: i32,
-  build: i32
+  build: i32,
 ): string {
   const ids = [
     getPluginRepoId(pluginRepo),
     release.toString(),
-    build.toString()
+    build.toString(),
   ];
   return ids.join('_');
 }
@@ -122,7 +122,7 @@ export function getPluginPermissionId(
   operation: i32,
   where: Address,
   who: Address,
-  permissionId: Bytes
+  permissionId: Bytes,
 ): string {
   const operationId = PERMISSION_OPERATIONS.get(operation);
   const ids = [
@@ -130,7 +130,7 @@ export function getPluginPermissionId(
     operationId,
     where.toHexString(),
     who.toHexString(),
-    permissionId.toHexString()
+    permissionId.toHexString(),
   ];
 
   return ids.join('_');

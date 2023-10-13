@@ -1,0 +1,33 @@
+name: 'Linting & Formatting'
+
+env:
+  working-directory: .
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  checks:
+    runs-on: 'ubuntu-latest'
+    defaults:
+      run:
+        working-directory: ${{env.working-directory}}
+    steps:
+      - name: 'Check out the repo'
+        uses: 'actions/checkout@v3'
+
+      - name: 'Install Node.js'
+        uses: 'actions/setup-node@v3'
+        with:
+          cache: 'yarn'
+          node-version: 16
+
+      - name: 'Install the dependencies'
+        run: 'yarn install'
+
+      - name: 'Lint the code'
+        run: 'yarn lint'
+
+      - name: 'Check code formatting'
+        run: yarn prettier:check

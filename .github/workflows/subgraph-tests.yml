@@ -1,4 +1,4 @@
-name: Subgraph Tests
+name: Subgraph
 on:
   push:
     paths:

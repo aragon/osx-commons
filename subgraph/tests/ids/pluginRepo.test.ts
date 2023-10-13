@@ -1,5 +1,3 @@
-import {Address, Bytes, crypto} from '@graphprotocol/graph-ts';
-import {assert, describe, log, test} from 'matchstick-as/assembly/index';
 import {
   getPluginRepoId,
   getPluginSetupId,
@@ -7,15 +5,12 @@ import {
   getPluginPreparationId,
   getPluginReleaseId,
   getPluginVersionId,
-  getPluginPermissionId
+  getPluginPermissionId,
 } from '../../src';
-import {
-  ADDRESS_ONE,
-  ADDRESS_TWO,
-  DUMMY_BYTES32_HEX,
-  DUMMY_INSTALLATION_ID
-} from '../constants';
 import {PERMISSION_OPERATIONS} from '../../src/utils/constants';
+import {ADDRESS_ONE, ADDRESS_TWO, DUMMY_BYTES32_HEX} from '../constants';
+import {Address, Bytes, crypto} from '@graphprotocol/graph-ts';
+import {assert, describe, test} from 'matchstick-as/assembly/index';
 
 describe('PluginRepo ID generation', () => {
   test('`getPluginRepoId` should return the hexadecimal representation of the provided address', () => {
@@ -40,16 +35,16 @@ describe('PluginRepo ID generation', () => {
     // Generate the pluginInstallationId.
     const pluginInstallationId = getPluginInstallationId(
       DAO_ADDRESS,
-      PLUGIN_ADDRESS
+      PLUGIN_ADDRESS,
     );
 
     if (pluginInstallationId) {
       const expectedEncodedBytes = Bytes.fromHexString(
-        '0x00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002'
+        '0x00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002',
       );
 
       const expectedId = Bytes.fromHexString(
-        crypto.keccak256(expectedEncodedBytes).toHexString()
+        crypto.keccak256(expectedEncodedBytes).toHexString(),
       ).toHexString();
 
       assert.stringEquals(pluginInstallationId, expectedId);
@@ -70,7 +65,7 @@ describe('PluginRepo ID generation', () => {
     // Generate the pluginInstallationId.
     const pluginInstallationId = getPluginInstallationId(
       DAO_ADDRESS,
-      PLUGIN_ADDRESS
+      PLUGIN_ADDRESS,
     );
 
     if (pluginInstallationId) {
@@ -79,7 +74,7 @@ describe('PluginRepo ID generation', () => {
       // Generate the pluginPreparationId.
       const pluginPreparationId = getPluginPreparationId(
         pluginInstallationId,
-        pluginSetupId
+        pluginSetupId,
       );
 
       // Expected result
@@ -103,7 +98,7 @@ describe('PluginRepo ID generation', () => {
     // Generate the pluginReleaseId.
     const pluginReleaseId = getPluginReleaseId(
       PLUGIN_REPO_ADDRESS,
-      PLUGIN_RELEASE
+      PLUGIN_RELEASE,
     );
 
     const expectedId = `${ADDRESS_ONE}_${PLUGIN_RELEASE}`;
@@ -121,7 +116,7 @@ describe('PluginRepo ID generation', () => {
     const pluginVersionId = getPluginVersionId(
       PLUGIN_REPO_ADDRESS,
       PLUGIN_RELEASE,
-      PLUGIN_BUILD
+      PLUGIN_BUILD,
     );
 
     const expectedId = `${ADDRESS_ONE}_${PLUGIN_RELEASE}_${PLUGIN_BUILD}`;
@@ -137,7 +132,7 @@ describe('PluginRepo ID generation', () => {
     const PERMISSION_ID = Bytes.fromHexString(DUMMY_BYTES32_HEX);
     const PLUGIN_PREPARATION_ID = getPluginPreparationId(
       DUMMY_BYTES32_HEX,
-      Bytes.fromHexString(DUMMY_BYTES32_HEX)
+      Bytes.fromHexString(DUMMY_BYTES32_HEX),
     );
 
     // Generate the pluginPermissionId
@@ -146,11 +141,11 @@ describe('PluginRepo ID generation', () => {
       OPERATION,
       WHERE_ADDRESS,
       WHO_ADDRESS,
-      PERMISSION_ID
+      PERMISSION_ID,
     );
 
     const expectedId = `${PLUGIN_PREPARATION_ID}_${PERMISSION_OPERATIONS.get(
-      OPERATION
+      OPERATION,
     )}_${WHERE_ADDRESS.toHexString()}_${WHO_ADDRESS.toHexString()}_${PERMISSION_ID.toHexString()}`;
 
     assert.stringEquals(pluginPermissionId, expectedId);
