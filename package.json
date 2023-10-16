@@ -31,8 +31,7 @@
   },
   "scripts": {
     "test": "yarn --cwd ./subgraph test",
-    "lint": "yarn lint:ts && yarn --cwd ./contracts lint:sol",
-    "lint:ts": "eslint --ignore-path ./.eslintignore --ext .js,.ts .",
+    "lint": "eslint --ignore-path ./.eslintignore --ext .js,.ts .",
     "clean": "yarn --cwd ./subgraph clean",
     "prettier:check": "prettier --check \"**/*.{js,json,md,sol,ts,yml}\"",
     "prettier:write": "prettier --write \"**/*.{js,json,md,sol,ts,yml}\""
