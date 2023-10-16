@@ -1,30 +1,38 @@
-# directories
+# dependencies
+node_modules
+
+# secrets
+.env
+
+# testing
+coverage
 .coverage_artifacts
 .coverage_cache
 .coverage_contracts
+
+# production
 artifacts
 build
 cache
-coverage
 dist
-node_modules
+dist-ssr
+*.local
+.cache
 typechain
 
-packages/subgraph/imported
-packages/subgraph/generated
-packages/subgraph/tests/.bin
-
-# files
-*.env
-*.log
+# misc
 .DS_Store
-.pnp.*
+*.pem
+*.tgz
+
+# debug
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# generated
+generated
+.bin
 coverage.json
-
-contracts/docs/developer-portal/reference-guide
-
-
-packages/subgraph/deploy-output.txt
-packages/subgraph/subgraph.yaml
-packages/subgraph/tests/.latest.json
-packages/subgraph/tests/helpers/extended-schema.ts
+.latest.json
