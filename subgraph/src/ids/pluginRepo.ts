@@ -5,7 +5,6 @@ import {
   crypto,
   ethereum
 } from '@graphprotocol/graph-ts';
-import {PERMISSION_OPERATIONS} from '../utils/constants';
 
 /**
  * Generates the plugin repository's ID using its address in hexadecimal format.
@@ -13,7 +12,7 @@ import {PERMISSION_OPERATIONS} from '../utils/constants';
  * @param pluginRepo - The address of the plugin repository.
  * @returns A hexadecimal string representation of the provided address.
  */
-export function getPluginRepoId(pluginRepo: Address): string {
+export function generatePluginRepoEntityId(pluginRepo: Address): string {
   return pluginRepo.toHexString();
 }
 
@@ -23,7 +22,7 @@ export function getPluginRepoId(pluginRepo: Address): string {
  * @param pluginSetup - The address of the plugin setup.
  * @returns A hexadecimal string representation of the provided address.
  */
-export function getPluginSetupId(pluginSetup: Address): string {
+export function generatePluginSetupEntityId(pluginSetup: Address): string {
   return pluginSetup.toHexString();
 }
 
@@ -34,7 +33,7 @@ export function getPluginSetupId(pluginSetup: Address): string {
  * @param plugin - The address of the plugin.
  * @returns A unique ID based on the DAO and plugin's address or null if the encoding fails.
  */
-export function getPluginInstallationId(
+export function generatePluginInstallationEntityId(
   dao: Address,
   plugin: Address
 ): string | null {
@@ -61,16 +60,16 @@ export function getPluginInstallationId(
 /**
  * Generates a preparation ID by merging plugin installation ID and plugin setup ID.
  *
- * @param pluginInstallationId - The installation ID of the plugin.
+ * @param pluginInstallationEntityId - The installation ID of the plugin.
  * @param pluginSetupId - The preparedSetupId of the plugin emitted from `PluginSetupProcessor`.
  *                         Refer to the [PluginSetupProcessor contract](https://github.com/aragon/osx/blob/develop/packages/contracts/src/framework/plugin/setup/PluginSetupProcessorHelpers.sol) for more details.
  * @returns A concatenated ID string for plugin preparation.
  */
-export function getPluginPreparationId(
-  pluginInstallationId: string,
+export function generatePluginPreparationEntityId(
+  pluginInstallationEntityId: string,
   prepareSetupId: Bytes
 ): string {
-  const ids = [pluginInstallationId, prepareSetupId.toHexString()];
+  const ids = [pluginInstallationEntityId, prepareSetupId.toHexString()];
   return ids.join('_');
 }
 
@@ -81,8 +80,11 @@ export function getPluginPreparationId(
  * @param release - The number corresponding to the plugin's release.
  * @returns An ID string for the plugin release.
  */
-export function getPluginReleaseId(pluginRepo: Address, release: i32): string {
-  const ids = [getPluginRepoId(pluginRepo), release.toString()];
+export function generatePluginReleaseEntityId(
+  pluginRepo: Address,
+  release: i32
+): string {
+  const ids = [generatePluginRepoEntityId(pluginRepo), release.toString()];
   return ids.join('_');
 }
 
@@ -94,44 +96,15 @@ export function getPluginReleaseId(pluginRepo: Address, release: i32): string {
  * @param build - The build number for the specific version of the plugin.
  * @returns A unique ID string for the plugin version.
  */
-export function getPluginVersionId(
+export function generatePluginVersionEntityId(
   pluginRepo: Address,
   release: i32,
   build: i32
 ): string {
   const ids = [
-    getPluginRepoId(pluginRepo),
+    generatePluginRepoEntityId(pluginRepo),
     release.toString(),
     build.toString()
   ];
-  return ids.join('_');
-}
-
-/**
- * Generates a unique permission ID for a plugin based on multiple attributes including operation, addresses, and existing permission ID.
- *
- * @param pluginPreparationId - The ID from plugin preparation.
- * @param operation - The numerical code for the operation type.
- * @param where - The address specifying the location of the permission.
- * @param who - The address specifying the entity of the permission.
- * @param permissionId - An existing permission ID.
- * @returns A concatenated unique ID string for the plugin permission.
- */
-export function getPluginPermissionId(
-  pluginPreparationId: string,
-  operation: i32,
-  where: Address,
-  who: Address,
-  permissionId: Bytes
-): string {
-  const operationId = PERMISSION_OPERATIONS.get(operation);
-  const ids = [
-    pluginPreparationId,
-    operationId,
-    where.toHexString(),
-    who.toHexString(),
-    permissionId.toHexString()
-  ];
-
   return ids.join('_');
 }
