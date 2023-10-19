@@ -2,27 +2,11 @@
   "name": "@aragon/osx-commons-repo",
   "license": "AGPL-3.0-or-later",
   "private": true,
-  "workspaces": {
-    "packages": [
-      "contracts",
-      "subgraph"
-    ],
-    "nohoist": [
-      "**/@graphprotocol/graph-ts",
-      "**/@graphprotocol/graph-ts/**",
-      "**/@graphprotocol/graph-cli",
-      "**/@graphprotocol/graph-cli/**",
-      "**/matchstick-as",
-      "**/matchstick-as/**"
-    ]
-  },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.2.0",
     "@typescript-eslint/eslint-plugin": "^5.59.8",
     "@typescript-eslint/parser": "^5.44.0",
     "@types/node": "^18.7.15",
-    "cross-env": "^7.0.3",
-    "dotenv": "^16.3.1",
     "eslint": "^8.51.0",
     "eslint-config-prettier": "^8.8.0",
     "prettier": "^2.4.1",
@@ -30,9 +14,8 @@
     "typescript": "^4.9.5"
   },
   "scripts": {
-    "test": "yarn --cwd ./subgraph test",
-    "lint": "eslint --ignore-path ./.eslintignore --ext .js,.ts .",
-    "clean": "yarn --cwd ./subgraph clean",
+    "lint": "yarn run lint:subgraph:ts",
+    "lint:subgraph:ts": "eslint --ext .js,.ts ./subgraph/",
     "prettier:check": "prettier --check \"**/*.{js,json,md,sol,ts,yml}\"",
     "prettier:write": "prettier --write \"**/*.{js,json,md,sol,ts,yml}\""
   }

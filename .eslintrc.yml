@@ -1,14 +1,11 @@
+root: true
 extends:
   - 'eslint:recommended'
   - 'plugin:@typescript-eslint/eslint-recommended'
   - 'plugin:@typescript-eslint/recommended'
   - 'prettier'
-parser: '@typescript-eslint/parser'
-parserOptions:
-  project: 'tsconfig.json'
 plugins:
   - '@typescript-eslint'
-root: true
 rules:
   '@typescript-eslint/no-floating-promises':
     - error
@@ -20,3 +17,11 @@ rules:
     - error
     - argsIgnorePattern: '_'
       varsIgnorePattern: '_'
+
+ignorePatterns:
+  - '*.log'
+  - '*.env'
+  - '.env'
+  - '.DS_Store'
+  - .pnp.*
+  - 'node_modules'

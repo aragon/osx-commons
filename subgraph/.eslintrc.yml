@@ -1,0 +1,10 @@
+parser: '@typescript-eslint/parser'
+parserOptions:
+  project: './subgraph/tsconfig.json'
+
+# Custom eslint settings for the subgraph can be defined here
+ignorePatterns:
+  - imported/
+  - generated/
+  - tests/
+  - extended-schema.ts

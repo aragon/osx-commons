@@ -16,8 +16,10 @@
   },
   "homepage": "https://github.com/aragon/osx-commons#readme",
   "scripts": {
-    "test": "graph test",
-    "lint": "prettier --write  ./**/*.ts",
+    "test:fast": "graph test",
+    "test": "graph test -r",
+    "coverage": "graph test -c",
+    "lint": "cd ../ && yarn run lint:subgraph:ts",
     "clean": "rimraf deploy-output.txt ./build ./imported ./generated ./tests/.bin tests/.latest.json"
   },
   "dependencies": {
