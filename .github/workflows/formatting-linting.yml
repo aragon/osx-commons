@@ -20,6 +20,9 @@ jobs:
       - name: 'Install the dependencies'
         run: 'yarn install'
 
+      - name: 'Install subgraph dependencies'
+        run: 'cd subgraph/ && yarn install'
+
       - name: 'Lint subgraph'
         run: 'yarn lint:subgraph:ts >> $GITHUB_STEP_SUMMARY'
 

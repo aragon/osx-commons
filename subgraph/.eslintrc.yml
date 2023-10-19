@@ -7,4 +7,3 @@ ignorePatterns:
   - imported/
   - generated/
   - tests/
-  - extended-schema.ts
