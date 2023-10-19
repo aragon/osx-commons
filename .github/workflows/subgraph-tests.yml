@@ -1,4 +1,4 @@
-name: Subgraph Tests
+name: Subgraph
 on:
   push:
     paths:
@@ -9,7 +9,9 @@ env:
   working-directory: subgraph
 
 jobs:
-  test:
+  formatting-linting:
+    uses: ./.github/workflows/formatting-linting.yml
+  tests:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -23,4 +25,4 @@ jobs:
       - name: Install dependencies
         run: yarn install --pure-lockfile
       - name: Run Tests
-        run: yarn run test
+        run: yarn run coverage >> $GITHUB_STEP_SUMMARY

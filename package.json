@@ -1,0 +1,22 @@
+{
+  "name": "@aragon/osx-commons-repo",
+  "license": "AGPL-3.0-or-later",
+  "private": true,
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.2.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.8",
+    "@typescript-eslint/parser": "^5.44.0",
+    "@types/node": "^18.7.15",
+    "eslint": "^8.51.0",
+    "eslint-config-prettier": "^8.8.0",
+    "prettier": "^2.4.1",
+    "prettier-plugin-solidity": "^1.1.1",
+    "typescript": "^4.9.5"
+  },
+  "scripts": {
+    "lint": "yarn run lint:subgraph:ts",
+    "lint:subgraph:ts": "eslint --ext .js,.ts ./subgraph/",
+    "prettier:check": "prettier --check \"**/*.{js,json,md,sol,ts,yml}\"",
+    "prettier:write": "prettier --write \"**/*.{js,json,md,sol,ts,yml}\""
+  }
+}

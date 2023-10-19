@@ -1,11 +1,19 @@
 # dependencies
 node_modules
 
+# secrets
+.env
+
 # testing
 coverage
+.coverage_artifacts
+.coverage_cache
+.coverage_contracts
 
 # production
+artifacts
 build
+cache
 dist
 dist-ssr
 *.local
@@ -26,5 +34,5 @@ yarn-error.log*
 # generated
 generated
 .bin
-
+coverage.json
 .latest.json

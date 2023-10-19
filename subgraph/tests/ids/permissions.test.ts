@@ -1,17 +1,17 @@
-import {Address, Bytes} from '@graphprotocol/graph-ts';
 import {
   generatePermissionEntityId,
   generatePluginPermissionEntityId,
-  generatePluginPreparationEntityId
+  generatePluginPreparationEntityId,
 } from '../../src';
-import {assert, describe, test} from 'matchstick-as/assembly/index';
+import {PERMISSION_OPERATIONS} from '../../src/utils/constants';
 import {
   ADDRESS_ZERO,
   ADDRESS_ONE,
   ADDRESS_TWO,
-  DUMMY_BYTES32_HEX
+  DUMMY_BYTES32_HEX,
 } from '../constants';
-import {PERMISSION_OPERATIONS} from '../../src/utils/constants';
+import {Address, Bytes} from '@graphprotocol/graph-ts';
+import {assert, describe, test} from 'matchstick-as/assembly/index';
 
 // Tests structure (matchstick-as >=0.5.0)
 // https://thegraph.com/docs/en/developer/matchstick/#tests-structure-0-5-0

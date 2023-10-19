@@ -1,5 +1,3 @@
-import {Address, Bytes, crypto} from '@graphprotocol/graph-ts';
-import {assert, describe, log, test} from 'matchstick-as/assembly/index';
 import {
   generatePluginRepoEntityId,
   generatePluginSetupEntityId,
@@ -7,15 +5,12 @@ import {
   generatePluginPreparationEntityId,
   generatePluginReleaseEntityId,
   generatePluginVersionEntityId,
-  generatePluginPermissionEntityId
+  generatePluginPermissionEntityId,
 } from '../../src';
-import {
-  ADDRESS_ONE,
-  ADDRESS_TWO,
-  DUMMY_BYTES32_HEX,
-  DUMMY_INSTALLATION_ID
-} from '../constants';
 import {PERMISSION_OPERATIONS} from '../../src/utils/constants';
+import {ADDRESS_ONE, ADDRESS_TWO, DUMMY_BYTES32_HEX} from '../constants';
+import {Address, Bytes, crypto} from '@graphprotocol/graph-ts';
+import {assert, describe, test} from 'matchstick-as/assembly/index';
 
 describe('PluginRepo ID generation', () => {
   test('`generatePluginRepoEntityId` should return the hexadecimal representation of the provided address', () => {

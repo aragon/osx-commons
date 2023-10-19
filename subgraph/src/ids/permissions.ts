@@ -1,5 +1,5 @@
-import {Address, Bytes} from '@graphprotocol/graph-ts';
 import {PERMISSION_OPERATIONS} from '../utils/constants';
+import {Address, Bytes} from '@graphprotocol/graph-ts';
 
 /**
  * Generates a unique permission ID using the given parameters.
@@ -20,7 +20,7 @@ export function generatePermissionEntityId(
     emittingContract.toHexString(),
     permissionId.toHexString(),
     where.toHexString(),
-    who.toHexString()
+    who.toHexString(),
   ];
   return ids.join('_');
 }
@@ -48,7 +48,7 @@ export function generatePluginPermissionEntityId(
     operationId,
     where.toHexString(),
     who.toHexString(),
-    permissionId.toHexString()
+    permissionId.toHexString(),
   ];
 
   return ids.join('_');

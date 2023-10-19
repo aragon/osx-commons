@@ -2,15 +2,10 @@
 
 Please include a summary of the change and be sure you follow the contributions rules we do provide [here](./CONTRIBUTIONS.md)
 
-Task: [ID]()
+Task ID: [OS-?](https://aragonassociation.atlassian.net/browse/OS-?)
 
-## Type of change
-
-<!--- Please delete options that are not relevant. -->
-
-- [ ] Bug fix (non-breaking change which fixes an issue)
-- [ ] New feature (non-breaking change which adds functionality)
-- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
+<!--- Use the https://www.conventionalcommits.org to name this PR and its commits.-->
+<!--- Consider using https://commitizen.github.io/cz-cli/ for this purpose.-->
 
 ## Checklist:
 

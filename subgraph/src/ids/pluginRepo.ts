@@ -1,9 +1,10 @@
+import {PERMISSION_OPERATIONS} from '../utils/constants';
 import {
   Address,
   ByteArray,
   Bytes,
   crypto,
-  ethereum
+  ethereum,
 } from '@graphprotocol/graph-ts';
 
 /**
@@ -37,11 +38,11 @@ export function generatePluginInstallationEntityId(
   dao: Address,
   plugin: Address
 ): string | null {
-  let installationIdTuple = new ethereum.Tuple();
+  const installationIdTuple = new ethereum.Tuple();
   installationIdTuple.push(ethereum.Value.fromAddress(dao));
   installationIdTuple.push(ethereum.Value.fromAddress(plugin));
 
-  let installationIdTupleEncoded = ethereum.encode(
+  const installationIdTupleEncoded = ethereum.encode(
     ethereum.Value.fromTuple(installationIdTuple)
   );
 
@@ -104,7 +105,7 @@ export function generatePluginVersionEntityId(
   const ids = [
     generatePluginRepoEntityId(pluginRepo),
     release.toString(),
-    build.toString()
+    build.toString(),
   ];
   return ids.join('_');
 }

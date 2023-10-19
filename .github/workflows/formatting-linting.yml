@@ -1,0 +1,30 @@
+name: 'formatting & linting'
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  checks:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: 'Check out the repo'
+        uses: 'actions/checkout@v3'
+
+      - name: 'Install Node.js'
+        uses: 'actions/setup-node@v3'
+        with:
+          cache: 'yarn'
+          node-version: 18
+
+      - name: 'Install the dependencies'
+        run: 'yarn install'
+
+      - name: 'Install subgraph dependencies'
+        run: 'cd subgraph/ && yarn install'
+
+      - name: 'Lint subgraph'
+        run: 'yarn lint:subgraph:ts >> $GITHUB_STEP_SUMMARY'
+
+      - name: 'Check code formatting'
+        run: yarn prettier:check
