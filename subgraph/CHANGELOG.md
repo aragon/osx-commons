@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Added `getPluginRepoId`, `getPluginSetupId`, `getPluginInstallationId`, `getPluginPreparationId`, `getPluginReleaseId`, `getPluginVersionId`, and `getPluginPermissionId`.
+- Added `generatePermissionId` and `generatePluginPermissionId`.
+- Added `generatePluginRepoEntityId`, `generatePluginSetupEntityId`, `generatePluginInstallationEntityId`, `generatePluginPreparationEntityId`, `generatePluginReleaseEntityId`, and `generatePluginVersionEntityId`.
 
 ### Removed
