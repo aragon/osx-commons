@@ -1,17 +1,12 @@
-name: 'Linting & Formatting'
-
-env:
-  working-directory: .
+name: 'formatting & linting'
 
 on:
-  push:
+  workflow_dispatch:
+  workflow_call:
 
 jobs:
   checks:
     runs-on: 'ubuntu-latest'
-    defaults:
-      run:
-        working-directory: ${{env.working-directory}}
     steps:
       - name: 'Check out the repo'
         uses: 'actions/checkout@v3'
@@ -20,13 +15,13 @@ jobs:
         uses: 'actions/setup-node@v3'
         with:
           cache: 'yarn'
-          node-version: 16
+          node-version: 18
 
       - name: 'Install the dependencies'
         run: 'yarn install'
 
-      - name: 'Lint the code'
-        run: 'yarn lint'
+      - name: 'Lint subgraph'
+        run: 'yarn lint:subgraph:ts >> $GITHUB_STEP_SUMMARY'
 
       - name: 'Check code formatting'
         run: yarn prettier:check
