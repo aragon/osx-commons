@@ -13,16 +13,6 @@ import {
 } from 'ethers/lib/utils';
 import {ethers} from 'hardhat';
 
-export type NetworkNameMapping = {[index: string]: string};
-
-export const networkNameMapping: NetworkNameMapping = {
-  mainnet: 'mainnet',
-  goerli: 'goerli',
-  polygon: 'polygon',
-  polygonMumbai: 'mumbai',
-  baseGoerli: 'baseGoerli',
-};
-
 export function toBytes(string: string) {
   return ethers.utils.formatBytes32String(string);
 }

@@ -1,10 +1,10 @@
-import {NetworkNameMapping} from './utils/helpers';
 import '@nomicfoundation/hardhat-chai-matchers';
 import '@nomicfoundation/hardhat-toolbox';
 import '@nomiclabs/hardhat-etherscan';
 import '@openzeppelin/hardhat-upgrades';
 import '@typechain/hardhat';
 import {config as dotenvConfig} from 'dotenv';
+import {ethers} from 'ethers';
 import 'hardhat-deploy';
 import 'hardhat-gas-reporter';
 import {extendEnvironment, HardhatUserConfig} from 'hardhat/config';
@@ -21,11 +21,13 @@ if (!process.env.INFURA_API_KEY) {
   throw new Error('INFURA_API_KEY in .env not set');
 }
 
-const apiUrls: NetworkNameMapping = {
+const apiUrls: {[index: string]: string} = {
   mainnet: 'https://mainnet.infura.io/v3/',
   goerli: 'https://goerli.infura.io/v3/',
+  sepolia: 'https://sepolia.infura.io/v3/',
   polygon: 'https://polygon-mainnet.infura.io/v3/',
   polygonMumbai: 'https://polygon-mumbai.infura.io/v3/',
+  base: 'https://mainnet.base.org',
   baseGoerli: 'https://goerli.base.org',
 };
 
@@ -46,6 +48,10 @@ export const networks: {[index: string]: NetworkUserConfig} = {
     chainId: 5,
     url: `${apiUrls.goerli}${process.env.INFURA_API_KEY}`,
   },
+  sepolia: {
+    chainId: 11155111,
+    url: `${apiUrls.sepolia}${process.env.INFURA_API_KEY}`,
+  },
   polygon: {
     chainId: 137,
     url: `${apiUrls.polygon}${process.env.INFURA_API_KEY}`,
@@ -54,10 +60,15 @@ export const networks: {[index: string]: NetworkUserConfig} = {
     chainId: 80001,
     url: `${apiUrls.polygonMumbai}${process.env.INFURA_API_KEY}`,
   },
+  base: {
+    chainId: 8453,
+    url: `${apiUrls.base}`,
+    gasPrice: ethers.utils.parseUnits('0.001', 'gwei').toNumber(),
+  },
   baseGoerli: {
     chainId: 84531,
     url: `${apiUrls.baseGoerli}`,
-    gasPrice: 20000000000,
+    gasPrice: ethers.utils.parseUnits('0.0000001', 'gwei').toNumber(),
   },
 };
 
@@ -88,11 +99,29 @@ const config: HardhatUserConfig = {
     apiKey: {
       mainnet: process.env.ETHERSCAN_API_KEY || '',
       goerli: process.env.ETHERSCAN_API_KEY || '',
+      sepolia: process.env.ETHERSCAN_API_KEY || '',
       polygon: process.env.POLYGONSCAN_API_KEY || '',
       polygonMumbai: process.env.POLYGONSCAN_API_KEY || '',
+      base: process.env.BASESCAN_API_KEY || '',
       baseGoerli: process.env.BASESCAN_API_KEY || '',
     },
     customChains: [
+      {
+        network: 'sepolia',
+        chainId: 11155111,
+        urls: {
+          apiURL: 'https://api-sepolia.etherscan.io/api',
+          browserURL: 'https://sepolia.etherscan.io',
+        },
+      },
+      {
+        network: 'base',
+        chainId: 8453,
+        urls: {
+          apiURL: 'https://api.basescan.org/api',
+          browserURL: 'https://basescan.org',
+        },
+      },
       {
         network: 'baseGoerli',
         chainId: 84531,
