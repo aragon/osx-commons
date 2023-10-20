@@ -1,7 +1,8 @@
-name: Subgraph
+name: 'Subgraph'
 on:
   push:
     paths:
+      - 'contracts/**'
       - 'subgraph/**'
       - '.github/workflows/subgraph-*.yml'
 

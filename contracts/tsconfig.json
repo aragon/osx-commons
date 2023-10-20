@@ -17,13 +17,6 @@
     "target": "es6"
   },
   "exclude": ["node_modules"],
-  "include": [
-    "index.ts",
-    "manifest/**/*",
-    "src/**/*",
-    "scripts/**/*",
-    "tests/**/*",
-    "utils/**/*",
-    "commons/**/*"
-  ]
+  "files": ["./hardhat.config.ts"],
+  "include": ["src/**/*", "deploy/**/*", "docs/**/*", "test/**/*", "utils/**/*"]
 }
