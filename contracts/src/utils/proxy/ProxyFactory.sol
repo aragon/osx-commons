@@ -26,7 +26,7 @@ contract ProxyFactory {
     /// @notice Creates an [ERC-1967](https://eips.ethereum.org/EIPS/eip-1967) proxy contract pointing to the pre-set logic contract.
     /// @param _data The initialization data for this contract.
     /// @return proxy The address of the proxy contract created.
-    /// @dev If `_data` is non-empty, it is used in a delegate call to the `_logic` contract. This will typically be an encoded function call initializing the storage of the proxy (see [OpenZeppelin ERC1967Proxy-constructor](https://docs.openzeppelin.com/contracts/4.x/api/proxy#ERC1967Proxy-constructor-address-bytes-)).
+    /// @dev If `_data` is non-empty, it is used in a delegate call to the `_logic` contract. This will typically be an encoded function call initializing the proxy (see [OpenZeppelin ERC1967Proxy-constructor](https://docs.openzeppelin.com/contracts/4.x/api/proxy#ERC1967Proxy-constructor-address-bytes-)).
     function deployUUPSProxy(bytes memory _data) external returns (address proxy) {
         proxy = _LOGIC.deployUUPSProxy(_data);
         emit ProxyCreated({proxy: proxy});

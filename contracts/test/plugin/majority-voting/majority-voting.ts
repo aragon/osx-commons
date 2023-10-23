@@ -11,7 +11,7 @@ import {
 } from '../../../typechain';
 import {deployUUPSProxy} from '../../../utils/helpers';
 import {getInterfaceId} from '../../../utils/interfaces';
-import {pctToRatio} from '../../utils/ratio';
+import {pctToRatio} from '../../utils/math/ratio';
 import {VotingSettings, VotingMode, ONE_HOUR, ONE_YEAR} from './voting-helpers';
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
 import {expect} from 'chai';

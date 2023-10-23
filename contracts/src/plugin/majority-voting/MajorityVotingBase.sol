@@ -10,7 +10,7 @@ import {IDAO} from "@aragon/osx/packages/contracts/src/core/dao/IDAO.sol";
 import {PluginUUPSUpgradeable} from "@aragon/osx/packages/contracts/src/core/plugin/PluginUUPSUpgradeable.sol";
 
 import {ProposalUpgradeable} from "../proposal//ProposalUpgradeable.sol";
-import {RATIO_BASE, RatioOutOfBounds} from "../../utils/Ratio.sol";
+import {RATIO_BASE, RatioOutOfBounds} from "../../utils/math/Ratio.sol";
 import {IMajorityVoting} from "./IMajorityVoting.sol";
 
 /// @title MajorityVotingBase
