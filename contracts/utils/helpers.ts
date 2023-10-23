@@ -1,9 +1,5 @@
-import {
-  MinimalCloneFactory__factory,
-  UUPSProxyFactory__factory,
-} from '../typechain';
-import {MinimalCloneCreatedEvent} from '../typechain/src/utils/MinimalCloneFactory';
-import {UUPSProxyCreatedEvent} from '../typechain/src/utils/UUPSProxyFactory';
+import {ProxyFactory__factory} from '../typechain';
+import {ProxyCreatedEvent} from '../typechain/src/utils/ProxyFactory';
 import {ContractFactory, ContractTransaction} from 'ethers';
 import {
   Interface,
@@ -48,7 +44,7 @@ export async function deployUUPSProxy<T>(
   initialization: {initializerName: string; args: any[]} | undefined = undefined
 ): Promise<T> {
   const logic = await contractFactory.deploy();
-  const proxyFactory = await new UUPSProxyFactory__factory(
+  const proxyFactory = await new ProxyFactory__factory(
     contractFactory.signer
   ).deploy(logic.address);
 
@@ -62,7 +58,7 @@ export async function deployUUPSProxy<T>(
 
   const tx = await proxyFactory.deployUUPSProxy(initData);
 
-  const event = await findEvent<UUPSProxyCreatedEvent>(tx, 'UUPSProxyCreated');
+  const event = await findEvent<ProxyCreatedEvent>(tx, 'ProxyCreated');
   if (!event) {
     throw new Error('Failed to get the event');
   }
@@ -75,7 +71,7 @@ export async function deployMinimalClone<T>(
   initialization: {initializerName: string; args: any[]} | undefined = undefined
 ): Promise<T> {
   const logic = await contractFactory.deploy();
-  const proxyFactory = await new MinimalCloneFactory__factory(
+  const proxyFactory = await new ProxyFactory__factory(
     contractFactory.signer
   ).deploy(logic.address);
 
@@ -87,12 +83,9 @@ export async function deployMinimalClone<T>(
         )
       : [];
 
-  const tx = await proxyFactory.deployClone(initData);
+  const tx = await proxyFactory.deployMinimalProxy(initData);
 
-  const event = await findEvent<MinimalCloneCreatedEvent>(
-    tx,
-    'MinimalCloneCreated'
-  );
+  const event = await findEvent<ProxyCreatedEvent>(tx, 'ProxyCreated');
   if (!event) {
     throw new Error('Failed to get the event');
   }
