@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
+      - 'contracts/**'
       - 'subgraph/**'
       - '.github/workflows/subgraph-*.yml'
 
