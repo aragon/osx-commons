@@ -1,29 +1,38 @@
-name: 'Subgraph'
+name: 'subgraph'
+
 on:
+  workflow_dispatch:
   push:
     paths:
-      - 'contracts/**'
       - 'subgraph/**'
       - '.github/workflows/subgraph-*.yml'
-
-env:
-  working-directory: subgraph
 
 jobs:
   formatting-linting:
     uses: ./.github/workflows/formatting-linting.yml
   tests:
-    runs-on: ubuntu-latest
+    runs-on: 'ubuntu-latest'
     defaults:
       run:
-        working-directory: ${{env.working-directory}}
+        working-directory: subgraph
     steps:
-      - uses: actions/checkout@v2
-      - name: Install node
-        uses: actions/setup-node@v3
+      - name: 'Check out the repo'
+        uses: 'actions/checkout@v3'
+
+      - name: 'Install Node.js'
+        uses: 'actions/setup-node@v3'
         with:
-          node-version: 16
-      - name: Install dependencies
-        run: yarn install --pure-lockfile
-      - name: Run Tests
-        run: yarn run coverage >> $GITHUB_STEP_SUMMARY
+          cache: 'yarn'
+          node-version: 18
+
+      - name: 'Install the dependencies'
+        run: 'yarn install'
+
+      - name: 'Build the subgraph'
+        run: 'yarn build'
+        env:
+          INFURA_API_KEY: ${{secrets.INFURA_API_KEY}}
+          NETWORK_NAME: 'goerli'
+
+      - name: 'Test the subgraph'
+        run: 'yarn test >> $GITHUB_STEP_SUMMARY'
