@@ -18,7 +18,7 @@ export const verifyContract = async (
     // Write a temporal file to host complex parameters for hardhat-etherscan https://github.com/nomiclabs/hardhat/tree/master/packages/hardhat-etherscan#complex-arguments
     const {fd, path, cleanup} = await file({
       prefix: 'verify-params-',
-      postfix: '.js',
+      postfix: '.js'
     });
     fs.writeSync(
       fd,
@@ -27,7 +27,7 @@ export const verifyContract = async (
 
     const params = {
       address: address,
-      constructorArgs: path,
+      constructorArgs: path
     };
     await runTaskWithRetry('verify', params, times, msDelay, cleanup);
   } catch (error) {

@@ -7,7 +7,7 @@ import {
   IMajorityVoting__factory,
   DAO__factory,
   MajorityVotingMock__factory,
-  IProtocolVersion__factory,
+  IProtocolVersion__factory
 } from '../../../typechain';
 import {deployUUPSProxy} from '../../../utils/helpers';
 import {getInterfaceId} from '../../../utils/interfaces';
@@ -24,7 +24,7 @@ export const MAJORITY_VOTING_BASE_INTERFACE = new ethers.utils.Interface([
   'function totalVotingPower(uint256)',
   'function getProposal(uint256)',
   'function updateVotingSettings(tuple(uint8,uint32,uint32,uint64,uint256))',
-  'function createProposal(bytes,tuple(address,uint256,bytes)[],uint256,uint64,uint64,uint8,bool)',
+  'function createProposal(bytes,tuple(address,uint256,bytes)[],uint256,uint64,uint64,uint8,bool)'
 ]);
 
 describe('MajorityVotingMock', function () {
@@ -40,7 +40,7 @@ describe('MajorityVotingMock', function () {
 
     dao = await deployUUPSProxy<DAO>(new DAO__factory(signers[0]), {
       initializerName: 'initialize',
-      args: [[], ownerAddress, ethers.constants.AddressZero, 'examplURI'],
+      args: [[], ownerAddress, ethers.constants.AddressZero, 'examplURI']
     });
   });
 
@@ -50,7 +50,7 @@ describe('MajorityVotingMock', function () {
       supportThreshold: pctToRatio(50),
       minParticipation: pctToRatio(20),
       minDuration: ONE_HOUR,
-      minProposerVotingPower: 0,
+      minProposerVotingPower: 0
     };
 
     const MajorityVotingBase = new MajorityVotingMock__factory(signers[0]);

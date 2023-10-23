@@ -28,7 +28,7 @@ const apiUrls: {[index: string]: string} = {
   polygon: 'https://polygon-mainnet.infura.io/v3/',
   polygonMumbai: 'https://polygon-mumbai.infura.io/v3/',
   base: 'https://mainnet.base.org',
-  baseGoerli: 'https://goerli.base.org',
+  baseGoerli: 'https://goerli.base.org'
 };
 
 export const networks: {[index: string]: NetworkUserConfig} = {
@@ -37,39 +37,39 @@ export const networks: {[index: string]: NetworkUserConfig} = {
     forking: {
       url: `${
         apiUrls[process.env.NETWORK_NAME ? process.env.NETWORK_NAME : 'mainnet']
-      }${process.env.INFURA_API_KEY}`,
-    },
+      }${process.env.INFURA_API_KEY}`
+    }
   },
   mainnet: {
     chainId: 1,
-    url: `${apiUrls.mainnet}${process.env.INFURA_API_KEY}`,
+    url: `${apiUrls.mainnet}${process.env.INFURA_API_KEY}`
   },
   goerli: {
     chainId: 5,
-    url: `${apiUrls.goerli}${process.env.INFURA_API_KEY}`,
+    url: `${apiUrls.goerli}${process.env.INFURA_API_KEY}`
   },
   sepolia: {
     chainId: 11155111,
-    url: `${apiUrls.sepolia}${process.env.INFURA_API_KEY}`,
+    url: `${apiUrls.sepolia}${process.env.INFURA_API_KEY}`
   },
   polygon: {
     chainId: 137,
-    url: `${apiUrls.polygon}${process.env.INFURA_API_KEY}`,
+    url: `${apiUrls.polygon}${process.env.INFURA_API_KEY}`
   },
   polygonMumbai: {
     chainId: 80001,
-    url: `${apiUrls.polygonMumbai}${process.env.INFURA_API_KEY}`,
+    url: `${apiUrls.polygonMumbai}${process.env.INFURA_API_KEY}`
   },
   base: {
     chainId: 8453,
     url: `${apiUrls.base}`,
-    gasPrice: ethers.utils.parseUnits('0.001', 'gwei').toNumber(),
+    gasPrice: ethers.utils.parseUnits('0.001', 'gwei').toNumber()
   },
   baseGoerli: {
     chainId: 84531,
     url: `${apiUrls.baseGoerli}`,
-    gasPrice: ethers.utils.parseUnits('0.0000001', 'gwei').toNumber(),
-  },
+    gasPrice: ethers.utils.parseUnits('0.0000001', 'gwei').toNumber()
+  }
 };
 
 // Uses hardhats private key if none is set. DON'T USE THIS ACCOUNT FOR DEPLOYMENTS
@@ -81,7 +81,7 @@ for (const network in networks) {
   // special treatement for hardhat
   if (network.startsWith('hardhat')) {
     networks[network].accounts = {
-      mnemonic: 'test test test test test test test test test test test junk',
+      mnemonic: 'test test test test test test test test test test test junk'
     };
     continue;
   }
@@ -103,7 +103,7 @@ const config: HardhatUserConfig = {
       polygon: process.env.POLYGONSCAN_API_KEY || '',
       polygonMumbai: process.env.POLYGONSCAN_API_KEY || '',
       base: process.env.BASESCAN_API_KEY || '',
-      baseGoerli: process.env.BASESCAN_API_KEY || '',
+      baseGoerli: process.env.BASESCAN_API_KEY || ''
     },
     customChains: [
       {
@@ -111,26 +111,26 @@ const config: HardhatUserConfig = {
         chainId: 11155111,
         urls: {
           apiURL: 'https://api-sepolia.etherscan.io/api',
-          browserURL: 'https://sepolia.etherscan.io',
-        },
+          browserURL: 'https://sepolia.etherscan.io'
+        }
       },
       {
         network: 'base',
         chainId: 8453,
         urls: {
           apiURL: 'https://api.basescan.org/api',
-          browserURL: 'https://basescan.org',
-        },
+          browserURL: 'https://basescan.org'
+        }
       },
       {
         network: 'baseGoerli',
         chainId: 84531,
         urls: {
           apiURL: 'https://api-goerli.basescan.org/api',
-          browserURL: 'https://goerli.basescan.org',
-        },
-      },
-    ],
+          browserURL: 'https://goerli.basescan.org'
+        }
+      }
+    ]
   },
 
   namedAccounts: {
@@ -145,7 +145,7 @@ const config: HardhatUserConfig = {
     harold: 7,
     ivan: 8,
     judy: 9,
-    mallory: 10,
+    mallory: 10
   },
 
   gasReporter: {
@@ -153,7 +153,7 @@ const config: HardhatUserConfig = {
     enabled: process.env.REPORT_GAS === 'true' ? true : false,
     excludeContracts: [],
     src: './contracts',
-    coinmarketcap: process.env.COINMARKETCAP_API_KEY,
+    coinmarketcap: process.env.COINMARKETCAP_API_KEY
   },
   networks,
   paths: {
@@ -161,7 +161,7 @@ const config: HardhatUserConfig = {
     cache: './cache',
     sources: './src',
     tests: './test',
-    deploy: './deploy',
+    deploy: './deploy'
   },
 
   solidity: {
@@ -170,19 +170,19 @@ const config: HardhatUserConfig = {
       metadata: {
         // Not including the metadata hash
         // https://github.com/paulrberg/hardhat-template/issues/31
-        bytecodeHash: 'none',
+        bytecodeHash: 'none'
       },
       // Disable the optimizer when debugging
       // https://hardhat.org/hardhat-network/#solidity-optimizer-support
       optimizer: {
         enabled: true,
-        runs: 800,
-      },
-    },
+        runs: 800
+      }
+    }
   },
   typechain: {
     outDir: 'typechain',
-    target: 'ethers-v5',
+    target: 'ethers-v5'
   },
   docgen: {
     outputDir: 'docs/developer-portal/reference-guide',
@@ -190,8 +190,8 @@ const config: HardhatUserConfig = {
     pages: 'files',
     templates: 'docs/templates',
     collapseNewlines: true,
-    exclude: ['test'],
-  },
+    exclude: ['test']
+  }
 };
 
 export default config;

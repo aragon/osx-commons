@@ -7,7 +7,7 @@ import {
   IGovernanceWrappedERC20__factory,
   IERC20Upgradeable__factory,
   IERC20PermitUpgradeable__factory,
-  IVotesUpgradeable__factory,
+  IVotesUpgradeable__factory
 } from '../../../typechain';
 import {getInterfaceId} from '../../../utils/interfaces';
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
@@ -53,7 +53,7 @@ describe('GovernanceWrappedERC20', function () {
     defaultBalances = [
       {account: signers[0].address, amount: 123},
       {account: signers[1].address, amount: 456},
-      {account: signers[2].address, amount: 789},
+      {account: signers[2].address, amount: 789}
     ];
 
     from = signers[0];
@@ -73,7 +73,7 @@ describe('GovernanceWrappedERC20', function () {
     defaultGovernanceWrappedERC20InitData = [
       erc20.address,
       governanceWrappedERC20Name,
-      governanceWrappedERC20Symbol,
+      governanceWrappedERC20Symbol
     ];
 
     governanceToken = await GovernanceWrappedERC20.deploy(
@@ -151,7 +151,7 @@ describe('GovernanceWrappedERC20', function () {
       const iface = new ethers.utils.Interface([
         'function name()',
         'function symbol()',
-        'function decimals()',
+        'function decimals()'
       ]);
       expect(await governanceToken.supportsInterface(getInterfaceId(iface))).to
         .be.true;

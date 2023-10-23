@@ -1,14 +1,14 @@
 import {
   generatePermissionEntityId,
   generatePluginPermissionEntityId,
-  generatePluginPreparationEntityId,
+  generatePluginPreparationEntityId
 } from '../../src';
 import {PERMISSION_OPERATIONS} from '../../src/utils/constants';
 import {
   ADDRESS_ZERO,
   ADDRESS_ONE,
   ADDRESS_TWO,
-  DUMMY_BYTES32_HEX,
+  DUMMY_BYTES32_HEX
 } from '../constants';
 import {Address, Bytes} from '@graphprotocol/graph-ts';
 import {assert, describe, test} from 'matchstick-as/assembly/index';
