@@ -31,7 +31,7 @@ describe('AddresslistMock', function () {
       await addresslist.addAddresses([
         signers[0].address,
         signers[1].address,
-        signers[2].address
+        signers[2].address,
       ]);
       expect(await addresslist.addresslistLength()).to.equal(3);
 
@@ -40,7 +40,7 @@ describe('AddresslistMock', function () {
 
       await addresslist.removeAddresses([
         signers[1].address,
-        signers[2].address
+        signers[2].address,
       ]);
       expect(await addresslist.addresslistLength()).to.equal(0);
     });
@@ -53,7 +53,7 @@ describe('AddresslistMock', function () {
 
       const tx2 = await addresslist.addAddresses([
         signers[1].address,
-        signers[2].address
+        signers[2].address,
       ]);
       await ethers.provider.send('evm_mine', []);
 
@@ -74,7 +74,7 @@ describe('AddresslistMock', function () {
       const tx1 = await addresslist.addAddresses([
         signers[0].address,
         signers[1].address,
-        signers[2].address
+        signers[2].address,
       ]);
       await ethers.provider.send('evm_mine', []);
 
@@ -83,14 +83,14 @@ describe('AddresslistMock', function () {
 
       const tx3 = await addresslist.removeAddresses([
         signers[1].address,
-        signers[2].address
+        signers[2].address,
       ]);
       await ethers.provider.send('evm_mine', []);
 
       const [rc1, rc2, rc3] = await Promise.all([
         tx1.wait(),
         tx2.wait(),
-        tx3.wait()
+        tx3.wait(),
       ]);
 
       expect(rc1.blockNumber).to.be.lt(rc2.blockNumber);

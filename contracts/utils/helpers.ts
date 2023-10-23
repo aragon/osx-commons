@@ -5,7 +5,7 @@ import {
   Interface,
   LogDescription,
   defaultAbiCoder,
-  keccak256
+  keccak256,
 } from 'ethers/lib/utils';
 import {ethers} from 'hardhat';
 

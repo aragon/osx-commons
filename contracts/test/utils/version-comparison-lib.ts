@@ -1,6 +1,6 @@
 import {
   VersionComparisonLibTest,
-  VersionComparisonLibTest__factory
+  VersionComparisonLibTest__factory,
 } from '../../typechain';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
@@ -121,7 +121,7 @@ async function eqChecks(
     func([0, 1, 0], [0, 1, 0]),
     func([0, 0, 1], [0, 0, 1]),
     //
-    func([0, 0, 0], [0, 0, 0])
+    func([0, 0, 0], [0, 0, 0]),
   ]);
 
   // Check that all results match the expected value
@@ -155,7 +155,7 @@ async function ltChecks(
     //
     func([1, 0, 0], [2, 0, 0]),
     func([0, 1, 0], [0, 2, 0]),
-    func([0, 0, 1], [0, 0, 2])
+    func([0, 0, 1], [0, 0, 2]),
   ]);
 
   // Check that all results match the expected value
@@ -187,7 +187,7 @@ async function gtChecks(
     //
     func([2, 0, 0], [1, 0, 0]),
     func([0, 2, 0], [0, 1, 0]),
-    func([0, 0, 2], [0, 0, 1])
+    func([0, 0, 2], [0, 0, 1]),
   ]);
 
   // Check that all results match the expected value

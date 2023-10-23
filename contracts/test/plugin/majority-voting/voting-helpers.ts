@@ -7,13 +7,13 @@ export enum VoteOption {
   None,
   Abstain,
   Yes,
-  No
+  No,
 }
 
 export enum VotingMode {
   Standard,
   EarlyExecution,
-  VoteReplacement
+  VoteReplacement,
 }
 
 export type VotingSettings = {
