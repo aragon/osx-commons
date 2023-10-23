@@ -9,7 +9,7 @@ import {
   IERC20Upgradeable__factory,
   IVotesUpgradeable__factory,
 } from '../../../typechain';
-import {deployUUPSProxy} from '../../../utils/helpers';
+import {deployUUPSProxy} from '../../../utils/events';
 import {getInterfaceId} from '../../../utils/interfaces';
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
 import {expect} from 'chai';

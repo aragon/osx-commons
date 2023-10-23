@@ -5,7 +5,7 @@ import {
   TestGovernanceERC20__factory,
 } from '../../../typechain';
 import {ProxyCreatedEvent} from '../../../typechain/src/utils/ProxyFactory';
-import {findEvent} from '../../../utils/helpers';
+import {findEvent} from '../../../utils/events';
 import {
   ERC1967_IMPLEMENTATION_SLOT,
   OZ_INITIALIZED_SLOT_POSITION,

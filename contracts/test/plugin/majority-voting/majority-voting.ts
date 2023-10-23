@@ -9,8 +9,8 @@ import {
   MajorityVotingMock__factory,
   IProtocolVersion__factory,
 } from '../../../typechain';
-import {deployUUPSProxy} from '../../../utils/helpers';
 import {getInterfaceId} from '../../../utils/interfaces';
+import {deployUUPSProxy} from '../../../utils/proxy';
 import {pctToRatio} from '../../utils/math/ratio';
 import {VotingSettings, VotingMode, ONE_HOUR, ONE_YEAR} from './voting-helpers';
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
