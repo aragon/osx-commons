@@ -31,7 +31,7 @@ const DEFAULT_INITIALIZATION: [
   },
 ];
 
-describe.only('ProxyFactory', function () {
+describe('ProxyFactory', function () {
   let deployer: SignerWithAddress;
   let proxyFactory: ProxyFactory;
   let logic: TestGovernanceERC20;
