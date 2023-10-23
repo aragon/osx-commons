@@ -1,4 +1,4 @@
-# Aragon OSx Subgraph
+# Aragon OSx Commons Subgraph
 
 All notable changes to this project will be documented in this file.
 
