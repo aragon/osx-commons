@@ -1,58 +1,29 @@
-import {ProxyFactory__factory} from '../typechain';
-import {ProxyCreatedEvent} from '../typechain/src/utils/ProxyFactory';
-import {findEvent} from './events';
 import {ContractFactory} from 'ethers';
+import {upgrades} from 'hardhat';
 
-export async function deployUUPSProxy<T>(
+type DeployOptions = {
+  constructurArgs?: unknown[];
+  proxyType?: 'uups';
+};
+
+// Used to deploy the implementation with the ERC1967 Proxy behind it.
+// It is designed this way, because it might be desirable to avoid the OpenZeppelin upgrades package.
+// In the future, this function might get replaced.
+// NOTE: To avoid lots of changes in the whole test codebase, `deployWithProxy`
+// won't automatically call `initialize` and it's the caller's responsibility to do so.
+export async function deployWithProxy<T>(
   contractFactory: ContractFactory,
-  initialization: {initializerName: string; args: any[]} | undefined = undefined
+  options: DeployOptions = {}
 ): Promise<T> {
-  const logic = await contractFactory.deploy();
-  const proxyFactory = await new ProxyFactory__factory(
-    contractFactory.signer
-  ).deploy(logic.address);
+  // NOTE: taking this out of this file and putting this in each test file's
+  // before hook seems a good idea for efficiency, though, all test files become
+  // highly dependent on this package which is undesirable for now.
+  upgrades.silenceWarnings();
 
-  const initData =
-    initialization !== undefined
-      ? contractFactory.interface.encodeFunctionData(
-          initialization.initializerName,
-          initialization.args
-        )
-      : [];
-
-  const tx = await proxyFactory.deployUUPSProxy(initData);
-
-  const event = await findEvent<ProxyCreatedEvent>(tx, 'ProxyCreated');
-  if (!event) {
-    throw new Error('Failed to get the event');
-  }
-
-  return contractFactory.attach(event.args.proxy) as unknown as T;
-}
-
-export async function deployMinimalClone<T>(
-  contractFactory: ContractFactory,
-  initialization: {initializerName: string; args: any[]} | undefined = undefined
-): Promise<T> {
-  const logic = await contractFactory.deploy();
-  const proxyFactory = await new ProxyFactory__factory(
-    contractFactory.signer
-  ).deploy(logic.address);
-
-  const initData =
-    initialization !== undefined
-      ? contractFactory.interface.encodeFunctionData(
-          initialization.initializerName,
-          initialization.args
-        )
-      : [];
-
-  const tx = await proxyFactory.deployMinimalProxy(initData);
-
-  const event = await findEvent<ProxyCreatedEvent>(tx, 'ProxyCreated');
-  if (!event) {
-    throw new Error('Failed to get the event');
-  }
-
-  return contractFactory.attach(event.args.proxy) as unknown as T;
+  return upgrades.deployProxy(contractFactory, [], {
+    kind: options.proxyType || 'uups',
+    initializer: false,
+    unsafeAllow: ['constructor'],
+    constructorArgs: options.constructurArgs || [],
+  }) as unknown as Promise<T>;
 }

@@ -10,7 +10,7 @@ import {
   IProtocolVersion__factory,
 } from '../../../typechain';
 import {getInterfaceId} from '../../../utils/interfaces';
-import {deployUUPSProxy} from '../../../utils/proxy';
+import {deployWithProxy} from '../../../utils/proxy';
 import {pctToRatio} from '../../utils/math/ratio';
 import {VotingSettings, VotingMode, ONE_HOUR, ONE_YEAR} from './voting-helpers';
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
@@ -38,10 +38,8 @@ describe('MajorityVotingMock', function () {
     signers = await ethers.getSigners();
     ownerAddress = await signers[0].getAddress();
 
-    dao = await deployUUPSProxy<DAO>(new DAO__factory(signers[0]), {
-      initializerName: 'initialize',
-      args: [[], ownerAddress, ethers.constants.AddressZero, 'examplURI'],
-    });
+    dao = await deployWithProxy<DAO>(new DAO__factory(signers[0]));
+    dao.initialize([], ownerAddress, ethers.constants.AddressZero, 'examplURI');
   });
 
   beforeEach(async () => {
@@ -55,7 +53,7 @@ describe('MajorityVotingMock', function () {
 
     const MajorityVotingBase = new MajorityVotingMock__factory(signers[0]);
 
-    votingBase = await deployUUPSProxy(MajorityVotingBase);
+    votingBase = await deployWithProxy<MajorityVotingMock>(MajorityVotingBase);
     await dao.grant(
       votingBase.address,
       ownerAddress,
