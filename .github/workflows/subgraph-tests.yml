@@ -29,11 +29,5 @@ jobs:
       - name: 'Install the dependencies'
         run: 'yarn install'
 
-      #- name: 'Build the subgraph'
-      #  run: 'yarn build'
-      #  env:
-      #    INFURA_API_KEY: ${{secrets.INFURA_API_KEY}}
-      #    NETWORK_NAME: 'goerli'
-
       - name: 'Test the subgraph'
         run: 'yarn test >> $GITHUB_STEP_SUMMARY'
