@@ -5,7 +5,7 @@
     "code-complexity": ["error", 8],
     "compiler-version": ["error", ">=0.8.4"],
     "func-visibility": ["error", {"ignoreConstructors": true}],
-    "max-line-length": ["off", 120],
+    "max-line-length": ["off"],
     "named-parameters-mapping": "warn",
     "no-console": "off",
     "not-rely-on-time": "off",
