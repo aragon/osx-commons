@@ -10,7 +10,7 @@ import {
   IVotesUpgradeable__factory,
 } from '../../../typechain';
 import {getInterfaceId} from '../../../utils/interfaces';
-import {deployWithProxy} from '../../../utils/proxy';
+import {deployUUPSProxy} from '../../../utils/proxy';
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
@@ -43,8 +43,10 @@ describe('GovernanceERC20', function () {
     signers = await ethers.getSigners();
     GovernanceERC20 = new GovernanceERC20__factory(signers[0]);
 
-    dao = await deployWithProxy<DAO>(new DAO__factory(signers[0]));
-    await dao.initialize([], signers[0].address, addressZero, 'exampleURI');
+    dao = await deployUUPSProxy<DAO>(new DAO__factory(signers[0]), {
+      initializerName: 'initialize',
+      args: [[], signers[0].address, addressZero, 'exampleURI'],
+    });
 
     from = signers[0];
     to = signers[1];
