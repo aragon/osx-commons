@@ -26,7 +26,7 @@ const governanceERC20Symbol = 'GOV';
 
 const addressZero = ethers.constants.AddressZero;
 
-describe.only('GovernanceERC20', function () {
+describe('GovernanceERC20', function () {
   let signers: SignerWithAddress[];
   let dao: DAO;
   let token: GovernanceERC20;
