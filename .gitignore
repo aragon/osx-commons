@@ -33,6 +33,7 @@ yarn-error.log*
 
 # generated
 generated
+reference-guide
 .bin
 coverage.json
 .latest.json
