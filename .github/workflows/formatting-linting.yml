@@ -25,6 +25,12 @@ jobs:
 
       - name: 'Lint subgraph'
         run: 'yarn lint:subgraph:ts >> $GITHUB_STEP_SUMMARY'
+      
+      - name: 'Install js-client dependencies'
+        run: 'cd js-client/ && yarn install'
+
+      - name: 'Lint js-client'
+        run: 'yarn lint:js-client:ts >> $GITHUB_STEP_SUMMARY'
 
       - name: 'Check code formatting'
         run: yarn prettier:check
