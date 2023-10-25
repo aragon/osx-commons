@@ -1,12 +1,11 @@
-name: 'subgraph'
+name: 'contracts'
 
 on:
   workflow_dispatch:
   push:
     paths:
       - 'contracts/**'
-      - 'subgraph/**'
-      - '.github/workflows/subgraph-*.yml'
+      - '.github/workflows/contracts-*.yml'
 
 jobs:
   formatting-linting:
@@ -15,7 +14,7 @@ jobs:
     runs-on: 'ubuntu-latest'
     defaults:
       run:
-        working-directory: subgraph
+        working-directory: contracts
     steps:
       - name: 'Check out the repo'
         uses: 'actions/checkout@v3'
@@ -29,5 +28,12 @@ jobs:
       - name: 'Install the dependencies'
         run: 'yarn install'
 
-      - name: 'Test the subgraph'
-        run: 'yarn test >> $GITHUB_STEP_SUMMARY'
+      - name: 'Build the contracts'
+        run: 'yarn build'
+        env:
+          INFURA_API_KEY: ${{ secrets.INFURA_API_KEY }}
+
+      - name: 'Test the contracts and generate the coverage report'
+        run: 'yarn coverage >> $GITHUB_STEP_SUMMARY'
+        env:
+          INFURA_API_KEY: ${{ secrets.INFURA_API_KEY }}
