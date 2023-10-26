@@ -1,6 +1,6 @@
-parser: "@typescript-eslint/parser"
+parser: '@typescript-eslint/parser'
 parserOptions:
-  project: "./subgraph/tsconfig.json"
+  project: './subgraph/tsconfig.json'
 
 # Custom eslint settings for the subgraph can be defined here
 ignorePatterns:
@@ -9,7 +9,4 @@ ignorePatterns:
   - extended-schema.ts
   - tests/
 
-rules:
-  {
-    "@typescript-eslint/ban-types": ["error", { "types": { "BigInt": false } }],
-  }
+rules: {'@typescript-eslint/ban-types': ['error', {'types': {'BigInt': false}}]}
