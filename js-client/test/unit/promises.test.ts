@@ -1,11 +1,11 @@
-import { promiseWithTimeout, runAndRetry } from "../../src";
+import { promiseWithTimeout, runAndRetry } from '../../src';
 
-describe("Test promise helpers", () => {
-  describe("runAndRetry", () => {
-    it("Should run and retry 3 times", async () => {
+describe('Test promise helpers', () => {
+  describe('runAndRetry', () => {
+    it('Should run and retry 3 times', async () => {
       let countFunc = 0;
       let countOnFail = 0;
-      const message = "success";
+      const message = 'success';
 
       const res = await runAndRetry({
         func: async () => {
@@ -24,7 +24,7 @@ describe("Test promise helpers", () => {
       expect(res).toBe(message);
       expect(countOnFail).toBe(2);
     });
-    it("Should run and throw", async () => {
+    it('Should run and throw', async () => {
       let countRetries = 0;
       await expect(async () => {
         await runAndRetry({
@@ -38,23 +38,23 @@ describe("Test promise helpers", () => {
       expect(countRetries).toBe(3);
     });
   });
-  describe("promiseWithTimeout", () => {
-    it("Should timeout", async () => {
+  describe('promiseWithTimeout', () => {
+    it('Should timeout', async () => {
       const timeout = 100;
       const promise = new Promise((resolve) =>
         setTimeout(resolve, timeout * 2)
       );
       await expect(promiseWithTimeout(promise, timeout)).rejects.toThrow(
-        "Time out",
+        'Time out'
       );
     });
-    it("Should not timeout", async () => {
+    it('Should not timeout', async () => {
       const timeout = 100;
       const promise = new Promise((resolve) =>
         setTimeout(resolve, timeout / 2)
       );
       await expect(
-        promiseWithTimeout(promise, timeout),
+        promiseWithTimeout(promise, timeout)
       ).resolves.toBeUndefined();
     });
   });
