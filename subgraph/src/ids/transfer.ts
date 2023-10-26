@@ -11,7 +11,7 @@ import {BigInt, Bytes} from '@graphprotocol/graph-ts';
 export function generateTransferEntityId(
   txHash: Bytes,
   logIndex: BigInt,
-  actionIndex: number
+  actionIndex: i32
 ): string {
   const ids = [
     txHash.toHexString(),

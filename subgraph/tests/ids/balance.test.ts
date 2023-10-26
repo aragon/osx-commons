@@ -19,9 +19,7 @@ describe('Balances ID generation', () => {
     const dao = Address.fromString(ADDRESS_ONE);
     const token = Address.fromString(ADDRESS_TWO);
     const tokenId = BigInt.fromI32(1);
-    const expected = `${dao.toHexString()}_${
-      token.toHexString
-    }_${tokenId.toString()}`;
+    const expected = `${dao.toHexString()}_${token.toHexString()}_${tokenId.toString()}`;
     const actual = generateTokenIdBalanceEntityId(dao, token, tokenId);
     assert.stringEquals(actual, expected);
   });
