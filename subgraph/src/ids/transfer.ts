@@ -10,7 +10,6 @@ import {BigInt, Bytes} from '@graphprotocol/graph-ts';
  */
 export function generateTransferEntityId(
   txHash: Bytes,
-  // eslint-disable-next-line
   logIndex: BigInt,
   actionIndex: number
 ): string {
