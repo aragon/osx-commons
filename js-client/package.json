@@ -19,7 +19,7 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "TESTING=true tsdx test --verbose --runInBand",
-    "lint": "tsdx lint",
+    "lint:ts": "cd .. && yarn run lint:js-client:ts",
     "prepare": "tsdx build",
     "size": "size-limit",
     "analyze": "size-limit --why",
