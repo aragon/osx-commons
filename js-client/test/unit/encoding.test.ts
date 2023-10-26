@@ -1,4 +1,4 @@
-import { InvalidProposalIdError } from '../../src';
+import {InvalidProposalIdError} from '../../src';
 import {
   bitmapToBoolArray,
   boolArrayToBitmap,
@@ -13,21 +13,21 @@ import {
   hexToBytes,
   strip0x,
 } from '../../src/encoding';
-import { getEmpty256Array } from '../utils';
+import {getEmpty256Array} from '../utils';
 
 describe('Test encoding helper functions', () => {
   describe('ensure0x', () => {
     it('Should ensure 0x prefixes', () => {
       const inputs = [
         // strip
-        { in: '0', out: '0x0' },
-        { in: '00', out: '0x00' },
-        { in: '1234', out: '0x1234' },
-        { in: '55555555555555555555', out: '0x55555555555555555555' },
+        {in: '0', out: '0x0'},
+        {in: '00', out: '0x00'},
+        {in: '1234', out: '0x1234'},
+        {in: '55555555555555555555', out: '0x55555555555555555555'},
         // skip
-        { in: '0x1234', out: '0x1234' },
-        { in: '0xabcd', out: '0xabcd' },
-        { in: '0x1234567890abcdef', out: '0x1234567890abcdef' },
+        {in: '0x1234', out: '0x1234'},
+        {in: '0xabcd', out: '0xabcd'},
+        {in: '0x1234567890abcdef', out: '0x1234567890abcdef'},
       ];
 
       for (const input of inputs) {
@@ -40,14 +40,14 @@ describe('Test encoding helper functions', () => {
     it('Should strip 0x prefixes', () => {
       const inputs = [
         // strip
-        { in: '0x0', out: '0' },
-        { in: '0x00', out: '00' },
-        { in: '0x1234', out: '1234' },
-        { in: '0x55555555555555555555', out: '55555555555555555555' },
+        {in: '0x0', out: '0'},
+        {in: '0x00', out: '00'},
+        {in: '0x1234', out: '1234'},
+        {in: '0x55555555555555555555', out: '55555555555555555555'},
         // skip
-        { in: '1234', out: '1234' },
-        { in: 'abcd', out: 'abcd' },
-        { in: '1234567890abcdef', out: '1234567890abcdef' },
+        {in: '1234', out: '1234'},
+        {in: 'abcd', out: 'abcd'},
+        {in: '1234567890abcdef', out: '1234567890abcdef'},
       ];
 
       for (const input of inputs) {
@@ -59,19 +59,19 @@ describe('Test encoding helper functions', () => {
   describe('hexToBytes', () => {
     it('Should convert hex strings to a buffer', () => {
       const inputs = [
-        { hex: '0x00', serializedBuffer: '0' },
-        { hex: '0x10', serializedBuffer: '16' },
-        { hex: '0xff', serializedBuffer: '255' },
-        { hex: '0xffffffff', serializedBuffer: '255,255,255,255' },
+        {hex: '0x00', serializedBuffer: '0'},
+        {hex: '0x10', serializedBuffer: '16'},
+        {hex: '0xff', serializedBuffer: '255'},
+        {hex: '0xffffffff', serializedBuffer: '255,255,255,255'},
         {
           hex: '0xaaaaaaaaaaaaaaaa',
           serializedBuffer: '170,170,170,170,170,170,170,170',
         },
-        { hex: '00', serializedBuffer: '0' },
-        { hex: '0x', serializedBuffer: '' },
-        { hex: '10', serializedBuffer: '16' },
-        { hex: 'ff', serializedBuffer: '255' },
-        { hex: 'ffffffff', serializedBuffer: '255,255,255,255' },
+        {hex: '00', serializedBuffer: '0'},
+        {hex: '0x', serializedBuffer: ''},
+        {hex: '10', serializedBuffer: '16'},
+        {hex: 'ff', serializedBuffer: '255'},
+        {hex: 'ffffffff', serializedBuffer: '255,255,255,255'},
         {
           hex: 'aaaaaaaaaaaaaaaa',
           serializedBuffer: '170,170,170,170,170,170,170,170',
@@ -87,12 +87,12 @@ describe('Test encoding helper functions', () => {
   describe('bytesToHex', () => {
     it("Should convert Uint8Array's into hex strings", () => {
       const items = [
-        { buffer: new Uint8Array([]), skip0x: false, output: '0x' },
-        { buffer: new Uint8Array([]), skip0x: true, output: '' },
-        { buffer: new Uint8Array([0]), skip0x: false, output: '0x00' },
-        { buffer: new Uint8Array([0]), skip0x: true, output: '00' },
-        { buffer: new Uint8Array([1]), skip0x: false, output: '0x01' },
-        { buffer: new Uint8Array([1]), skip0x: true, output: '01' },
+        {buffer: new Uint8Array([]), skip0x: false, output: '0x'},
+        {buffer: new Uint8Array([]), skip0x: true, output: ''},
+        {buffer: new Uint8Array([0]), skip0x: false, output: '0x00'},
+        {buffer: new Uint8Array([0]), skip0x: true, output: '00'},
+        {buffer: new Uint8Array([1]), skip0x: false, output: '0x01'},
+        {buffer: new Uint8Array([1]), skip0x: true, output: '01'},
         {
           buffer: new Uint8Array([
             10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 200, 250, 255,
@@ -117,8 +117,8 @@ describe('Test encoding helper functions', () => {
           skip0x: true,
           output: '646464646464',
         },
-        { buffer: new Uint8Array([0, 255]), skip0x: false, output: '0x00ff' },
-        { buffer: new Uint8Array([0, 255]), skip0x: true, output: '00ff' },
+        {buffer: new Uint8Array([0, 255]), skip0x: false, output: '0x00ff'},
+        {buffer: new Uint8Array([0, 255]), skip0x: true, output: '00ff'},
       ];
 
       for (const item of items) {
@@ -130,10 +130,10 @@ describe('Test encoding helper functions', () => {
   describe('encodeRatio', () => {
     it('Should encode a bigint from a float and the number of digits', () => {
       const inputs = [
-        { float: 0.5, digits: 1, out: BigInt(5) },
-        { float: 1, digits: 4, out: BigInt(10000) },
-        { float: 0.25555, digits: 2, out: BigInt(26) },
-        { float: 0.123456789, digits: 15, out: BigInt(123456789000000) },
+        {float: 0.5, digits: 1, out: BigInt(5)},
+        {float: 1, digits: 4, out: BigInt(10000)},
+        {float: 0.25555, digits: 2, out: BigInt(26)},
+        {float: 0.123456789, digits: 15, out: BigInt(123456789000000)},
       ];
 
       for (const input of inputs) {
@@ -152,14 +152,14 @@ describe('Test encoding helper functions', () => {
   describe('decodeRatio', () => {
     it('Should decode a float from a given bigint and a number of digits', () => {
       const inputs = [
-        { bigint: BigInt(5), digits: 1, out: 0.5 },
-        { bigint: BigInt(5456), digits: 4, out: 0.5456 },
-        { bigint: 5, digits: 1, out: 0.5 },
-        { bigint: 5456, digits: 4, out: 0.5456 },
-        { bigint: BigInt('1'), digits: 9, out: 0.000000001 },
-        { bigint: BigInt('367483947'), digits: 9, out: 0.367483947 },
-        { bigint: 1, digits: 9, out: 0.000000001 },
-        { bigint: 367483947, digits: 9, out: 0.367483947 },
+        {bigint: BigInt(5), digits: 1, out: 0.5},
+        {bigint: BigInt(5456), digits: 4, out: 0.5456},
+        {bigint: 5, digits: 1, out: 0.5},
+        {bigint: 5456, digits: 4, out: 0.5456},
+        {bigint: BigInt('1'), digits: 9, out: 0.000000001},
+        {bigint: BigInt('367483947'), digits: 9, out: 0.367483947},
+        {bigint: 1, digits: 9, out: 0.000000001},
+        {bigint: 367483947, digits: 9, out: 0.367483947},
       ];
 
       for (const input of inputs) {
@@ -283,26 +283,26 @@ describe('Test encoding helper functions', () => {
     });
     it('should transform a boolean array into a bigint bitmap', () => {
       const tests = [
-        { input: undefined, output: BigInt(0) },
-        { input: [], output: BigInt(0) },
-        { input: [false], output: BigInt(0) },
-        { input: [true], output: BigInt(1) },
-        { input: [true, false], output: BigInt(1) },
-        { input: [true, false, false, false, false, false], output: BigInt(1) },
-        { input: [false, true, false, true], output: BigInt(10) },
-        { input: getEmpty256Array(), output: BigInt(0) },
+        {input: undefined, output: BigInt(0)},
+        {input: [], output: BigInt(0)},
+        {input: [false], output: BigInt(0)},
+        {input: [true], output: BigInt(1)},
+        {input: [true, false], output: BigInt(1)},
+        {input: [true, false, false, false, false, false], output: BigInt(1)},
+        {input: [false, true, false, true], output: BigInt(10)},
+        {input: getEmpty256Array(), output: BigInt(0)},
       ];
       let input = getEmpty256Array();
       input[0] = true;
-      tests.push({ input, output: BigInt(1) << BigInt(0) });
+      tests.push({input, output: BigInt(1) << BigInt(0)});
 
       input = getEmpty256Array();
       input[100] = true;
-      tests.push({ input, output: BigInt(1) << BigInt(100) });
+      tests.push({input, output: BigInt(1) << BigInt(100)});
 
       input = getEmpty256Array();
       input[150] = true;
-      tests.push({ input, output: BigInt(1) << BigInt(150) });
+      tests.push({input, output: BigInt(1) << BigInt(150)});
 
       for (const entry of tests) {
         expect(boolArrayToBitmap(entry.input)).toEqual(entry.output);
@@ -311,30 +311,30 @@ describe('Test encoding helper functions', () => {
   });
   describe('bitmapToBoolArray', () => {
     it('should transform a bigint bitmap into a boolean array', () => {
-      const tests = [{ input: BigInt(0), output: getEmpty256Array() }];
+      const tests = [{input: BigInt(0), output: getEmpty256Array()}];
       let output = getEmpty256Array();
       output[0] = true;
-      tests.push({ input: BigInt(1) << BigInt(0), output });
+      tests.push({input: BigInt(1) << BigInt(0), output});
 
       output = getEmpty256Array();
       output[1] = true;
-      tests.push({ input: BigInt(1) << BigInt(1), output });
+      tests.push({input: BigInt(1) << BigInt(1), output});
 
       output = getEmpty256Array();
       output[2] = true;
-      tests.push({ input: BigInt(1) << BigInt(2), output });
+      tests.push({input: BigInt(1) << BigInt(2), output});
 
       output = getEmpty256Array();
       output[5] = true;
-      tests.push({ input: BigInt(1) << BigInt(5), output });
+      tests.push({input: BigInt(1) << BigInt(5), output});
 
       output = getEmpty256Array();
       output[100] = true;
-      tests.push({ input: BigInt(1) << BigInt(100), output });
+      tests.push({input: BigInt(1) << BigInt(100), output});
 
       output = getEmpty256Array();
       output[150] = true;
-      tests.push({ input: BigInt(1) << BigInt(150), output });
+      tests.push({input: BigInt(1) << BigInt(150), output});
 
       for (const entry of tests) {
         expect(bitmapToBoolArray(entry.input)).toMatchObject(entry.output);

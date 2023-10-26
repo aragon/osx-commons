@@ -1,4 +1,4 @@
-import { HEX_STRING_REGEX, OSX_PROPOSAL_ID_REGEX } from './constants';
+import {HEX_STRING_REGEX, OSX_PROPOSAL_ID_REGEX} from './constants';
 import {
   InvalidArraySizeError,
   InvalidBitMapValueError,
@@ -7,8 +7,8 @@ import {
   InvalidRatioValueError,
   ValueOutOfRangeError,
 } from './errors';
-import { isProposalId } from './validation';
-import { hexZeroPad } from '@ethersproject/bytes';
+import {isProposalId} from './validation';
+import {hexZeroPad} from '@ethersproject/bytes';
 
 /**
  * Ensures that a hex string has the "0x" prefix

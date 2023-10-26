@@ -1,11 +1,11 @@
 // This file contains the definition of the low level network clients
-import { GasFeeEstimation, SupportedNetwork } from '../types';
-import { DeployedAddresses } from './types';
-import { Client as IpfsClient, PinResponse } from '@aragon/sdk-ipfs';
-import { Signer } from '@ethersproject/abstract-signer';
-import { Contract, ContractInterface } from '@ethersproject/contracts';
-import { JsonRpcProvider } from '@ethersproject/providers';
-import { GraphQLClient } from 'graphql-request';
+import {GasFeeEstimation, SupportedNetwork} from '../types';
+import {DeployedAddresses} from './types';
+import {Client as IpfsClient, PinResponse} from '@aragon/sdk-ipfs';
+import {Signer} from '@ethersproject/abstract-signer';
+import {Contract, ContractInterface} from '@ethersproject/contracts';
+import {JsonRpcProvider} from '@ethersproject/providers';
+import {GraphQLClient} from 'graphql-request';
 
 export interface IClientWeb3Core {
   shiftProvider: () => void;
@@ -41,7 +41,7 @@ export interface IClientGraphQLCore {
     name,
   }: {
     query: string;
-    params: { [key: string]: any };
+    params: {[key: string]: any};
     name?: string;
   }) => Promise<T>;
 }

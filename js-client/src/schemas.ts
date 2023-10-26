@@ -5,19 +5,19 @@ import {
   InvalidParameter,
   InvalidSubdomainError,
 } from './errors';
-import { ANY_ADDRESS } from './internal/constants';
-import { isEnsName, isIpfsUri, isSubdomain } from './validation';
-import { isAddress } from '@ethersproject/address';
-import { array, mixed, number, object, string } from 'yup';
+import {ANY_ADDRESS} from './internal/constants';
+import {isEnsName, isIpfsUri, isSubdomain} from './validation';
+import {isAddress} from '@ethersproject/address';
+import {array, mixed, number, object, string} from 'yup';
 
 export const BigintSchema = mixed().test(
   'isBigint',
   new InvalidParameter('bigint').message,
-  (value) => typeof value === 'bigint'
+  value => typeof value === 'bigint'
 );
 export const AddressOrEnsSchema = string()
   .notRequired()
-  .test('isAddressOrEns', new InvalidAddressOrEnsError().message, (value) =>
+  .test('isAddressOrEns', new InvalidAddressOrEnsError().message, value =>
     value ? isAddress(value) || isEnsName(value) : true
   );
 export const AddressOrEnsWithoutAnySchema = string()
@@ -25,7 +25,7 @@ export const AddressOrEnsWithoutAnySchema = string()
   .test(
     'isAddressOrEnsWithoutAny',
     new InvalidAddressOrEnsError().message,
-    (value) =>
+    value =>
       value
         ? (isAddress(value) || isEnsName(value)) && value !== ANY_ADDRESS
         : true
@@ -45,17 +45,17 @@ export const AbiSchema = array()
 export const Uint8ArraySchema = mixed().test(
   'isUint8Array',
   new InvalidParameter('Uint8Array').message,
-  (value) => (value ? value instanceof Uint8Array : true)
+  value => (value ? value instanceof Uint8Array : true)
 );
 export const IpfsUriSchema = string().test(
   'isIpfsUri',
   new InvalidCidError().message,
-  (value) => (value ? isIpfsUri(value) : true)
+  value => (value ? isIpfsUri(value) : true)
 );
 export const SubdomainSchema = string().test(
   'isSubdomain',
   new InvalidSubdomainError().message,
-  (value) => (value ? isSubdomain(value) : true)
+  value => (value ? isSubdomain(value) : true)
 );
 
 export const PaginationSchema = object({

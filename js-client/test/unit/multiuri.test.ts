@@ -1,4 +1,4 @@
-import { MultiUri } from '../../src';
+import {MultiUri} from '../../src';
 import {
   TEST_HTTP_URI,
   TEST_INVALID_IPFS_CID,

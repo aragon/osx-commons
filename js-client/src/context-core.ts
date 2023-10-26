@@ -1,11 +1,11 @@
-import { GRAPHQL_NODES, IPFS_NODES, LIVE_CONTRACTS } from './constants';
+import {GRAPHQL_NODES, IPFS_NODES, LIVE_CONTRACTS} from './constants';
 import {
   InvalidAddressError,
   InvalidGasEstimationFactorError,
   UnsupportedNetworkError,
   UnsupportedProtocolError,
 } from './errors';
-import { DeployedAddressesArray } from './internal';
+import {DeployedAddressesArray} from './internal';
 import {
   ContextParams,
   ContextState,
@@ -14,12 +14,12 @@ import {
   SupportedNetworksArray,
   SupportedVersion,
 } from './types';
-import { getNetwork } from './utils';
-import { Client as IpfsClient } from '@aragon/sdk-ipfs';
-import { Signer } from '@ethersproject/abstract-signer';
-import { isAddress } from '@ethersproject/address';
-import { JsonRpcProvider, Network, Networkish } from '@ethersproject/providers';
-import { GraphQLClient } from 'graphql-request';
+import {getNetwork} from './utils';
+import {Client as IpfsClient} from '@aragon/sdk-ipfs';
+import {Signer} from '@ethersproject/abstract-signer';
+import {isAddress} from '@ethersproject/address';
+import {JsonRpcProvider, Network, Networkish} from '@ethersproject/providers';
+import {GraphQLClient} from 'graphql-request';
 
 const DEFAULT_GAS_FEE_ESTIMATION_FACTOR = 0.625;
 const supportedProtocols = ['https:'];
@@ -53,7 +53,7 @@ export abstract class ContextCore {
    */
   constructor(params?: Partial<ContextParams>) {
     // set network to mainnet, overrided by the value of params
-    const mergedParams = Object.assign({ network: 'mainnet' }, params);
+    const mergedParams = Object.assign({network: 'mainnet'}, params);
     this.set(mergedParams);
   }
 
@@ -375,7 +375,7 @@ export abstract class ContextCore {
     network: Network
   ): JsonRpcProvider[] {
     if (Array.isArray(endpoints)) {
-      return endpoints.map((item) => {
+      return endpoints.map(item => {
         if (typeof item === 'string') {
           const url = new URL(item);
           if (!supportedProtocols.includes(url.protocol)) {
@@ -403,7 +403,7 @@ export abstract class ContextCore {
     }[]
   ): IpfsClient[] {
     const clients: IpfsClient[] = [];
-    configs.forEach((config) => {
+    configs.forEach(config => {
       const url = new URL(config.url);
       if (!supportedProtocols.includes(url.protocol)) {
         throw new UnsupportedProtocolError(url.protocol);
@@ -413,9 +413,9 @@ export abstract class ContextCore {
     return clients;
   }
 
-  private static resolveGraphql(endpoints: { url: string }[]): GraphQLClient[] {
+  private static resolveGraphql(endpoints: {url: string}[]): GraphQLClient[] {
     const clients: GraphQLClient[] = [];
-    endpoints.forEach((endpoint) => {
+    endpoints.forEach(endpoint => {
       const url = new URL(endpoint.url);
       if (!supportedProtocols.includes(url.protocol)) {
         throw new UnsupportedProtocolError(url.protocol);

@@ -8,7 +8,7 @@ title: Extended context
 Use the ContextCore class to create an extended Context for you own plugin. Now you can receive a generic base context with Web3, Subgraph and IPFS capabilities add custom parameters for your client on top.
 
 */
-import { Context, ContextCore } from '../src';
+import {Context, ContextCore} from '../src';
 
 // define a custom context params
 type MyContextParams = {
@@ -31,7 +31,7 @@ export class MyContext extends ContextCore {
 const genericUiCtx: Context = new Context(/* ... */);
 
 // define our custom context
-const context1 = new MyContext({ myParam: 'hello world' }, genericUiCtx);
+const context1 = new MyContext({myParam: 'hello world'}, genericUiCtx);
 
 // call extended client functions
 console.log(context1.network);

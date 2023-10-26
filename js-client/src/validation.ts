@@ -4,8 +4,8 @@ import {
   OSX_PROPOSAL_ID_REGEX,
   SUBDOMAIN_REGEX,
 } from './constants';
-import { InvalidCidError } from './errors';
-import { MultiUri } from './multiuri';
+import {InvalidCidError} from './errors';
+import {MultiUri} from './multiuri';
 
 /**
  * Attempts to parse the given string as a URL and returns the IPFS CiD contained in it.

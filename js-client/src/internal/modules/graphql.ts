@@ -1,13 +1,13 @@
-import { Context } from '../../context';
+import {Context} from '../../context';
 import {
   ClientNotInitializedError,
   GraphQLError,
   NoNodesAvailableError,
 } from '../../errors';
-import { runAndRetry } from '../../promises';
-import { QueryStatus } from '../graphql-queries';
-import { IClientGraphQLCore } from '../interfaces';
-import { ClientError, GraphQLClient } from 'graphql-request';
+import {runAndRetry} from '../../promises';
+import {QueryStatus} from '../graphql-queries';
+import {IClientGraphQLCore} from '../interfaces';
+import {ClientError, GraphQLClient} from 'graphql-request';
 
 export class GraphqlModule implements IClientGraphQLCore {
   private clientIdx: number = -1;
@@ -49,7 +49,7 @@ export class GraphqlModule implements IClientGraphQLCore {
   public isUp(): Promise<boolean> {
     return this.getClient()
       .request(QueryStatus)
-      .then((res) => {
+      .then(res => {
         return !!res._meta?.deployment;
       })
       .catch(() => {
@@ -84,7 +84,7 @@ export class GraphqlModule implements IClientGraphQLCore {
     name,
   }: {
     query: string;
-    params: { [key: string]: any };
+    params: {[key: string]: any};
     name?: string;
   }) {
     if (!this.clients.length) {

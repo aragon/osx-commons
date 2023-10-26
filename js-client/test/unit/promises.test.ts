@@ -1,4 +1,4 @@
-import { promiseWithTimeout, runAndRetry } from '../../src';
+import {promiseWithTimeout, runAndRetry} from '../../src';
 
 describe('Test promise helpers', () => {
   describe('runAndRetry', () => {
@@ -41,18 +41,14 @@ describe('Test promise helpers', () => {
   describe('promiseWithTimeout', () => {
     it('Should timeout', async () => {
       const timeout = 100;
-      const promise = new Promise((resolve) =>
-        setTimeout(resolve, timeout * 2)
-      );
+      const promise = new Promise(resolve => setTimeout(resolve, timeout * 2));
       await expect(promiseWithTimeout(promise, timeout)).rejects.toThrow(
         'Time out'
       );
     });
     it('Should not timeout', async () => {
       const timeout = 100;
-      const promise = new Promise((resolve) =>
-        setTimeout(resolve, timeout / 2)
-      );
+      const promise = new Promise(resolve => setTimeout(resolve, timeout / 2));
       await expect(
         promiseWithTimeout(promise, timeout)
       ).resolves.toBeUndefined();

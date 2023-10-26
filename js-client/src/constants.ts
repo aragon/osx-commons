@@ -1,10 +1,10 @@
-import { NetworkDeployment } from './internal';
-import { ProposalMetadata, SupportedNetwork, SupportedVersion } from './types';
-import { activeContractsList } from '@aragon/osx-ethers';
-import { activeContractsList as activeContractsListV1_0_0 } from '@aragon/osx-ethers-v1.0.0';
-import { keccak256 } from '@ethersproject/keccak256';
-import { Network } from '@ethersproject/networks';
-import { toUtf8Bytes } from '@ethersproject/strings';
+import {NetworkDeployment} from './internal';
+import {ProposalMetadata, SupportedNetwork, SupportedVersion} from './types';
+import {activeContractsList} from '@aragon/osx-ethers';
+import {activeContractsList as activeContractsListV1_0_0} from '@aragon/osx-ethers-v1.0.0';
+import {keccak256} from '@ethersproject/keccak256';
+import {Network} from '@ethersproject/networks';
+import {toUtf8Bytes} from '@ethersproject/strings';
 
 /** Timeout that will be applied to operations involving
  * many fetch requests that could take a long time */
@@ -56,26 +56,26 @@ const getGraphqlNode = (network: SupportedNetwork): string => {
   return `https://subgraph.satsuma-prod.com/qHR2wGfc5RLi6/aragon/osx-${SupportedNetworksToGraphqlNetworks[network]}/version/v1.3.0/api`;
 };
 
-export const GRAPHQL_NODES: { [K in SupportedNetwork]: { url: string }[] } = {
+export const GRAPHQL_NODES: {[K in SupportedNetwork]: {url: string}[]} = {
   [SupportedNetwork.MAINNET]: [
     {
       url: getGraphqlNode(SupportedNetwork.MAINNET),
     },
   ],
-  [SupportedNetwork.GOERLI]: [{ url: getGraphqlNode(SupportedNetwork.GOERLI) }],
+  [SupportedNetwork.GOERLI]: [{url: getGraphqlNode(SupportedNetwork.GOERLI)}],
   [SupportedNetwork.POLYGON]: [
     {
       url: getGraphqlNode(SupportedNetwork.POLYGON),
     },
   ],
-  [SupportedNetwork.MUMBAI]: [{ url: getGraphqlNode(SupportedNetwork.MUMBAI) }],
-  [SupportedNetwork.BASE]: [{ url: getGraphqlNode(SupportedNetwork.BASE) }],
+  [SupportedNetwork.MUMBAI]: [{url: getGraphqlNode(SupportedNetwork.MUMBAI)}],
+  [SupportedNetwork.BASE]: [{url: getGraphqlNode(SupportedNetwork.BASE)}],
   [SupportedNetwork.BASE_GOERLI]: [
     {
       url: getGraphqlNode(SupportedNetwork.BASE_GOERLI),
     },
   ],
-  [SupportedNetwork.LOCAL]: [{ url: getGraphqlNode(SupportedNetwork.LOCAL) }],
+  [SupportedNetwork.LOCAL]: [{url: getGraphqlNode(SupportedNetwork.LOCAL)}],
   [SupportedNetwork.SEPOLIA]: [
     {
       url: getGraphqlNode(SupportedNetwork.SEPOLIA),
@@ -119,7 +119,7 @@ export const IPFS_NODES: {
 };
 
 export const LIVE_CONTRACTS: {
-  [J in SupportedVersion]: { [K in SupportedNetwork]: NetworkDeployment };
+  [J in SupportedVersion]: {[K in SupportedNetwork]: NetworkDeployment};
 } = {
   [SupportedVersion.V1_0_0]: {
     [SupportedNetwork.MAINNET]: {
@@ -407,13 +407,13 @@ const Permissions = {
 };
 
 const PermissionIds = Object.entries(Permissions).reduce(
-  (acc, [k, v]) => ({ ...acc, [k + '_ID']: keccak256(toUtf8Bytes(v)) }),
-  {} as { [k: string]: string }
+  (acc, [k, v]) => ({...acc, [k + '_ID']: keccak256(toUtf8Bytes(v))}),
+  {} as {[k: string]: string}
 );
 Object.freeze(Permissions);
-export { Permissions };
+export {Permissions};
 Object.freeze(PermissionIds);
-export { PermissionIds };
+export {PermissionIds};
 export const IPFS_CID_REGEX =
   /^((Qm[1-9A-HJ-NP-Za-km-z]{44,})|(b[A-Za-z2-7]{58,}|B[A-Z2-7]{58,})|(z[1-9A-HJ-NP-Za-km-z]{48,})|(F[0-9A-F]{50,}))$/;
 

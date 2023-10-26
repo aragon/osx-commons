@@ -1,6 +1,6 @@
-import { getInterfaceId, getNamedTypesFromMetadata } from '../../src';
-import { ERC165_ABI, TEST_ABI } from '../constants';
-import { Interface } from '@ethersproject/abi';
+import {getInterfaceId, getNamedTypesFromMetadata} from '../../src';
+import {ERC165_ABI, TEST_ABI} from '../constants';
+import {Interface} from '@ethersproject/abi';
 
 describe('Utils', () => {
   describe('getNamedTypesFromMetadata', () => {

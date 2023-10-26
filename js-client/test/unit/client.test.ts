@@ -11,7 +11,7 @@ import {
   TEST_WALLET_ADDRESS,
   web3endpoints,
 } from '../constants';
-import { Wallet } from '@ethersproject/wallet';
+import {Wallet} from '@ethersproject/wallet';
 
 class TestContext extends ContextCore {
   constructor(params?: Partial<ContextParams>) {

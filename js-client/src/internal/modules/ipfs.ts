@@ -1,17 +1,13 @@
-import { Context } from '../../context';
+import {Context} from '../../context';
 import {
   ClientNotInitializedError,
   DataDecodingError,
   IpfsError,
   NoNodesAvailableError,
 } from '../../errors';
-import { runAndRetry } from '../../promises';
-import { IClientIpfsCore } from '../interfaces';
-import {
-  Client as IpfsClient,
-  ClientError,
-  PinResponse,
-} from '@aragon/sdk-ipfs';
+import {runAndRetry} from '../../promises';
+import {IClientIpfsCore} from '../interfaces';
+import {Client as IpfsClient, ClientError, PinResponse} from '@aragon/sdk-ipfs';
 
 export class IPFSModule implements IClientIpfsCore {
   private clientIdx: number = -1;
@@ -71,7 +67,7 @@ export class IPFSModule implements IClientIpfsCore {
 
   public async add(input: string | Uint8Array): Promise<string> {
     return this.runAndRetryHelper(() => this.getClient().add(input)).then(
-      (res) => res.hash
+      res => res.hash
     );
   }
 
@@ -107,8 +103,8 @@ export class IPFSModule implements IClientIpfsCore {
 
   public fetchString(cid: string): Promise<string> {
     return this.fetchBytes(cid)
-      .then((bytes) => new TextDecoder().decode(bytes))
-      .catch((e) => {
+      .then(bytes => new TextDecoder().decode(bytes))
+      .catch(e => {
         throw new DataDecodingError(e.message);
       });
   }

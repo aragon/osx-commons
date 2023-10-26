@@ -8,8 +8,8 @@ title: Extended client
 Use the ClientCore class to create an extended client. Now you can add your custom functions and properties to the client.
 
 */
-import { ClientCore } from '../src';
-import { MyContext } from './01-extended-context';
+import {ClientCore} from '../src';
+import {MyContext} from './01-extended-context';
 
 // define a custom client that extends the ClientCore class
 class MyClient extends ClientCore {

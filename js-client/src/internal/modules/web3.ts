@@ -1,4 +1,4 @@
-import { Context } from '../../context';
+import {Context} from '../../context';
 import {
   CannotEstimateGasError,
   InvalidAddressError,
@@ -13,12 +13,12 @@ import {
   SupportedNetwork,
   SupportedNetworksArray,
 } from '../../types';
-import { IClientWeb3Core } from '../interfaces';
-import { DeployedAddresses } from '../types';
-import { Signer } from '@ethersproject/abstract-signer';
-import { isAddress } from '@ethersproject/address';
-import { Contract, ContractInterface } from '@ethersproject/contracts';
-import { JsonRpcProvider } from '@ethersproject/providers';
+import {IClientWeb3Core} from '../interfaces';
+import {DeployedAddresses} from '../types';
+import {Signer} from '@ethersproject/abstract-signer';
+import {isAddress} from '@ethersproject/address';
+import {Contract, ContractInterface} from '@ethersproject/contracts';
+import {JsonRpcProvider} from '@ethersproject/providers';
 
 export class Web3Module implements IClientWeb3Core {
   private static readonly PRECISION_FACTOR_BASE = 1000;
@@ -117,7 +117,7 @@ export class Web3Module implements IClientWeb3Core {
   public getMaxFeePerGas(): Promise<bigint> {
     return this.getConnectedSigner()
       .getFeeData()
-      .then((feeData) => {
+      .then(feeData => {
         if (!feeData.maxFeePerGas) {
           throw new CannotEstimateGasError();
         }
@@ -126,7 +126,7 @@ export class Web3Module implements IClientWeb3Core {
   }
 
   public getApproximateGasFee(estimatedFee: bigint): Promise<GasFeeEstimation> {
-    return this.getMaxFeePerGas().then((maxFeePerGas) => {
+    return this.getMaxFeePerGas().then(maxFeePerGas => {
       const max = estimatedFee * maxFeePerGas;
 
       const factor =
@@ -136,7 +136,7 @@ export class Web3Module implements IClientWeb3Core {
         (max * BigInt(Math.trunc(factor))) /
         BigInt(Web3Module.PRECISION_FACTOR_BASE);
 
-      return { average, max };
+      return {average, max};
     });
   }
 

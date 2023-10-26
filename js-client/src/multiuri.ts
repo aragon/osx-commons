@@ -1,5 +1,5 @@
-import { IPFS_CID_REGEX } from './constants';
-import { EmptyMultiUriError } from './errors';
+import {IPFS_CID_REGEX} from './constants';
+import {EmptyMultiUriError} from './errors';
 
 /**
  * Parses a multi URI and returns the IPFS or HTTP URI.
@@ -31,7 +31,7 @@ export class MultiUri {
   }
   get ipfs() {
     for (let item of this.items) {
-      if (IPFS_CID_REGEX.test(item)) return { cid: item, path: '' };
+      if (IPFS_CID_REGEX.test(item)) return {cid: item, path: ''};
       else if (item.startsWith('ipfs://')) {
         item = item.substring(7);
       }
@@ -40,7 +40,7 @@ export class MultiUri {
       let cid = item;
       if (pathIdx < 0) {
         if (!IPFS_CID_REGEX.test(cid)) continue;
-        return { cid, path: '' };
+        return {cid, path: ''};
       }
       cid = item.substring(0, pathIdx);
       if (!IPFS_CID_REGEX.test(cid)) continue;
@@ -64,7 +64,7 @@ export class MultiUri {
   }
   get http() {
     return this.items.filter(
-      (item) => item.startsWith('http://') || item.startsWith('https://')
+      item => item.startsWith('http://') || item.startsWith('https://')
     );
   }
 }

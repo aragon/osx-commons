@@ -36,7 +36,7 @@ import {
   TEST_IPFS_URI_V1,
   TEST_SUBDOMAIN,
 } from './constants';
-import { ValidationError } from 'yup';
+import {ValidationError} from 'yup';
 
 describe('Test client schemas', () => {
   describe('Test bigints', () => {

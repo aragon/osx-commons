@@ -33,7 +33,7 @@ Then import them like the following **before** you import the Aragon SDK
 package:
 
 ```javascript
-import { Client } from '@aragon/sdk-client-common';
+import {Client} from '@aragon/sdk-client-common';
 import '@ethersproject/shims';
 import 'react-native-url-polyfill/auto';
 ```

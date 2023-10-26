@@ -1,8 +1,4 @@
-import {
-  InvalidPromiseError,
-  InvalidTimeoutError,
-  TimeoutError,
-} from './errors';
+import {InvalidPromiseError, InvalidTimeoutError, TimeoutError} from './errors';
 
 /**
  * Run a promise with a timeout
@@ -33,7 +29,7 @@ export function promiseWithTimeout<T>(
       timeout
     );
 
-    return prom.then((result) => resolve(result)).catch((err) => reject(err));
+    return prom.then(result => resolve(result)).catch(err => reject(err));
   });
 }
 

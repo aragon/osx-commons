@@ -86,7 +86,7 @@ export enum PrepareInstallationStep {
 }
 
 export type PrepareInstallationStepValue =
-  | { key: PrepareInstallationStep.PREPARING; txHash: string }
+  | {key: PrepareInstallationStep.PREPARING; txHash: string}
   | ({
       key: PrepareInstallationStep.DONE;
     } & ApplyInstallationParams);
@@ -118,7 +118,7 @@ export enum PrepareUninstallationSteps {
   DONE = 'done',
 }
 export type PrepareUninstallationStepValue =
-  | { key: PrepareUninstallationSteps.PREPARING; txHash: string }
+  | {key: PrepareUninstallationSteps.PREPARING; txHash: string}
   | ({
       key: PrepareUninstallationSteps.DONE;
     } & ApplyUninstallationParams);
@@ -176,7 +176,7 @@ export type ProposalMetadata = {
   title: string;
   summary: string;
   description: string;
-  resources: Array<{ url: string; name: string }>;
+  resources: Array<{url: string; name: string}>;
   media?: {
     header?: string;
     logo?: string;
@@ -249,7 +249,7 @@ export enum PrepareUpdateStep {
 }
 
 export type PrepareUpdateStepValue =
-  | { key: PrepareUpdateStep.PREPARING; txHash: string }
+  | {key: PrepareUpdateStep.PREPARING; txHash: string}
   | ({
       key: PrepareUpdateStep.DONE;
     } & ApplyUpdateParams);

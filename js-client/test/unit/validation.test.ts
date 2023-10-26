@@ -72,12 +72,12 @@ describe('Test Validations', () => {
   describe('isProposalId', () => {
     it('Should recognize invalid proposal IDs', () => {
       const inputs = [
-        { in: '1', out: false },
-        { in: '0x1', out: false },
-        { in: ADDRESS_ONE + '_0x1', out: true },
-        { in: ADDRESS_ONE, out: false },
-        { in: '0x1_0x1', out: false },
-        { in: ADDRESS_ONE + '_0x' + '0'.repeat(64), out: true },
+        {in: '1', out: false},
+        {in: '0x1', out: false},
+        {in: ADDRESS_ONE + '_0x1', out: true},
+        {in: ADDRESS_ONE, out: false},
+        {in: '0x1_0x1', out: false},
+        {in: ADDRESS_ONE + '_0x' + '0'.repeat(64), out: true},
       ];
       for (const input of inputs) {
         expect(isProposalId(input.in)).toBe(input.out);
@@ -86,11 +86,11 @@ describe('Test Validations', () => {
   });
   describe('isIpfsUri', () => {
     const inputs = [
-      { in: TEST_IPFS_CID_V0, out: false },
-      { in: TEST_IPFS_CID_V1, out: false },
-      { in: TEST_INVALID_IPFS_URI, out: false },
-      { in: TEST_IPFS_URI_V0, out: true },
-      { in: TEST_IPFS_URI_V1, out: true },
+      {in: TEST_IPFS_CID_V0, out: false},
+      {in: TEST_IPFS_CID_V1, out: false},
+      {in: TEST_INVALID_IPFS_URI, out: false},
+      {in: TEST_IPFS_URI_V0, out: true},
+      {in: TEST_IPFS_URI_V1, out: true},
     ];
     for (const input of inputs) {
       expect(isIpfsUri(input.in)).toBe(input.out);
@@ -98,8 +98,8 @@ describe('Test Validations', () => {
   });
   describe('isSubdomain', () => {
     const inputs = [
-      { in: TEST_SUBDOMAIN, out: true },
-      { in: TEST_INVALID_SUBDOMAIN, out: false },
+      {in: TEST_SUBDOMAIN, out: true},
+      {in: TEST_INVALID_SUBDOMAIN, out: false},
     ];
     for (const input of inputs) {
       expect(isSubdomain(input.in)).toBe(input.out);
@@ -107,8 +107,8 @@ describe('Test Validations', () => {
   });
   describe('isEnsName', () => {
     const inputs = [
-      { in: TEST_ENS_NAME, out: true },
-      { in: TEST_INVALID_ENS_NAME, out: false },
+      {in: TEST_ENS_NAME, out: true},
+      {in: TEST_INVALID_ENS_NAME, out: false},
     ];
     for (const input of inputs) {
       expect(isEnsName(input.in)).toBe(input.out);

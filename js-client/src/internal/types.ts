@@ -1,7 +1,7 @@
-import { Client as IpfsClient } from '@aragon/sdk-ipfs';
-import { Signer } from '@ethersproject/abstract-signer';
-import { JsonRpcProvider, Network, Networkish } from '@ethersproject/providers';
-import { GraphQLClient } from 'graphql-request';
+import {Client as IpfsClient} from '@aragon/sdk-ipfs';
+import {Signer} from '@ethersproject/abstract-signer';
+import {JsonRpcProvider, Network, Networkish} from '@ethersproject/providers';
+import {GraphQLClient} from 'graphql-request';
 
 // Create a readonly string array from the keys of NetworkDeployment
 export const DeployedAddressesArray = [
@@ -25,7 +25,7 @@ export type NetworkDeployment = Override<
   {
     [address in DeployedAddresses]: string;
   },
-  { ensRegistryAddress?: string }
+  {ensRegistryAddress?: string}
 >;
 // Context input parameters
 
@@ -44,18 +44,18 @@ export type Web3ContextParams =
   };
 export type IpfsContextParams = {
   /** If not provided uses default value */
-  ipfsNodes?: { url: string; headers?: Record<string, string> }[];
+  ipfsNodes?: {url: string; headers?: Record<string, string>}[];
 };
 export type GraphQLContextParams = {
   /** If not provided uses default value */
-  graphqlNodes?: { url: string }[];
+  graphqlNodes?: {url: string}[];
 };
 
 export type Web3ContextState = Override<
   {
     [address in DeployedAddresses]: string;
   },
-  { ensRegistryAddress?: string }
+  {ensRegistryAddress?: string}
 > & {
   network: Network;
   signer: Signer;

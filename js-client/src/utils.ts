@@ -1,5 +1,5 @@
-import { ADDITIONAL_NETWORKS, LIVE_CONTRACTS } from './constants';
-import { bytesToHex, hexToBytes } from './encoding';
+import {ADDITIONAL_NETWORKS, LIVE_CONTRACTS} from './constants';
+import {bytesToHex, hexToBytes} from './encoding';
 import {
   InstallationNotFoundError,
   InvalidAddressError,
@@ -13,7 +13,7 @@ import {
   IClientWeb3Core,
   SubgraphPluginInstallation,
 } from './internal';
-import { QueryIPlugin } from './internal/graphql-queries';
+import {QueryIPlugin} from './internal/graphql-queries';
 import {
   GasFeeEstimation,
   MetadataAbiInput,
@@ -31,13 +31,13 @@ import {
   PluginSetupProcessor,
   PluginSetupProcessor__factory,
 } from '@aragon/osx-ethers';
-import { FunctionFragment, Interface } from '@ethersproject/abi';
-import { defaultAbiCoder } from '@ethersproject/abi';
-import { isAddress } from '@ethersproject/address';
-import { Zero } from '@ethersproject/constants';
-import { ContractReceipt } from '@ethersproject/contracts';
-import { id } from '@ethersproject/hash';
-import { Network } from '@ethersproject/networks';
+import {FunctionFragment, Interface} from '@ethersproject/abi';
+import {defaultAbiCoder} from '@ethersproject/abi';
+import {isAddress} from '@ethersproject/address';
+import {Zero} from '@ethersproject/constants';
+import {ContractReceipt} from '@ethersproject/contracts';
+import {id} from '@ethersproject/hash';
+import {Network} from '@ethersproject/networks';
 import {
   getNetwork as ethersGetNetwork,
   Log,
@@ -59,7 +59,7 @@ export function findLog(
   eventName: string
 ): Log | undefined {
   return receipt.logs.find(
-    (log) => log.topics[0] === id(iface.getEvent(eventName).format('sighash'))
+    log => log.topics[0] === id(iface.getEvent(eventName).format('sighash'))
   );
 }
 
@@ -90,7 +90,7 @@ export function getFunctionFragment(
 export function getNamedTypesFromMetadata(
   inputs: MetadataAbiInput[] = []
 ): string[] {
-  return inputs.map((input) => {
+  return inputs.map(input => {
     if (input.type.startsWith('tuple')) {
       const tupleResult = getNamedTypesFromMetadata(input.components).join(
         ', '
@@ -140,7 +140,7 @@ export async function prepareGenericInstallationEstimation(
     version = latestVersion.tag;
   }
   // encode installation params
-  const { installationParams = [], installationAbi = [] } = params;
+  const {installationParams = [], installationAbi = []} = params;
   const data = defaultAbiCoder.encode(
     getNamedTypesFromMetadata(installationAbi),
     installationParams
@@ -175,7 +175,7 @@ export async function prepareGenericInstallationEstimation(
  */
 export async function* prepareGenericInstallation(
   web3: IClientWeb3Core,
-  params: PrepareInstallationParams & { pluginSetupProcessorAddress: string }
+  params: PrepareInstallationParams & {pluginSetupProcessorAddress: string}
 ): AsyncGenerator<PrepareInstallationStepValue> {
   const signer = web3.getConnectedSigner();
   if (!isAddress(params.pluginRepo)) {
@@ -192,7 +192,7 @@ export async function* prepareGenericInstallation(
     version = latestVersion.tag;
   }
   // encode installation params
-  const { installationParams = [], installationAbi = [] } = params;
+  const {installationParams = [], installationAbi = []} = params;
   const data = defaultAbiCoder.encode(
     getNamedTypesFromMetadata(installationAbi),
     installationParams
@@ -249,19 +249,19 @@ async function getPrepareUpdateParams(
   params: PrepareUpdateParams
 ): Promise<PluginSetupProcessor.PrepareUpdateParamsStruct> {
   type T = {
-    iplugin: { installations: SubgraphPluginInstallation[] };
+    iplugin: {installations: SubgraphPluginInstallation[]};
   };
-  const { iplugin } = await graphql.request<T>({
+  const {iplugin} = await graphql.request<T>({
     query: QueryIPlugin,
     params: {
       address: params.pluginAddress.toLowerCase(),
-      where: { dao: params.daoAddressOrEns.toLowerCase() },
+      where: {dao: params.daoAddressOrEns.toLowerCase()},
     },
     name: 'plugin',
   });
 
   // filter specified installation
-  const { pluginInstallationIndex = 0 } = params;
+  const {pluginInstallationIndex = 0} = params;
   const selectedInstallation = iplugin.installations[pluginInstallationIndex];
   if (!selectedInstallation) {
     throw new InstallationNotFoundError();
@@ -275,7 +275,7 @@ async function getPrepareUpdateParams(
     throw new InvalidVersionError();
   }
   // encode update params
-  const { updateParams = [], updateAbi = [] } = params;
+  const {updateParams = [], updateAbi = []} = params;
   const data = defaultAbiCoder.encode(
     getNamedTypesFromMetadata(updateAbi),
     updateParams
@@ -307,7 +307,7 @@ async function getPrepareUpdateParams(
 export async function prepareGenericUpdateEstimation(
   web3: IClientWeb3Core,
   graphql: IClientGraphQLCore,
-  params: PrepareUpdateParams & { pluginSetupProcessorAddress: string }
+  params: PrepareUpdateParams & {pluginSetupProcessorAddress: string}
 ): Promise<GasFeeEstimation> {
   const signer = web3.getConnectedSigner();
   const prepareUpdateParams = await getPrepareUpdateParams(graphql, params);
