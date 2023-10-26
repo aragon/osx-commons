@@ -23,6 +23,7 @@ export function generateBalanceEntityId(dao: Address, token: Address): string {
 export function generateTokenIdBalanceEntityId(
   dao: Address,
   token: Address,
+  // eslint-disable-next-line
   tokenId: BigInt
 ): string {
   const ids = [dao.toHexString(), token.toHexString(), tokenId.toString()];
