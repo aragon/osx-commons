@@ -33,6 +33,7 @@ class MyClient extends ClientCore {
     console.log(signer);
     console.log(provider);
     console.log(graphqlClient);
+    console.log(ipfsClient);
 
     // ...
   }
