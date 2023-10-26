@@ -8,9 +8,9 @@ import {
   IERC20PermitUpgradeable__factory,
   IERC20Upgradeable__factory,
   IVotesUpgradeable__factory,
-} from '../../../typechain';
-import {getInterfaceId} from '../../../utils/interfaces';
-import {deployWithProxy} from '../../../utils/proxy';
+} from '../../../../typechain';
+import {getInterfaceId} from '../../../../utils/interfaces';
+import {deployWithProxy} from '../../../../utils/proxy';
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
