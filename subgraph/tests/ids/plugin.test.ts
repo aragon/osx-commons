@@ -12,7 +12,7 @@ import {Address, Bytes, crypto} from '@graphprotocol/graph-ts';
 import {assert, describe, test} from 'matchstick-as/assembly/index';
 
 describe('Plugin ID generation', () => {
-  test("`generatePluginEntityId` should return the hex string representation of the plugin address", () => {
+  test('`generatePluginEntityId` should return the hex string representation of the plugin address', () => {
     const pluginAddress = Address.fromString(ADDRESS_ONE);
     const expectedId = pluginAddress.toHexString();
 

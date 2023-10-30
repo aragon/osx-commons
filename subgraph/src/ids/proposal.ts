@@ -1,5 +1,5 @@
-import { Address, BigInt, Bytes } from "@graphprotocol/graph-ts";
-import { bigIntToBytes32 } from "../utils/utils";
+import {bigIntToBytes32} from '../utils/utils';
+import {Address, BigInt, Bytes} from '@graphprotocol/graph-ts';
 
 /**
  * Generates a unique action ID using the given parameters.
@@ -26,14 +26,10 @@ export function generateActionEntityId(
 export function generateTransactionActionsProposalEntityId(
   proposalEntityId: string,
   txHash: Bytes,
-  logIndex: BigInt,
+  logIndex: BigInt
 ): string {
-  const ids = [
-    proposalEntityId,
-    txHash.toHexString(),
-    logIndex.toHexString(),
-  ];
-  return ids.join("_");
+  const ids = [proposalEntityId, txHash.toHexString(), logIndex.toHexString()];
+  return ids.join('_');
 }
 
 /**
@@ -44,11 +40,8 @@ export function generateTransactionActionsProposalEntityId(
  */
 export function generateProposalEntityId(
   plugin: Address,
-  proposalId: BigInt,
+  proposalId: BigInt
 ): string {
-  const ids = [
-    plugin.toHexString(),
-    bigIntToBytes32(proposalId),
-  ];
-  return ids.join("_");
+  const ids = [plugin.toHexString(), bigIntToBytes32(proposalId)];
+  return ids.join('_');
 }

@@ -8,5 +8,4 @@ ignorePatterns:
   - generated/
   - extended-schema.ts
 
-
 rules: {'@typescript-eslint/ban-types': ['error', {'types': {'BigInt': false}}]}

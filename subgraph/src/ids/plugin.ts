@@ -1,11 +1,11 @@
-import { PERMISSION_OPERATIONS } from "../utils/constants";
+import {PERMISSION_OPERATIONS} from '../utils/constants';
 import {
   Address,
   ByteArray,
   Bytes,
   crypto,
   ethereum,
-} from "@graphprotocol/graph-ts";
+} from '@graphprotocol/graph-ts';
 
 /**
  * Generates an entity ID for a plugin.
@@ -45,23 +45,23 @@ export function generatePluginSetupEntityId(pluginSetup: Address): string {
  */
 export function generatePluginInstallationEntityId(
   dao: Address,
-  plugin: Address,
+  plugin: Address
 ): string | null {
   const installationIdTuple = new ethereum.Tuple();
   installationIdTuple.push(ethereum.Value.fromAddress(dao));
   installationIdTuple.push(ethereum.Value.fromAddress(plugin));
 
   const installationIdTupleEncoded = ethereum.encode(
-    ethereum.Value.fromTuple(installationIdTuple),
+    ethereum.Value.fromTuple(installationIdTuple)
   );
 
   if (installationIdTupleEncoded) {
     return Bytes.fromHexString(
       crypto
         .keccak256(
-          ByteArray.fromHexString(installationIdTupleEncoded.toHexString()),
+          ByteArray.fromHexString(installationIdTupleEncoded.toHexString())
         )
-        .toHexString(),
+        .toHexString()
     ).toHexString();
   }
   return null;
@@ -77,10 +77,10 @@ export function generatePluginInstallationEntityId(
  */
 export function generatePluginPreparationEntityId(
   pluginInstallationEntityId: string,
-  prepareSetupId: Bytes,
+  prepareSetupId: Bytes
 ): string {
   const ids = [pluginInstallationEntityId, prepareSetupId.toHexString()];
-  return ids.join("_");
+  return ids.join('_');
 }
 
 /**
@@ -92,10 +92,10 @@ export function generatePluginPreparationEntityId(
  */
 export function generatePluginReleaseEntityId(
   pluginRepo: Address,
-  release: i32,
+  release: i32
 ): string {
   const ids = [generatePluginRepoEntityId(pluginRepo), release.toString()];
-  return ids.join("_");
+  return ids.join('_');
 }
 
 /**
@@ -109,12 +109,12 @@ export function generatePluginReleaseEntityId(
 export function generatePluginVersionEntityId(
   pluginRepo: Address,
   release: i32,
-  build: i32,
+  build: i32
 ): string {
   const ids = [
     generatePluginRepoEntityId(pluginRepo),
     release.toString(),
     build.toString(),
   ];
-  return ids.join("_");
+  return ids.join('_');
 }
