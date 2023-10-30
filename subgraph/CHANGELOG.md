@@ -7,8 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## v1.0.0
 
+### Changed
+
+- Renamed `pluginRepo` to `plugin`
+
 ### Added
 
 - Added `generateActionEntityId` and `generateStandardCAllbackEntityId`.
+- Added `generateTransactionActionsProposalEntityId`, `generateProposalEntityId` and `generatePluginEntityId`
 - Added `generatePermissionId` and `generatePluginPermissionId`.
 - Added `generatePluginRepoEntityId`, `generatePluginSetupEntityId`, `generatePluginInstallationEntityId`, `generatePluginPreparationEntityId`, `generatePluginReleaseEntityId`, and `generatePluginVersionEntityId`.
