@@ -51,7 +51,9 @@ describe('GovernanceERC20', function () {
     from = signers[0];
     to = signers[1];
     other = signers[2];
+  });
 
+  beforeEach(async function () {
     mintSettings = {
       receivers: signers.slice(0, 3).map(s => s.address),
       amounts: [123, 456, 789],
