@@ -59,9 +59,7 @@ describe('GovernanceWrappedERC20', function () {
     from = signers[0];
     to = signers[1];
     other = signers[2];
-  });
 
-  beforeEach(async function () {
     defaultExistingERC20InitData = [existingErc20Name, existingErc20Symbol];
     erc20 = await TestERC20.deploy(...defaultExistingERC20InitData);
 
