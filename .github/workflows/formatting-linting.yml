@@ -29,8 +29,8 @@ jobs:
       - name: 'Lint contracts ts and js'
         run: yarn lint:contracts:ts >> $GITHUB_STEP_SUMMARY
 
-      - name: 'Lint js-client ts and js'
-        run: yarn lint:js-client:ts >> $GITHUB_STEP_SUMMARY
+      - name: 'Lint sdk ts and js'
+        run: yarn lint:sdk:ts >> $GITHUB_STEP_SUMMARY
 
       - name: 'Lint subgraph ts and js'
         run: yarn lint:subgraph:ts >> $GITHUB_STEP_SUMMARY

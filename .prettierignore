@@ -13,7 +13,7 @@ typechain
 types
 imported
 generated
-*/js-client/test/integration/*.test.ts
+*/sdk/test/integration/*.test.ts
 
 # files
 *.env

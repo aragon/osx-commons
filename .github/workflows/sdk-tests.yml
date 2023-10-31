@@ -1,11 +1,11 @@
-name: 'js-client'
+name: 'sdk'
 
 on:
   workflow_dispatch:
   push:
     paths:
-      - 'js-client/**'
-      - '.github/workflows/js-client-*.yml'
+      - 'sdk/**'
+      - '.github/workflows/sdk-*.yml'
 
 jobs:
   formatting-linting:
@@ -14,7 +14,7 @@ jobs:
     runs-on: 'ubuntu-latest'
     defaults:
       run:
-        working-directory: js-client
+        working-directory: sdk
     steps:
       - name: 'Check out the repo'
         uses: 'actions/checkout@v3'
@@ -28,8 +28,8 @@ jobs:
       - name: 'Install the dependencies'
         run: 'yarn install'
 
-      - name: 'Build the js-client'
+      - name: 'Build the sdk'
         run: 'yarn build'
 
-      - name: 'Test the js-client'
+      - name: 'Test the sdk'
         run: 'yarn test >> $GITHUB_STEP_SUMMARY'

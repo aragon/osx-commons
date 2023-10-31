@@ -1,6 +1,6 @@
-# Aragon JS SDK Client common utilities
+# Aragon OSx commons SDK utilities
 
-`@aragon/sdk-client-common` provides a set of base classes for creating custom
+`@aragon/osx-commons-sdk` provides a set of base classes for creating custom
 JS clients on top of the built-in one.
 
 - Extendable JS client with built-in Web3, Subgraph and IPFS
@@ -9,11 +9,11 @@ JS clients on top of the built-in one.
 # Installation
 
 Use [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/) to install
-@aragon/sdk-client-common.
+@aragon/osx-commons-sdk.
 
 ```bash
-npm install @aragon/sdk-client-common
-yarn add @aragon/sdk-client-common
+npm install @aragon/osx-commons-sdk
+yarn add @aragon/osx-commons-sdk
 ```
 
 # Usage
@@ -33,7 +33,7 @@ Then import them like the following **before** you import the Aragon SDK
 package:
 
 ```javascript
-import {Client} from '@aragon/sdk-client-common';
+import {Client} from '@aragon/osx-commons-sdk';
 import '@ethersproject/shims';
 import 'react-native-url-polyfill/auto';
 ```

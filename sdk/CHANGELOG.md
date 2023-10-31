@@ -35,7 +35,7 @@ TEMPLATE:
 
 - Add common schemas for validations
 - Support for sepolia network
-- Move functionality from `sdk-common` to `sdk-client-common`
+- Move functionality from `sdk-common` to `osx-commons-sdk`
 - New error classes `InvalidVersionError`, `PluginUpdatePreparationError` and `ProposalNotFoundError`
 - Add `isSubdomain`, `isIpfsUri` and `isEnsName` functions
 - Update SizeMismatchError error class
