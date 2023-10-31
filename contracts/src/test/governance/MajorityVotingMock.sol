@@ -4,7 +4,7 @@ pragma solidity ^0.8.8;
 
 import {IDAO} from "@aragon/osx/packages/contracts/src/core/dao/IDAO.sol";
 
-import {MajorityVotingBase} from "../../plugin/majority-voting/MajorityVotingBase.sol";
+import {MajorityVotingBase} from "../../governance/majority-voting/MajorityVotingBase.sol";
 
 contract MajorityVotingMock is MajorityVotingBase {
     function initializeMock(IDAO _dao, VotingSettings calldata _votingSettings) public initializer {

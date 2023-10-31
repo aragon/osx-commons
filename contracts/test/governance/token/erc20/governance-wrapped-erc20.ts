@@ -8,8 +8,8 @@ import {
   IERC20Upgradeable__factory,
   IERC20PermitUpgradeable__factory,
   IVotesUpgradeable__factory,
-} from '../../../typechain';
-import {getInterfaceId} from '../../../utils/interfaces';
+} from '../../../../typechain';
+import {getInterfaceId} from '../../../../utils/interfaces';
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
@@ -42,7 +42,7 @@ describe('GovernanceWrappedERC20', function () {
   let GovernanceWrappedERC20: GovernanceWrappedERC20__factory;
   let defaultBalances: AccountBalance[];
 
-  let defaultExistingERC20InitData: [string, string, number];
+  let defaultExistingERC20InitData: [string, string];
   let defaultGovernanceWrappedERC20InitData: [string, string, string];
 
   before(async () => {
@@ -62,7 +62,7 @@ describe('GovernanceWrappedERC20', function () {
   });
 
   beforeEach(async function () {
-    defaultExistingERC20InitData = [existingErc20Name, existingErc20Symbol, 0];
+    defaultExistingERC20InitData = [existingErc20Name, existingErc20Symbol];
     erc20 = await TestERC20.deploy(...defaultExistingERC20InitData);
 
     const promises = defaultBalances.map(balance =>
