@@ -7,12 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## v1.0.0
 
-### Changed
-
 ### Added
 
-- Added `generateActionEntityId` and `generateStandardCAllbackEntityId`.
-- Added `generatePermissionId` and `generatePluginPermissionId`.
-- Added `generatePluginRepoEntityId`, `generatePluginSetupEntityId`, `generatePluginInstallationEntityId`, `generatePluginPreparationEntityId`, `generatePluginReleaseEntityId`, and `generatePluginVersionEntityId`.
+- Copied files from [aragon/osx commit XXXXX TODO](https://github.com/aragon/osx/tree/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx) TODO TODO
 
-### Removed
+  - `generateActionEntityId` and `generateStandardCAllbackEntityId`.
+  - `generatePermissionId` and `generatePluginPermissionId`.
+  - `generatePluginRepoEntityId`, `generatePluginSetupEntityId`, `generatePluginInstallationEntityId`, `generatePluginPreparationEntityId`, `generatePluginReleaseEntityId`, and `generatePluginVersionEntityId`.
