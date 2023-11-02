@@ -1,104 +1,14 @@
-# Aragon JS SDK (client-common) changelog
+# Aragon OSx Commons SDK
 
-The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
-project adheres to [Semantic Versioning](http://semver.org/).
+All notable changes to this project will be documented in this file.
 
-<!--
-TEMPLATE:
-(Leave "## [UPCOMING]" first and describe the changes below it)
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-### Added
-- Feature 1, 2, 3
-
-### Changed
-- Change 1, 2, 3
-
-### Fixed
-- Fix 1, 2, 3
--->
-
-## [UPCOMING]
+## v1.0.0
 
 ### Added
 
-- Add new class error `InvalidPermissionOperationType`
+- Copied files from [aragon/sdk commit 76b4fc](https://github.com/aragon/sdk/tree/76b4fc815cfacce60b7c983ef0ce53110761f23a)
 
-## [1.7.1]
-
-### Fixed
-
-- ENS name Regex
-
-## [1.7.0]
-
-### Added
-
-- Add common schemas for validations
-- Support for sepolia network
-- Move functionality from `sdk-common` to `osx-commons-sdk`
-- New error classes `InvalidVersionError`, `PluginUpdatePreparationError` and `ProposalNotFoundError`
-- Add `isSubdomain`, `isIpfsUri` and `isEnsName` functions
-- Update SizeMismatchError error class
-
-## 1.6.0
-
-### Added
-
-- Add generic prepare update function
-- Add generic prepare update estimation function
-- Support for multiple versions on `LIVE_CONTRACTS`
-
-## 1.5.0-rc0
-
-### Changed
-
-- Renamed `LIVE_CONTRACTS` properties
-
-### Added
-
-- Support for local chains
-
-## 1.4.0-rc0
-
-### Added
-
-- Support for baseMainnet network
-
-## 1.3.0-rc0
-
-### Added
-
-- Support for baseGoerli network
-
-## 1.2.1-rc0
-
-### Fixed
-
-- Default ipfs endpoints
-
-## 1.2.0-rc0
-
-### Added
-
-- Tests for `getNamedTypesFromMetadata`
-
-### Changed
-
-- Updates `@aragon/osx-ethers` to v1.3.0-rc0.
-
-## 1.1.0
-
-- Added `MULTI_FETCH_TIMEOUT` for operations involving many remote data fetches
-
-## 1.0.2
-
-### Changed
-
-- Fixed the ESM import path
-
-## 1.0.1
-
-### Added
-
-- Add usage of common errors in all the code
-- Export of OverridenState
+  - TODO LIST WHAT COMPONENTS WERE MOVE OVER
