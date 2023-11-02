@@ -4,7 +4,7 @@ pragma solidity ^0.8.8;
 
 import {IDAO} from "@aragon/osx/packages/contracts/src/core/dao/IDAO.sol";
 
-import {GovernanceERC20} from "../../token/erc20/GovernanceERC20.sol";
+import {GovernanceERC20} from "../../governance/token/erc20/GovernanceERC20.sol";
 
 /// @title TestGovernanceERC20
 /// @author Aragon Association - 2022-2023
