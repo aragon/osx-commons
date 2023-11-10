@@ -1,4 +1,4 @@
-# Aragon OSx commons SDK utilities
+# Aragon OSx Commons SDK
 
 `@aragon/osx-commons-sdk` provides a set of base classes for creating custom
 JS clients on top of the built-in one.
