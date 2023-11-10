@@ -8,6 +8,15 @@ import {
 } from '@graphprotocol/graph-ts';
 
 /**
+ * Generates an entity ID for a plugin.
+ * @param plugin - The address of the plugin.
+ * @returns The entity ID as a string.
+ */
+export function generatePluginEntityId(plugin: Address): string {
+  return plugin.toHexString();
+}
+
+/**
  * Generates the plugin repository's ID using its address in hexadecimal format.
  *
  * @param pluginRepo - The address of the plugin repository.

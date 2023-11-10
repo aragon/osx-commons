@@ -5,12 +5,19 @@ import {
   generatePluginPreparationEntityId,
   generatePluginReleaseEntityId,
   generatePluginVersionEntityId,
+  generatePluginEntityId,
 } from '../../src';
 import {ADDRESS_ONE, ADDRESS_TWO, DUMMY_BYTES32_HEX} from '../constants';
 import {Address, Bytes, crypto} from '@graphprotocol/graph-ts';
 import {assert, describe, test} from 'matchstick-as/assembly/index';
 
-describe('PluginRepo ID generation', () => {
+describe('Plugin ID generation', () => {
+  test('`generatePluginEntityId` should return the hex string representation of the plugin address', () => {
+    const pluginAddress = Address.fromString(ADDRESS_ONE);
+    const expectedId = pluginAddress.toHexString();
+
+    assert.stringEquals(generatePluginEntityId(pluginAddress), expectedId);
+  });
   test('`generatePluginRepoEntityId` should return the hexadecimal representation of the provided address', () => {
     // Constants
     const PLUGIN_REPO_ADDRESS = Address.fromString(ADDRESS_ONE);
