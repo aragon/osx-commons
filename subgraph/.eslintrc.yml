@@ -7,3 +7,6 @@ ignorePatterns:
   - imported/
   - generated/
   - extended-schema.ts
+  - tests/
+
+rules: {'@typescript-eslint/ban-types': ['error', {'types': {'BigInt': false}}]}
