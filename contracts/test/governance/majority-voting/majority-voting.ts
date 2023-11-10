@@ -39,7 +39,12 @@ describe('MajorityVotingMock', function () {
     ownerAddress = await signers[0].getAddress();
 
     dao = await deployWithProxy<DAO>(new DAO__factory(signers[0]));
-    dao.initialize([], ownerAddress, ethers.constants.AddressZero, 'examplURI');
+    await dao.initialize(
+      [],
+      ownerAddress,
+      ethers.constants.AddressZero,
+      'examplURI'
+    );
   });
 
   beforeEach(async () => {

@@ -1,0 +1,8 @@
+parser: '@typescript-eslint/parser'
+parserOptions:
+  project: './sdk/tsconfig.json'
+
+# Custom eslint settings for the contracts can be defined here
+ignorePatterns:
+  # directories
+  - dist

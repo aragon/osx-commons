@@ -1,0 +1,67 @@
+{
+  "name": "@aragon/osx-commons-sdk",
+  "author": "Aragon Association",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/osx-commons-sdk.esm.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "TESTING=true tsdx test --verbose --runInBand",
+    "lint:ts": "cd .. && yarn run lint:sdk:ts",
+    "prepare": "tsdx build",
+    "size": "size-limit",
+    "analyze": "size-limit --why",
+    "clean": "rm -Rf .turbo dist",
+    "examples": "node ./scripts/generate-examples-md.js ./examples ./examples.md"
+  },
+  "peerDependencies": {},
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint:ts"
+    }
+  },
+  "size-limit": [
+    {
+      "path": "dist/osx-commons-sdk.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/osx-commons-sdk.esm.js",
+      "limit": "10 KB"
+    }
+  ],
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^7.0.8",
+    "husky": "^7.0.4",
+    "size-limit": "^7.0.8",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.3.1",
+    "typescript": "^4.6.2"
+  },
+  "dependencies": {
+    "@aragon/osx-ethers-v1.0.0": "npm:@aragon/osx-ethers@1.2.1",
+    "@aragon/osx-ethers": "^1.3.0-rc0.3",
+    "@aragon/sdk-ipfs": "^1.1.0",
+    "@ethersproject/abstract-signer": "^5.5.0",
+    "@ethersproject/bignumber": "^5.6.0",
+    "@ethersproject/constants": "^5.6.0",
+    "@ethersproject/contracts": "^5.5.0",
+    "@ethersproject/providers": "^5.5.0",
+    "@ethersproject/wallet": "^5.6.0",
+    "graphql": "^16.5.0",
+    "graphql-request": "^4.3.0",
+    "yup": "^1.2.0"
+  }
+}
