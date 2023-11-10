@@ -1,7 +1,15 @@
 # Aragon OSx Commons SDK
 
-`@aragon/osx-commons-sdk` provides a set of base classes for creating custom
-JS clients on top of the built-in one.
+`@aragon/osx-commons-sdk` provides common utilities for the development of plugins and the OSx protocol. This includes:
+
+- common helper functionality for
+    - web3 interaction
+    - subgraph interaction
+    - file storage on IPFS
+    - retrieving addresses of deployed Aragon OSx framework contracts
+    - contract deployment
+    - contract testing
+- base classes for creating custom JS clients on top of the built-in one.
 
 - Extendable JS client with built-in Web3, Subgraph and IPFS
 - Extendable context for holding inheritable configuration
