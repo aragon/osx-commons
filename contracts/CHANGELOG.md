@@ -17,7 +17,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - libraries `VersionComparisonLib`
   - free functions `BitMap`, `Ratio`, and `UncheckedMath`
   - test helpers `TestERC1155`, `TestERC20`, `TestERC721`, `TestGovernanceERC20`, `AddresslistMock`, `MajorityVotingMock`, `RatioTest`, `VersionComparisonLibTest`
-
-### Changed
-
-### Removed
