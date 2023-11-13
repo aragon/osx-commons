@@ -27,12 +27,14 @@ export type OverriddenState = {
 export enum SupportedNetwork {
   MAINNET = 'homestead',
   GOERLI = 'goerli',
+  SEPOLIA = 'sepolia',
   POLYGON = 'matic',
   MUMBAI = 'maticmum',
   BASE = 'base',
   BASE_GOERLI = 'baseGoerli',
+  ARBITRUM = 'arbitrum',
+  ARBITRUM_GOERLI = 'arbitrumGoerli',
   LOCAL = 'local',
-  SEPOLIA = 'sepolia',
 }
 
 export const SupportedNetworksArray = Object.values(SupportedNetwork);
