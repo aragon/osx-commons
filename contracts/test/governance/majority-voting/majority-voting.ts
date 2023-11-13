@@ -1,3 +1,5 @@
+import {getInterfaceId} from '../../../../sdk/src/utils';
+// TODO Include from npm package once published
 import {
   MajorityVotingMock,
   DAO,
@@ -9,7 +11,6 @@ import {
   MajorityVotingMock__factory,
   IProtocolVersion__factory,
 } from '../../../typechain';
-import {getInterfaceId} from '../../../utils/interfaces';
 import {deployWithProxy} from '../../../utils/proxy';
 import {pctToRatio} from '../../utils/math/ratio';
 import {VotingSettings, VotingMode, ONE_HOUR, ONE_YEAR} from './voting-helpers';

@@ -1,3 +1,5 @@
+import {getInterfaceId} from '../../../../../sdk/src/utils';
+// TODO Include from npm package once published
 import {
   TestERC20,
   TestERC20__factory,
@@ -9,7 +11,6 @@ import {
   IERC20PermitUpgradeable__factory,
   IVotesUpgradeable__factory,
 } from '../../../../typechain';
-import {getInterfaceId} from '../../../../utils/interfaces';
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';

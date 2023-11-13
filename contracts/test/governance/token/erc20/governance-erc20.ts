@@ -1,3 +1,5 @@
+import {getInterfaceId} from '../../../../../sdk/src/utils';
+// TODO Include from npm package once published
 import {
   DAO,
   DAO__factory,
@@ -9,7 +11,6 @@ import {
   IERC20Upgradeable__factory,
   IVotesUpgradeable__factory,
 } from '../../../../typechain';
-import {getInterfaceId} from '../../../../utils/interfaces';
 import {deployWithProxy} from '../../../../utils/proxy';
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
 import {expect} from 'chai';

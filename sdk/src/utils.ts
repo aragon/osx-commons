@@ -8,6 +8,7 @@ import {
   PluginUpdatePreparationError,
   UnsupportedNetworkError,
 } from './errors';
+import {findEventTopicLog} from './events';
 import {
   IClientGraphQLCore,
   IClientWeb3Core,
@@ -35,33 +36,12 @@ import {FunctionFragment, Interface} from '@ethersproject/abi';
 import {defaultAbiCoder} from '@ethersproject/abi';
 import {isAddress} from '@ethersproject/address';
 import {Zero} from '@ethersproject/constants';
-import {ContractReceipt} from '@ethersproject/contracts';
-import {id} from '@ethersproject/hash';
 import {Network} from '@ethersproject/networks';
 import {
   getNetwork as ethersGetNetwork,
   Log,
   Networkish,
 } from '@ethersproject/providers';
-
-/**
- * Finds a log in a receipt given the event name
- *
- * @export
- * @param {ContractReceipt} receipt
- * @param {Interface} iface
- * @param {string} eventName
- * @return {*}  {(Log | undefined)}
- */
-export function findLog(
-  receipt: ContractReceipt,
-  iface: Interface,
-  eventName: string
-): Log | undefined {
-  return receipt.logs.find(
-    log => log.topics[0] === id(iface.getEvent(eventName).format('sighash'))
-  );
-}
 
 /**
  * Gets a function fragment from encoded data
@@ -215,15 +195,17 @@ export async function* prepareGenericInstallation(
     txHash: tx.hash,
   };
 
-  const receipt = await tx.wait();
   const pspContractInterface = PluginSetupProcessor__factory.createInterface();
-  const log = findLog(receipt, pspContractInterface, 'InstallationPrepared');
-  if (!log) {
+  const logDescription = findEventTopicLog(
+    await tx.wait(),
+    pspContractInterface,
+    'InstallationPrepared'
+  );
+  if (!logDescription) {
     throw new PluginInstallationPreparationError();
   }
-  const parsedLog = pspContractInterface.parseLog(log);
-  const pluginAddress = parsedLog.args['plugin'];
-  const preparedSetupData = parsedLog.args['preparedSetupData'];
+  const pluginAddress = logDescription.args['plugin'];
+  const preparedSetupData = logDescription.args['preparedSetupData'];
   if (!(pluginAddress || preparedSetupData)) {
     throw new PluginInstallationPreparationError();
   }
@@ -348,14 +330,17 @@ export async function* prepareGenericUpdate(
   };
   const receipt = await tx.wait();
   const pspContractInterface = PluginSetupProcessor__factory.createInterface();
-  const log = findLog(receipt, pspContractInterface, 'UpdatePrepared');
-  if (!log) {
+  const logDescription = findEventTopicLog(
+    receipt,
+    pspContractInterface,
+    'UpdatePrepared'
+  );
+  if (!logDescription) {
     throw new PluginUpdatePreparationError();
   }
-  const parsedLog = pspContractInterface.parseLog(log);
-  const versionTag = parsedLog.args['versionTag'];
-  const preparedSetupData = parsedLog.args['preparedSetupData'];
-  const initData = parsedLog.args['initData'];
+  const versionTag = logDescription.args['versionTag'];
+  const preparedSetupData = logDescription.args['preparedSetupData'];
+  const initData = logDescription.args['initData'];
   if (
     !versionTag ||
     versionTag.build !== params.newVersion.build ||
