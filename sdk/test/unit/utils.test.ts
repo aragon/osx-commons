@@ -11,7 +11,7 @@ describe('Utils', () => {
       ]);
     });
   });
-  
+
   describe('getInterfaceId', () => {
     it('should return the interface id for an ERC165 contract', () => {
       const result = getInterfaceId(new Interface(ERC165_ABI));
