@@ -249,7 +249,7 @@ export const LIVE_CONTRACTS: {
     [SupportedNetwork.MAINNET]: {
       daoFactoryAddress: activeContractsList.mainnet.DAOFactory,
       pluginSetupProcessorAddress:
-        activeContractsList.mainnet.PluginRepoFactory,
+        activeContractsList.mainnet.PluginSetupProcessor,
       multisigRepoAddress: activeContractsList.mainnet['multisig-repo'],
       adminRepoAddress: activeContractsList.mainnet['admin-repo'],
       addresslistVotingRepoAddress:
