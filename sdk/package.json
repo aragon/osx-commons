@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "main": "dist/index.js",
+  "type": "module",
   "module": "dist/osx-commons-sdk.esm.js",
   "typings": "dist/index.d.ts",
   "files": [
