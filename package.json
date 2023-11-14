@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "license": "AGPL-3.0-or-later",
   "private": true,
-  "workspaces": ["contracts", "sdk", "subgraph"],
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@typescript-eslint/eslint-plugin": "^5.59.8",
