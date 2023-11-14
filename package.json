@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "license": "AGPL-3.0-or-later",
   "private": true,
+  "workspaces": [
+    "contracts",
+    "sdk",
+    "subgraph"
+  ],
   "type": "module",
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
