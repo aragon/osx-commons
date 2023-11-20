@@ -29,6 +29,8 @@ const apiUrls: {[index: string]: string} = {
   polygonMumbai: 'https://polygon-mumbai.infura.io/v3/',
   base: 'https://mainnet.base.org',
   baseGoerli: 'https://goerli.base.org',
+  arbitrum: 'https://arbitrum-mainnet.infura.io/v3/',
+  arbitrumGoerli: 'https://arbitrum-goerli.infura.io/v3/',
 };
 
 export const networks: {[index: string]: NetworkUserConfig} = {
@@ -70,6 +72,14 @@ export const networks: {[index: string]: NetworkUserConfig} = {
     url: `${apiUrls.baseGoerli}`,
     gasPrice: ethers.utils.parseUnits('0.0000001', 'gwei').toNumber(),
   },
+  arbitrum: {
+    chainId: 42161,
+    url: `${apiUrls.arbitrum}${process.env.INFURA_API_KEY}`,
+  },
+  arbitrumGoerli: {
+    chainId: 421613,
+    url: `${apiUrls.arbitrumGoerli}${process.env.INFURA_API_KEY}`,
+  },
 };
 
 // Uses hardhats private key if none is set. DON'T USE THIS ACCOUNT FOR DEPLOYMENTS
@@ -104,6 +114,8 @@ const config: HardhatUserConfig = {
       polygonMumbai: process.env.POLYGONSCAN_API_KEY || '',
       base: process.env.BASESCAN_API_KEY || '',
       baseGoerli: process.env.BASESCAN_API_KEY || '',
+      arbitrumOne: process.env.ARBISCAN_API_KEY || '',
+      arbitrumGoerli: process.env.ARBISCAN_API_KEY || '',
     },
     customChains: [
       {
