@@ -11,13 +11,13 @@ import {toUtf8Bytes} from '@ethersproject/strings';
 export const MULTI_FETCH_TIMEOUT = 7 * 1000;
 
 type GraphqlNetworks =
-  | 'homestead'
+  | 'mainnet'
   | 'goerli'
   | 'sepolia'
   | 'polygon'
   | 'mumbai'
+  | 'baseMainnet'
   | 'baseGoerli'
-  | 'base'
   | 'arbitrum'
   | 'arbitrumGoerli'
   | 'local';
@@ -25,12 +25,12 @@ type GraphqlNetworks =
 const SupportedNetworksToGraphqlNetworks: {
   [K in SupportedNetwork]: GraphqlNetworks;
 } = {
-  [SupportedNetwork.MAINNET]: 'homestead',
+  [SupportedNetwork.MAINNET]: 'mainnet',
   [SupportedNetwork.GOERLI]: 'goerli',
   [SupportedNetwork.SEPOLIA]: 'sepolia',
   [SupportedNetwork.POLYGON]: 'polygon',
   [SupportedNetwork.MUMBAI]: 'mumbai',
-  [SupportedNetwork.BASE]: 'base',
+  [SupportedNetwork.BASE]: 'baseMainnet',
   [SupportedNetwork.BASE_GOERLI]: 'baseGoerli',
   [SupportedNetwork.ARBITRUM]: 'arbitrum',
   [SupportedNetwork.ARBITRUM_GOERLI]: 'arbitrumGoerli',
