@@ -72,9 +72,9 @@ export const networks: {[index: string]: NetworkUserConfig} = {
     url: `${apiUrls.baseGoerli}`,
     gasPrice: ethers.utils.parseUnits('0.0000001', 'gwei').toNumber(),
   },
-  abitrum: {
+  arbitrum: {
     chainId: 42161,
-    url: `${apiUrls.abitrum}${process.env.INFURA_API_KEY}`,
+    url: `${apiUrls.arbitrum}${process.env.INFURA_API_KEY}`,
   },
   arbitrumGoerli: {
     chainId: 421613,
