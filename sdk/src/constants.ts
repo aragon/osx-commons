@@ -11,13 +11,13 @@ import {toUtf8Bytes} from '@ethersproject/strings';
 export const MULTI_FETCH_TIMEOUT = 7 * 1000;
 
 type GraphqlNetworks =
-  | 'mainnet'
+  | 'homestead'
   | 'goerli'
   | 'sepolia'
   | 'polygon'
   | 'mumbai'
   | 'baseGoerli'
-  | 'baseMainnet'
+  | 'base'
   | 'arbitrum'
   | 'arbitrumGoerli'
   | 'local';
@@ -25,12 +25,12 @@ type GraphqlNetworks =
 const SupportedNetworksToGraphqlNetworks: {
   [K in SupportedNetwork]: GraphqlNetworks;
 } = {
-  [SupportedNetwork.MAINNET]: 'mainnet',
+  [SupportedNetwork.MAINNET]: 'homestead',
   [SupportedNetwork.GOERLI]: 'goerli',
   [SupportedNetwork.SEPOLIA]: 'sepolia',
   [SupportedNetwork.POLYGON]: 'polygon',
   [SupportedNetwork.MUMBAI]: 'mumbai',
-  [SupportedNetwork.BASE]: 'baseMainnet',
+  [SupportedNetwork.BASE]: 'base',
   [SupportedNetwork.BASE_GOERLI]: 'baseGoerli',
   [SupportedNetwork.ARBITRUM]: 'arbitrum',
   [SupportedNetwork.ARBITRUM_GOERLI]: 'arbitrumGoerli',
@@ -449,12 +449,24 @@ export const LIVE_CONTRACTS: {
 };
 export const ADDITIONAL_NETWORKS: Network[] = [
   {
-    name: 'baseGoerli',
-    chainId: 84531,
+    name: 'sepolia',
+    chainId: 11155111,
+  },
+  {
+    name: 'arbitrum',
+    chainId: 42161,
+  },
+  {
+    name: 'arbitrumGoerli',
+    chainId: 421613,
   },
   {
     name: 'base',
     chainId: 8453,
+  },
+  {
+    name: 'baseGoerli',
+    chainId: 84531,
   },
   {
     name: 'local',
