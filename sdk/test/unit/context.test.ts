@@ -243,6 +243,7 @@ describe('Context instances', () => {
   it('Should create a context with the correct DAOFactory address from the core-contracts-package', () => {
     contextParams.daoFactoryAddress = '';
     contextParams.network = 'matic';
+    contextParams.web3Providers = ['https://polygon-rpc.com/'];
     const context = new TestContext(contextParams);
 
     expect(context).toBeInstanceOf(TestContext);
