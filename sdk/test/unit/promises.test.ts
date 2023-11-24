@@ -41,14 +41,18 @@ describe('Test promise helpers', () => {
   describe('promiseWithTimeout', () => {
     it('Should timeout', async () => {
       const timeout = 100;
-      const promise = new Promise(resolve => setTimeout(resolve, timeout * 2).unref());
+      const promise = new Promise(resolve =>
+        setTimeout(resolve, timeout * 2).unref()
+      );
       await expect(promiseWithTimeout(promise, timeout)).rejects.toThrow(
         'Time out'
       );
     });
     it('Should not timeout', async () => {
       const timeout = 100;
-      const promise = new Promise(resolve => setTimeout(resolve, timeout / 2).unref());
+      const promise = new Promise(resolve =>
+        setTimeout(resolve, timeout / 2).unref()
+      );
       await expect(
         promiseWithTimeout(promise, timeout)
       ).resolves.toBeUndefined();
