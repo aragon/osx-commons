@@ -36,5 +36,5 @@
     // TODO remove once generics are implemented in ContextCore
     "useDefineForClassFields": false
   },
-  "include": ["src", "types", "test"]
+  "include": ["src", "types"]
 }
