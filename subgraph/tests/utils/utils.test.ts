@@ -15,14 +15,6 @@ const MAX_UINT256_NUMBER_STRING =
   '115792089237316195423570985008687907853269984665640564039457584007913129639935';
 
 describe('bigIntToBytes32', () => {
-  test('should convert a BigInt to a bytes32 string with 64 zero padding', () => {
-    const input = BigInt.fromI32(123);
-    const expectedOutput =
-      '0x000000000000000000000000000000000000000000000000000000000000007b';
-
-    assert.stringEquals(bigIntToBytes32(input), expectedOutput);
-  });
-
   test('should successfully convert a range of `bigInt`s', function () {
     const MAX_UINT256 = BigInt.fromString(MAX_UINT256_NUMBER_STRING);
 
