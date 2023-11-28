@@ -16,11 +16,11 @@
     "node": ">=16"
   },
   "scripts": {
-    "start": "tsdx watch",
-    "build": "tsdx build",
-    "test": "TESTING=true tsdx test --verbose --runInBand",
+    "start": "dts watch",
+    "build": "dts build",
+    "test": "TESTING=true dts test --verbose --runInBand",
     "lint:ts": "cd .. && yarn run lint:sdk:ts",
-    "prepare": "tsdx build",
+    "prepare": "yarn run build",
     "size": "size-limit",
     "analyze": "size-limit --why",
     "clean": "rm -Rf .turbo dist",
@@ -44,15 +44,16 @@
   ],
   "devDependencies": {
     "@size-limit/preset-small-lib": "^7.0.8",
+    "@types/node": "^20.10.0",
+    "dts-cli": "^2.0.3",
     "husky": "^7.0.4",
     "size-limit": "^7.0.8",
-    "tsdx": "^0.14.1",
     "tslib": "^2.3.1",
-    "typescript": "^4.6.2"
+    "typescript": "^5.1.0"
   },
   "dependencies": {
-    "@aragon/osx-ethers-v1.0.0": "npm:@aragon/osx-ethers@1.2.1",
     "@aragon/osx-ethers": "^1.3.0-rc0.4",
+    "@aragon/osx-ethers-v1.0.0": "npm:@aragon/osx-ethers@1.2.1",
     "@aragon/sdk-ipfs": "^1.1.0",
     "@ethersproject/abstract-signer": "^5.5.0",
     "@ethersproject/bignumber": "^5.6.0",
