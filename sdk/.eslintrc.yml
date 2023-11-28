@@ -6,4 +6,3 @@ parserOptions:
 ignorePatterns:
   # directories
   - dist
-
