@@ -20,7 +20,7 @@
     "build": "dts build",
     "test": "TESTING=true dts test --verbose --runInBand",
     "lint:ts": "cd .. && yarn run lint:sdk:ts",
-    "prepare": "yarn run build build",
+    "prepare": "yarn run build",
     "size": "size-limit",
     "analyze": "size-limit --why",
     "clean": "rm -Rf .turbo dist",
