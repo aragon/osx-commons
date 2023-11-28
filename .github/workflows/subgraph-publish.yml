@@ -1,0 +1,71 @@
+name: Subgraph Publish
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  check_tag:
+    runs-on: ubuntu-latest
+    outputs:
+      package: ${{ steps.tag-info.outputs.package }}
+      version: ${{ steps.tag-info.outputs.version }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Get version from Github Tag
+        id: tag-info
+        run: |
+          GITHUB_REF="${{ github.ref }}"
+          if [[ "$GITHUB_REF" == *"subgraph"* ]]; then
+            TAG=${GITHUB_REF##*/}
+            VERSION=$(echo "$TAG" | grep -woP "([0-9]+\.[0-9]+\.[0-9]+)-\w+" | sed 's/-javascript//')
+            PACKAGE=subgraph
+          fi
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: [check_tag]
+    if: ${{ needs.check_tag.outputs.package }}
+    steps:
+      - name: Validate values (package and version) from Github Tag
+        run: |
+          if [ -z "${{ needs.check_tag.outputs.package }}" ]; then
+            echo "::error ::No package found in tag"
+            exit 1
+          fi
+          if [ -z "${{ needs.check_tag.outputs.version }}" ]; then
+            echo "::error ::No version found in tag"
+            exit 1
+          fi
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          ref: 'develop'
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          cache: 'yarn'
+          node-version: 18.x
+          registry-url: https://registry.npmjs.org
+      - name: Publish NPM pkg (${{ needs.check_tag.outputs.package }} - ${{ needs.check_tag.outputs.version }})
+        run: yarn publish --no-git-tag-version --new-version ${{ needs.check_tag.outputs.version }}
+        working-directory: ./${{ needs.check_tag.outputs.package }}
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      - name: Setup Python environment
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+      - name: Create release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref_name }}
+          package: ${{ needs.check_tag.outputs.package }}
+          version: ${{ needs.check_tag.outputs.version }}
+        run: |
+          gh release create "$tag" \
+              --repo="$GITHUB_REPOSITORY" \
+              --title="$package - $version" \
+              --generate-notes
