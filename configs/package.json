@@ -1,0 +1,42 @@
+{
+  "name": "@aragon/osx-commons-configs",
+  "author": "Aragon Association",
+  "version": "1.0.0",
+  "license": "MIT",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint:ts": "cd .. && yarn run lint:configs:ts",
+    "prepare": "yarn run build",
+    "analyze": "size-limit --why",
+    "clean": "rm -Rf dist"
+  },
+  "peerDependencies": {},
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint:ts"
+    }
+  },
+  "size-limit": [
+    {
+      "path": "dist/osx-commons-sdk.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/osx-commons-sdk.esm.js",
+      "limit": "10 KB"
+    }
+  ],
+  "devDependencies": {
+    "typescript": "^5.1"
+  }
+}

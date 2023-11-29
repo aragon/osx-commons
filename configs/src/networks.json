@@ -1,0 +1,62 @@
+{
+  "mainnet": {
+    "url": "https://mainnet.infura.io/v3/481a4cdc7c774286b8627f21c6827f48",
+    "isTestnet": false,
+    "chainId": 1
+  },
+  "goerli": {
+    "url": "https://goerli.infura.io/v3/481a4cdc7c774286b8627f21c6827f48",
+    "isTestnet": true,
+    "chainId": 5
+  },
+  "sepolia": {
+    "url": "https://sepolia.infura.io/v3/481a4cdc7c774286b8627f21c6827f48",
+    "isTestnet": true,
+    "chainId": 11155111
+  },
+  "polygon": {
+    "url": "https://polygon-mainnet.infura.io/v3/481a4cdc7c774286b8627f21c6827f48",
+    "isTestnet": false,
+    "chainId": 137,
+    "feesUrl": "https://gasstation-mainnet.matic.network/v2"
+  },
+  "mumbai": {
+    "url": "https://polygon-mumbai.infura.io/v3/481a4cdc7c774286b8627f21c6827f48",
+    "isTestnet": true,
+    "chainId": 80001,
+    "feesUrl": "https://gasstation-mumbai.matic.today/v2"
+  },
+  "baseMainnet": {
+    "url": "https://developer-access-mainnet.base.org",
+    "isTestnet": false,
+    "chainId": 8453,
+    "gasPrice": 1000
+  },
+  "baseGoerli": {
+    "url": "https://goerli.base.org",
+    "isTestnet": true,
+    "chainId": 84531,
+    "gasPrice": 1000000
+  },
+  "baseSepolia": {
+    "url": "https://sepolia.base.org",
+    "isTestnet": true,
+    "chainId": 84532,
+    "gasPrice": 1000000
+  },
+  "arbitrum": {
+    "url": "https://arbitrum-mainnet.infura.io/v3/481a4cdc7c774286b8627f21c6827f48",
+    "isTestnet": false,
+    "chainId": 42161
+  },
+  "arbitrumGoerli": {
+    "url": "https://arbitrum-goerli.infura.io/v3/481a4cdc7c774286b8627f21c6827f48",
+    "isTestnet": true,
+    "chainId": 421613
+  },
+  "arbitrumSepolia": {
+    "url": "https://arbitrum-sepolia.infura.io/v3/481a4cdc7c774286b8627f21c6827f48",
+    "isTestnet": true,
+    "chainId": 421614
+  }
+}
