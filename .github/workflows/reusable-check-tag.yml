@@ -1,0 +1,34 @@
+name: Check Tag
+
+on:
+  workflow_call:
+    inputs:
+      ref:
+        required: true
+        type: string
+    outputs:
+      package:
+        description: 'the package this ref was created for'
+        value: ${{ jobs.check_tag.outputs.package }}
+      version:
+        description: 'the version included in the ref'
+        value: ${{ jobs.check_tag.outputs.version }}
+
+jobs:
+  check_tag:
+    runs-on: ubuntu-latest
+    outputs:
+      package: ${{ steps.tag-info.outputs.package }}
+      version: ${{ steps.tag-info.outputs.version }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Get version from Github Tag
+        id: tag-info
+        run: |
+          GITHUB_REF="${{ inputs.ref }}"
+          TAG=${GITHUB_REF##*/}
+          VERSION=$(echo "$TAG" | grep -woP "([0-9]+\.[0-9]+\.[0-9]+)-\w+" | sed 's/-sdk//')
+          PACKAGE=sdk
+          echo "package=$PACKAGE" >> $GITHUB_OUTPUT
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
