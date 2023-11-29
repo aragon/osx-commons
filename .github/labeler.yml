@@ -1,14 +1,14 @@
 contracts:
-- ./contracts/**/*
-- ./contracts/*
-- ./.github/workflows/contracts-*.yml
+  - ./contracts/**/*
+  - ./contracts/*
+  - ./.github/workflows/contracts-*.yml
 
 sdk:
-- ./sdk/**/*
-- ./sdk/*
-- ./.github/workflows/sdk-*.yml
+  - ./sdk/**/*
+  - ./sdk/*
+  - ./.github/workflows/sdk-*.yml
 
 subgraph:
-- ./subgraph/**/*
-- ./subgraph/*
-- ./.github/workflows/subgraph-*.yml
+  - ./subgraph/**/*
+  - ./subgraph/*
+  - ./.github/workflows/subgraph-*.yml
