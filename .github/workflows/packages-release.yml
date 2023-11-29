@@ -1,4 +1,4 @@
-name: 01-JS-Release
+name: Packages release
 
 on:
   pull_request:
