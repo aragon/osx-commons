@@ -5,7 +5,7 @@ pragma solidity ^0.8.8;
 import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 /// @title TestERC20
-/// @author Aragon Association - 2022-2023
+/// @author Aragon - 2022-2023
 /// @notice A test [ERC-20](https://eips.ethereum.org/EIPS/eip-20) that can be minted and burned by everyone.
 /// @dev DO NOT USE IN PRODUCTION!
 contract TestERC20 is ERC20 {

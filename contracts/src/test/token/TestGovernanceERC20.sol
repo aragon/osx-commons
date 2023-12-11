@@ -7,7 +7,7 @@ import {IDAO} from "@aragon/osx/packages/contracts/src/core/dao/IDAO.sol";
 import {GovernanceERC20} from "../../governance/token/erc20/GovernanceERC20.sol";
 
 /// @title TestGovernanceERC20
-/// @author Aragon Association - 2022-2023
+/// @author Aragon - 2022-2023
 /// @notice A test GovernanceERC20 that can be minted and burned by everyone.
 /// @dev DO NOT USE IN PRODUCTION!
 contract TestGovernanceERC20 is GovernanceERC20 {

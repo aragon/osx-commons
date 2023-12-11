@@ -1,6 +1,6 @@
 {
   "name": "@aragon/osx-commons-sdk",
-  "author": "Aragon Association",
+  "author": "Aragon",
   "version": "1.0.0",
   "license": "MIT",
   "main": "dist/index.js",

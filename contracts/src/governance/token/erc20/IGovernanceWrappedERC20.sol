@@ -3,7 +3,7 @@
 pragma solidity ^0.8.8;
 
 /// @title IGovernanceWrappedERC20
-/// @author Aragon Association
+/// @author Aragon
 /// @notice An interface for the token wrapping contract wrapping existing [ERC-20](https://eips.ethereum.org/EIPS/eip-20) tokens.
 /// @custom:security-contact sirt@aragon.org
 interface IGovernanceWrappedERC20 {

@@ -5,7 +5,7 @@ pragma solidity ^0.8.8;
 import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 /// @title TestERC721
-/// @author Aragon Association - 2022-2023
+/// @author Aragon - 2022-2023
 /// @notice A test [ERC-721](https://eips.ethereum.org/EIPS/eip-721) that can be minted and burned by everyone.
 /// @dev DO NOT USE IN PRODUCTION!
 contract TestERC721 is ERC721 {
