@@ -164,6 +164,16 @@
       "address": "0x74b3B3504B5d6D1c6247009c9b1e3D8cFF7bd445",
       "deploymentTX": "0xe5dda5be7dfc7d0d6916a0df06d8450e8b7c658f2f82622044562c7e7e638c2a",
       "blockNumber": 40828513
+    },
+    "GovernanceERC20": {
+      "address": "0x644D3bA8A335F5b1a6afFe63e551306D0C933582",
+      "deploymentTX": "0xdb5184b69ee7b14786d95a59806b476fe4a21c1b35e66e6162accff6fcd32f12",
+      "blockNumber": 50610289
+    },
+    "GovernanceWrappedERC20": {
+      "address": "0x8f2088E83F007B1567E8E1187380DFfdC83079d4",
+      "deploymentTX": "0xce156c195029b396cdae87eb2b7e9235963c58bbbcecd737221101def5562925",
+      "blockNumber": 50610293
     }
   },
   "v1.0.0": {
