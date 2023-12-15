@@ -13,7 +13,7 @@ export function createDummyAction(
   value: string,
   data: string
 ): ethereum.Tuple {
-  let tuple = new ethereum.Tuple();
+  const tuple = new ethereum.Tuple();
 
   tuple.push(ethereum.Value.fromAddress(Address.fromString(to)));
   tuple.push(ethereum.Value.fromSignedBigInt(BigInt.fromString(value)));

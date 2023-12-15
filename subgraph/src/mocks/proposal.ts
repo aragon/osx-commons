@@ -42,7 +42,7 @@ export function createGetProposalCall(
   allowFailureMap: string
 ): void {
   // Proposal parameters
-  let parameters = new ethereum.Tuple();
+  const parameters = new ethereum.Tuple();
   parameters.push(
     ethereum.Value.fromUnsignedBigInt(BigInt.fromString(votingMode))
   );
@@ -63,7 +63,7 @@ export function createGetProposalCall(
   );
 
   // Tally
-  let tally = new ethereum.Tuple();
+  const tally = new ethereum.Tuple();
   tally.push(ethereum.Value.fromUnsignedBigInt(BigInt.fromString(abstain)));
   tally.push(ethereum.Value.fromUnsignedBigInt(BigInt.fromString(yes)));
   tally.push(ethereum.Value.fromUnsignedBigInt(BigInt.fromString(no)));
