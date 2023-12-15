@@ -1,5 +1,5 @@
 import * as arbitrum from './deployments/arbitrum.json';
-import * as arbitrumGoerli from './deployments/arbitrumGoerli.json';
+import * as arbitrumSepolia from './deployments/arbitrumSepolia.json';
 import * as baseGoerli from './deployments/baseGoerli.json';
 import * as baseMainnet from './deployments/baseMainnet.json';
 import * as goerli from './deployments/goerli.json';
@@ -12,7 +12,7 @@ import * as networks from './networks.json';
 export {
   networks,
   arbitrum,
-  arbitrumGoerli,
+  arbitrumSepolia,
   baseGoerli,
   baseMainnet,
   goerli,
