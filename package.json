@@ -15,6 +15,7 @@
     "typescript": "5.0.4"
   },
   "scripts": {
+    "lint:configs:ts": "eslint --ext .js,.ts ./configs/",
     "lint:contracts:sol": "solhint --max-warnings 0 \"contracts/src/**/*.sol\"",
     "lint:contracts:ts": "eslint --ext .js,.ts ./contracts/",
     "lint:sdk:ts": "eslint --ext .js,.ts ./sdk/",

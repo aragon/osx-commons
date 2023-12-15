@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "typings": "dist/index.d.ts",
+  "main": "dist/index.js",
   "files": [
     "dist"
   ],
@@ -26,16 +27,6 @@
       "pre-commit": "yarn lint:ts"
     }
   },
-  "size-limit": [
-    {
-      "path": "dist/osx-commons-sdk.cjs.production.min.js",
-      "limit": "10 KB"
-    },
-    {
-      "path": "dist/osx-commons-sdk.esm.js",
-      "limit": "10 KB"
-    }
-  ],
   "devDependencies": {
     "typescript": "^5.1"
   }
