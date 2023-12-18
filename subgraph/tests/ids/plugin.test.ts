@@ -5,7 +5,7 @@ import {
   generatePluginPreparationEntityId,
   generatePluginReleaseEntityId,
   generatePluginVersionEntityId,
-  generatePluginEntityId,
+  generatePluginEntityId
 } from '../../src';
 import {ADDRESS_ONE, ADDRESS_TWO, DUMMY_BYTES32_HEX} from '../constants';
 import {Address, Bytes, crypto} from '@graphprotocol/graph-ts';

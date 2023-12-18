@@ -16,7 +16,7 @@ export function generateTransferEntityId(
   const ids = [
     txHash.toHexString(),
     logIndex.toString(),
-    actionIndex.toString(),
+    actionIndex.toString()
   ];
   return ids.join('_');
 }
