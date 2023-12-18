@@ -4,7 +4,7 @@ import {
   ByteArray,
   Bytes,
   crypto,
-  ethereum
+  ethereum,
 } from '@graphprotocol/graph-ts';
 
 /**
@@ -114,7 +114,7 @@ export function generatePluginVersionEntityId(
   const ids = [
     generatePluginRepoEntityId(pluginRepo),
     release.toString(),
-    build.toString()
+    build.toString(),
   ];
   return ids.join('_');
 }

@@ -16,11 +16,11 @@ export function createTokenCalls(
   symbol: string = 'MT'
 ) {
   createMockGetter(tokenAddress, 'name', 'name():(string)', [
-    ethereum.Value.fromString(name)
+    ethereum.Value.fromString(name),
   ]);
 
   createMockGetter(tokenAddress, 'symbol', 'symbol():(string)', [
-    ethereum.Value.fromString(symbol)
+    ethereum.Value.fromString(symbol),
   ]);
 }
 
@@ -43,10 +43,10 @@ export function createERC20TokenCalls(
 ) {
   createTokenCalls(tokenAddress, name, symbol);
   createMockGetter(tokenAddress, 'decimals', 'decimals():(uint8)', [
-    ethereum.Value.fromUnsignedBigInt(BigInt.fromString(decimals))
+    ethereum.Value.fromUnsignedBigInt(BigInt.fromString(decimals)),
   ]);
   createMockGetter(tokenAddress, 'totalSupply', 'totalSupply():(uint256)', [
-    ethereum.Value.fromUnsignedBigInt(BigInt.fromString(totalSupply))
+    ethereum.Value.fromUnsignedBigInt(BigInt.fromString(totalSupply)),
   ]);
 }
 /**
@@ -70,7 +70,7 @@ export function createWrappedERC20TokenCalls(
 ): void {
   createERC20TokenCalls(tokenAddress, name, symbol, decimals, totalSupply);
   createMockGetter(tokenAddress, 'underlying', 'underlying():(address)', [
-    ethereum.Value.fromAddress(Address.fromString(underlyingTokenAddress))
+    ethereum.Value.fromAddress(Address.fromString(underlyingTokenAddress)),
   ]);
 }
 

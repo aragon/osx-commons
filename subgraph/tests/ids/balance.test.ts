@@ -1,6 +1,6 @@
 import {
   generateBalanceEntityId,
-  generateTokenIdBalanceEntityId
+  generateTokenIdBalanceEntityId,
 } from '../../src/ids/balance';
 import {ADDRESS_ONE, ADDRESS_TWO} from '../constants';
 import {Address, BigInt} from '@graphprotocol/graph-ts';

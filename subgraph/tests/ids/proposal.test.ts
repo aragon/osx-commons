@@ -1,7 +1,7 @@
 import {
   generateActionEntityId,
   generateProposalEntityId,
-  generateTransactionActionsProposalEntityId
+  generateTransactionActionsProposalEntityId,
 } from '../../src/ids/proposal';
 import {bigIntToBytes32} from '../../src/utils/utils';
 import {ADDRESS_ONE, DUMMY_BYTES32_HEX, DUMMY_PROPOSAL_ID} from '../constants';

@@ -20,7 +20,7 @@ export function generatePermissionEntityId(
     emittingContract.toHexString(),
     permissionId.toHexString(),
     where.toHexString(),
-    who.toHexString()
+    who.toHexString(),
   ];
   return ids.join('_');
 }
@@ -48,7 +48,7 @@ export function generatePluginPermissionEntityId(
     operationId,
     where.toHexString(),
     who.toHexString(),
-    permissionId.toHexString()
+    permissionId.toHexString(),
   ];
 
   return ids.join('_');

@@ -1,4 +1,5 @@
 import {Address, BigInt, Bytes, ethereum} from '@graphprotocol/graph-ts';
+
 /**
  * Create a ethereum.Tuple for the actions parameters.
  *
