@@ -14,7 +14,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Added `createTokenCalls`, `createERC20TokenCalls`, `createWrappedERC20TokenCalls`, `createERC1155TokenCalls` and `createERC721TokenCalls` mocks.
-- Added `createGetProposalCall` and `createTotalVotingPowerCall` mocks.
 - Added `createDummyAction` function.
 - Added `generateActionEntityId` and `generateStandardCAllbackEntityId`.
 - Added `generateTransactionActionsProposalEntityId`, `generateProposalEntityId` and `generatePluginEntityId`
