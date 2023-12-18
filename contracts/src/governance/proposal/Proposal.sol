@@ -5,8 +5,7 @@ pragma solidity ^0.8.8;
 import {Counters} from "@openzeppelin/contracts/utils/Counters.sol";
 import {ERC165} from "@openzeppelin/contracts/utils/introspection/ERC165.sol";
 
-import {IDAO} from "@aragon/osx/packages/contracts/src/core/dao/IDAO.sol";
-
+import {IDAO} from "../../interfaces/IDAO.sol";
 import {IProposal} from "./IProposal.sol";
 
 /// @title Proposal

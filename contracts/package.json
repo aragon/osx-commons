@@ -41,7 +41,6 @@
     "typescript": "5.0.4"
   },
   "dependencies": {
-    "@aragon/osx": "aragon/osx#develop",
     "@aragon/osx-ethers": "1.3.0",
     "@openzeppelin/contracts": "4.9.5",
     "@openzeppelin/contracts-upgradeable": "4.9.5",

@@ -9,10 +9,6 @@
   dependencies:
     ethers "^5.6.2"
 
-"@aragon/osx@aragon/osx#develop":
-  version "0.1.0"
-  resolved "https://codeload.github.com/aragon/osx/tar.gz/fcf3fca18b1c32e7678f3e28d828eebaa4e7ed1f"
-
 "@aws-crypto/sha256-js@1.2.2":
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/@aws-crypto/sha256-js/-/sha256-js-1.2.2.tgz#02acd1a1fda92896fc5a28ec7c6e164644ea32fc"
