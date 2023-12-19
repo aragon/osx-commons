@@ -23,5 +23,4 @@ jobs:
       package: ${{ needs.check_tag.outputs.package }}
       version: ${{ needs.check_tag.outputs.version }}
     secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
