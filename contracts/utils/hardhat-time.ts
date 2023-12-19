@@ -3,7 +3,7 @@ import {ethers} from 'hardhat';
 // TODO provide hre or provider as an input argument
 
 export async function timestampIn(durationInSec: number): Promise<number> {
-  return (await ethers.provider.getBlock('latest')).timestamp + durationInSec;
+  return (await getTime()) + durationInSec;
 }
 
 export async function setTimeForNextBlock(timestamp: number): Promise<void> {
