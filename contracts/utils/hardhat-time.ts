@@ -25,7 +25,7 @@ export async function advanceTimeTo(timestamp: number) {
   await advanceTimeBy(delta);
 }
 
-export async function advanceTimeBy(time: number) {
-  await ethers.provider.send('evm_increaseTime', [time]);
+export async function advanceTimeBy(duration: number) {
+  await ethers.provider.send('evm_increaseTime', [duration]);
   await ethers.provider.send('evm_mine', []);
 }
