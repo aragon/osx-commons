@@ -22,5 +22,6 @@ jobs:
     with:
       package: ${{ needs.check_tag.outputs.package }}
       version: ${{ needs.check_tag.outputs.version }}
+
     secrets:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
