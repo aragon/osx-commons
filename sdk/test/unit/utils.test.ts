@@ -1,4 +1,5 @@
-import {getInterfaceId, getNamedTypesFromMetadata} from '../../src';
+import {getNamedTypesFromMetadata} from '../../src';
+import {getInterfaceId} from '../../src/interfaces';
 import {ERC165_ABI, TEST_ABI} from '../constants';
 import {Interface} from '@ethersproject/abi';
 
