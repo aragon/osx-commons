@@ -7,14 +7,18 @@ import {Interface, LogDescription} from 'ethers/lib/utils';
  * @export
  * @param {ContractReceipt} tx
  * @param {string} eventName
- * @return {*}  {(Log | undefined)}
+ * @return {*}  {(T)}
  */
 export async function findEvent<T>(tx: ContractTransaction, eventName: string) {
   const receipt = await tx.wait();
 
   const event = (receipt.events || []).find(event => event.event === eventName);
 
-  return event as T | undefined;
+  if (!event) {
+    throw new Error(`No event found with name "${eventName}".`);
+  }
+
+  return event as T;
 }
 /**
  * Finds a log in a transaction given the interface of the emitting contract and the event name
