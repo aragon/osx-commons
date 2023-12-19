@@ -25,10 +25,13 @@ jobs:
         uses: actions/checkout@v3
       - name: Get version from Github Tag
         id: tag-info
+        # Expected format: X.Y.Z-sdk or X.Y.Z-subgraph or X.Y.Z-contracts
+        # Version = X.Y.Z, grep gets X.Y.Z-sdk, sed removes -sdk
+        # Package = sdk, grep gets -sdk, sed removes -
         run: |
           GITHUB_REF="${{ inputs.ref }}"
           TAG=${GITHUB_REF##*/}
-          VERSION=$(echo "$TAG" | grep -woP "([0-9]+\.[0-9]+\.[0-9]+)-\w+" | sed 's/-sdk//')
-          PACKAGE=sdk
+          VERSION=$(echo "$TAG" | grep -woP "([0-9]+\.[0-9]+\.[0-9]+)-\w+" | sed -E 's/-(sdk|subgraph|contracts)//')
+          PACKAGE=$(echo "$TAG" | grep -woP "-\w+" | sed -E 's/-//')
           echo "package=$PACKAGE" >> $GITHUB_OUTPUT
           echo "version=$VERSION" >> $GITHUB_OUTPUT
