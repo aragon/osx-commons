@@ -1,5 +1,7 @@
 import {ethers} from 'hardhat';
 
+// TODO provide hre or provider as an input argument
+
 export async function timestampIn(durationInSec: number): Promise<number> {
   return (await ethers.provider.getBlock('latest')).timestamp + durationInSec;
 }
@@ -18,20 +20,12 @@ export async function getTime(): Promise<number> {
   return (await ethers.provider.getBlock('latest')).timestamp;
 }
 
-export async function advanceTime(time: number) {
-  await ethers.provider.send('evm_increaseTime', [time]);
-  await ethers.provider.send('evm_mine', []);
-}
-
 export async function advanceTimeTo(timestamp: number) {
   const delta = timestamp - (await getTime());
-  await advanceTime(delta);
+  await advanceTimeBy(delta);
 }
 
-export async function advanceIntoVoteTime(startDate: number) {
-  await advanceTimeTo(startDate);
-}
-
-export async function advanceAfterVoteEnd(endDate: number) {
-  await advanceTimeTo(endDate);
+export async function advanceTimeBy(time: number) {
+  await ethers.provider.send('evm_increaseTime', [time]);
+  await ethers.provider.send('evm_mine', []);
 }

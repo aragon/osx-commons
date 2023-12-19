@@ -8,6 +8,7 @@ import {
   PluginUpdatePreparationError,
   UnsupportedNetworkError,
 } from './errors';
+import {findEventTopicLog} from './events';
 import {
   IClientGraphQLCore,
   IClientWeb3Core,
@@ -34,34 +35,11 @@ import {
 import {FunctionFragment, Interface} from '@ethersproject/abi';
 import {defaultAbiCoder} from '@ethersproject/abi';
 import {isAddress} from '@ethersproject/address';
-import {Zero} from '@ethersproject/constants';
-import {ContractReceipt} from '@ethersproject/contracts';
-import {id} from '@ethersproject/hash';
 import {Network} from '@ethersproject/networks';
 import {
   getNetwork as ethersGetNetwork,
-  Log,
   Networkish,
 } from '@ethersproject/providers';
-
-/**
- * Finds a log in a receipt given the event name
- *
- * @export
- * @param {ContractReceipt} receipt
- * @param {Interface} iface
- * @param {string} eventName
- * @return {*}  {(Log | undefined)}
- */
-export function findLog(
-  receipt: ContractReceipt,
-  iface: Interface,
-  eventName: string
-): Log | undefined {
-  return receipt.logs.find(
-    log => log.topics[0] === id(iface.getEvent(eventName).format('sighash'))
-  );
-}
 
 /**
  * Gets a function fragment from encoded data
@@ -215,15 +193,13 @@ export async function* prepareGenericInstallation(
     txHash: tx.hash,
   };
 
-  const receipt = await tx.wait();
-  const pspContractInterface = PluginSetupProcessor__factory.createInterface();
-  const log = findLog(receipt, pspContractInterface, 'InstallationPrepared');
-  if (!log) {
-    throw new PluginInstallationPreparationError();
-  }
-  const parsedLog = pspContractInterface.parseLog(log);
-  const pluginAddress = parsedLog.args['plugin'];
-  const preparedSetupData = parsedLog.args['preparedSetupData'];
+  const event = await findEventTopicLog(
+    tx,
+    PluginSetupProcessor__factory.createInterface(),
+    'InstallationPrepared'
+  );
+  const pluginAddress = event.args['plugin'];
+  const preparedSetupData = event.args['preparedSetupData'];
   if (!(pluginAddress || preparedSetupData)) {
     throw new PluginInstallationPreparationError();
   }
@@ -346,16 +322,15 @@ export async function* prepareGenericUpdate(
     key: PrepareUpdateStep.PREPARING,
     txHash: tx.hash,
   };
-  const receipt = await tx.wait();
-  const pspContractInterface = PluginSetupProcessor__factory.createInterface();
-  const log = findLog(receipt, pspContractInterface, 'UpdatePrepared');
-  if (!log) {
-    throw new PluginUpdatePreparationError();
-  }
-  const parsedLog = pspContractInterface.parseLog(log);
-  const versionTag = parsedLog.args['versionTag'];
-  const preparedSetupData = parsedLog.args['preparedSetupData'];
-  const initData = parsedLog.args['initData'];
+
+  const event = await findEventTopicLog(
+    tx,
+    PluginSetupProcessor__factory.createInterface(),
+    'UpdatePrepared'
+  );
+  const versionTag = event.args['versionTag'];
+  const preparedSetupData = event.args['preparedSetupData'];
+  const initData = event.args['initData'];
   if (
     !versionTag ||
     versionTag.build !== params.newVersion.build ||
@@ -410,20 +385,4 @@ export function getNetwork(networkish: Networkish): Network {
     network = ethersGetNetwork(networkish);
   }
   return network;
-}
-
-/**
- * Gets the interfaceId of a given interface
- *
- * @export
- * @param {Interface} iface
- * @return {*}  {string}
- */
-export function getInterfaceId(iface: Interface): string {
-  let interfaceId = Zero;
-  const functions: string[] = Object.keys(iface.functions);
-  for (const func of functions) {
-    interfaceId = interfaceId.xor(iface.getSighash(func));
-  }
-  return interfaceId.toHexString();
 }
