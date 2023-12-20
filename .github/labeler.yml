@@ -12,3 +12,8 @@ subgraph:
   - ./subgraph/**/*
   - ./subgraph/*
   - ./.github/workflows/subgraph-*.yml
+
+configs:
+  - ./configs/**/*
+  - ./configs/*
+  - ./.github/workflows/configs-*.yml
