@@ -1,9 +1,9 @@
-import {RATIO_BASE, pctToRatio} from '../../../../sdk/src/math';
 import {
-  RatioTest,
-  RatioTest__factory,
+  RATIO_BASE,
+  pctToRatio,
   /* TODO how to handle internal dependencies between contracts and SDK? */
-} from '../../../typechain';
+} from '../../../../sdk/src/math';
+import {RatioTest, RatioTest__factory} from '../../../typechain';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
 
