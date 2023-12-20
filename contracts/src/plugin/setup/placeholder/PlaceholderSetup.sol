@@ -2,9 +2,9 @@
 
 pragma solidity ^0.8.8;
 
-import {PermissionLib} from "../../permission/PermissionLib.sol";
-import {IPluginSetup} from "./IPluginSetup.sol";
-import {PluginSetup} from "./PluginSetup.sol";
+import {PermissionLib} from "../../../permission/PermissionLib.sol";
+import {IPluginSetup} from "../IPluginSetup.sol";
+import {PluginSetup} from "../PluginSetup.sol";
 
 /// @title PlaceholderSetup
 /// @author Aragon Association - 2023
