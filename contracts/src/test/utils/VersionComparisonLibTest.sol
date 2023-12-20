@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.8;
 
-import {VersionComparisonLib} from "../../utils/VersionComparisonLib.sol";
+import {VersionComparisonLib} from "../../utils/versioning/VersionComparisonLib.sol";
 
 contract VersionComparisonLibTest {
     using VersionComparisonLib for uint8[3];

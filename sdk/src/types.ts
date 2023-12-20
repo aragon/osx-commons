@@ -48,6 +48,12 @@ export interface PluginInstallItem {
   data: Uint8Array;
 }
 
+export enum PluginType {
+  UUPS,
+  Cloneable,
+  Constructable,
+}
+
 export type GasFeeEstimation = {
   average: bigint;
   max: bigint;

@@ -1,9 +1,5 @@
-import {
-  RATIO_BASE,
-  pctToRatio,
-  /* TODO how to handle internal dependencies between contracts and SDK? */
-} from '../../../../sdk/src/math';
 import {RatioTest, RatioTest__factory} from '../../../typechain';
+import {RATIO_BASE, pctToRatio} from '@aragon/osx-commons-sdk/src/math';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
 
@@ -52,3 +48,4 @@ describe('Ratio', function () {
     });
   });
 });
+export {pctToRatio};
