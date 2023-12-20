@@ -1,3 +1,3 @@
-export * from './ids/dao';
-export * from './ids/plugin';
-export * from './ids/permissions';
+export * from './ids';
+export * from './mocks';
+export * from './utils';
