@@ -3,7 +3,7 @@ name: SDK Publish
 on:
   push:
     tags:
-      - '*'
+      - '*-sdk'
 
 jobs:
   check_tag:

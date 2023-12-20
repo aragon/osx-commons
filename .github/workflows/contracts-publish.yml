@@ -3,7 +3,7 @@ name: Contracts Publish
 on:
   push:
     tags:
-      - '*'
+      - '*-contracts'
 
 jobs:
   check_tag:
