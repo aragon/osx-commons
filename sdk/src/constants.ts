@@ -23,15 +23,30 @@ export const TIME = {
   get YEAR() {
     return 365 * this.DAY;
   },
-};
 
-function toMilliseconds(seconds: number) {
-  return seconds * 1000;
-}
+  toMilliseconds(seconds: number) {
+    return seconds * 1000;
+  },
+  get SECOND_MS() {
+    return this.toMilliseconds(this.SECOND);
+  },
+  get HOUR_MS() {
+    return this.toMilliseconds(this.HOUR);
+  },
+  get DAY_MS() {
+    return this.toMilliseconds(this.DAY);
+  },
+  get WEEK_MS() {
+    return this.toMilliseconds(this.WEEK);
+  },
+  get YEAR_MS() {
+    return this.toMilliseconds(this.YEAR);
+  },
+};
 
 /** Timeout that will be applied to operations involving
  * many fetch requests that could take a long time */
-export const MULTI_FETCH_TIMEOUT = toMilliseconds(7 * TIME.SECOND);
+export const MULTI_FETCH_TIMEOUT = 7 * TIME.SECOND_MS;
 
 type GraphqlNetworks =
   | 'mainnet'
