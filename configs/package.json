@@ -2,7 +2,7 @@
   "name": "@aragon/osx-commons-configs",
   "author": "Aragon Association",
   "version": "0.0.1",
-  "license": "MIT",
+  "license": "AGPL-3.0-or-later",
   "typings": "dist/index.d.ts",
   "main": "dist/index.js",
   "files": [
