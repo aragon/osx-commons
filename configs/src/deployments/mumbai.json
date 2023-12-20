@@ -30,22 +30,22 @@
       "blockNumber": 33633415,
       "deploymentTX": "0xbfb4ce5363d2ce67ded1e1e215ea74cbef27d9659ed15f490c757c70931b32e5"
     },
-    "DAORegistry": {
+    "DAORegistryProxy": {
       "address": "0x6dD0C8b7F9406206ceAA01B5576D9d46e9298f0E",
       "blockNumber": 33633400,
       "deploymentTX": "0x9a6876eb1e59906b904de888398db2e52790c799374753e86ac80f35ab7ee9e2"
     },
-    "DAORegistry_Implementation": {
+    "DAORegistryImplementation": {
       "address": "0xE5058D785C934279Af1EF7E90BB5D58048829256",
       "blockNumber": 33633397,
       "deploymentTX": "0x5eaa053ad7028bcaabfd880ea5e9c68e6e59c43d3ad34aa5b3f59208c345cf09"
     },
-    "DAO_ENSSubdomainRegistrar": {
+    "DAOENSSubdomainRegistrarProxy": {
       "address": "0xC528B8AA6a4D0f21455a06b6D7A41fd795619C31",
       "blockNumber": 33633383,
       "deploymentTX": "0x31feed4734abc55368ebed2bfa0dcc14cf321db4cf095ec200451e383f9ed02f"
     },
-    "DAO_ENSSubdomainRegistrar_Implementation": {
+    "DAOENSSubdomainRegistrarImplementation": {
       "address": "0xD5baCA29C944A28f1f568F7e69B119030914c15D",
       "blockNumber": 33633380,
       "deploymentTX": "0xc943306ca192c2adf6d144ef74cdc72c54105078c25faaa6e1812685b4f1b2a5"
@@ -85,12 +85,12 @@
       "blockNumber": 33633409,
       "deploymentTX": "0x3a527eba0eab7d7248aa0d46cf3cb16124dd611eff4401ee0a5e10c1b0257432"
     },
-    "PluginRepoRegistry": {
+    "PluginRepoRegistryProxy": {
       "address": "0xc796bB1AfEBc56daDF6CAcD2aDa78055e5381971",
       "blockNumber": 33633406,
       "deploymentTX": "0x70d06ce3674acda0aed4d1d5adb8ccf8a7ad8c6d159384d1c26ff4b985ed64e9"
     },
-    "PluginRepoRegistry_Implementation": {
+    "PluginRepoRegistryImplementation": {
       "address": "0xab27e29F579C870F66F48F4825A4D294AE540818",
       "blockNumber": 33633403,
       "deploymentTX": "0x9543b2d66393485dc0b24d8380816ea8a3ac4049ff407e64b8e9acb94798038b"
@@ -100,12 +100,12 @@
       "blockNumber": 33633412,
       "deploymentTX": "0x2e898d064fe46d7a0788c93f76ad9ef54e105e3029739714190bea97eadcd553"
     },
-    "Plugin_ENSSubdomainRegistrar": {
+    "PluginENSSubdomainRegistrarProxy": {
       "address": "0x2EfcED958034c3BC455273153C3e604D34C78e46",
       "blockNumber": 33633389,
       "deploymentTX": "0x73dad0e2a0409575b2ad3300001f36a567a45de8792cb9a7f92ab2c2e1283d5a"
     },
-    "Plugin_ENSSubdomainRegistrar_Implementation": {
+    "PluginENSSubdomainRegistrarImplementation": {
       "address": "0x99965D7cFFE21C4AC94526AAFEd33E9EaA27f004",
       "blockNumber": 33633386,
       "deploymentTX": "0xb0c2ae97a7cdc0fc3ad3275b294586b6ffcd336dfd71db7cd6fd09f8e4d26ea9"
@@ -125,52 +125,52 @@
       "blockNumber": 33633436,
       "deploymentTX": "0x98b67fc0a9e265d7aa76c40222e1d0dd87c01805f5440baa1383593ef4416f21"
     },
-    "address-list-voting-repo": {
+    "AddresslistVotingRepoProxy": {
       "address": "0x71570268A86A80B5cCa3F5e430c2BAa3F4b26278",
       "blockNumber": 33633447,
       "deploymentTX": "0xd5e86f13c7c114802cbcf4d006c9df92bd821913d8851e9108ca94d792cf0d47"
     },
-    "address-list-voting-repo_Implementation": {
+    "AddresslistVotingRepoImplementation": {
       "address": "0xa65e5b74bbd522b78091520e92934521ed436663",
       "blockNumber": 33633409,
       "deploymentTX": "0x3a527eba0eab7d7248aa0d46cf3cb16124dd611eff4401ee0a5e10c1b0257432"
     },
-    "admin-repo": {
+    "AdminRepoProxy": {
       "address": "0x0DF9b15550fF39149e491dDD154b28f587e0cD16",
       "blockNumber": 33633464,
       "deploymentTX": "0xdd60506618c700ffba333ae4f283757e2649af3a66149550769bf58e1d92c6aa"
     },
-    "admin-repo_Implementation": {
+    "AdminRepoImplementation": {
       "address": "0xa65e5b74bbd522b78091520e92934521ed436663",
       "blockNumber": 33633409,
       "deploymentTX": "0x3a527eba0eab7d7248aa0d46cf3cb16124dd611eff4401ee0a5e10c1b0257432"
     },
-    "managingDAO": {
+    "ManagementDAOProxy": {
       "address": "0xE1De373E219a0d19a0500e599adb903477bCA0f9",
       "blockNumber": 33633329,
       "deploymentTX": "0xf64c87f3c77f5b0a54e3cb94696c9001e831b906cb2eb766ca87e29f9b7e7411"
     },
-    "managingDAO_Implementation": {
+    "ManagementDAOImplementation": {
       "address": "0x5E993db91Fd2c713Df1110358396EAc60d54fE66",
       "blockNumber": 33633326,
       "deploymentTX": "0xbab4166ec70b848e8a2477a96c1d2e3be761ca03073484c4e2588e59a14e2f89"
     },
-    "multisig-repo": {
+    "MultisigRepoProxy": {
       "address": "0x2c4690b8be39adAd4F15A69340d5035aC6E53eEF",
       "blockNumber": 33633475,
       "deploymentTX": "0x3d574650d5264cc91c4798313eac3a9b5f0acbececf0e8a3393952e41da3d52d"
     },
-    "multisig-repo_Implementation": {
+    "MultisigRepoImplementation": {
       "address": "0xa65e5b74bbd522b78091520e92934521ed436663",
       "blockNumber": 33633409,
       "deploymentTX": "0x3a527eba0eab7d7248aa0d46cf3cb16124dd611eff4401ee0a5e10c1b0257432"
     },
-    "token-voting-repo": {
+    "TokenVotingRepoProxy": {
       "address": "0xaCa70D8c462940B839DE386BcDD4CACf745632cA",
       "blockNumber": 33633454,
       "deploymentTX": "0x08c2f0be9d5e6acc0d04a53fd6ab9aee64fb261f4d5f38861091c9bff1077f5c"
     },
-    "token-voting-repo_Implementation": {
+    "TokenVotingRepoImplementation": {
       "address": "0xa65e5b74bbd522b78091520e92934521ed436663",
       "blockNumber": 33633409,
       "deploymentTX": "0x3a527eba0eab7d7248aa0d46cf3cb16124dd611eff4401ee0a5e10c1b0257432"
@@ -207,22 +207,22 @@
       "blockNumber": 37807321,
       "deploymentTX": "0xdd7a979c7f436bf636b7a47cad9ae0326efd4e9ee461706bd8abd2591ee376f1"
     },
-    "DAORegistry": {
+    "DAORegistryProxy": {
       "address": "0x6dD0C8b7F9406206ceAA01B5576D9d46e9298f0E",
       "blockNumber": 33633400,
       "deploymentTX": "0x9a6876eb1e59906b904de888398db2e52790c799374753e86ac80f35ab7ee9e2"
     },
-    "DAORegistry_Implementation": {
+    "DAORegistryImplementation": {
       "address": "0xE5058D785C934279Af1EF7E90BB5D58048829256",
       "blockNumber": 33633397,
       "deploymentTX": "0x5eaa053ad7028bcaabfd880ea5e9c68e6e59c43d3ad34aa5b3f59208c345cf09"
     },
-    "DAO_ENSSubdomainRegistrar": {
+    "DAOENSSubdomainRegistrarProxy": {
       "address": "0xC528B8AA6a4D0f21455a06b6D7A41fd795619C31",
       "blockNumber": 33633383,
       "deploymentTX": "0x31feed4734abc55368ebed2bfa0dcc14cf321db4cf095ec200451e383f9ed02f"
     },
-    "DAO_ENSSubdomainRegistrar_Implementation": {
+    "DAOENSSubdomainRegistrarImplementation": {
       "address": "0xD5baCA29C944A28f1f568F7e69B119030914c15D",
       "blockNumber": 33633380,
       "deploymentTX": "0xc943306ca192c2adf6d144ef74cdc72c54105078c25faaa6e1812685b4f1b2a5"
@@ -262,12 +262,12 @@
       "blockNumber": 37807321,
       "deploymentTX": "0xcf1be9352463981c585b84d776da6eec9d33745d1ecdad2c7774b15887ac8c82"
     },
-    "PluginRepoRegistry": {
+    "PluginRepoRegistryProxy": {
       "address": "0xc796bB1AfEBc56daDF6CAcD2aDa78055e5381971",
       "blockNumber": 33633406,
       "deploymentTX": "0x70d06ce3674acda0aed4d1d5adb8ccf8a7ad8c6d159384d1c26ff4b985ed64e9"
     },
-    "PluginRepoRegistry_Implementation": {
+    "PluginRepoRegistryImplementation": {
       "address": "0xab27e29F579C870F66F48F4825A4D294AE540818",
       "blockNumber": 33633403,
       "deploymentTX": "0x9543b2d66393485dc0b24d8380816ea8a3ac4049ff407e64b8e9acb94798038b"
@@ -277,12 +277,12 @@
       "blockNumber": 33633412,
       "deploymentTX": "0x2e898d064fe46d7a0788c93f76ad9ef54e105e3029739714190bea97eadcd553"
     },
-    "Plugin_ENSSubdomainRegistrar": {
+    "PluginENSSubdomainRegistrarProxy": {
       "address": "0x2EfcED958034c3BC455273153C3e604D34C78e46",
       "blockNumber": 33633389,
       "deploymentTX": "0x73dad0e2a0409575b2ad3300001f36a567a45de8792cb9a7f92ab2c2e1283d5a"
     },
-    "Plugin_ENSSubdomainRegistrar_Implementation": {
+    "PluginENSSubdomainRegistrarImplementation": {
       "address": "0x99965D7cFFE21C4AC94526AAFEd33E9EaA27f004",
       "blockNumber": 33633386,
       "deploymentTX": "0xb0c2ae97a7cdc0fc3ad3275b294586b6ffcd336dfd71db7cd6fd09f8e4d26ea9"
@@ -302,52 +302,52 @@
       "blockNumber": 37807321,
       "deploymentTX": "0x06ad339badc3048b5faefec2f788a9eac4a30ba6e45cae2cead6fdb00004f46e"
     },
-    "address-list-voting-repo": {
+    "AddresslistVotingRepoProxy": {
       "address": "0x71570268A86A80B5cCa3F5e430c2BAa3F4b26278",
       "blockNumber": 33633447,
       "deploymentTX": "0xd5e86f13c7c114802cbcf4d006c9df92bd821913d8851e9108ca94d792cf0d47"
     },
-    "address-list-voting-repo_Implementation": {
+    "AddresslistVotingRepoImplementation": {
       "address": "0xae1f68b9399cf01b0059f125f16b5e1e79c2479f",
       "blockNumber": 37807321,
       "deploymentTX": "0xcf1be9352463981c585b84d776da6eec9d33745d1ecdad2c7774b15887ac8c82"
     },
-    "admin-repo": {
+    "AdminRepoProxy": {
       "address": "0x0DF9b15550fF39149e491dDD154b28f587e0cD16",
       "blockNumber": 33633464,
       "deploymentTX": "0xdd60506618c700ffba333ae4f283757e2649af3a66149550769bf58e1d92c6aa"
     },
-    "admin-repo_Implementation": {
+    "AdminRepoImplementation": {
       "address": "0xae1f68b9399cf01b0059f125f16b5e1e79c2479f",
       "blockNumber": 37807321,
       "deploymentTX": "0xcf1be9352463981c585b84d776da6eec9d33745d1ecdad2c7774b15887ac8c82"
     },
-    "managingDAO": {
+    "ManagementDAOProxy": {
       "address": "0xE1De373E219a0d19a0500e599adb903477bCA0f9",
       "blockNumber": 33633329,
       "deploymentTX": "0xf64c87f3c77f5b0a54e3cb94696c9001e831b906cb2eb766ca87e29f9b7e7411"
     },
-    "managingDAO_Implementation": {
+    "ManagementDAOImplementation": {
       "address": "0x5c61dae07318c86c1798891193c70ec0e91c2ee3",
       "blockNumber": 37807321,
       "deploymentTX": "0xdd7a979c7f436bf636b7a47cad9ae0326efd4e9ee461706bd8abd2591ee376f1"
     },
-    "multisig-repo": {
+    "MultisigRepoProxy": {
       "address": "0x2c4690b8be39adAd4F15A69340d5035aC6E53eEF",
       "blockNumber": 33633475,
       "deploymentTX": "0x3d574650d5264cc91c4798313eac3a9b5f0acbececf0e8a3393952e41da3d52d"
     },
-    "multisig-repo_Implementation": {
+    "MultisigRepoImplementation": {
       "address": "0xae1f68b9399cf01b0059f125f16b5e1e79c2479f",
       "blockNumber": 37807321,
       "deploymentTX": "0xcf1be9352463981c585b84d776da6eec9d33745d1ecdad2c7774b15887ac8c82"
     },
-    "token-voting-repo": {
+    "TokenVotingRepoProxy": {
       "address": "0xaCa70D8c462940B839DE386BcDD4CACf745632cA",
       "blockNumber": 33633454,
       "deploymentTX": "0x08c2f0be9d5e6acc0d04a53fd6ab9aee64fb261f4d5f38861091c9bff1077f5c"
     },
-    "token-voting-repo_Implementation": {
+    "TokenVotingRepoImplementation": {
       "address": "0xae1f68b9399cf01b0059f125f16b5e1e79c2479f",
       "blockNumber": 37807321,
       "deploymentTX": "0xcf1be9352463981c585b84d776da6eec9d33745d1ecdad2c7774b15887ac8c82"
