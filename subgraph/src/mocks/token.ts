@@ -14,7 +14,7 @@ export function createTokenCalls(
   tokenAddress: string,
   name: string = 'Mock Token',
   symbol: string = 'MT'
-) {
+): void {
   createMockGetter(tokenAddress, 'name', 'name():(string)', [
     ethereum.Value.fromString(name),
   ]);
@@ -40,7 +40,7 @@ export function createERC20TokenCalls(
   name: string = 'Mock Token',
   symbol: string = 'MT',
   decimals: string = '18'
-) {
+): void {
   createTokenCalls(tokenAddress, name, symbol);
   createMockGetter(tokenAddress, 'decimals', 'decimals():(uint8)', [
     ethereum.Value.fromUnsignedBigInt(BigInt.fromString(decimals)),
