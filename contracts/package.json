@@ -2,7 +2,7 @@
   "name": "@aragon/osx-commons",
   "license": "AGPL-3.0-or-later",
   "description": "The Aragon OSx contracts package containing common utilities",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "author": {
     "name": "aragon",
     "url": "https://github.com/aragon"
@@ -42,9 +42,9 @@
   },
   "dependencies": {
     "@aragon/osx": "aragon/osx#develop",
-    "@aragon/osx-ethers": "^1.3.0-rc0.4",
-    "@openzeppelin/contracts": "^4.9.3",
-    "@openzeppelin/contracts-upgradeable": "^4.9.3",
+    "@aragon/osx-ethers": "1.3.0",
+    "@openzeppelin/contracts": "4.9.5",
+    "@openzeppelin/contracts-upgradeable": "4.9.5",
     "@openzeppelin/hardhat-upgrades": "^1.28.0"
   },
   "files": [

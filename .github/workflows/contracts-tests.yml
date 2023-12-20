@@ -2,6 +2,10 @@ name: 'contracts'
 
 on:
   workflow_dispatch:
+  workflow_call:
+    secrets:
+      INFURA_API_KEY:
+        required: true
   push:
     paths:
       - 'contracts/**'

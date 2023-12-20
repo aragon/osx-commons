@@ -7,12 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [UPCOMING]
 
+## v0.0.1
+
 ### Changed
 
 - Replaces `tsdx` with `dts-cli`.
 - Updates typescript verstion to `^5.1.0`.
-
-## v1.0.0
 
 ### Added
 

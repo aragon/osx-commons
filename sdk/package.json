@@ -1,7 +1,7 @@
 {
   "name": "@aragon/osx-commons-sdk",
   "author": "Aragon Association",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/osx-commons-sdk.esm.js",
