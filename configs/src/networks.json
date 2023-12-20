@@ -26,7 +26,8 @@
     "feesUrl": "https://gasstation-mainnet.matic.network/v2",
     "aliases": {
       "ethers5": "matic",
-      "ethers6": "matic"
+      "ethers6": "matic",
+      "alchemySubgraphs": "matic"
     }
   },
   "mumbai": {
@@ -36,7 +37,8 @@
     "feesUrl": "https://gasstation-mumbai.matic.today/v2",
     "aliases": {
       "ethers5": "maticmum",
-      "ethers6": "matic-mumbai"
+      "ethers6": "matic-mumbai",
+      "alchemySubgraphs": "mumbai"
     }
   },
   "baseMainnet": {
@@ -44,27 +46,35 @@
     "isTestnet": false,
     "chainId": 8453,
     "gasPrice": 1000,
-    "aliases": {}
+    "aliases": {
+      "alchemySubgraphs": "base"
+    }
   },
   "baseGoerli": {
     "url": "https://goerli.base.org",
     "isTestnet": true,
     "chainId": 84531,
     "gasPrice": 1000000,
-    "aliases": {}
+    "aliases": {
+      "alchemySubgraphs": "base-testnet"
+    }
   },
   "baseSepolia": {
     "url": "https://sepolia.base.org",
     "isTestnet": true,
     "chainId": 84532,
     "gasPrice": 1000000,
-    "aliases": {}
+    "aliases": {
+      "alchemySubgraphs": "base-sepolia"
+    }
   },
   "arbitrum": {
     "url": "https://arbitrum-mainnet.infura.io/v3/481a4cdc7c774286b8627f21c6827f48",
     "isTestnet": false,
     "chainId": 42161,
-    "aliases": {}
+    "aliases": {
+      "alchemySubgraphs": "arbitrum-one"
+    }
   },
   "arbitrumGoerli": {
     "url": "https://arbitrum-goerli.infura.io/v3/481a4cdc7c774286b8627f21c6827f48",
@@ -72,13 +82,17 @@
     "chainId": 421613,
     "aliases": {
       "ethers5": "arbitrum-goerli",
-      "ethers6": "arbitrum-goerli"
+      "ethers6": "arbitrum-goerli",
+
+      "alchemySubgraphs": "arbitrum-goerli"
     }
   },
   "arbitrumSepolia": {
     "url": "https://arbitrum-sepolia.infura.io/v3/481a4cdc7c774286b8627f21c6827f48",
     "isTestnet": true,
     "chainId": 421614,
-    "aliases": {}
+    "aliases": {
+      "alchemySubgraphs": "arbitrum-sepolia"
+    }
   }
 }
