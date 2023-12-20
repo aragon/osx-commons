@@ -15,9 +15,9 @@ import {
   SubgraphPluginInstallation,
 } from './internal';
 import {QueryIPlugin} from './internal/graphql-queries';
+import {getNamedTypesFromMetadata} from './metadata';
 import {
   GasFeeEstimation,
-  MetadataAbiInput,
   PrepareInstallationParams,
   PrepareInstallationStep,
   PrepareInstallationStepValue,
@@ -56,38 +56,6 @@ export function getFunctionFragment(
   const hexBytes = bytesToHex(data);
   const iface = new Interface(availableFunctions);
   return iface.getFunction(hexBytes.substring(0, 10));
-}
-
-/**
- * Gets the named types from a metadata abi input
- *
- * @export
- * @param {MetadataAbiInput[]} [inputs=[]]
- * @return {*}  {string[]}
- */
-export function getNamedTypesFromMetadata(
-  inputs: MetadataAbiInput[] = []
-): string[] {
-  return inputs.map(input => {
-    if (input.type.startsWith('tuple')) {
-      const tupleResult = getNamedTypesFromMetadata(input.components).join(
-        ', '
-      );
-
-      let tupleString = `tuple(${tupleResult})`;
-
-      if (input.type.endsWith('[]')) {
-        tupleString = tupleString.concat('[]');
-      }
-
-      return tupleString;
-    } else if (input.type.endsWith('[]')) {
-      const baseType = input.type.slice(0, -2);
-      return `${baseType}[] ${input.name}`;
-    } else {
-      return `${input.type} ${input.name}`;
-    }
-  });
 }
 
 /**
