@@ -1,7 +1,7 @@
 import {
   VersionComparisonLibTest,
   VersionComparisonLibTest__factory,
-} from '../../typechain';
+} from '../../../typechain';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
 
