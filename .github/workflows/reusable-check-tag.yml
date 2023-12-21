@@ -31,7 +31,7 @@ jobs:
         run: |
           GITHUB_REF="${{ inputs.ref }}"
           TAG=${GITHUB_REF##*/}
-          VERSION=$(echo "$TAG" | grep -woP "([0-9]+\.[0-9]+\.[0-9]+)-\w+" | sed -E 's/-(sdk|subgraph|contracts)//')
+          VERSION=$(echo "$TAG" | grep -woP "([0-9]+\.[0-9]+\.[0-9]+)-\w+" | sed -E 's/-(sdk|subgraph|contracts|configs)//')
           PACKAGE=$(echo "$TAG" | grep -oP -- "-.*" | sed -E "s/-//")
           echo "package=$PACKAGE" >> $GITHUB_OUTPUT
           echo "version=$VERSION" >> $GITHUB_OUTPUT

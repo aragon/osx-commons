@@ -1,0 +1,33 @@
+{
+  "name": "@aragon/osx-commons-configs",
+  "author": "Aragon Association",
+  "version": "0.0.1",
+  "license": "AGPL-3.0-or-later",
+  "typings": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint:ts": "cd .. && yarn run lint:configs:ts",
+    "prepare": "yarn run build",
+    "analyze": "size-limit --why",
+    "clean": "rm -Rf dist"
+  },
+  "peerDependencies": {},
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint:ts"
+    }
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
+}
