@@ -1,4 +1,4 @@
-name: SDK Publish
+name: Configs Publish
 
 on:
   push:
