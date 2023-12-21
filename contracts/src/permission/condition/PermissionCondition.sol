@@ -4,8 +4,8 @@ pragma solidity ^0.8.8;
 
 import {ERC165} from "@openzeppelin/contracts/utils/introspection/ERC165.sol";
 
-import {IProtocolVersion} from "../utils/versioning/IProtocolVersion.sol";
-import {ProtocolVersion} from "../utils/versioning/ProtocolVersion.sol";
+import {IProtocolVersion} from "../../utils/versioning/IProtocolVersion.sol";
+import {ProtocolVersion} from "../../utils/versioning/ProtocolVersion.sol";
 import {IPermissionCondition} from "./IPermissionCondition.sol";
 
 /// @title PermissionCondition

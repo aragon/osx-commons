@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.8;
 
-import {PermissionCondition} from "../../permission/PermissionCondition.sol";
+import {PermissionCondition} from "../../permission/condition/PermissionCondition.sol";
 
 contract PermissionConditionMock is PermissionCondition {
     bool public answer;

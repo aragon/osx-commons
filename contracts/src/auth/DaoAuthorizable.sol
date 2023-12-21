@@ -4,7 +4,7 @@ pragma solidity ^0.8.8;
 
 import {Context} from "@openzeppelin/contracts/utils/Context.sol";
 
-import {IDAO} from "../../interfaces/IDAO.sol";
+import {IDAO} from "../dao/IDAO.sol";
 import {_auth} from "./auth.sol";
 
 /// @title DaoAuthorizable

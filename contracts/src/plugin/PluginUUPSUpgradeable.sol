@@ -8,8 +8,8 @@ import {ERC165Upgradeable} from "@openzeppelin/contracts-upgradeable/utils/intro
 
 import {IProtocolVersion} from "../utils/versioning/IProtocolVersion.sol";
 import {ProtocolVersion} from "../utils/versioning/ProtocolVersion.sol";
-import {DaoAuthorizableUpgradeable} from "../permission/dao-authorizable/DaoAuthorizableUpgradeable.sol";
-import {IDAO} from "../interfaces/IDAO.sol";
+import {DaoAuthorizableUpgradeable} from "../auth/DaoAuthorizableUpgradeable.sol";
+import {IDAO} from "../dao/IDAO.sol";
 import {IPlugin} from "./IPlugin.sol";
 
 /// @title PluginUUPSUpgradeable

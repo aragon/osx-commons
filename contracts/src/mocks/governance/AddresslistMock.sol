@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.8;
 
-import {Addresslist} from "../../governance/membership/Addresslist.sol";
+import {Addresslist} from "../../governance/Addresslist.sol";
 
 contract AddresslistMock is Addresslist {
     function addAddresses(address[] calldata _newAddresses) external {

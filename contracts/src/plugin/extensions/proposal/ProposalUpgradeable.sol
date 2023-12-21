@@ -2,21 +2,21 @@
 
 pragma solidity ^0.8.8;
 
-import {Counters} from "@openzeppelin/contracts/utils/Counters.sol";
-import {ERC165} from "@openzeppelin/contracts/utils/introspection/ERC165.sol";
+import {CountersUpgradeable} from "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
+import {ERC165Upgradeable} from "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol";
 
-import {IDAO} from "../../interfaces/IDAO.sol";
+import {IDAO} from "../../../dao/IDAO.sol";
 import {IProposal} from "./IProposal.sol";
 
-/// @title Proposal
+/// @title ProposalUpgradeable
 /// @author Aragon Association - 2022-2023
-/// @notice An abstract contract containing the traits and internal functionality to create and execute proposals that can be inherited by non-upgradeable DAO plugins.
+/// @notice An abstract contract containing the traits and internal functionality to create and execute proposals that can be inherited by upgradeable DAO plugins.
 /// @custom:security-contact sirt@aragon.org
-abstract contract Proposal is IProposal, ERC165 {
-    using Counters for Counters.Counter;
+abstract contract ProposalUpgradeable is IProposal, ERC165Upgradeable {
+    using CountersUpgradeable for CountersUpgradeable.Counter;
 
     /// @notice The incremental ID for proposals and executions.
-    Counters.Counter private proposalCounter;
+    CountersUpgradeable.Counter private proposalCounter;
 
     /// @inheritdoc IProposal
     function proposalCount() public view override returns (uint256) {
@@ -80,4 +80,7 @@ abstract contract Proposal is IProposal, ERC165 {
         (execResults, failureMap) = _dao.execute(bytes32(_proposalId), _actions, _allowFailureMap);
         emit ProposalExecuted({proposalId: _proposalId});
     }
+
+    /// @notice This empty reserved space is put in place to allow future versions to add new variables without shifting down storage in the inheritance chain (see [OpenZeppelin's guide about storage gaps](https://docs.openzeppelin.com/contracts/4.x/upgradeable#storage_gaps)).
+    uint256[49] private __gap;
 }

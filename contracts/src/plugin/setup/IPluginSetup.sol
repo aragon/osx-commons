@@ -5,7 +5,7 @@ pragma solidity ^0.8.8;
 import {PermissionLib} from "../../permission/PermissionLib.sol";
 
 // solhint-disable-next-line no-unused-import
-import {IDAO} from "../../interfaces/IDAO.sol";
+import {IDAO} from "../../dao/IDAO.sol";
 
 /// @title IPluginSetup
 /// @author Aragon Association - 2022-2023

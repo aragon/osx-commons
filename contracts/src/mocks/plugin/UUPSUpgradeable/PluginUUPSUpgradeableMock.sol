@@ -4,7 +4,7 @@
 pragma solidity ^0.8.8;
 
 import {PluginUUPSUpgradeable} from "../../../plugin/PluginUUPSUpgradeable.sol";
-import {IDAO} from "../../../interfaces/IDAO.sol";
+import {IDAO} from "../../../dao/IDAO.sol";
 
 contract PluginUUPSUpgradeableV1Mock is PluginUUPSUpgradeable {
     uint256 public state1;

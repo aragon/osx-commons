@@ -3,7 +3,7 @@
 pragma solidity ^0.8.8;
 
 import {Plugin} from "../../../plugin/Plugin.sol";
-import {IDAO} from "../../../interfaces/IDAO.sol";
+import {IDAO} from "../../../dao/IDAO.sol";
 
 contract PluginV1Mock is Plugin {
     uint256 public state1;
