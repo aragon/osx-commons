@@ -7,7 +7,7 @@ import {ethers} from 'hardhat';
 /**
  * Returns the NPM version number from the `osx-commons-contracts` package.json file
  */
-export function osxCommonsContractsNPMVersion(): [number, number, number] {
+export function osxCommonsContractsVersion(): [number, number, number] {
   const trimmedVersion = version.split('-')[0];
   const semver = trimmedVersion.split('.');
   return [Number(semver[0]), Number(semver[1]), Number(semver[2])];
@@ -24,7 +24,7 @@ describe('ProtocolVersion', function () {
       signers[0]
     ).deploy();
     expect(await ProtocolVersionMock.protocolVersion()).to.deep.equal(
-      osxCommonsContractsNPMVersion()
+      osxCommonsContractsVersion()
     );
   });
 });

@@ -5,7 +5,7 @@ import {
   PluginV1Mock,
   PluginV1Mock__factory,
 } from '../../typechain';
-import {osxCommonsContractsNPMVersion} from '../utils/versioning/protocol-version';
+import {osxCommonsContractsVersion} from '../utils/versioning/protocol-version';
 import {getInterfaceId, PluginType} from '@aragon/osx-commons-sdk';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
@@ -50,7 +50,7 @@ describe('Plugin', function () {
   describe('Protocol version', async () => {
     it('returns the current protocol version', async () => {
       expect(await plugin.protocolVersion()).to.deep.equal(
-        osxCommonsContractsNPMVersion()
+        osxCommonsContractsVersion()
       );
     });
   });
