@@ -6,8 +6,8 @@ import {
   PluginCloneableV1Mock,
   PluginCloneableV1Mock__factory,
 } from '../../typechain';
-import {getInterfaceId} from '@aragon/osx-commons-sdk/src/interfaces';
-import {PluginType} from '@aragon/osx-commons-sdk/src/types';
+import {getInterfaceId} from '@aragon/osx-commons-sdk/dist/interfaces';
+import {PluginType} from '@aragon/osx-commons-sdk/dist/types';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
 
