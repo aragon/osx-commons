@@ -2,7 +2,7 @@
   "name": "@aragon/osx-commons-contracts",
   "license": "AGPL-3.0-or-later",
   "description": "The Aragon OSx contracts package containing common utilities",
-  "version": "0.0.1-alpha.2",
+  "version": "0.0.1-alpha.3",
   "author": {
     "name": "aragon",
     "url": "https://github.com/aragon"
@@ -13,8 +13,8 @@
     "@ethersproject/abi": "^5.7.0",
     "@ethersproject/abstract-signer": "^5.7.0",
     "@ethersproject/bignumber": "^5.7.0",
-    "@ethersproject/constants": "^5.7.0",
     "@ethersproject/bytes": "^5.7.0",
+    "@ethersproject/constants": "^5.7.0",
     "@ethersproject/providers": "^5.7.2",
     "@nomicfoundation/hardhat-chai-matchers": "^1.0.6",
     "@nomicfoundation/hardhat-network-helpers": "^1.0.8",
