@@ -48,7 +48,8 @@
     "@openzeppelin/contracts-upgradeable": "4.9.5"
   },
   "files": [
-    "/src"
+    "/src",
+    "./protocol-version.ts"
   ],
   "keywords": [
     "blockchain",
