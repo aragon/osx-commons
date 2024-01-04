@@ -1,5 +1,5 @@
-import {getInterfaceId} from '../../../sdk/src/interfaces';
 import {PluginType} from '../../../sdk/src/types';
+import {CURRENT_PROTOCOL_VERSION} from '../../protocol-version';
 import {
   IERC165__factory,
   IPlugin__factory,
@@ -7,7 +7,7 @@ import {
   PluginUUPSUpgradeableV1Mock,
   PluginUUPSUpgradeableV1Mock__factory,
 } from '../../typechain';
-import {CURRENT_PROTOCOL_VERSION} from '../../utils/protocol-version';
+import {getInterfaceId} from '@aragon/osx-commons-sdk/src/interfaces';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
 

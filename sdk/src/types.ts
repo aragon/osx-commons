@@ -48,6 +48,9 @@ export interface PluginInstallItem {
   data: Uint8Array;
 }
 
+/**
+ * Contains the supported plugin types
+ */
 export enum PluginType {
   UUPS,
   Cloneable,
