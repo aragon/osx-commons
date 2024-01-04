@@ -1,4 +1,3 @@
-import {CURRENT_PROTOCOL_VERSION} from '../../protocol-version';
 import {
   IERC165__factory,
   IPlugin__factory,
@@ -6,6 +5,7 @@ import {
   PluginCloneableV1Mock,
   PluginCloneableV1Mock__factory,
 } from '../../typechain';
+import {osxCommonsContractsNPMVersion} from '../utils/versioning/protocol-version';
 import {getInterfaceId, PluginType} from '@aragon/osx-commons-sdk';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
@@ -48,7 +48,7 @@ describe('PluginCloneable', function () {
   describe('Protocol version', async () => {
     it('returns the current protocol version', async () => {
       expect(await plugin.protocolVersion()).to.deep.equal(
-        CURRENT_PROTOCOL_VERSION
+        osxCommonsContractsNPMVersion()
       );
     });
   });

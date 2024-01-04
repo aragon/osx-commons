@@ -2,7 +2,7 @@
   "name": "@aragon/osx-commons-contracts",
   "license": "AGPL-3.0-or-later",
   "description": "The Aragon OSx contracts package containing common utilities",
-  "version": "0.0.1-alpha.4",
+  "version": "1.4.0-alpha.0",
   "author": {
     "name": "aragon",
     "url": "https://github.com/aragon"
@@ -48,8 +48,7 @@
     "@openzeppelin/contracts-upgradeable": "4.9.5"
   },
   "files": [
-    "/src",
-    "./protocol-version.ts"
+    "/src"
   ],
   "keywords": [
     "blockchain",
