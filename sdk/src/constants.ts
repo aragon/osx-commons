@@ -1,5 +1,5 @@
-import {TIME} from './from_osx/time';
 import {NetworkDeployment} from './internal';
+import {TIME} from './time';
 import {ProposalMetadata, SupportedNetwork, SupportedVersion} from './types';
 import {activeContractsList} from '@aragon/osx-ethers';
 import {activeContractsList as activeContractsListV1_0_0} from '@aragon/osx-ethers-v1.0.0';

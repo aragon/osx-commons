@@ -8,7 +8,7 @@ import {
   PluginUpdatePreparationError,
   UnsupportedNetworkError,
 } from './errors';
-import {findEventTopicLog} from './from_osx/events';
+import {findEventTopicLog} from './events';
 import {
   IClientGraphQLCore,
   IClientWeb3Core,
