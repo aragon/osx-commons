@@ -1,5 +1,5 @@
 import {version} from '../../../package.json';
-import {ProtocolVersion__factory} from '../../../typechain';
+import {ProtocolVersionMock__factory} from '../../../typechain';
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
@@ -20,10 +20,10 @@ describe('ProtocolVersion', function () {
   });
 
   it('returns the current protocol version that must match the semantic version of the `osx-commons-contracts` package', async () => {
-    const versionedContract = await new ProtocolVersion__factory(
+    const ProtocolVersionMock = await new ProtocolVersionMock__factory(
       signers[0]
     ).deploy();
-    expect(await versionedContract.protocolVersion()).to.deep.equal(
+    expect(await ProtocolVersionMock.protocolVersion()).to.deep.equal(
       osxCommonsContractsNPMVersion()
     );
   });

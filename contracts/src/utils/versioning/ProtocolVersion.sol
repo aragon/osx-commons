@@ -6,10 +6,10 @@ import {IProtocolVersion} from "./IProtocolVersion.sol";
 
 /// @title ProtocolVersion
 /// @author Aragon Association - 2023
-/// @notice A stateless, non-upgradeable contract providing the current Aragon OSx protocol version number.
+/// @notice An abstract, stateless, non-upgradeable contract providing the current Aragon OSx protocol version number.
 /// @dev Do not add any new variables to this contract that would shift down storage in the inheritance chain.
 /// @custom:security-contact sirt@aragon.org
-contract ProtocolVersion is IProtocolVersion {
+abstract contract ProtocolVersion is IProtocolVersion {
     // IMPORTANT: Do not add any storage variable, see the above notice.
 
     /// @inheritdoc IProtocolVersion
