@@ -9,9 +9,14 @@ import * as mumbai from './deployments/mumbai.json';
 import * as polygon from './deployments/polygon.json';
 import * as sepolia from './deployments/sepolia.json';
 import * as networks from './networks.json';
+import {NetworkConfigs} from './types';
+
+export * from './types';
+
+const networksTyped: NetworkConfigs = networks;
 
 export {
-  networks,
+  networksTyped as networks,
   arbitrum,
   arbitrumSepolia,
   baseGoerli,
