@@ -1,5 +1,5 @@
 import {RatioTest, RatioTest__factory} from '../../../typechain';
-import {RATIO_BASE, pctToRatio} from '@aragon/osx-commons-sdk/src/math';
+import {RATIO_BASE, pctToRatio} from '@aragon/osx-commons-sdk';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
 

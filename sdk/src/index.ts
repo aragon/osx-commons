@@ -16,6 +16,7 @@ export * from './errors';
 // From OSX
 export * from './bitmap';
 export * from './events';
+export * from './math';
 export * from './permission';
 export * from './proposal';
 export * from './time';
