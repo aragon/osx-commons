@@ -39,9 +39,9 @@ jobs:
           python-version: 3.x
       - name: Generate release notes
         id: release_notes
-        run: ./.github/scripts/generate_release_notes.sh $PACKAGE
+        run: ./.github/scripts/generate_release_notes.sh ${{ inputs.package }}
         env:
-          PACKAGE: ${{ inputs.package }}
+          GH_TOKEN: ${{ github.token }}
       - name: Create release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
