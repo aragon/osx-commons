@@ -1,4 +1,3 @@
-import {PluginType} from '../../../sdk/src/types';
 import {CURRENT_PROTOCOL_VERSION} from '../../protocol-version';
 import {
   IERC165__factory,
@@ -8,6 +7,7 @@ import {
   PluginUUPSUpgradeableV1Mock__factory,
 } from '../../typechain';
 import {getInterfaceId} from '@aragon/osx-commons-sdk/src/interfaces';
+import {PluginType} from '@aragon/osx-commons-sdk/src/types';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
 
