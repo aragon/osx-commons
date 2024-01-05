@@ -2,8 +2,8 @@ import {
   IERC165__factory,
   IPlugin__factory,
   IProtocolVersion__factory,
-  PluginV1Mock,
-  PluginV1Mock__factory,
+  PluginMockBuild1,
+  PluginMockBuild1__factory,
 } from '../../typechain';
 import {osxCommonsContractsVersion} from '../utils/versioning/protocol-version';
 import {getInterfaceId, PluginType} from '@aragon/osx-commons-sdk';
@@ -11,11 +11,11 @@ import {expect} from 'chai';
 import {ethers} from 'hardhat';
 
 describe('Plugin', function () {
-  let plugin: PluginV1Mock;
+  let plugin: PluginMockBuild1;
 
   before(async () => {
     const deployer = (await ethers.getSigners())[0];
-    plugin = await new PluginV1Mock__factory(deployer).deploy(
+    plugin = await new PluginMockBuild1__factory(deployer).deploy(
       ethers.constants.AddressZero
     );
   });

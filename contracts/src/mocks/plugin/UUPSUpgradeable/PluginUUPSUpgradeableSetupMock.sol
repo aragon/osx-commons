@@ -8,13 +8,13 @@ import {IPluginSetup} from "../../../plugin/setup/IPluginSetup.sol";
 import {PluginSetup} from "../../../plugin/setup/PluginSetup.sol";
 
 import {mockPermissions, mockHelpers, mockPluginProxy} from "../PluginMockData.sol";
-import {PluginUUPSUpgradeableV1Mock, PluginUUPSUpgradeableV2Mock, PluginUUPSUpgradeableV3Mock} from "./PluginUUPSUpgradeableMock.sol";
+import {PluginUUPSUpgradeableMockBuild1, PluginUUPSUpgradeableMockBuild2, PluginUUPSUpgradeableMockBuild3} from "./PluginUUPSUpgradeableMock.sol";
 
-contract PluginUUPSUpgradeableSetupV1Mock is PluginSetup {
+contract PluginUUPSUpgradeableSetupMockBuild1 is PluginSetup {
     address internal pluginBase;
 
     constructor() {
-        pluginBase = address(new PluginUUPSUpgradeableV1Mock());
+        pluginBase = address(new PluginUUPSUpgradeableMockBuild1());
     }
 
     /// @inheritdoc IPluginSetup
@@ -42,7 +42,7 @@ contract PluginUUPSUpgradeableSetupV1Mock is PluginSetup {
     }
 }
 
-contract PluginUUPSUpgradeableSetupV1MockBad is PluginUUPSUpgradeableSetupV1Mock {
+contract PluginUUPSUpgradeableSetupMockBuild1Bad is PluginUUPSUpgradeableSetupMockBuild1 {
     function prepareInstallation(
         address _dao,
         bytes memory
@@ -54,9 +54,9 @@ contract PluginUUPSUpgradeableSetupV1MockBad is PluginUUPSUpgradeableSetupV1Mock
     }
 }
 
-contract PluginUUPSUpgradeableSetupV2Mock is PluginUUPSUpgradeableSetupV1Mock {
+contract PluginUUPSUpgradeableSetupMockBuild2 is PluginUUPSUpgradeableSetupMockBuild1 {
     constructor() {
-        pluginBase = address(new PluginUUPSUpgradeableV2Mock());
+        pluginBase = address(new PluginUUPSUpgradeableMockBuild2());
     }
 
     /// @inheritdoc IPluginSetup
@@ -81,18 +81,21 @@ contract PluginUUPSUpgradeableSetupV2Mock is PluginUUPSUpgradeableSetupV1Mock {
     {
         (_dao, _payload);
 
-        // Update from V1
+        // Update from Build 1
         if (_currentBuild == 1) {
             preparedSetupData.helpers = mockHelpers(2);
-            initData = abi.encodeCall(PluginUUPSUpgradeableV2Mock.initializeV1toV2, ());
+            initData = abi.encodeCall(
+                PluginUUPSUpgradeableMockBuild2.initializeFrom,
+                (_currentBuild)
+            );
             preparedSetupData.permissions = mockPermissions(1, 2, PermissionLib.Operation.Grant);
         }
     }
 }
 
-contract PluginUUPSUpgradeableSetupV3Mock is PluginUUPSUpgradeableSetupV2Mock {
+contract PluginUUPSUpgradeableSetupMockBuild3 is PluginUUPSUpgradeableSetupMockBuild2 {
     constructor() {
-        pluginBase = address(new PluginUUPSUpgradeableV3Mock());
+        pluginBase = address(new PluginUUPSUpgradeableMockBuild3());
     }
 
     /// @inheritdoc IPluginSetup
@@ -117,68 +120,24 @@ contract PluginUUPSUpgradeableSetupV3Mock is PluginUUPSUpgradeableSetupV2Mock {
     {
         (_dao, _payload);
 
-        // Update from V1
+        // Update from Build 1
         if (_currentBuild == 1) {
             preparedSetupData.helpers = mockHelpers(3);
-            initData = abi.encodeCall(PluginUUPSUpgradeableV3Mock.initializeV1toV3, ());
+            initData = abi.encodeCall(
+                PluginUUPSUpgradeableMockBuild3.initializeFrom,
+                (_currentBuild)
+            );
             preparedSetupData.permissions = mockPermissions(1, 3, PermissionLib.Operation.Grant);
         }
 
-        // Update from V2
+        // Update from Build 2
         if (_currentBuild == 2) {
             preparedSetupData.helpers = mockHelpers(3);
-            initData = abi.encodeCall(PluginUUPSUpgradeableV3Mock.initializeV2toV3, ());
+            initData = abi.encodeCall(
+                PluginUUPSUpgradeableMockBuild3.initializeFrom,
+                (_currentBuild)
+            );
             preparedSetupData.permissions = mockPermissions(2, 3, PermissionLib.Operation.Grant);
-        }
-    }
-}
-
-/// @dev With this plugin setup, the plugin base implementation doesn't change.
-/// This setup is a good example when you want to design a new plugin setup
-/// which uses the same base implementation(doesn't update the logic contract)
-/// but applies new/modifier permissions on it.
-
-contract PluginUUPSUpgradeableSetupV4Mock is PluginUUPSUpgradeableSetupV3Mock {
-    constructor(address _pluginUUPSUpgradeableV3) {
-        pluginBase = _pluginUUPSUpgradeableV3;
-    }
-
-    /// @inheritdoc IPluginSetup
-    function prepareInstallation(
-        address _dao,
-        bytes memory
-    ) public virtual override returns (address plugin, PreparedSetupData memory preparedSetupData) {
-        plugin = mockPluginProxy(pluginBase, _dao);
-        preparedSetupData.helpers = mockHelpers(3);
-        preparedSetupData.permissions = mockPermissions(0, 3, PermissionLib.Operation.Grant);
-    }
-
-    function prepareUpdate(
-        address _dao,
-        uint16 _currentBuild,
-        SetupPayload calldata _payload
-    )
-        public
-        virtual
-        override
-        returns (bytes memory initData, PreparedSetupData memory preparedSetupData)
-    {
-        // If one tries to upgrade from v3 to this(v4), developer of this v4
-        // knows that logic contract doesn't change as he specified the same address
-        // in `implementation()`. This means this update should only include returning
-        // the desired updated permissions. PluginSetupProcessor will take care of
-        // not calling `upgradeTo` on the plugin in such cases.
-        if (_currentBuild == 3) {
-            preparedSetupData.permissions = mockPermissions(3, 4, PermissionLib.Operation.Grant);
-        }
-        // If the update happens from those that have different implementation addresses(v1,v2)
-        // proxy(plugin) contract should be upgraded to the new base implementation which requires(not always though)
-        // returning the `initData` that will be called upon `upradeToAndCall` by plugin setup processor.
-        // NOTE that dev is free to do what he wishes.
-        else if (_currentBuild == 1 || _currentBuild == 2) {
-            (initData, preparedSetupData) = super.prepareUpdate(_dao, _currentBuild, _payload);
-            // Even for this case, dev might decide to modify the permissions..
-            preparedSetupData.permissions = mockPermissions(4, 5, PermissionLib.Operation.Grant);
         }
     }
 }

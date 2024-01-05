@@ -6,7 +6,7 @@ pragma solidity ^0.8.8;
 import {PluginUUPSUpgradeable} from "../../../plugin/PluginUUPSUpgradeable.sol";
 import {IDAO} from "../../../dao/IDAO.sol";
 
-contract PluginUUPSUpgradeableV1Mock is PluginUUPSUpgradeable {
+contract PluginUUPSUpgradeableMockBuild1 is PluginUUPSUpgradeable {
     uint256 public state1;
 
     function initialize(IDAO _dao) external initializer {
@@ -15,7 +15,7 @@ contract PluginUUPSUpgradeableV1Mock is PluginUUPSUpgradeable {
     }
 }
 
-contract PluginUUPSUpgradeableV2Mock is PluginUUPSUpgradeable {
+contract PluginUUPSUpgradeableMockBuild2 is PluginUUPSUpgradeable {
     uint256 public state1;
     uint256 public state2;
 
@@ -25,12 +25,14 @@ contract PluginUUPSUpgradeableV2Mock is PluginUUPSUpgradeable {
         state2 = 2;
     }
 
-    function initializeV1toV2() external reinitializer(2) {
-        state2 = 2;
+    function initializeFrom(uint16 _previousBuild) external reinitializer(2) {
+        if (_previousBuild < 2) {
+            state2 = 2;
+        }
     }
 }
 
-contract PluginUUPSUpgradeableV3Mock is PluginUUPSUpgradeable {
+contract PluginUUPSUpgradeableMockBuild3 is PluginUUPSUpgradeable {
     uint256 public state1;
     uint256 public state2;
     uint256 public state3;
@@ -42,12 +44,12 @@ contract PluginUUPSUpgradeableV3Mock is PluginUUPSUpgradeable {
         state3 = 3;
     }
 
-    function initializeV1toV3() external reinitializer(3) {
-        state2 = 2;
-        state3 = 3;
-    }
-
-    function initializeV2toV3() external reinitializer(3) {
-        state3 = 3;
+    function initializeFrom(uint16 _previousBuild) external reinitializer(3) {
+        if (_previousBuild < 2) {
+            state2 = 2;
+        }
+        if (_previousBuild < 3) {
+            state2 = 3;
+        }
     }
 }

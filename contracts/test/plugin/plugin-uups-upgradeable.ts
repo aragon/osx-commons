@@ -2,8 +2,8 @@ import {
   IERC165__factory,
   IPlugin__factory,
   IProtocolVersion__factory,
-  PluginUUPSUpgradeableV1Mock,
-  PluginUUPSUpgradeableV1Mock__factory,
+  PluginUUPSUpgradeableMockBuild1,
+  PluginUUPSUpgradeableMockBuild1__factory,
 } from '../../typechain';
 import {osxCommonsContractsVersion as osxCommonsContractsPackageVersion} from '../utils/versioning/protocol-version';
 import {getInterfaceId, PluginType} from '@aragon/osx-commons-sdk';
@@ -11,11 +11,13 @@ import {expect} from 'chai';
 import {ethers} from 'hardhat';
 
 describe('PluginUUPSUpgradeable', function () {
-  let plugin: PluginUUPSUpgradeableV1Mock;
+  let plugin: PluginUUPSUpgradeableMockBuild1;
 
   before(async () => {
     const deployer = (await ethers.getSigners())[0];
-    plugin = await new PluginUUPSUpgradeableV1Mock__factory(deployer).deploy();
+    plugin = await new PluginUUPSUpgradeableMockBuild1__factory(
+      deployer
+    ).deploy();
   });
 
   describe('Plugin Type', async () => {
@@ -50,6 +52,16 @@ describe('PluginUUPSUpgradeable', function () {
       expect(await plugin.protocolVersion()).to.deep.equal(
         osxCommonsContractsPackageVersion()
       );
+    });
+  });
+
+  describe.skip('Upgradeability', async () => {
+    it('upgrades', async () => {
+      expect(true).to.equal(false);
+    });
+
+    it('can be reinitialized', async () => {
+      expect(true).to.equal(false);
     });
   });
 });
