@@ -3,7 +3,6 @@
 pragma solidity ^0.8.8;
 
 import {PermissionLib} from "../../permission/PermissionLib.sol";
-import {createERC1967Proxy} from "../../utils/deployment/Proxy.sol";
 
 address constant NO_CONDITION = address(0);
 
@@ -35,12 +34,4 @@ function mockHelpers(uint160 amount) pure returns (address[] memory helpers) {
     for (uint160 i = 0; i < amount; i++) {
         helpers[i] = address(i);
     }
-}
-
-function mockPluginProxy(address _pluginBase, address _dao) returns (address) {
-    return
-        createERC1967Proxy(
-            _pluginBase,
-            abi.encodeWithSelector(bytes4(keccak256("initialize(address)")), _dao)
-        );
 }

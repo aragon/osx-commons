@@ -6,8 +6,8 @@ pragma solidity ^0.8.8;
 import {PermissionLib} from "../../../permission/PermissionLib.sol";
 import {IPluginSetup} from "../../../plugin/setup/IPluginSetup.sol";
 import {PluginSetup} from "../../../plugin/setup/PluginSetup.sol";
-
-import {mockPermissions, mockHelpers, mockPluginProxy} from "../PluginMockData.sol";
+import {IDAO} from "../../../dao/IDAO.sol";
+import {mockPermissions, mockHelpers} from "../PluginMockData.sol";
 import {PluginUUPSUpgradeableMockBuild1, PluginUUPSUpgradeableMockBuild2, PluginUUPSUpgradeableMockBuild3} from "./PluginUUPSUpgradeableMock.sol";
 
 contract PluginUUPSUpgradeableSetupMockBuild1 is PluginSetup {
@@ -22,9 +22,12 @@ contract PluginUUPSUpgradeableSetupMockBuild1 is PluginSetup {
         address _dao,
         bytes memory
     ) public virtual override returns (address plugin, PreparedSetupData memory preparedSetupData) {
-        plugin = mockPluginProxy(pluginBase, _dao);
-        preparedSetupData.helpers = mockHelpers(2);
-        preparedSetupData.permissions = mockPermissions(0, 2, PermissionLib.Operation.Grant);
+        plugin = createERC1967Proxy(
+            pluginBase,
+            abi.encodeCall(PluginUUPSUpgradeableMockBuild1.initialize, (IDAO(_dao)))
+        );
+        preparedSetupData.helpers = mockHelpers(1);
+        preparedSetupData.permissions = mockPermissions(0, 1, PermissionLib.Operation.Grant);
     }
 
     /// @inheritdoc IPluginSetup
@@ -42,19 +45,9 @@ contract PluginUUPSUpgradeableSetupMockBuild1 is PluginSetup {
     }
 }
 
-contract PluginUUPSUpgradeableSetupMockBuild1Bad is PluginUUPSUpgradeableSetupMockBuild1 {
-    function prepareInstallation(
-        address _dao,
-        bytes memory
-    ) public pure override returns (address plugin, PreparedSetupData memory preparedSetupData) {
-        (_dao);
-        plugin = address(0); // The bad behaviour is returning the same address over and over again
-        preparedSetupData.helpers = mockHelpers(1);
-        preparedSetupData.permissions = mockPermissions(0, 1, PermissionLib.Operation.Grant);
-    }
-}
+contract PluginUUPSUpgradeableSetupMockBuild2 is PluginSetup {
+    address internal pluginBase;
 
-contract PluginUUPSUpgradeableSetupMockBuild2 is PluginUUPSUpgradeableSetupMockBuild1 {
     constructor() {
         pluginBase = address(new PluginUUPSUpgradeableMockBuild2());
     }
@@ -63,19 +56,23 @@ contract PluginUUPSUpgradeableSetupMockBuild2 is PluginUUPSUpgradeableSetupMockB
     function prepareInstallation(
         address _dao,
         bytes memory
-    ) public virtual override returns (address plugin, PreparedSetupData memory preparedSetupData) {
-        plugin = mockPluginProxy(pluginBase, _dao);
+    ) external override returns (address plugin, PreparedSetupData memory preparedSetupData) {
+        plugin = createERC1967Proxy(
+            pluginBase,
+            abi.encodeCall(PluginUUPSUpgradeableMockBuild2.initialize, (IDAO(_dao)))
+        );
         preparedSetupData.helpers = mockHelpers(2);
         preparedSetupData.permissions = mockPermissions(0, 2, PermissionLib.Operation.Grant);
     }
 
+    /// @inheritdoc IPluginSetup
     function prepareUpdate(
         address _dao,
         uint16 _currentBuild,
         SetupPayload calldata _payload
     )
-        public
-        virtual
+        external
+        pure
         override
         returns (bytes memory initData, PreparedSetupData memory preparedSetupData)
     {
@@ -91,9 +88,25 @@ contract PluginUUPSUpgradeableSetupMockBuild2 is PluginUUPSUpgradeableSetupMockB
             preparedSetupData.permissions = mockPermissions(1, 2, PermissionLib.Operation.Grant);
         }
     }
+
+    /// @inheritdoc IPluginSetup
+    function prepareUninstallation(
+        address _dao,
+        SetupPayload calldata _payload
+    ) external pure override returns (PermissionLib.MultiTargetPermission[] memory permissions) {
+        (_dao, _payload);
+        permissions = mockPermissions(0, 2, PermissionLib.Operation.Revoke);
+    }
+
+    /// @inheritdoc IPluginSetup
+    function implementation() external view override returns (address) {
+        return address(pluginBase);
+    }
 }
 
-contract PluginUUPSUpgradeableSetupMockBuild3 is PluginUUPSUpgradeableSetupMockBuild2 {
+contract PluginUUPSUpgradeableSetupMockBuild3 is PluginSetup {
+    address internal pluginBase;
+
     constructor() {
         pluginBase = address(new PluginUUPSUpgradeableMockBuild3());
     }
@@ -102,19 +115,23 @@ contract PluginUUPSUpgradeableSetupMockBuild3 is PluginUUPSUpgradeableSetupMockB
     function prepareInstallation(
         address _dao,
         bytes memory
-    ) public virtual override returns (address plugin, PreparedSetupData memory preparedSetupData) {
-        plugin = mockPluginProxy(pluginBase, _dao);
+    ) external returns (address plugin, PreparedSetupData memory preparedSetupData) {
+        plugin = createERC1967Proxy(
+            pluginBase,
+            abi.encodeCall(PluginUUPSUpgradeableMockBuild3.initialize, (IDAO(_dao)))
+        );
         preparedSetupData.helpers = mockHelpers(3);
         preparedSetupData.permissions = mockPermissions(0, 3, PermissionLib.Operation.Grant);
     }
 
+    /// @inheritdoc IPluginSetup
     function prepareUpdate(
         address _dao,
         uint16 _currentBuild,
         SetupPayload calldata _payload
     )
-        public
-        virtual
+        external
+        pure
         override
         returns (bytes memory initData, PreparedSetupData memory preparedSetupData)
     {
@@ -139,5 +156,19 @@ contract PluginUUPSUpgradeableSetupMockBuild3 is PluginUUPSUpgradeableSetupMockB
             );
             preparedSetupData.permissions = mockPermissions(2, 3, PermissionLib.Operation.Grant);
         }
+    }
+
+    /// @inheritdoc IPluginSetup
+    function prepareUninstallation(
+        address _dao,
+        SetupPayload calldata _payload
+    ) external virtual override returns (PermissionLib.MultiTargetPermission[] memory permissions) {
+        (_dao, _payload);
+        permissions = mockPermissions(0, 3, PermissionLib.Operation.Revoke);
+    }
+
+    /// @inheritdoc IPluginSetup
+    function implementation() external view override returns (address) {
+        return address(pluginBase);
     }
 }
