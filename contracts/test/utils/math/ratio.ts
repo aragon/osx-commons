@@ -1,9 +1,7 @@
 import {RatioTest, RatioTest__factory} from '../../../typechain';
+import {RATIO_BASE, pctToRatio} from '@aragon/osx-commons-sdk';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
-
-export const RATIO_BASE = ethers.BigNumber.from(10).pow(6); // 100% => 10**6
-export const pctToRatio = (x: number) => RATIO_BASE.mul(x).div(100);
 
 describe('Ratio', function () {
   let ratio: RatioTest;
@@ -50,3 +48,4 @@ describe('Ratio', function () {
     });
   });
 });
+export {pctToRatio};

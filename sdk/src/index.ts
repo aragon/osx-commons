@@ -7,6 +7,16 @@ export * from './utils';
 export * from './schemas';
 export * from './validation';
 export * from './multiuri';
+export * from './metadata';
+export * from './interfaces';
 export * from './encoding';
 export * from './promises';
 export * from './errors';
+
+// From OSX
+export * from './bitmap';
+export * from './events';
+export * from './math';
+export * from './permission';
+export * from './proposal';
+export * from './time';
