@@ -8,17 +8,22 @@ address constant NO_CONDITION = address(0);
 
 error ConflictingValues();
 
+/// @notice Creates a mock `MultiTargetPermission` array by converting a range of `uint160` values into `address` values.
+/// @param rangeStart The start of the range.
+/// @param rangeEnd The end of the range (that is not included).
+/// @param op The permission operation type.
+/// @return permissions The mock array of permissions.
 function mockPermissions(
-    uint160 start,
-    uint160 end,
+    uint160 rangeStart,
+    uint160 rangeEnd,
     PermissionLib.Operation op
 ) pure returns (PermissionLib.MultiTargetPermission[] memory permissions) {
-    if (start > end) revert ConflictingValues();
+    if (rangeStart > rangeEnd) revert ConflictingValues();
 
-    permissions = new PermissionLib.MultiTargetPermission[](end - start);
+    permissions = new PermissionLib.MultiTargetPermission[](rangeEnd - rangeStart);
 
-    for (uint160 i = start; i < end; i++) {
-        permissions[i - start] = PermissionLib.MultiTargetPermission({
+    for (uint160 i = rangeStart; i < rangeEnd; i++) {
+        permissions[i - rangeStart] = PermissionLib.MultiTargetPermission({
             operation: op,
             where: address(i),
             who: address(i),
@@ -28,10 +33,13 @@ function mockPermissions(
     }
 }
 
-function mockHelpers(uint160 amount) pure returns (address[] memory helpers) {
-    helpers = new address[](amount);
+/// @notice Creates a mock array of helper addresses of specified length by converting `uint160` values starting from 0 into `address` values.
+/// @param len The length of the helper array.
+/// @return helpers The mock array of helper addresses.
+function mockHelpers(uint160 len) pure returns (address[] memory helpers) {
+    helpers = new address[](len);
 
-    for (uint160 i = 0; i < amount; i++) {
+    for (uint160 i = 0; i < len; i++) {
         helpers[i] = address(i);
     }
 }
