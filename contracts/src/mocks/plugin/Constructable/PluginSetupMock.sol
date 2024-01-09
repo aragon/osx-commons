@@ -24,7 +24,7 @@ contract PluginSetupMockBuild1 is PluginSetup {
     ) external override returns (address plugin, PreparedSetupData memory preparedSetupData) {
         plugin = address(new PluginMockBuild1(IDAO(_dao)));
         preparedSetupData.helpers = mockHelpers(1);
-        preparedSetupData.permissions = mockPermissions(5, 6, PermissionLib.Operation.Grant);
+        preparedSetupData.permissions = mockPermissions(0, 1, PermissionLib.Operation.Grant);
     }
 
     /// @inheritdoc IPluginSetup
@@ -33,7 +33,7 @@ contract PluginSetupMockBuild1 is PluginSetup {
         SetupPayload calldata _payload
     ) external pure override returns (PermissionLib.MultiTargetPermission[] memory permissions) {
         (_dao, _payload);
-        permissions = mockPermissions(5, 6, PermissionLib.Operation.Revoke);
+        permissions = mockPermissions(0, 1, PermissionLib.Operation.Revoke);
     }
 
     /// @inheritdoc IPluginSetup

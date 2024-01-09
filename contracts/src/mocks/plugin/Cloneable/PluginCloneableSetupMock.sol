@@ -22,10 +22,8 @@ contract PluginCloneableSetupMockBuild1 is PluginSetup {
         address _dao,
         bytes memory
     ) external override returns (address plugin, PreparedSetupData memory preparedSetupData) {
-        plugin = createERC1967Proxy(
-            pluginBase,
-            abi.encodeCall(PluginCloneableMockBuild1.initialize, (IDAO(_dao)))
-        ); // TODO createClone(pluginBase, _dao); is missing! See task OS-794 and OS-675.
+        bytes memory initData = abi.encodeCall(PluginCloneableMockBuild1.initialize, (IDAO(_dao)));
+        plugin = createERC1967Proxy(pluginBase, initData); // TODO createClone(pluginBase, initData); is missing! See task OS-794 and OS-675.
         preparedSetupData.helpers = mockHelpers(1);
         preparedSetupData.permissions = mockPermissions(0, 1, PermissionLib.Operation.Grant);
     }
@@ -57,12 +55,10 @@ contract PluginCloneableSetupMockBuild2 is PluginSetup {
         address _dao,
         bytes memory
     ) external override returns (address plugin, PreparedSetupData memory preparedSetupData) {
-        plugin = createERC1967Proxy(
-            pluginBase,
-            abi.encodeCall(PluginCloneableMockBuild1.initialize, (IDAO(_dao)))
-        ); // TODO createClone(pluginBase, _dao); is missing! See task OS-794 and OS-675.
-        preparedSetupData.helpers = mockHelpers(1);
-        preparedSetupData.permissions = mockPermissions(0, 1, PermissionLib.Operation.Grant);
+        bytes memory initData = abi.encodeCall(PluginCloneableMockBuild2.initialize, (IDAO(_dao)));
+        plugin = createERC1967Proxy(pluginBase, initData); // TODO createClone(pluginBase, initData); is missing! See task OS-794 and OS-675.
+        preparedSetupData.helpers = mockHelpers(2);
+        preparedSetupData.permissions = mockPermissions(0, 2, PermissionLib.Operation.Grant);
     }
 
     /// @inheritdoc IPluginSetup
@@ -71,7 +67,7 @@ contract PluginCloneableSetupMockBuild2 is PluginSetup {
         SetupPayload calldata _payload
     ) external pure override returns (PermissionLib.MultiTargetPermission[] memory permissions) {
         (_dao, _payload);
-        permissions = mockPermissions(0, 1, PermissionLib.Operation.Revoke);
+        permissions = mockPermissions(0, 2, PermissionLib.Operation.Revoke);
     }
 
     /// @inheritdoc IPluginSetup

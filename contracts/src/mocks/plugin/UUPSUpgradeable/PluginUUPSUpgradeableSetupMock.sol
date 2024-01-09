@@ -22,10 +22,11 @@ contract PluginUUPSUpgradeableSetupMockBuild1 is PluginSetup {
         address _dao,
         bytes memory
     ) public virtual override returns (address plugin, PreparedSetupData memory preparedSetupData) {
-        plugin = createERC1967Proxy(
-            pluginBase,
-            abi.encodeCall(PluginUUPSUpgradeableMockBuild1.initialize, (IDAO(_dao)))
+        bytes memory initData = abi.encodeCall(
+            PluginUUPSUpgradeableMockBuild1.initialize,
+            (IDAO(_dao))
         );
+        plugin = createERC1967Proxy(pluginBase, initData);
         preparedSetupData.helpers = mockHelpers(1);
         preparedSetupData.permissions = mockPermissions(0, 1, PermissionLib.Operation.Grant);
     }
@@ -57,10 +58,11 @@ contract PluginUUPSUpgradeableSetupMockBuild2 is PluginSetup {
         address _dao,
         bytes memory
     ) external override returns (address plugin, PreparedSetupData memory preparedSetupData) {
-        plugin = createERC1967Proxy(
-            pluginBase,
-            abi.encodeCall(PluginUUPSUpgradeableMockBuild2.initialize, (IDAO(_dao)))
+        bytes memory initData = abi.encodeCall(
+            PluginUUPSUpgradeableMockBuild2.initialize,
+            (IDAO(_dao))
         );
+        plugin = createERC1967Proxy(pluginBase, initData);
         preparedSetupData.helpers = mockHelpers(2);
         preparedSetupData.permissions = mockPermissions(0, 2, PermissionLib.Operation.Grant);
     }
@@ -116,10 +118,11 @@ contract PluginUUPSUpgradeableSetupMockBuild3 is PluginSetup {
         address _dao,
         bytes memory
     ) external returns (address plugin, PreparedSetupData memory preparedSetupData) {
-        plugin = createERC1967Proxy(
-            pluginBase,
-            abi.encodeCall(PluginUUPSUpgradeableMockBuild3.initialize, (IDAO(_dao)))
+        bytes memory initData = abi.encodeCall(
+            PluginUUPSUpgradeableMockBuild3.initialize,
+            (IDAO(_dao))
         );
+        plugin = createERC1967Proxy(pluginBase, initData);
         preparedSetupData.helpers = mockHelpers(3);
         preparedSetupData.permissions = mockPermissions(0, 3, PermissionLib.Operation.Grant);
     }
