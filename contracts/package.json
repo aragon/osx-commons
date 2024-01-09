@@ -47,7 +47,7 @@
     "@openzeppelin/contracts-upgradeable": "4.9.5"
   },
   "files": [
-    "{auth,dao,governance,permission,plugin,utils}/**/*.sol"
+    "{dao,governance,permission,plugin,utils}/**/*.sol"
   ],
   "keywords": [
     "blockchain",

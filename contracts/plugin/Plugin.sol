@@ -6,7 +6,7 @@ import {ERC165} from "@openzeppelin/contracts/utils/introspection/ERC165.sol";
 
 import {IProtocolVersion} from "../utils/versioning/IProtocolVersion.sol";
 import {ProtocolVersion} from "../utils/versioning/ProtocolVersion.sol";
-import {DaoAuthorizable} from "../auth/DaoAuthorizable.sol";
+import {DaoAuthorizable} from "../permission/auth/DaoAuthorizable.sol";
 import {IDAO} from "../dao/IDAO.sol";
 import {IPlugin} from "./IPlugin.sol";
 
