@@ -7,27 +7,12 @@ import {config as dotenvConfig} from 'dotenv';
 import {ethers} from 'ethers';
 import 'hardhat-deploy';
 import 'hardhat-gas-reporter';
-import {TASK_COMPILE_SOLIDITY_GET_SOURCE_PATHS} from 'hardhat/builtin-tasks/task-names';
-import {extendEnvironment, HardhatUserConfig, subtask} from 'hardhat/config';
+import {extendEnvironment, HardhatUserConfig} from 'hardhat/config';
 import {HardhatRuntimeEnvironment} from 'hardhat/types';
 import type {NetworkUserConfig} from 'hardhat/types';
 import {resolve} from 'path';
 import 'solidity-coverage';
 import 'solidity-docgen';
-
-// Adapted from from https://github.com/NomicFoundation/hardhat/issues/776#issuecomment-1713584386
-subtask(TASK_COMPILE_SOLIDITY_GET_SOURCE_PATHS).setAction(
-  async (_, hre, runSuper) => {
-    const paths = await runSuper();
-
-    // Exclude the `node_modules` folder from the source paths.
-    const filteredPaths = paths.filter(
-      (path: string) => !path.includes('node_modules')
-    );
-
-    return filteredPaths;
-  }
-);
 
 const dotenvConfigPath: string = process.env.DOTENV_CONFIG_PATH || '../.env';
 dotenvConfig({path: resolve(__dirname, dotenvConfigPath)});
@@ -187,7 +172,7 @@ const config: HardhatUserConfig = {
   paths: {
     artifacts: './artifacts',
     cache: './cache',
-    sources: '.', // see the modified subtask(TASK_COMPILE_SOLIDITY_GET_SOURCE_PATHS) at the top of the file
+    sources: './src',
     tests: './test',
     deploy: './deploy',
   },
