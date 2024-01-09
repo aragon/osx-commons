@@ -8,7 +8,7 @@ Our smart contracts undergo regular audits.
 
 ### v1.0.0
 
-_This version of the `osx-commons-contracts` has been audit when they were part of the `aragon/osx` repo._
+_Version `1.0.0` of `osx-commons-contracts` has been audit when it was part of the `aragon/osx` repo._
 
 **Halborn**: [link 1](./audits/Halborn_AragonOSx_2023-02-24.pdf), [link 2](https://github.com/HalbornSecurity/PublicReports/blob/b3fe424535dce7ce345f74dc7e6c25e9200e7860/Solidity%20Smart%20Contract%20Audits/Aragon_aragonOS_Smart_Contract_Security_Audit_Report_Halborn_Final.pdf)
 
@@ -18,7 +18,7 @@ _This version of the `osx-commons-contracts` has been audit when they were part 
 
 ### v1.3.0
 
-_This version of the `osx-commons-contracts` has been audit when they were part of the `aragon/osx` repo._
+_Version `1.3.0` of `osx-commons-contracts` has been audit when it was part of the `aragon/osx` repo._
 
 **Code4rena**: [link 1](./audits/Code4rena_AragonOSx_2023-12-12.pdf), [link 2](https://code4rena.com/reports/2023-03-aragon)
 
