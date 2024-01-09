@@ -3,8 +3,8 @@
 /* solhint-disable one-contract-per-file */
 pragma solidity ^0.8.8;
 
-import {PluginUUPSUpgradeable} from "../../../plugin/PluginUUPSUpgradeable.sol";
-import {IDAO} from "../../../dao/IDAO.sol";
+import {PluginUUPSUpgradeable} from "../../plugin/PluginUUPSUpgradeable.sol";
+import {IDAO} from "../../dao/IDAO.sol";
 
 contract PluginUUPSUpgradeableMockBuild1 is PluginUUPSUpgradeable {
     uint256 public state1;

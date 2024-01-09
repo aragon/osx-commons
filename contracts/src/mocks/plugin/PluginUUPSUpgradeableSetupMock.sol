@@ -3,11 +3,11 @@
 /* solhint-disable one-contract-per-file */
 pragma solidity ^0.8.8;
 
-import {PermissionLib} from "../../../permission/PermissionLib.sol";
-import {IPluginSetup} from "../../../plugin/setup/IPluginSetup.sol";
-import {PluginSetup} from "../../../plugin/setup/PluginSetup.sol";
-import {IDAO} from "../../../dao/IDAO.sol";
-import {mockPermissions, mockHelpers} from "../PluginSetupMockData.sol";
+import {PermissionLib} from "../../permission/PermissionLib.sol";
+import {IPluginSetup} from "../../plugin/setup/IPluginSetup.sol";
+import {PluginSetup} from "../../plugin/setup/PluginSetup.sol";
+import {IDAO} from "../../dao/IDAO.sol";
+import {mockPermissions, mockHelpers} from "./PluginSetupMockData.sol";
 import {PluginUUPSUpgradeableMockBuild1, PluginUUPSUpgradeableMockBuild2, PluginUUPSUpgradeableMockBuild3} from "./PluginUUPSUpgradeableMock.sol";
 
 contract PluginUUPSUpgradeableSetupMockBuild1 is PluginSetup {
