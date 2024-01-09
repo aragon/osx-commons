@@ -7,7 +7,7 @@ import {PermissionLib} from "../../../permission/PermissionLib.sol";
 import {IPluginSetup} from "../../../plugin/setup/IPluginSetup.sol";
 import {PluginSetup} from "../../../plugin/setup/PluginSetup.sol";
 import {IDAO} from "../../../dao/IDAO.sol";
-import {mockPermissions, mockHelpers} from "../PluginMockData.sol";
+import {mockPermissions, mockHelpers} from "../PluginSetupMockData.sol";
 import {PluginCloneableMockBuild1, PluginCloneableMockBuild2} from "./PluginCloneableMock.sol";
 
 contract PluginCloneableSetupMockBuild1 is PluginSetup {

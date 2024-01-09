@@ -6,7 +6,7 @@ pragma solidity ^0.8.8;
 import {PermissionLib} from "../../../permission/PermissionLib.sol";
 import {IPluginSetup} from "../../../plugin/setup/IPluginSetup.sol";
 import {PluginSetup} from "../../../plugin/setup/PluginSetup.sol";
-import {mockPermissions, mockHelpers} from "../PluginMockData.sol";
+import {mockPermissions, mockHelpers} from "../PluginSetupMockData.sol";
 import {IDAO} from "../../../dao/IDAO.sol";
 import {PluginMockBuild1} from "./PluginMock.sol";
 
