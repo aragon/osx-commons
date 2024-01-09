@@ -30,7 +30,6 @@ abstract contract PluginSetup is ERC165, IPluginSetup, ProtocolVersion {
     // solhint-disable-next-line no-empty-blocks
     {
         // Empty to have a default implementation for non-upgradeable plugins.
-        // TODO Revert with custom error.
     }
 
     /// @notice A convenience function to create an [ERC-1967](https://eips.ethereum.org/EIPS/eip-1967) proxy contract pointing to an implementation and being associated to a DAO.
