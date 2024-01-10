@@ -1,4 +1,3 @@
-import {PERMISSION_OPERATIONS} from '../utils/constants';
 import {
   Address,
   ByteArray,
