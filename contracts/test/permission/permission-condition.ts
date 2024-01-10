@@ -33,7 +33,7 @@ describe('PermissionCondition', async () => {
 
   describe('ERC-165', async () => {
     it('supports the `ERC-165` standard', async () => {
-      erc165ComplianceTests(condition, deployer);
+      await erc165ComplianceTests(condition, deployer);
     });
 
     it('supports the `IPermissionCondition` interface', async () => {

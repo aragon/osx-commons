@@ -39,7 +39,7 @@ describe('PluginSetup', async () => {
 
   describe('ERC-165', async () => {
     it('supports the `ERC-165` standard', async () => {
-      erc165ComplianceTests(pluginSetup, deployer);
+      await erc165ComplianceTests(pluginSetup, deployer);
     });
 
     it('supports the `IPluginSetup` interface', async () => {

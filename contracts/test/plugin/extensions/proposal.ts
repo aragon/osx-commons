@@ -51,7 +51,7 @@ describe.skip('Proposal', async () => {
 
   describe('ERC-165', async () => {
     it('supports the `ERC-165` standard', async () => {
-      erc165ComplianceTests(contract, deployer);
+      await erc165ComplianceTests(contract, deployer);
     });
 
     it('supports the `IProposal` interface', async () => {
