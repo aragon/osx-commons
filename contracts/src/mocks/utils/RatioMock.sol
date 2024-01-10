@@ -4,7 +4,7 @@ pragma solidity ^0.8.8;
 
 import {RATIO_BASE, _applyRatioCeiled} from "../../utils/math/Ratio.sol";
 
-contract RatioTest {
+contract RatioMock {
     function getRatioBase() public pure returns (uint256) {
         return RATIO_BASE;
     }

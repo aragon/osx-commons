@@ -1,15 +1,15 @@
-import {RatioTest, RatioTest__factory} from '../../../typechain';
+import {RatioMock, RatioMock__factory} from '../../../typechain';
 import {RATIO_BASE, pctToRatio} from '@aragon/osx-commons-sdk';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
 
 describe('Ratio', function () {
-  let ratio: RatioTest;
+  let ratio: RatioMock;
 
   before(async () => {
     const signers = await ethers.getSigners();
-    const RatioTest = new RatioTest__factory(signers[0]);
-    ratio = await RatioTest.deploy();
+    const RatioMock = new RatioMock__factory(signers[0]);
+    ratio = await RatioMock.deploy();
   });
 
   describe('RATIO_BASE', async () => {

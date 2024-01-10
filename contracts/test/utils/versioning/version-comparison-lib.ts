@@ -1,6 +1,6 @@
 import {
-  VersionComparisonLibTest,
-  VersionComparisonLibTest__factory,
+  VersionComparisonLibMock,
+  VersionComparisonLibMock__factory,
 } from '../../../typechain';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
@@ -8,11 +8,11 @@ import {ethers} from 'hardhat';
 type SemVer = [number, number, number];
 
 describe('VersionComparisonLib', function () {
-  let cmp: VersionComparisonLibTest;
+  let cmp: VersionComparisonLibMock;
 
   before(async () => {
     const signers = await ethers.getSigners();
-    cmp = await new VersionComparisonLibTest__factory(signers[0]).deploy();
+    cmp = await new VersionComparisonLibMock__factory(signers[0]).deploy();
   });
 
   describe('eq', async () => {

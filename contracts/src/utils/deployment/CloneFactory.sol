@@ -2,6 +2,8 @@
 
 pragma solidity ^0.8.8;
 
+// TODO will be refactored as part of task OS-794
+
 import {Clones} from "@openzeppelin/contracts/proxy/Clones.sol";
 
 contract CloneFactory {

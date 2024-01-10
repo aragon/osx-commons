@@ -4,7 +4,7 @@ pragma solidity ^0.8.8;
 
 import {VersionComparisonLib} from "../../utils/versioning/VersionComparisonLib.sol";
 
-contract VersionComparisonLibTest {
+contract VersionComparisonLibMock {
     using VersionComparisonLib for uint8[3];
 
     function eq(uint8[3] memory lhs, uint8[3] memory rhs) public pure returns (bool) {

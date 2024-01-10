@@ -46,6 +46,7 @@ contract PluginUUPSUpgradeableSetupMockBuild1 is PluginSetup {
     }
 }
 
+/// @dev DO NOT USE IN PRODUCTION!
 contract PluginUUPSUpgradeableSetupMockBuild2 is PluginSetup {
     address internal pluginBase;
 
