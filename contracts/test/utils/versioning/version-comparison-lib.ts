@@ -11,8 +11,8 @@ describe('VersionComparisonLib', function () {
   let cmp: VersionComparisonLibMock;
 
   before(async () => {
-    const signers = await ethers.getSigners();
-    cmp = await new VersionComparisonLibMock__factory(signers[0]).deploy();
+    const [deployer] = await ethers.getSigners();
+    cmp = await new VersionComparisonLibMock__factory(deployer).deploy();
   });
 
   describe('eq', async () => {

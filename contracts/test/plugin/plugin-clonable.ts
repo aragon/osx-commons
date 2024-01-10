@@ -14,7 +14,7 @@ describe('PluginCloneable', function () {
   let plugin: PluginCloneableMockBuild1;
 
   before(async () => {
-    const deployer = (await ethers.getSigners())[0];
+    const [deployer] = await ethers.getSigners();
     plugin = await new PluginCloneableMockBuild1__factory(deployer).deploy();
   });
 

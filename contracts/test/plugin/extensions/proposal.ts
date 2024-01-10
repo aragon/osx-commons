@@ -15,7 +15,7 @@ describe.skip('Proposal', async () => {
   let contract: Contract; // TODO create ProposalMock
 
   before(async () => {
-    //const deployer = (await ethers.getSigners())[0];
+    //const [deployer] = await ethers.getSigners();
     //contract = await new ProposalMock__factory(deployer).deploy();
   });
 

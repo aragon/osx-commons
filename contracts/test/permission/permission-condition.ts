@@ -15,7 +15,7 @@ describe('PermissionCondition', async () => {
   let condition: PermissionConditionMock;
 
   before(async () => {
-    const deployer = (await ethers.getSigners())[0];
+    const [deployer] = await ethers.getSigners();
     condition = await new PermissionConditionMock__factory(deployer).deploy();
   });
 

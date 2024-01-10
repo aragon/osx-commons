@@ -14,7 +14,7 @@ describe('Plugin', function () {
   let plugin: PluginMockBuild1;
 
   before(async () => {
-    const deployer = (await ethers.getSigners())[0];
+    const [deployer] = await ethers.getSigners();
     plugin = await new PluginMockBuild1__factory(deployer).deploy(
       ethers.constants.AddressZero
     );

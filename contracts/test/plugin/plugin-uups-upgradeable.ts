@@ -14,7 +14,7 @@ describe('PluginUUPSUpgradeable', function () {
   let plugin: PluginUUPSUpgradeableMockBuild1;
 
   before(async () => {
-    const deployer = (await ethers.getSigners())[0];
+    const [deployer] = await ethers.getSigners();
     plugin = await new PluginUUPSUpgradeableMockBuild1__factory(
       deployer
     ).deploy();

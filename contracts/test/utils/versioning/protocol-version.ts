@@ -14,14 +14,14 @@ export function osxCommonsContractsVersion(): [number, number, number] {
 }
 
 describe('ProtocolVersion', function () {
-  let signers: SignerWithAddress[];
+  let deployer: SignerWithAddress;
   before(async () => {
-    signers = await ethers.getSigners();
+    [deployer] = await ethers.getSigners();
   });
 
   it('returns the current protocol version that must match the semantic version of the `osx-commons-contracts` package', async () => {
     const ProtocolVersionMock = await new ProtocolVersionMock__factory(
-      signers[0]
+      deployer
     ).deploy();
     expect(await ProtocolVersionMock.protocolVersion()).to.deep.equal(
       osxCommonsContractsVersion()
