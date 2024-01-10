@@ -2,6 +2,20 @@ parser: '@typescript-eslint/parser'
 parserOptions:
   project: './contracts/tsconfig.json'
 
+plugins:
+  - eslint-plugin-import
+
+rules:
+  no-unused-vars:
+    - error
+    - vars: all
+      varsIgnorePattern: '^_'
+      args: after-used
+      argsIgnorePattern: '^_'
+
+  # Enforce named exports over default exports in ES6 modules
+  import/named: error
+
 # Custom eslint settings for the contracts can be defined here
 ignorePatterns:
   # directories
@@ -13,6 +27,7 @@ ignorePatterns:
   - cache
   - coverage
   - dist
+  - docs
   - typechain
   # files
   - coverage.json
