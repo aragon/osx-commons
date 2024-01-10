@@ -1,5 +1,4 @@
 import {
-  IERC165__factory,
   IPlugin__factory,
   IProtocolVersion__factory,
   PluginUUPSUpgradeableMockBuild1,

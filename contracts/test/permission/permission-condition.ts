@@ -1,5 +1,4 @@
 import {
-  IERC165__factory,
   IPermissionCondition__factory,
   IProtocolVersion__factory,
   PermissionConditionMock,
