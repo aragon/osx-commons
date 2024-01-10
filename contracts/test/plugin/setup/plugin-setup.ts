@@ -1,24 +1,36 @@
 import {
-  IERC165__factory,
   IPluginSetup__factory,
   IProtocolVersion__factory,
+  PluginSetupMockBuild1,
+  PluginSetupMockBuild1__factory,
 } from '../../../typechain';
+import {erc165ComplianceTests} from '../../helpers';
 import {getInterfaceId} from '@aragon/osx-commons-sdk';
+import {IPluginSetup__factory as IPluginSetup_V1_0_0__factory} from '@aragon/osx-ethers-v1.0.0';
+import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
 import {expect} from 'chai';
-import {Contract} from 'ethers';
+import {ethers} from 'hardhat';
 
-// TODO
-
-describe.skip('IPluginSetup', async () => {
-  it('has the same interface ID as in OSx v1.0.0', async () => {
-    expect(true).to.equal(false);
+describe('IPluginSetup', function () {
+  it('has the same interface ID as its initial version introduced in v1.0.0', async () => {
+    const current = getInterfaceId(IPluginSetup__factory.createInterface());
+    const initial = getInterfaceId(
+      IPluginSetup_V1_0_0__factory.createInterface()
+    );
+    expect(current).to.equal(initial);
   });
 });
 
-describe.skip('PluginSetup', async () => {
-  let contract: Contract; // TODO create ProposalMock
+describe('PluginSetup', async () => {
+  let deployer: SignerWithAddress;
+  let pluginSetup: PluginSetupMockBuild1;
 
-  it('creates ERC1967 proxies', async () => {
+  before(async () => {
+    [deployer] = await ethers.getSigners();
+    pluginSetup = await new PluginSetupMockBuild1__factory(deployer).deploy();
+  });
+
+  it.skip('creates ERC1967 proxies', async () => {
     // TODO this will likely be refactored with task OS-675
     expect(true).to.equal(false);
   });
@@ -26,34 +38,28 @@ describe.skip('PluginSetup', async () => {
   // TODO think about more tests
 
   describe('ERC-165', async () => {
-    it('does not support the empty interface', async () => {
-      expect(await contract.supportsInterface('0xffffffff')).to.be.false;
-    });
-
-    it('supports the `IERC165` interface', async () => {
-      const iface = IERC165__factory.createInterface();
-      expect(await contract.supportsInterface(getInterfaceId(iface))).to.be
-        .true;
+    it('supports the `ERC-165` standard', async () => {
+      erc165ComplianceTests(pluginSetup, deployer);
     });
 
     it('supports the `IPluginSetup` interface', async () => {
       const iface = IPluginSetup__factory.createInterface();
-      expect(await contract.supportsInterface(getInterfaceId(iface))).to.be
+      expect(await pluginSetup.supportsInterface(getInterfaceId(iface))).to.be
         .true;
     });
 
     it('supports the `IProtocolVersion` interface', async () => {
       const iface = IProtocolVersion__factory.createInterface();
-      expect(await contract.supportsInterface(getInterfaceId(iface))).to.be
+      expect(await pluginSetup.supportsInterface(getInterfaceId(iface))).to.be
         .true;
     });
   });
 
-  it('upgrades', async () => {
+  it.skip('upgrades', async () => {
     expect(true).to.equal(false);
   });
 
-  it('can be reinitialized', async () => {
+  it.skip('can be reinitialized', async () => {
     expect(true).to.equal(false);
   });
 });

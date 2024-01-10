@@ -5,7 +5,9 @@ import {
   PermissionConditionMock,
   PermissionConditionMock__factory,
 } from '../../typechain';
+import {erc165ComplianceTests} from '../helpers';
 import {getInterfaceId} from '@aragon/osx-commons-sdk';
+import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
 
@@ -13,9 +15,10 @@ import {ethers} from 'hardhat';
 
 describe('PermissionCondition', async () => {
   let condition: PermissionConditionMock;
+  let deployer: SignerWithAddress;
 
   before(async () => {
-    const [deployer] = await ethers.getSigners();
+    [deployer] = await ethers.getSigners();
     condition = await new PermissionConditionMock__factory(deployer).deploy();
   });
 
@@ -29,14 +32,8 @@ describe('PermissionCondition', async () => {
   });
 
   describe('ERC-165', async () => {
-    it('does not support the empty interface', async () => {
-      expect(await condition.supportsInterface('0xffffffff')).to.be.false;
-    });
-
-    it('supports the `IERC165` interface', async () => {
-      const iface = IERC165__factory.createInterface();
-      expect(await condition.supportsInterface(getInterfaceId(iface))).to.be
-        .true;
+    it('supports the `ERC-165` standard', async () => {
+      erc165ComplianceTests(condition, deployer);
     });
 
     it('supports the `IPermissionCondition` interface', async () => {

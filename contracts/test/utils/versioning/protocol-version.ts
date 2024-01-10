@@ -1,5 +1,10 @@
 import {version} from '../../../package.json';
-import {ProtocolVersionMock__factory} from '../../../typechain';
+import {
+  IProtocolVersion__factory,
+  ProtocolVersionMock__factory,
+} from '../../../typechain';
+import {getInterfaceId} from '@aragon/osx-commons-sdk';
+import {IProtocolVersion__factory as IProtocolVersion_V1_3_0__factory} from '@aragon/osx-ethers-v1.3.0';
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
@@ -12,6 +17,16 @@ export function osxCommonsContractsVersion(): [number, number, number] {
   const semver = trimmedVersion.split('.');
   return [Number(semver[0]), Number(semver[1]), Number(semver[2])];
 }
+
+describe('IProtocolVersion', function () {
+  it('has the same interface ID as its initial version introduced in v1.3.0', async () => {
+    const current = getInterfaceId(IProtocolVersion__factory.createInterface());
+    const initial = getInterfaceId(
+      IProtocolVersion_V1_3_0__factory.createInterface()
+    );
+    expect(current).to.equal(initial);
+  });
+});
 
 describe('ProtocolVersion', function () {
   let deployer: SignerWithAddress;
