@@ -1,6 +1,5 @@
-import {PERMISSION_OPERATIONS} from '../utils/constants';
 import {generateEntityIdFromAddress, generateEntityIdFromBytes} from './ids';
-import {Address, BigInt, Bytes} from '@graphprotocol/graph-ts';
+import {Address, Bytes} from '@graphprotocol/graph-ts';
 
 /**
  * Generates a unique permission ID using the given parameters.

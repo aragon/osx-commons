@@ -1,7 +1,6 @@
 import {generateEntityIdFromAddress, generateEntityIdFromBytes} from './ids';
 import {
   Address,
-  BigInt,
   ByteArray,
   Bytes,
   crypto,
