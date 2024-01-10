@@ -1,4 +1,4 @@
-export const PERMISSION_OPERATIONS = new Map<number, string>()
-  .set(0, 'Grant')
-  .set(1, 'Revoke')
-  .set(2, 'GrantWithCondition');
+export const PERMISSION_OPERATIONS = new Map<i32, string>()
+  .set(1, 'Grant')
+  .set(2, 'Revoke')
+  .set(3, 'GrantWithCondition');
