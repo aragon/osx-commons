@@ -53,9 +53,7 @@ describe('Plugin Permissions ID generation', () => {
       PERMISSION_ID
     );
 
-    const expectedId = `${PLUGIN_PREPARATION_ID}_${PERMISSION_OPERATIONS.get(
-      OPERATION
-    )}_${WHERE_ADDRESS.toHexString()}_${WHO_ADDRESS.toHexString()}_${PERMISSION_ID.toHexString()}`;
+    const expectedId = `${PLUGIN_PREPARATION_ID}_${OPERATION}_${WHERE_ADDRESS.toHexString()}_${WHO_ADDRESS.toHexString()}_${PERMISSION_ID.toHexString()}`;
 
     assert.stringEquals(pluginPermissionEntityId, expectedId);
   });

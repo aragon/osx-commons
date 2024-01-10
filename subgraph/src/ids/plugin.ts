@@ -1,4 +1,4 @@
-import {PERMISSION_OPERATIONS} from '../utils/constants';
+import {generateEntityIdFromAddress, generateEntityIdFromBytes} from './ids';
 import {
   Address,
   ByteArray,
@@ -13,7 +13,7 @@ import {
  * @returns The entity ID as a string.
  */
 export function generatePluginEntityId(plugin: Address): string {
-  return plugin.toHexString();
+  return generateEntityIdFromAddress(plugin);
 }
 
 /**
@@ -23,7 +23,7 @@ export function generatePluginEntityId(plugin: Address): string {
  * @returns A hexadecimal string representation of the provided address.
  */
 export function generatePluginRepoEntityId(pluginRepo: Address): string {
-  return pluginRepo.toHexString();
+  return generateEntityIdFromAddress(pluginRepo);
 }
 
 /**
@@ -33,7 +33,7 @@ export function generatePluginRepoEntityId(pluginRepo: Address): string {
  * @returns A hexadecimal string representation of the provided address.
  */
 export function generatePluginSetupEntityId(pluginSetup: Address): string {
-  return pluginSetup.toHexString();
+  return generateEntityIdFromAddress(pluginSetup);
 }
 
 /**
@@ -56,13 +56,15 @@ export function generatePluginInstallationEntityId(
   );
 
   if (installationIdTupleEncoded) {
-    return Bytes.fromHexString(
-      crypto
-        .keccak256(
-          ByteArray.fromHexString(installationIdTupleEncoded.toHexString())
-        )
-        .toHexString()
-    ).toHexString();
+    return generateEntityIdFromBytes(
+      Bytes.fromHexString(
+        crypto
+          .keccak256(
+            ByteArray.fromHexString(installationIdTupleEncoded.toHexString())
+          )
+          .toHexString()
+      )
+    );
   }
   return null;
 }
@@ -79,8 +81,10 @@ export function generatePluginPreparationEntityId(
   pluginInstallationEntityId: string,
   prepareSetupId: Bytes
 ): string {
-  const ids = [pluginInstallationEntityId, prepareSetupId.toHexString()];
-  return ids.join('_');
+  return [
+    pluginInstallationEntityId,
+    generateEntityIdFromBytes(prepareSetupId),
+  ].join('_');
 }
 
 /**
@@ -94,8 +98,7 @@ export function generatePluginReleaseEntityId(
   pluginRepo: Address,
   release: i32
 ): string {
-  const ids = [generatePluginRepoEntityId(pluginRepo), release.toString()];
-  return ids.join('_');
+  return [generatePluginRepoEntityId(pluginRepo), release.toString()].join('_');
 }
 
 /**
@@ -111,10 +114,9 @@ export function generatePluginVersionEntityId(
   release: i32,
   build: i32
 ): string {
-  const ids = [
+  return [
     generatePluginRepoEntityId(pluginRepo),
     release.toString(),
     build.toString(),
-  ];
-  return ids.join('_');
+  ].join('_');
 }

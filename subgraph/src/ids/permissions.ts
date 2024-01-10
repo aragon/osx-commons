@@ -1,4 +1,4 @@
-import {PERMISSION_OPERATIONS} from '../utils/constants';
+import {generateEntityIdFromAddress, generateEntityIdFromBytes} from './ids';
 import {Address, Bytes} from '@graphprotocol/graph-ts';
 
 /**
@@ -16,13 +16,12 @@ export function generatePermissionEntityId(
   where: Address,
   who: Address
 ): string {
-  const ids = [
-    emittingContract.toHexString(),
-    permissionId.toHexString(),
-    where.toHexString(),
-    who.toHexString(),
-  ];
-  return ids.join('_');
+  return [
+    generateEntityIdFromAddress(emittingContract),
+    generateEntityIdFromBytes(permissionId),
+    generateEntityIdFromAddress(where),
+    generateEntityIdFromAddress(who),
+  ].join('_');
 }
 
 /**
@@ -42,14 +41,11 @@ export function generatePluginPermissionEntityId(
   who: Address,
   permissionId: Bytes
 ): string {
-  const operationId = PERMISSION_OPERATIONS.get(operation);
-  const ids = [
+  return [
     pluginPreparationEntityId,
-    operationId,
-    where.toHexString(),
-    who.toHexString(),
-    permissionId.toHexString(),
-  ];
-
-  return ids.join('_');
+    operation.toString(),
+    generateEntityIdFromAddress(where),
+    generateEntityIdFromAddress(who),
+    generateEntityIdFromBytes(permissionId),
+  ].join('_');
 }
