@@ -4,8 +4,6 @@ pragma solidity ^0.8.8;
 
 import {Addresslist} from "../../../../plugin/extensions/governance/Addresslist.sol";
 
-/// @title AddresslistMock
-/// @author Aragon Association - 2022-2023
 /// @notice A mock addresslist that everyone can add and remove addresses to and from, respectively.
 /// @dev DO NOT USE IN PRODUCTION!
 contract AddresslistMock is Addresslist {
