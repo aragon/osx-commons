@@ -3,7 +3,7 @@ name: Subgraph Publish
 on:
   push:
     tags:
-      - '*'
+      - '*-subgraph'
 
 jobs:
   check_tag:

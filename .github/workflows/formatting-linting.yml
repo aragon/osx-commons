@@ -35,3 +35,6 @@ jobs:
 
       - name: 'Lint subgraph ts and js'
         run: yarn lint:subgraph:ts >> $GITHUB_STEP_SUMMARY
+
+      - name: 'Lint configs ts and js'
+        run: yarn lint:configs:ts >> $GITHUB_STEP_SUMMARY

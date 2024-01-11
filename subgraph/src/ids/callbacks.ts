@@ -1,3 +1,4 @@
+import {generateEntityIdFromAddress, generateEntityIdFromBytes} from './ids';
 import {Address, Bytes} from '@graphprotocol/graph-ts';
 
 /**
@@ -11,6 +12,8 @@ export function generateStandardCallbackEntityId(
   dao: Address,
   interfaceId: Bytes
 ): string {
-  const ids = [dao.toHexString(), interfaceId.toHexString()];
-  return ids.join('_');
+  return [
+    generateEntityIdFromAddress(dao),
+    generateEntityIdFromBytes(interfaceId),
+  ].join('_');
 }

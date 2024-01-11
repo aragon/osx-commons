@@ -1,4 +1,9 @@
 import {bigIntToBytes32} from '../utils/utils';
+import {
+  generateEntityIdFromAddress,
+  generateEntityIdFromBigInt,
+  generateEntityIdFromBytes,
+} from './ids';
 import {Address, BigInt, Bytes} from '@graphprotocol/graph-ts';
 
 /**
@@ -12,8 +17,7 @@ export function generateActionEntityId(
   proposalEntityId: string,
   index: i32
 ): string {
-  const ids = [proposalEntityId, index.toString()];
-  return ids.join('_');
+  return [proposalEntityId, index.toString()].join('_');
 }
 
 /**
@@ -28,8 +32,11 @@ export function generateTransactionActionsProposalEntityId(
   txHash: Bytes,
   logIndex: BigInt
 ): string {
-  const ids = [proposalEntityId, txHash.toHexString(), logIndex.toHexString()];
-  return ids.join('_');
+  return [
+    proposalEntityId,
+    generateEntityIdFromBytes(txHash),
+    generateEntityIdFromBigInt(logIndex),
+  ].join('_');
 }
 
 /**
@@ -42,6 +49,8 @@ export function generateProposalEntityId(
   plugin: Address,
   proposalId: BigInt
 ): string {
-  const ids = [plugin.toHexString(), bigIntToBytes32(proposalId)];
-  return ids.join('_');
+  return [
+    generateEntityIdFromAddress(plugin),
+    bigIntToBytes32(proposalId),
+  ].join('_');
 }

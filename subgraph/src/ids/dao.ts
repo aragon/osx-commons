@@ -1,3 +1,4 @@
+import {generateEntityIdFromAddress} from './ids';
 import {Address} from '@graphprotocol/graph-ts';
 
 /**
@@ -7,7 +8,7 @@ import {Address} from '@graphprotocol/graph-ts';
  * @returns A hexadecimal string representation of the provided DAO address.
  */
 export function generateDaoEntityId(dao: Address): string {
-  return dao.toHexString();
+  return generateEntityIdFromAddress(dao);
 }
 
 // TODO: this is not complete, it will be done in it's own task.

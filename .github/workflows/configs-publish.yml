@@ -1,9 +1,9 @@
-name: SDK Publish
+name: Configs Publish
 
 on:
   push:
     tags:
-      - '*-sdk'
+      - '*-configs'
 
 jobs:
   check_tag:
@@ -11,13 +11,8 @@ jobs:
     with:
       ref: ${{ github.ref }}
 
-  tests:
-    needs: [check_tag]
-    if: ${{ needs.check_tag.outputs.package == 'sdk' }}
-    uses: ./.github/workflows/sdk-tests.yml
-
   publish:
-    needs: [check_tag, tests]
+    needs: [check_tag]
     uses: ./.github/workflows/reusable-publish.yml
     with:
       package: ${{ needs.check_tag.outputs.package }}
