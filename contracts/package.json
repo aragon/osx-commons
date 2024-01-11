@@ -8,7 +8,7 @@
     "url": "https://github.com/aragon"
   },
   "devDependencies": {
-    "@aragon/osx-commons-sdk": "0.0.1-alpha.2",
+    "@aragon/osx-commons-sdk": "0.0.1-alpha.3",
     "@ethersproject/abi": "^5.7.0",
     "@ethersproject/abstract-signer": "^5.7.0",
     "@ethersproject/bignumber": "^5.7.0",

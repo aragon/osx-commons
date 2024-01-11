@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@aragon/osx-commons-sdk@0.0.1-alpha.2":
-  version "0.0.1-alpha.2"
-  resolved "https://registry.yarnpkg.com/@aragon/osx-commons-sdk/-/osx-commons-sdk-0.0.1-alpha.2.tgz#4491276b72981814169d76cfce0a7805ab2f17f3"
-  integrity sha512-Vt71lMowO7WWV1v1MD+1Jcbmd+zqWMrEg1fMK5EbhqJ6IEZ7LlxDj2/13+KGN+M+0TsTtBEPs6WNUnedMYKIWg==
+"@aragon/osx-commons-sdk@0.0.1-alpha.3":
+  version "0.0.1-alpha.3"
+  resolved "https://registry.yarnpkg.com/@aragon/osx-commons-sdk/-/osx-commons-sdk-0.0.1-alpha.3.tgz#c8ca71702cc404f7ad82cc327fb2355807a84801"
+  integrity sha512-7ibaTyNouYiPOQuMYFvfonl4Ts/87XPh2XerrqkdwQAEcdRGEkQjmwAd4XO4cHXC8yJh8u9JCTt604muuRJehA==
   dependencies:
     "@aragon/osx-ethers" "^1.3.0-rc0.4"
     "@aragon/osx-ethers-v1.0.0" "npm:@aragon/osx-ethers@1.2.1"
@@ -1191,9 +1191,9 @@
     undici-types "~5.25.1"
 
 "@types/node@>=13.7.0":
-  version "20.10.6"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.10.6.tgz#a3ec84c22965802bf763da55b2394424f22bfbb5"
-  integrity sha512-Vac8H+NlRNNlAmDfGUP7b5h/KA+AtWIzuXy0E6OyP8f1tCLYAtPvKRRDJjAPqhpCb0t6U2j7/xqAuLEebW2kiw==
+  version "20.11.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.11.0.tgz#8e0b99e70c0c1ade1a86c4a282f7b7ef87c9552f"
+  integrity sha512-o9bjXmDNcF7GbM4CNQpmi+TutCgap/K3w1JyKgxAjqx41zp9qlIAVFi0IhCNsJcXolEqLWhbFbEeL0PvYm4pcQ==
   dependencies:
     undici-types "~5.26.4"
 
@@ -5464,9 +5464,9 @@ web-encoding@1.1.5:
     "@zxing/text-encoding" "0.9.0"
 
 web-streams-polyfill@^3.1.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/web-streams-polyfill/-/web-streams-polyfill-3.2.1.tgz#71c2718c52b45fd49dbeee88634b3a60ceab42a6"
-  integrity sha512-e0MO3wdXWKrLbL0DgGnUV7WHVuw9OUvL4hjgnPkIeEvESk74gAITi5G606JtZPp39cd8HA9VQzCIvA49LpPN5Q==
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/web-streams-polyfill/-/web-streams-polyfill-3.3.2.tgz#32e26522e05128203a7de59519be3c648004343b"
+  integrity sha512-3pRGuxRF5gpuZc0W+EpwQRmCD7gRqcDOMt688KmdlDAgAyaB1XlN0zq2njfDNm44XVdIouE7pZ6GzbdyH47uIQ==
 
 web3-utils@^1.3.6:
   version "1.10.3"
