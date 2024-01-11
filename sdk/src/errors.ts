@@ -1,3 +1,5 @@
+import {ContractTransaction} from '@ethersproject/contracts';
+
 class SdkError extends Error {
   public cause?: Error | string;
   constructor(message: string, cause?: any) {
@@ -355,5 +357,14 @@ export class InvalidTimeoutError extends SdkError {
 export class InvalidPermissionOperationType extends SdkError {
   constructor(cause?: any) {
     super('Invalid permission operation', cause);
+  }
+}
+
+export class EventNotFoundError extends SdkError {
+  constructor(eventName: string, tx: ContractTransaction) {
+    super(
+      `Event "${eventName}" could not be found in transaction ${tx.hash}.`,
+      tx
+    );
   }
 }
