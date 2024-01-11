@@ -171,7 +171,7 @@ describe('AddresslistMock', function () {
       await ethers.provider.send('evm_mine', []);
       expect(await addresslist.addresslistLength()).to.equal(2);
 
-      // try to add signer[1] and signer[2], the latter of which is currently listed
+      // try to add bob and carol, the latter of which is currently listed
       await expect(addresslist.addAddresses([bob.address, carol.address]))
         .to.be.revertedWithCustomError(addresslist, 'InvalidAddresslistUpdate')
         .withArgs(carol.address);
@@ -214,7 +214,7 @@ describe('AddresslistMock', function () {
       await ethers.provider.send('evm_mine', []);
       expect(await addresslist.addresslistLength()).to.equal(2);
 
-      // try to remove signer[1] and signer[2], the latter of which is currently not listed
+      // try to remove bob and carol, the latter of which is currently not listed
       await expect(addresslist.removeAddresses([bob.address, carol.address]))
         .to.be.revertedWithCustomError(addresslist, 'InvalidAddresslistUpdate')
         .withArgs(carol.address);
