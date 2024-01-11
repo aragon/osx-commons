@@ -3,7 +3,6 @@ import {
   generatePluginPermissionEntityId,
   generatePluginPreparationEntityId,
 } from '../../src';
-import {PERMISSION_OPERATIONS} from '../../src/utils/constants';
 import {
   ADDRESS_ZERO,
   ADDRESS_ONE,
