@@ -1,3 +1,4 @@
+import {getAddress} from '@ethersproject/address';
 import {id} from '@ethersproject/hash';
 
 export enum Operation {
@@ -5,6 +6,17 @@ export enum Operation {
   Revoke = 1,
   GrantWithCondition = 2,
 }
+
+const addressZero = getAddress(`0x${'0'.repeat(40)}`); // address(0)
+const addressTwo = getAddress(`0x${'0'.repeat(39)}2`); // address(2)
+const addressLast = getAddress(`0x${'f'.repeat(40)}`); // address(-1)
+
+export const PERMISSION_MANAGER_FLAGS = {
+  UNSET_FLAG: addressZero,
+  ALLOW_FLAG: addressTwo,
+  ANY_ADDR: addressLast,
+  NO_CONDITION: addressZero,
+};
 
 export const DAO_PERMISSIONS = {
   ROOT_PERMISSION_ID: id('ROOT_PERMISSION'),
