@@ -1,23 +1,26 @@
 {
-  "name": "@aragon/osx-commons",
+  "name": "@aragon/osx-commons-contracts",
   "license": "AGPL-3.0-or-later",
   "description": "The Aragon OSx contracts package containing common utilities",
-  "version": "0.0.1",
+  "version": "1.4.0-alpha.2",
   "author": {
     "name": "aragon",
     "url": "https://github.com/aragon"
   },
   "devDependencies": {
+    "@aragon/osx-commons-sdk": "0.0.1-alpha.3",
     "@ethersproject/abi": "^5.7.0",
     "@ethersproject/abstract-signer": "^5.7.0",
     "@ethersproject/bignumber": "^5.7.0",
     "@ethersproject/bytes": "^5.7.0",
+    "@ethersproject/constants": "^5.7.0",
     "@ethersproject/providers": "^5.7.2",
     "@nomicfoundation/hardhat-chai-matchers": "^1.0.6",
     "@nomicfoundation/hardhat-network-helpers": "^1.0.8",
     "@nomicfoundation/hardhat-toolbox": "^2.0.2",
     "@nomiclabs/hardhat-ethers": "^2.2.3",
     "@nomiclabs/hardhat-etherscan": "^3.1.7",
+    "@openzeppelin/hardhat-upgrades": "^1.28.0",
     "@typechain/ethers-v5": "^10.1.1",
     "@typechain/hardhat": "^6.1.4",
     "@types/chai": "^4.3.4",
@@ -30,7 +33,6 @@
     "hardhat": "^2.13.1",
     "hardhat-deploy": "^0.11.26",
     "hardhat-gas-reporter": "^1.0.9",
-    "ipfs-http-client": "^51.0.0",
     "mocha": "^10.1.0",
     "rimraf": "^5.0.5",
     "solidity-coverage": "^0.8.2",
@@ -41,14 +43,11 @@
     "typescript": "5.0.4"
   },
   "dependencies": {
-    "@aragon/osx": "aragon/osx#develop",
-    "@aragon/osx-ethers": "1.3.0",
     "@openzeppelin/contracts": "4.9.5",
-    "@openzeppelin/contracts-upgradeable": "4.9.5",
-    "@openzeppelin/hardhat-upgrades": "^1.28.0"
+    "@openzeppelin/contracts-upgradeable": "4.9.5"
   },
   "files": [
-    "/src"
+    "src/{dao,permission,plugin,utils}/**/*.sol"
   ],
   "keywords": [
     "blockchain",
@@ -71,7 +70,6 @@
     "lint": "yarn lint:sol && yarn lint:ts",
     "lint:sol": "cd .. && yarn run lint:contracts:sol",
     "lint:ts": "cd .. && yarn run lint:contracts:ts",
-    "postinstall": "DOTENV_CONFIG_PATH=../.env.example yarn typechain",
     "test": "hardhat test",
     "typechain": "cross-env TS_NODE_TRANSPILE_ONLY=true hardhat typechain",
     "clean": "rimraf ./artifacts ./cache ./coverage ./types ./coverage.json && yarn typechain",

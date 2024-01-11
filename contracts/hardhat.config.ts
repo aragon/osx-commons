@@ -167,6 +167,7 @@ const config: HardhatUserConfig = {
     src: './contracts',
     coinmarketcap: process.env.COINMARKETCAP_API_KEY,
   },
+
   networks,
   paths: {
     artifacts: './artifacts',

@@ -1,4 +1,5 @@
 import {NetworkDeployment} from './internal';
+import {TIME} from './time';
 import {ProposalMetadata, SupportedNetwork, SupportedVersion} from './types';
 import {activeContractsList} from '@aragon/osx-ethers';
 import {activeContractsList as activeContractsListV1_0_0} from '@aragon/osx-ethers-v1.0.0';
@@ -8,7 +9,7 @@ import {toUtf8Bytes} from '@ethersproject/strings';
 
 /** Timeout that will be applied to operations involving
  * many fetch requests that could take a long time */
-export const MULTI_FETCH_TIMEOUT = 7 * 1000;
+export const MULTI_FETCH_TIMEOUT = 7 * TIME.SECOND_MS;
 
 type GraphqlNetworks =
   | 'mainnet'
