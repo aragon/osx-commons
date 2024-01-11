@@ -1,9 +1,9 @@
 import {id} from '@ethersproject/hash';
 
 export enum Operation {
-  Grant,
-  Revoke,
-  GrantWithCondition,
+  Grant = 0,
+  Revoke = 1,
+  GrantWithCondition = 2,
 }
 
 export const DAO_PERMISSIONS = {

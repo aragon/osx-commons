@@ -1,3 +1,4 @@
+import {EventNotFoundError} from './errors';
 import {ContractTransaction} from 'ethers';
 import {Interface, LogDescription} from 'ethers/lib/utils';
 
@@ -15,7 +16,7 @@ export async function findEvent<T>(tx: ContractTransaction, eventName: string) {
   const event = (receipt.events || []).find(event => event.event === eventName);
 
   if (!event) {
-    throw new Error(`No event found with name "${eventName}".`);
+    throw new EventNotFoundError(eventName, tx);
   }
 
   return event as T;
@@ -39,7 +40,7 @@ export async function findEventTopicLog<T>(
   const topic = iface.getEventTopic(eventName);
   const log = receipt.logs.find(x => x.topics[0] === topic);
   if (!log) {
-    throw new Error(`No logs found for the topic of event "${eventName}".`);
+    throw new EventNotFoundError(eventName, tx);
   }
   return iface.parseLog(log) as LogDescription & (T | LogDescription);
 }
