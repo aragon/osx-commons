@@ -52,9 +52,9 @@ export interface PluginInstallItem {
  * Contains the supported plugin types
  */
 export enum PluginType {
-  UUPS,
-  Cloneable,
-  Constructable,
+  UUPS = 0,
+  Cloneable = 1,
+  Constructable = 2,
 }
 
 export type GasFeeEstimation = {
