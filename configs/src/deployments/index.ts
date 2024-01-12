@@ -2,7 +2,7 @@ import {
   NetworkDeployment,
   NetworkDeploymnets,
   SupportedNetworks,
-  SupportedVerions,
+  SupportedVersions,
 } from '../types';
 import * as arbitrum from './arbitrum.json';
 import * as arbitrumSepolia from './arbitrumSepolia.json';
@@ -52,12 +52,12 @@ export function getNetworkDeployments(
  * Retrieves the network deployment for a specific version.
  *
  * @param {SupportedNetworks} network - The network to retrieve the deployment for.
- * @param {SupportedVerions} version - The version of the deployment.
+ * @param {SupportedVersions} version - The version of the deployment.
  * @return {NetworkDeployment | undefined} The network deployment for the specified version, or undefined if not found.
  */
 export function getNetworkDeploymentForVersion(
   network: SupportedNetworks,
-  version: SupportedVerions
+  version: SupportedVersions
 ): NetworkDeployment | undefined {
   return getNetworkDeployments(network)[version];
 }
@@ -71,7 +71,7 @@ export function getNetworkDeploymentForVersion(
 export function getLatestNetworkDeployment(
   network: SupportedNetworks
 ): NetworkDeployment | undefined {
-  const versions = Object.values(SupportedVerions).reverse();
+  const versions = Object.values(SupportedVersions).reverse();
   for (const version of versions) {
     const deployment = getNetworkDeploymentForVersion(network, version);
     if (deployment) {
