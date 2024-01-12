@@ -71,14 +71,14 @@ export function getNetworkDeploymentForVersion(
 export function getLatestNetworkDeployment(
   network: SupportedNetworks
 ): NetworkDeployment | undefined {
-    const versions = Object.values(SupportedVerions).reverse();
-    for(const version of versions) {
-        const deployment = getNetworkDeploymentForVersion(network, version);
-        if(deployment) {
-            return deployment;
-        }
+  const versions = Object.values(SupportedVerions).reverse();
+  for (const version of versions) {
+    const deployment = getNetworkDeploymentForVersion(network, version);
+    if (deployment) {
+      return deployment;
     }
-    return undefined
+  }
+  return undefined;
 }
 
 export {
