@@ -1,6 +1,6 @@
 import {
   NetworkDeployment,
-  NetworkDeploymnets,
+  NetworkDeployments,
   SupportedNetworks,
   SupportedVersions,
 } from '../types';
@@ -23,7 +23,7 @@ import * as sepolia from './sepolia.json';
  */
 export function getNetworkDeployments(
   network: SupportedNetworks
-): NetworkDeploymnets {
+): NetworkDeployments {
   switch (network) {
     case SupportedNetworks.MAINNET:
       return mainnet;

@@ -37,10 +37,14 @@ export enum SupportedVersions {
   V130 = 'v1.3.0',
 }
 
-export type NetworkDeploymnets = {
+// this type defines the structure of the network deployments
+// for each supported version. the index is the version
+export type NetworkDeployments = {
   [index in SupportedVersions]?: NetworkDeployment;
 };
 
+// this type defines the structure of the network deployment
+// the index is the contract name
 export type NetworkDeployment = {
   [index: string]: ContractDeployment;
 };
