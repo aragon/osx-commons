@@ -7,8 +7,8 @@ describe('Ratio', function () {
   let ratio: RatioMock;
 
   before(async () => {
-    const signers = await ethers.getSigners();
-    const RatioMock = new RatioMock__factory(signers[0]);
+    const [deployer] = await ethers.getSigners();
+    const RatioMock = new RatioMock__factory(deployer);
     ratio = await RatioMock.deploy();
   });
 

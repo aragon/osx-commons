@@ -1,7 +1,5 @@
 import {expect} from 'chai';
 
-// TODO
-
 describe.skip('DaoAuthorizable', async () => {
   // TODO abstract these common tests that also apply to `DaoAuthorizableUpgradeable`
   it('initializes the DAO', async () => {

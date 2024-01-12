@@ -11,8 +11,8 @@ describe('VersionComparisonLib', function () {
   let cmp: VersionComparisonLibMock;
 
   before(async () => {
-    const signers = await ethers.getSigners();
-    cmp = await new VersionComparisonLibMock__factory(signers[0]).deploy();
+    const [deployer] = await ethers.getSigners();
+    cmp = await new VersionComparisonLibMock__factory(deployer).deploy();
   });
 
   describe('eq', async () => {
@@ -107,7 +107,7 @@ describe('VersionComparisonLib', function () {
 });
 
 async function eqChecks(
-  func: (lhs: SemVer, rhs: SemVer) => Promise<boolean>,
+  func: (_lhs: SemVer, _rhs: SemVer) => Promise<boolean>,
   expected: boolean
 ) {
   const results: boolean[] = await Promise.all([
@@ -129,7 +129,7 @@ async function eqChecks(
 }
 
 async function ltChecks(
-  func: (lhs: SemVer, rhs: SemVer) => Promise<boolean>,
+  func: (_lhs: SemVer, _rhs: SemVer) => Promise<boolean>,
   expected: boolean
 ) {
   const results: boolean[] = await Promise.all([
@@ -163,7 +163,7 @@ async function ltChecks(
 }
 
 async function gtChecks(
-  func: (lhs: SemVer, rhs: SemVer) => Promise<boolean>,
+  func: (_lhs: SemVer, _rhs: SemVer) => Promise<boolean>,
   expected: boolean
 ) {
   const results: boolean[] = await Promise.all([

@@ -13,6 +13,7 @@ ignorePatterns:
   - cache
   - coverage
   - dist
+  - docs
   - typechain
   # files
   - coverage.json

@@ -8,6 +8,7 @@ extends:
 
 plugins:
   - '@typescript-eslint'
+  - 'unused-imports'
 
 rules:
   '@typescript-eslint/no-floating-promises':
@@ -20,6 +21,8 @@ rules:
     - error
     - argsIgnorePattern: '_'
       varsIgnorePattern: '_'
+
+  'unused-imports/no-unused-imports': 'error'
 
 ignorePatterns:
   - '*.log'

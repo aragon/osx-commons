@@ -1,7 +1,5 @@
 import {expect} from 'chai';
 
-// TODO
-
 describe.skip('auth', async () => {
   it('reverts with an error if the permission is not granted', async () => {
     expect(true).to.equal(false);

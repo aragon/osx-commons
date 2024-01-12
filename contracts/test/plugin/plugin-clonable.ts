@@ -1,20 +1,22 @@
 import {
-  IERC165__factory,
   IPlugin__factory,
   IProtocolVersion__factory,
   PluginCloneableMockBuild1,
   PluginCloneableMockBuild1__factory,
 } from '../../typechain';
+import {erc165ComplianceTests} from '../helpers';
 import {osxCommonsContractsVersion} from '../utils/versioning/protocol-version';
 import {getInterfaceId, PluginType} from '@aragon/osx-commons-sdk';
+import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
 
 describe('PluginCloneable', function () {
+  let deployer: SignerWithAddress;
   let plugin: PluginCloneableMockBuild1;
 
   before(async () => {
-    const deployer = (await ethers.getSigners())[0];
+    [deployer] = await ethers.getSigners();
     plugin = await new PluginCloneableMockBuild1__factory(deployer).deploy();
   });
 
@@ -25,13 +27,8 @@ describe('PluginCloneable', function () {
   });
 
   describe('ERC-165', async () => {
-    it('does not support the empty interface', async () => {
-      expect(await plugin.supportsInterface('0xffffffff')).to.be.false;
-    });
-
-    it('supports the `IERC165` interface', async () => {
-      const iface = IERC165__factory.createInterface();
-      expect(await plugin.supportsInterface(getInterfaceId(iface))).to.be.true;
+    it('supports the `ERC-165` standard', async () => {
+      await erc165ComplianceTests(plugin, deployer);
     });
 
     it('supports the `IPlugin` interface', async () => {
