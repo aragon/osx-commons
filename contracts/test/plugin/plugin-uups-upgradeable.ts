@@ -1,4 +1,5 @@
 import {
+  IERC1822ProxiableUpgradeable__factory,
   IPlugin__factory,
   IProtocolVersion__factory,
   PluginUUPSUpgradeableMockBuild1,
@@ -40,6 +41,11 @@ describe('PluginUUPSUpgradeable', function () {
 
     it('supports the `IProtocolVersion` interface', async () => {
       const iface = IProtocolVersion__factory.createInterface();
+      expect(await plugin.supportsInterface(getInterfaceId(iface))).to.be.true;
+    });
+
+    it('supports the `IERC1822ProxiableUpgradeable` interface', async () => {
+      const iface = IERC1822ProxiableUpgradeable__factory.createInterface();
       expect(await plugin.supportsInterface(getInterfaceId(iface))).to.be.true;
     });
   });
