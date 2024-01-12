@@ -2,16 +2,16 @@
 
 pragma solidity ^0.8.8;
 
-import {Initializable} from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import {IDAO} from "../../dao/IDAO.sol";
 
 contract DAOMock is IDAO {
     function hasPermission(
-        address /* _where */,
-        address /* _who */,
-        bytes32 /* _permissionId */,
-        bytes memory /* _data */
+        address _where,
+        address _who,
+        bytes32 _permissionId,
+        bytes memory _data
     ) public pure override returns (bool) {
+        (_where, _who, _permissionId, _data);
         return true;
     }
 
@@ -19,9 +19,13 @@ contract DAOMock is IDAO {
         return address(0);
     }
 
-    function setTrustedForwarder(address /* _trustedForwarder */) external override {}
+    function setTrustedForwarder(address _trustedForwarder) external pure override {
+        (_trustedForwarder);
+    }
 
-    function setMetadata(bytes calldata /* _metadata */) external override {}
+    function setMetadata(bytes calldata _metadata) external pure override {
+        (_metadata);
+    }
 
     function execute(
         bytes32 callId,
@@ -32,17 +36,22 @@ contract DAOMock is IDAO {
     }
 
     function deposit(
-        address /* _token */,
-        uint256 /* _amount */,
-        string calldata /* _reference */
-    ) external payable override {}
+        address _token,
+        uint256 _amount,
+        string calldata _reference
+    ) external payable override {
+        (_token, _amount, _reference);
+    }
 
-    function setSignatureValidator(address /* _signatureValidator */) external override {}
+    function setSignatureValidator(address _signatureValidator) external pure override {
+        (_signatureValidator);
+    }
 
     function isValidSignature(
-        bytes32 /* _hash */,
-        bytes memory /* _signature */
+        bytes32 _hash,
+        bytes memory _signature
     ) external pure override returns (bytes4) {
+        (_hash, _signature);
         return 0x0;
     }
 
@@ -50,5 +59,7 @@ contract DAOMock is IDAO {
         bytes4 _interfaceId,
         bytes4 _callbackSelector,
         bytes4 _magicNumber
-    ) external override {}
+    ) external pure override {
+        (_interfaceId, _callbackSelector, _magicNumber);
+    }
 }
