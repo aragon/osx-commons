@@ -33,8 +33,8 @@ export enum SupportedNetworks {
 // the entries in this enum has to be in order from
 // oldest to newest so that getLatestNetworkVersion() works as expected
 export enum SupportedVersions {
-  V100 = 'v1.0.0',
-  V130 = 'v1.3.0',
+  V1_0_0 = 'v1.0.0',
+  V1_3_0 = 'v1.3.0',
 }
 
 // this type defines the structure of the network deployments
