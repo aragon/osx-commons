@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.8;
 
-import {ProtocolVersion} from "../../utils/versioning/ProtocolVersion.sol";
+import {ProtocolVersion} from "../../../utils/versioning/ProtocolVersion.sol";
 
 /// @title ProtocolVersionMock
 // solhint-disable-next-line no-empty-blocks

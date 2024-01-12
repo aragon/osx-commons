@@ -38,7 +38,7 @@ export type ProposalData = {
   allowFailureMap: BigNumberish;
 };
 
-describe.only('Proposal', async () => {
+describe('Proposal', async () => {
   let alice: SignerWithAddress;
   let bob: SignerWithAddress;
   let exampleData: ProposalData;

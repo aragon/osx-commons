@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.8;
 
-import {RATIO_BASE, _applyRatioCeiled} from "../../utils/math/Ratio.sol";
+import {RATIO_BASE, _applyRatioCeiled} from "../../../utils/math/Ratio.sol";
 
 contract RatioMock {
     function getRatioBase() public pure returns (uint256) {
