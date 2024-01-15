@@ -3,10 +3,10 @@ import {expect} from 'chai';
 import {BigNumber} from 'ethers';
 import {ethers} from 'hardhat';
 
-describe.only('Bitmap', function () {
-  let bitmapMock: BitmapMock;
+describe('Bitmap', function () {
   const bitmapWithZerosOnly = ethers.constants.Zero;
   const bitmapWithOnesOnly = ethers.constants.MaxUint256;
+  let bitmapMock: BitmapMock;
 
   before(async () => {
     const [deployer] = await ethers.getSigners();
