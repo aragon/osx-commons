@@ -82,7 +82,6 @@ describe.only('Bitmap', function () {
 
     it.skip('reverts for out of bounds indexes', async () => {
       // TODO Fix these failing tests in task OS-955
-
       await expect(bitmapMock.hasBit(bitmapWithOnesOnly, 256)).to.be.reverted;
       await expect(bitmapMock.hasBit(bitmapWithOnesOnly, 257)).to.be.reverted;
     });
