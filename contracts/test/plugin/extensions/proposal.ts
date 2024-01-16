@@ -22,7 +22,7 @@ import {expect} from 'chai';
 import {BigNumberish, BytesLike} from 'ethers';
 import {ethers} from 'hardhat';
 
-describe.skip('IProposal', function () {
+describe('IProposal', function () {
   it('has the same interface ID as its initial version introduced in v1.0.0', async () => {
     const current = getInterfaceId(IProposal__factory.createInterface());
     const initial = getInterfaceId(IProposal_V1_0_0__factory.createInterface());
