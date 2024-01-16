@@ -9,22 +9,48 @@ import * as mumbai from './deployments/mumbai.json';
 import * as polygon from './deployments/polygon.json';
 import * as sepolia from './deployments/sepolia.json';
 import * as networks from './networks.json';
-import {NetworkConfigs} from './types';
+import {NetworkConfigs, NetworkDeployment} from './types';
 
+export * from './utils';
 export * from './types';
 
 const networksTyped: NetworkConfigs = networks;
+const arbitrumTyped: NetworkDeployment = arbitrum;
+const arbitrumSepoliaTyped: NetworkDeployment = arbitrumSepolia;
+const baseGoerliTyped: NetworkDeployment = baseGoerli;
+const baseMainnetTyped: NetworkDeployment = baseMainnet;
+const baseSepoliaTyped: NetworkDeployment = baseSepolia;
+const goerliTyped: NetworkDeployment = goerli;
+const mainnetTyped: NetworkDeployment = mainnet;
+const mumbaiTyped: NetworkDeployment = mumbai;
+const polygonTyped: NetworkDeployment = polygon;
+const sepoliaTyped: NetworkDeployment = sepolia;
+
+const contracts = {
+  mainnet: mainnetTyped,
+  goerli: goerliTyped,
+  sepolia: sepoliaTyped,
+  polygon: polygonTyped,
+  mumbai: mumbaiTyped,
+  baseMainnet: baseMainnetTyped,
+  baseGoerli: baseGoerliTyped,
+  baseSepolia: baseSepoliaTyped,
+  arbitrum: arbitrumTyped,
+  arbitrumGoerli: arbitrumTyped,
+  arbitrumSepolia: arbitrumSepoliaTyped,
+};
 
 export {
+  contracts,
   networksTyped as networks,
-  arbitrum,
-  arbitrumSepolia,
-  baseGoerli,
-  baseMainnet,
-  baseSepolia,
-  goerli,
-  mainnet,
-  mumbai,
-  polygon,
-  sepolia,
+  arbitrumTyped as arbitrum,
+  arbitrumSepoliaTyped as arbitrumSepolia,
+  baseGoerliTyped as baseGoerli,
+  baseMainnetTyped as baseMainnet,
+  baseSepoliaTyped as baseSepolia,
+  goerliTyped as goerli,
+  mainnetTyped as mainnet,
+  mumbaiTyped as mumbai,
+  polygonTyped as polygon,
+  sepoliaTyped as sepolia,
 };
