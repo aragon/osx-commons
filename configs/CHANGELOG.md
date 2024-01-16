@@ -22,17 +22,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Deployment JSON files for:
-    - Mainnet
-    - Goerli
-    - Sepolia
-    - Polygon
-    - Mumbai
-    - Base Mainnet
-    - Base Goerli
-    - Base Sepolia
-    - Arbitrum
-    - Arbitrum Sepolia
+  - Mainnet
+  - Goerli
+  - Sepolia
+  - Polygon
+  - Mumbai
+  - Base Mainnet
+  - Base Goerli
+  - Base Sepolia
+  - Arbitrum
+  - Arbitrum Sepolia
 - JSON file with the supported networks and the default rpcs, chainIds, and aliases on other services.
 - Typing for the Network Configs.
-
-
