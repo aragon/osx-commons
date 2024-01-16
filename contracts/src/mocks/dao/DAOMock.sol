@@ -5,14 +5,20 @@ pragma solidity ^0.8.8;
 import {IDAO} from "../../dao/IDAO.sol";
 
 contract DAOMock is IDAO {
+    bool public hasPermissionReturnValueMock;
+
+    function setHasPermissionReturnValueMock(bool _hasPermissionReturnValueMock) external {
+        hasPermissionReturnValueMock = _hasPermissionReturnValueMock;
+    }
+
     function hasPermission(
         address _where,
         address _who,
         bytes32 _permissionId,
         bytes memory _data
-    ) public pure override returns (bool) {
+    ) external view override returns (bool) {
         (_where, _who, _permissionId, _data);
-        return true;
+        return hasPermissionReturnValueMock;
     }
 
     function getTrustedForwarder() public pure override returns (address) {

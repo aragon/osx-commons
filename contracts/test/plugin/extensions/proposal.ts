@@ -46,14 +46,6 @@ describe('Proposal', async () => {
 
 describe('ProposalUpgradeable', async () => {
   proposalBaseTests(proposalUpgradeableFixture);
-
-  it.skip('upgrades', async () => {
-    expect(true).to.equal(false);
-  });
-
-  it.skip('can be reinitialized', async () => {
-    expect(true).to.equal(false);
-  });
 });
 
 // Contains tests for functionality common for `ProposalMock` and `ProposalUpgradeableMock` to avoid duplication.
