@@ -2,17 +2,6 @@
 
 pragma solidity ^0.8.8;
 
-/// @notice Increments an unsigned integer by one without checking the result for overflow errors (using safe math).
-/// @param i The number to be incremented.
-/// @return The number incremented by one.
-/// @custom:security-contact sirt@aragon.org
-function _uncheckedIncrement(uint256 i) pure returns (uint256) {
-    unchecked {
-        ++i;
-    }
-    return i;
-}
-
 /// @notice Adds two unsigned integers without checking the result for overflow errors (using safe math).
 /// @param a The first summand.
 /// @param b The second summand.
