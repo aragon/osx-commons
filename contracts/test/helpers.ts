@@ -4,7 +4,7 @@ import {defaultAbiCoder} from '@ethersproject/abi';
 import {Provider} from '@ethersproject/providers';
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
 import {expect} from 'chai';
-import {Contract, ethers} from 'ethers';
+import {Contract} from 'ethers';
 
 export async function erc165ComplianceTests(
   contract: Contract,
