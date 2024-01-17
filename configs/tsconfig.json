@@ -2,7 +2,10 @@
   // see https://www.typescriptlang.org/tsconfig to better understand tsconfigs
   "compilerOptions": {
     "module": "esnext",
-    "lib": ["dom", "esnext"],
+    "lib": [
+      "dom",
+      "esnext"
+    ],
     "target": "es2018",
     "importHelpers": true,
     // output .d.ts declaration files for consumers
@@ -32,5 +35,9 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true
   },
-  "include": ["src", "types"]
+  "include": [
+    "src",
+    "types",
+    "test"
+  ],
 }
