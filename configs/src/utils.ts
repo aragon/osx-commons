@@ -2,7 +2,7 @@ import {networks} from '.';
 import {SupportedNetworks, SupportedAliases} from './types';
 
 /**
- *
+ * Returns the network alias
  *
  * @export
  * @param {SupportedNetworks} network
@@ -16,7 +16,7 @@ export function getNetworkAlias(
   return networks[network].aliases[alias] || network;
 }
 /**
- *
+ * Returns the network name from the alias
  *
  * @export
  * @param {string} alias
@@ -27,6 +27,10 @@ export function getNetworkNameFromAlias(
   alias: string,
   aliasName: SupportedAliases
 ): SupportedNetworks | undefined {
-  const supportedNetworks = Object.keys(networks) as SupportedNetworks[];
-  return supportedNetworks.find(n => networks[n].aliases[aliasName] === alias);
+  const networkNames = Object.keys(networks) as SupportedNetworks[];
+  return networkNames.find(
+    networkName =>
+      networks[networkName].aliases[aliasName] === alias ||
+      networkName === alias
+  );
 }

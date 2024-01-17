@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Typed deployments
 - `contracts` object with all contracts
 - `getNetworkAlias` function
+- `getNetworkNameFromAlias` function
 
 ## v0.0.2
 

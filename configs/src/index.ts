@@ -26,6 +26,7 @@ const mumbaiTyped: NetworkDeployment = mumbai;
 const polygonTyped: NetworkDeployment = polygon;
 const sepoliaTyped: NetworkDeployment = sepolia;
 
+
 const contracts = {
   mainnet: mainnetTyped,
   goerli: goerliTyped,
