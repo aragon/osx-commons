@@ -8,24 +8,15 @@ import {IProtocolVersion} from "../../utils/versioning/IProtocolVersion.sol";
 import {ProtocolVersion} from "../../utils/versioning/ProtocolVersion.sol";
 import {IPluginSetup} from "./IPluginSetup.sol";
 
-/// @title PluginSetup
+/// @title PluginUUPSUpgradeableSetup
 /// @author Aragon Association - 2022-2023
 /// @notice An abstract contract that developers have to inherit from to write the setup of a plugin.
 /// @custom:security-contact sirt@aragon.org
-abstract contract PluginSetup is ERC165, IPluginSetup, ProtocolVersion {
-    /// @notice Thrown when attempting to prepare an update on a non-upgradeable plugin.
-    error NonUpgradeablePlugin();
-
-    /// @inheritdoc IPluginSetup
-    /// @dev Since the plugin is not upgradeable, this function reverts.
-    function prepareUpdate(
-        address _dao,
-        uint16 _fromBuild,
-        SetupPayload calldata _payload
-    ) external pure returns (bytes memory, PreparedSetupData memory) {
-        (_dao, _fromBuild, _payload);
-        revert NonUpgradeablePlugin();
-    }
+abstract contract PluginUUPSUpgradeableSetup is ERC165, IPluginSetup, ProtocolVersion {
+    /// @notice Thrown when an update is not available, for example, if this is the initial build.
+    /// @param fromBuild The build number to update from.
+    /// @param thisBuild The build number of this setup to update to.
+    error InvalidUpdatePath(uint16 fromBuild, uint16 thisBuild);
 
     /// @notice Checks if this or the parent contract supports an interface by its ID.
     /// @param _interfaceId The ID of the interface.

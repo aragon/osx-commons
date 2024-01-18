@@ -42,13 +42,13 @@ interface IPluginSetup {
 
     /// @notice Prepares the update of a plugin.
     /// @param _dao The address of the updating DAO.
-    /// @param _currentBuild The build number of the plugin to update from.
+    /// @param _fromBuild The build number of the plugin to update from.
     /// @param _payload The relevant data necessary for the `prepareUpdate`. See above.
     /// @return initData The initialization data to be passed to upgradeable contracts when the update is applied in the `PluginSetupProcessor`.
     /// @return preparedSetupData The deployed plugin's relevant data which consists of helpers and permissions.
     function prepareUpdate(
         address _dao,
-        uint16 _currentBuild,
+        uint16 _fromBuild,
         SetupPayload calldata _payload
     ) external returns (bytes memory initData, PreparedSetupData memory preparedSetupData);
 

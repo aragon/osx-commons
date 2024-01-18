@@ -24,7 +24,7 @@ contract PluginSetupMockBuild1 is PluginSetup {
     function prepareInstallation(
         address _dao,
         bytes memory
-    ) external override returns (address plugin, PreparedSetupData memory preparedSetupData) {
+    ) external returns (address plugin, PreparedSetupData memory preparedSetupData) {
         plugin = address(new PluginMockBuild1(IDAO(_dao)));
         preparedSetupData.helpers = mockHelpers(1);
         preparedSetupData.permissions = mockPermissions(0, 1, PermissionLib.Operation.Grant);
@@ -34,13 +34,13 @@ contract PluginSetupMockBuild1 is PluginSetup {
     function prepareUninstallation(
         address _dao,
         SetupPayload calldata _payload
-    ) external pure override returns (PermissionLib.MultiTargetPermission[] memory permissions) {
+    ) external pure returns (PermissionLib.MultiTargetPermission[] memory permissions) {
         (_dao, _payload);
         permissions = mockPermissions(0, 1, PermissionLib.Operation.Revoke);
     }
 
     /// @inheritdoc IPluginSetup
-    function implementation() external view override returns (address) {
+    function implementation() external view returns (address) {
         return address(pluginBase);
     }
 }
