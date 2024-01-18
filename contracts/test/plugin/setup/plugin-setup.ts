@@ -4,7 +4,6 @@ import {
   PluginCloneableSetupMockBuild1,
   PluginCloneableSetupMockBuild1__factory,
   PluginUUPSUpgradeableMockBuild1,
-  PluginUUPSUpgradeableMockBuild1__factory,
   PluginUUPSUpgradeableSetupMockBuild1__factory,
 } from '../../../typechain';
 import {erc165ComplianceTests} from '../../helpers';
