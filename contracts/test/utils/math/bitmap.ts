@@ -26,8 +26,6 @@ describe('Bitmap', function () {
     });
 
     it('returns correct values for a bitmap composed of zeros only', async () => {
-      const bitmapWithZerosOnly = 0;
-
       for (let index = 0; index < 256; index++) {
         expect(await bitmapMock.hasBit(bitmapWithZerosOnly, index)).to.be.false;
       }
