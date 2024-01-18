@@ -40,6 +40,6 @@ abstract contract PluginUUPSUpgradeableSetup is ERC165, IPluginSetup, ProtocolVe
 
     /// @inheritdoc IPluginSetup
     function implementation() public view returns (address) {
-        return implementation_;
+        return IMPLEMENTATION_;
     }
 }
