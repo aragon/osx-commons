@@ -44,8 +44,6 @@ describe('PluginSetup', async () => {
     expect(true).to.equal(false);
   });
 
-  // TODO think about more tests
-
   describe('ERC-165', async () => {
     it('supports the `ERC-165` standard', async () => {
       await erc165ComplianceTests(pluginSetup, deployer);
@@ -62,13 +60,5 @@ describe('PluginSetup', async () => {
       expect(await pluginSetup.supportsInterface(getInterfaceId(iface))).to.be
         .true;
     });
-  });
-
-  it.skip('upgrades', async () => {
-    expect(true).to.equal(false);
-  });
-
-  it.skip('can be reinitialized', async () => {
-    expect(true).to.equal(false);
   });
 });

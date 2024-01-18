@@ -49,7 +49,7 @@ describe('ProposalUpgradeable', async () => {
 });
 
 // Contains tests for functionality common for `ProposalMock` and `ProposalUpgradeableMock` to avoid duplication.
-function proposalBaseTests(fixture: () => Promise<ProposalFixtureInput>) {
+function proposalBaseTests(fixture: () => Promise<ProposalFixtureResult>) {
   it('counts proposals', async () => {
     const {alice, bob, proposalMock, exampleData} = await loadFixture(fixture);
 
@@ -253,7 +253,7 @@ async function baseFixture(): Promise<BaseFixtureInput> {
   return {alice, bob, daoMock, exampleData};
 }
 
-type ProposalFixtureInput = {
+type ProposalFixtureResult = {
   proposalMock: ProposalMock | ProposalUpgradeableMock;
   alice: SignerWithAddress;
   bob: SignerWithAddress;
@@ -261,7 +261,7 @@ type ProposalFixtureInput = {
   exampleData: ProposalData;
 };
 
-async function proposalFixture(): Promise<ProposalFixtureInput> {
+async function proposalFixture(): Promise<ProposalFixtureResult> {
   const {alice, bob, daoMock, exampleData} = await baseFixture();
 
   const proposalMock = await new ProposalMock__factory(alice).deploy();
@@ -269,7 +269,7 @@ async function proposalFixture(): Promise<ProposalFixtureInput> {
   return {alice, bob, proposalMock, daoMock, exampleData};
 }
 
-async function proposalUpgradeableFixture(): Promise<ProposalFixtureInput> {
+async function proposalUpgradeableFixture(): Promise<ProposalFixtureResult> {
   const {alice, bob, daoMock, exampleData} = await baseFixture();
 
   const proposalMock = await new ProposalUpgradeableMock__factory(

@@ -2,16 +2,12 @@
 
 pragma solidity ^0.8.8;
 
-import {PermissionCondition} from "../../permission/condition/PermissionCondition.sol";
+import {PermissionConditionUpgradeable} from "../../../permission/condition/PermissionConditionUpgradeable.sol";
 
-/// @notice A mock permission condition that can be set to permit or deny every call.
+/// @notice A mock permission condition that can be set to permit or deny every call and be upgraded by everyone.
 /// @dev DO NOT USE IN PRODUCTION!
-contract PermissionConditionMock is PermissionCondition {
+contract PermissionConditionUpgradeableMock is PermissionConditionUpgradeable {
     bool public answer;
-
-    constructor() {
-        answer = true;
-    }
 
     function setAnswer(bool _answer) external {
         answer = _answer;
