@@ -10,13 +10,23 @@ import {IPluginSetup} from "./IPluginSetup.sol";
 
 /// @title PluginUUPSUpgradeableSetup
 /// @author Aragon Association - 2022-2023
-/// @notice An abstract contract that developers have to inherit from to write the setup of a plugin.
+/// @notice An abstract contract to inherit from to implement the plugin setup for `PluginUUPSUpgradeable` plugins being deployed via the UUPS pattern (see [ERC-1822](https://eips.ethereum.org/EIPS/eip-1822)).
 /// @custom:security-contact sirt@aragon.org
 abstract contract PluginUUPSUpgradeableSetup is ERC165, IPluginSetup, ProtocolVersion {
+    /// @notice The address of the plugin implementation contract for initial block explorer verification
+    /// and to create [ERC-1967](https://eips.ethereum.org/EIPS/eip-1967) UUPS proxies from.
+    address internal immutable implementation_;
+
     /// @notice Thrown when an update is not available, for example, if this is the initial build.
     /// @param fromBuild The build number to update from.
     /// @param thisBuild The build number of this setup to update to.
     error InvalidUpdatePath(uint16 fromBuild, uint16 thisBuild);
+
+    /// @notice The contract constructor, that setting the plugin implementation contract.
+    /// @param _implementation The address of the plugin implementation contract.
+    constructor(address _implementation) {
+        implementation_ = _implementation;
+    }
 
     /// @notice Checks if this or the parent contract supports an interface by its ID.
     /// @param _interfaceId The ID of the interface.
@@ -26,5 +36,10 @@ abstract contract PluginUUPSUpgradeableSetup is ERC165, IPluginSetup, ProtocolVe
             _interfaceId == type(IPluginSetup).interfaceId ||
             _interfaceId == type(IProtocolVersion).interfaceId ||
             super.supportsInterface(_interfaceId);
+    }
+
+    /// @inheritdoc IPluginSetup
+    function implementation() public view returns (address) {
+        return implementation_;
     }
 }

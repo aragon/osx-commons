@@ -14,11 +14,7 @@ import {PluginMockBuild1} from "./PluginMock.sol";
 /// v1.1 (Release 1, Build 1)
 /// @dev DO NOT USE IN PRODUCTION!
 contract PluginSetupMockBuild1 is PluginSetup {
-    address internal pluginBase;
-
-    constructor() {
-        pluginBase = address(new PluginMockBuild1(IDAO(address(0))));
-    }
+    constructor() PluginSetup(address(new PluginMockBuild1(IDAO(address(0))))) {}
 
     /// @inheritdoc IPluginSetup
     function prepareInstallation(
@@ -37,10 +33,5 @@ contract PluginSetupMockBuild1 is PluginSetup {
     ) external pure returns (PermissionLib.MultiTargetPermission[] memory permissions) {
         (_dao, _payload);
         permissions = mockPermissions(0, 1, PermissionLib.Operation.Revoke);
-    }
-
-    /// @inheritdoc IPluginSetup
-    function implementation() external view returns (address) {
-        return address(pluginBase);
     }
 }

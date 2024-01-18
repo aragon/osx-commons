@@ -17,11 +17,7 @@ import {PluginCloneableMockBuild1, PluginCloneableMockBuild2} from "./PluginClon
 contract PluginCloneableSetupMockBuild1 is PluginSetup {
     using ProxyLib for address;
 
-    address internal pluginBase;
-
-    constructor() {
-        pluginBase = address(new PluginCloneableMockBuild1());
-    }
+    constructor() PluginSetup(address(new PluginCloneableMockBuild1())) {}
 
     /// @inheritdoc IPluginSetup
     function prepareInstallation(
@@ -29,7 +25,7 @@ contract PluginCloneableSetupMockBuild1 is PluginSetup {
         bytes memory
     ) external returns (address plugin, PreparedSetupData memory preparedSetupData) {
         bytes memory initData = abi.encodeCall(PluginCloneableMockBuild1.initialize, (IDAO(_dao)));
-        plugin = pluginBase.deployMinimalProxy(initData);
+        plugin = implementation().deployMinimalProxy(initData);
         preparedSetupData.helpers = mockHelpers(1);
         preparedSetupData.permissions = mockPermissions(0, 1, PermissionLib.Operation.Grant);
     }
@@ -42,11 +38,6 @@ contract PluginCloneableSetupMockBuild1 is PluginSetup {
         (_dao, _payload);
         permissions = mockPermissions(0, 1, PermissionLib.Operation.Revoke);
     }
-
-    /// @inheritdoc IPluginSetup
-    function implementation() external view returns (address) {
-        return address(pluginBase);
-    }
 }
 
 /// @notice A mock plugin setup of a cloneable plugin to be deployed via the minimal proxy pattern.
@@ -55,11 +46,7 @@ contract PluginCloneableSetupMockBuild1 is PluginSetup {
 contract PluginCloneableSetupMockBuild2 is PluginSetup {
     using ProxyLib for address;
 
-    address internal pluginBase;
-
-    constructor() {
-        pluginBase = address(new PluginCloneableMockBuild2());
-    }
+    constructor() PluginSetup(address(new PluginCloneableMockBuild2())) {}
 
     /// @inheritdoc IPluginSetup
     function prepareInstallation(
@@ -67,7 +54,7 @@ contract PluginCloneableSetupMockBuild2 is PluginSetup {
         bytes memory
     ) external returns (address plugin, PreparedSetupData memory preparedSetupData) {
         bytes memory initData = abi.encodeCall(PluginCloneableMockBuild2.initialize, (IDAO(_dao)));
-        plugin = pluginBase.deployMinimalProxy(initData);
+        plugin = implementation().deployMinimalProxy(initData);
         preparedSetupData.helpers = mockHelpers(2);
         preparedSetupData.permissions = mockPermissions(0, 2, PermissionLib.Operation.Grant);
     }
@@ -79,10 +66,5 @@ contract PluginCloneableSetupMockBuild2 is PluginSetup {
     ) external pure returns (PermissionLib.MultiTargetPermission[] memory permissions) {
         (_dao, _payload);
         permissions = mockPermissions(0, 2, PermissionLib.Operation.Revoke);
-    }
-
-    /// @inheritdoc IPluginSetup
-    function implementation() external view returns (address) {
-        return address(pluginBase);
     }
 }

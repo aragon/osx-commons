@@ -10,11 +10,22 @@ import {IPluginSetup} from "./IPluginSetup.sol";
 
 /// @title PluginSetup
 /// @author Aragon Association - 2022-2023
-/// @notice An abstract contract that developers have to inherit from to write the setup of a plugin.
+/// @notice An abstract contract to inherit from to implement the plugin setup for plugins of
+/// - `Plugin` type being deployed via the `new` keyword
+/// - `PluginCloneable` type being deployed via the minimal proxy pattern (see [ERC-1167](https://eips.ethereum.org/EIPS/eip-1167)).
 /// @custom:security-contact sirt@aragon.org
 abstract contract PluginSetup is ERC165, IPluginSetup, ProtocolVersion {
+    /// @notice The address of the plugin implementation contract for initial block explorer verification and, in the case of `PluginClonable` implementations, to create [ERC-1167](https://eips.ethereum.org/EIPS/eip-1167) clones from.
+    address internal immutable implementation_;
+
     /// @notice Thrown when attempting to prepare an update on a non-upgradeable plugin.
     error NonUpgradeablePlugin();
+
+    /// @notice The contract constructor, that setting the plugin implementation contract.
+    /// @param _implementation The address of the plugin implementation contract.
+    constructor(address _implementation) {
+        implementation_ = _implementation;
+    }
 
     /// @inheritdoc IPluginSetup
     /// @dev Since the plugin is not upgradeable, this function reverts.
@@ -35,5 +46,10 @@ abstract contract PluginSetup is ERC165, IPluginSetup, ProtocolVersion {
             _interfaceId == type(IPluginSetup).interfaceId ||
             _interfaceId == type(IProtocolVersion).interfaceId ||
             super.supportsInterface(_interfaceId);
+    }
+
+    /// @inheritdoc IPluginSetup
+    function implementation() public view returns (address) {
+        return implementation_;
     }
 }

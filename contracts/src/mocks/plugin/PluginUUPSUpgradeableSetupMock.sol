@@ -17,11 +17,7 @@ import {PluginUUPSUpgradeableMockBuild1, PluginUUPSUpgradeableMockBuild2, Plugin
 contract PluginUUPSUpgradeableSetupMockBuild1 is PluginUUPSUpgradeableSetup {
     using ProxyLib for address;
 
-    address internal pluginBase;
-
-    constructor() {
-        pluginBase = address(new PluginUUPSUpgradeableMockBuild1());
-    }
+    constructor() PluginUUPSUpgradeableSetup(address(new PluginUUPSUpgradeableMockBuild1())) {}
 
     /// @inheritdoc IPluginSetup
     function prepareInstallation(
@@ -32,7 +28,7 @@ contract PluginUUPSUpgradeableSetupMockBuild1 is PluginUUPSUpgradeableSetup {
             PluginUUPSUpgradeableMockBuild1.initialize,
             (IDAO(_dao))
         );
-        plugin = pluginBase.deployUUPSProxy(initData);
+        plugin = implementation().deployUUPSProxy(initData);
         preparedSetupData.helpers = mockHelpers(1);
         preparedSetupData.permissions = mockPermissions(0, 1, PermissionLib.Operation.Grant);
     }
@@ -56,11 +52,6 @@ contract PluginUUPSUpgradeableSetupMockBuild1 is PluginUUPSUpgradeableSetup {
         (_dao, _payload);
         permissions = mockPermissions(0, 1, PermissionLib.Operation.Revoke);
     }
-
-    /// @inheritdoc IPluginSetup
-    function implementation() external view returns (address) {
-        return address(pluginBase);
-    }
 }
 
 /// @notice A mock plugin setup of an upgradeable plugin to be deployed via the UUPS pattern.
@@ -69,11 +60,7 @@ contract PluginUUPSUpgradeableSetupMockBuild1 is PluginUUPSUpgradeableSetup {
 contract PluginUUPSUpgradeableSetupMockBuild2 is PluginUUPSUpgradeableSetup {
     using ProxyLib for address;
 
-    address internal pluginBase;
-
-    constructor() {
-        pluginBase = address(new PluginUUPSUpgradeableMockBuild2());
-    }
+    constructor() PluginUUPSUpgradeableSetup(address(new PluginUUPSUpgradeableMockBuild2())) {}
 
     /// @inheritdoc IPluginSetup
     function prepareInstallation(
@@ -84,7 +71,7 @@ contract PluginUUPSUpgradeableSetupMockBuild2 is PluginUUPSUpgradeableSetup {
             PluginUUPSUpgradeableMockBuild2.initialize,
             (IDAO(_dao))
         );
-        plugin = pluginBase.deployUUPSProxy(initData);
+        plugin = implementation().deployUUPSProxy(initData);
         preparedSetupData.helpers = mockHelpers(2);
         preparedSetupData.permissions = mockPermissions(0, 2, PermissionLib.Operation.Grant);
     }
@@ -113,11 +100,6 @@ contract PluginUUPSUpgradeableSetupMockBuild2 is PluginUUPSUpgradeableSetup {
         (_dao, _payload);
         permissions = mockPermissions(0, 2, PermissionLib.Operation.Revoke);
     }
-
-    /// @inheritdoc IPluginSetup
-    function implementation() external view returns (address) {
-        return address(pluginBase);
-    }
 }
 
 /// @notice A mock plugin setup of an upgradeable plugin to be deployed via the UUPS pattern.
@@ -125,11 +107,7 @@ contract PluginUUPSUpgradeableSetupMockBuild2 is PluginUUPSUpgradeableSetup {
 contract PluginUUPSUpgradeableSetupMockBuild3 is PluginUUPSUpgradeableSetup {
     using ProxyLib for address;
 
-    address internal pluginBase;
-
-    constructor() {
-        pluginBase = address(new PluginUUPSUpgradeableMockBuild3());
-    }
+    constructor() PluginUUPSUpgradeableSetup(address(new PluginUUPSUpgradeableMockBuild3())) {}
 
     /// @inheritdoc IPluginSetup
     function prepareInstallation(
@@ -140,7 +118,7 @@ contract PluginUUPSUpgradeableSetupMockBuild3 is PluginUUPSUpgradeableSetup {
             PluginUUPSUpgradeableMockBuild3.initialize,
             (IDAO(_dao))
         );
-        plugin = pluginBase.deployUUPSProxy(initData);
+        plugin = implementation().deployUUPSProxy(initData);
         preparedSetupData.helpers = mockHelpers(3);
         preparedSetupData.permissions = mockPermissions(0, 3, PermissionLib.Operation.Grant);
     }
@@ -175,10 +153,5 @@ contract PluginUUPSUpgradeableSetupMockBuild3 is PluginUUPSUpgradeableSetup {
     ) external pure returns (PermissionLib.MultiTargetPermission[] memory permissions) {
         (_dao, _payload);
         permissions = mockPermissions(0, 3, PermissionLib.Operation.Revoke);
-    }
-
-    /// @inheritdoc IPluginSetup
-    function implementation() external view returns (address) {
-        return address(pluginBase);
     }
 }

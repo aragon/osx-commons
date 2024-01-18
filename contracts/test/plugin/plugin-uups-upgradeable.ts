@@ -19,6 +19,8 @@ import {expect} from 'chai';
 import {ethers, upgrades} from 'hardhat';
 
 describe('PluginUUPSUpgradeable', function () {
+  const dummyDaoAddress = `0x${'1234'.repeat(10)}`;
+
   let Build1Factory: PluginUUPSUpgradeableMockBuild1__factory;
   let Build2Factory: PluginUUPSUpgradeableMockBuild2__factory;
   let DAOMockFactory: DAOMock__factory;
@@ -54,7 +56,6 @@ describe('PluginUUPSUpgradeable', function () {
       expect(await proxy.state1()).to.equal(0);
 
       // Initialize the clone
-      const dummyDaoAddress = plugin.address;
       await proxy.initialize(dummyDaoAddress);
 
       // Check the clone after initialization
@@ -63,6 +64,23 @@ describe('PluginUUPSUpgradeable', function () {
       ).to.equal(1);
       expect(await proxy.dao()).to.equal(dummyDaoAddress);
       expect(await proxy.state1()).to.equal(1);
+    });
+
+    it('disables initializers for the implementation', async () => {
+      // Deploy the implementation contract
+      const implementation = await new PluginUUPSUpgradeableMockBuild1__factory(
+        deployer
+      ).deploy();
+
+      // Check that the implementation is uninitialized.
+      expect(await implementation.dao()).to.equal(ethers.constants.AddressZero);
+      expect(await implementation.state1()).to.equal(0);
+
+      // Check that the implementation initialization is disabled.
+
+      expect(
+        await getOzInitializedSlotValue(ethers.provider, implementation.address)
+      ).to.equal(255);
     });
   });
 

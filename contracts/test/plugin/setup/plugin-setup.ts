@@ -1,13 +1,17 @@
 import {
   IPluginSetup__factory,
   IProtocolVersion__factory,
-  PluginSetupMockBuild1,
-  PluginSetupMockBuild1__factory,
+  PluginCloneableSetupMockBuild1,
+  PluginCloneableSetupMockBuild1__factory,
+  PluginUUPSUpgradeableMockBuild1,
+  PluginUUPSUpgradeableMockBuild1__factory,
+  PluginUUPSUpgradeableSetupMockBuild1__factory,
 } from '../../../typechain';
 import {erc165ComplianceTests} from '../../helpers';
 import {osxCommonsContractsVersion} from '../../utils/versioning/protocol-version';
 import {getInterfaceId} from '@aragon/osx-commons-sdk';
 import {IPluginSetup__factory as IPluginSetup_V1_0_0__factory} from '@aragon/osx-ethers-v1.0.0';
+import {loadFixture} from '@nomicfoundation/hardhat-network-helpers';
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
@@ -23,42 +27,65 @@ describe('IPluginSetup', function () {
 });
 
 describe('PluginSetup', async () => {
-  let deployer: SignerWithAddress;
-  let pluginSetup: PluginSetupMockBuild1;
+  permissionConditionBaseTests(pluginSetupFixture);
+});
 
-  before(async () => {
-    [deployer] = await ethers.getSigners();
-    pluginSetup = await new PluginSetupMockBuild1__factory(deployer).deploy();
-  });
+describe('PluginUUPSUpgradeableSetup', async () => {
+  permissionConditionBaseTests(pluginUUPSUpgradeableSetupFixture);
+});
 
+function permissionConditionBaseTests(
+  fixture: () => Promise<PluginSetupFixtureInput>
+) {
   describe('ProtocolVersion', async () => {
     it('returns the current protocol version matching the semantic version of the `osx-contracts-commons` package', async () => {
-      expect(await pluginSetup.protocolVersion()).to.deep.equal(
+      const {pluginSetupMock} = await loadFixture(fixture);
+      expect(await pluginSetupMock.protocolVersion()).to.deep.equal(
         osxCommonsContractsVersion()
       );
     });
   });
 
-  it.skip('creates ERC1967 proxies', async () => {
-    // TODO this will likely be refactored with task OS-675
-    expect(true).to.equal(false);
-  });
-
   describe('ERC-165', async () => {
     it('supports the `ERC-165` standard', async () => {
-      await erc165ComplianceTests(pluginSetup, deployer);
+      const {deployer, pluginSetupMock} = await loadFixture(fixture);
+      await erc165ComplianceTests(pluginSetupMock, deployer);
     });
 
     it('supports the `IPluginSetup` interface', async () => {
+      const {pluginSetupMock} = await loadFixture(fixture);
       const iface = IPluginSetup__factory.createInterface();
-      expect(await pluginSetup.supportsInterface(getInterfaceId(iface))).to.be
-        .true;
+      expect(await pluginSetupMock.supportsInterface(getInterfaceId(iface))).to
+        .be.true;
     });
 
     it('supports the `IProtocolVersion` interface', async () => {
+      const {pluginSetupMock} = await loadFixture(fixture);
       const iface = IProtocolVersion__factory.createInterface();
-      expect(await pluginSetup.supportsInterface(getInterfaceId(iface))).to.be
-        .true;
+      expect(await pluginSetupMock.supportsInterface(getInterfaceId(iface))).to
+        .be.true;
     });
   });
-});
+}
+
+type PluginSetupFixtureInput = {
+  deployer: SignerWithAddress;
+  pluginSetupMock:
+    | PluginCloneableSetupMockBuild1
+    | PluginUUPSUpgradeableMockBuild1;
+};
+
+async function pluginSetupFixture(): Promise<PluginSetupFixtureInput> {
+  const [deployer] = await ethers.getSigners();
+  const pluginSetupMock = await new PluginCloneableSetupMockBuild1__factory(
+    deployer
+  ).deploy();
+  return {deployer, pluginSetupMock};
+}
+
+async function pluginUUPSUpgradeableSetupFixture(): Promise<PluginSetupFixtureInput> {
+  const [deployer] = await ethers.getSigners();
+  const pluginSetupMock =
+    await new PluginUUPSUpgradeableSetupMockBuild1__factory(deployer).deploy();
+  return {deployer, pluginSetupMock};
+}
