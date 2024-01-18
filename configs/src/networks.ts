@@ -1,4 +1,9 @@
-import {NetworkConfig, NetworkConfigs, SupportedNetworks} from './types';
+import {
+  NetworkConfig,
+  NetworkConfigs,
+  SupportedAliases,
+  SupportedNetworks,
+} from './types';
 
 /**
  * Retrieves the network configuration for a given supported network.
@@ -66,6 +71,17 @@ export function getNetworkNameByAlias(alias: string): SupportedNetworks | null {
     }
   }
   return null;
+}
+
+export function getNetworkAlias(
+  aliasName: SupportedAliases,
+  network: SupportedNetworks
+): string | null {
+  const networkConfig = getNetwork(network);
+  if (!networkConfig) {
+    return null;
+  }
+  return networkConfig.aliases[aliasName] || network;
 }
 
 export const networks: NetworkConfigs = {

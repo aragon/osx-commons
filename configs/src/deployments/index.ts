@@ -15,6 +15,23 @@ import * as mumbai from './mumbai.json';
 import * as polygon from './polygon.json';
 import * as sepolia from './sepolia.json';
 
+const contracts: {
+  [network in SupportedNetworks]: {
+    [version in SupportedVersions]?: NetworkDeployment;
+  };
+} = {
+  mainnet,
+  goerli,
+  sepolia,
+  polygon,
+  mumbai,
+  baseMainnet,
+  baseGoerli,
+  baseSepolia,
+  arbitrum,
+  arbitrumSepolia,
+};
+
 /**
  * Retrieves the network deployments based on the specified network.
  *
@@ -24,28 +41,7 @@ import * as sepolia from './sepolia.json';
 export function getNetworkDeployments(
   network: SupportedNetworks
 ): NetworkDeployments {
-  switch (network) {
-    case SupportedNetworks.MAINNET:
-      return mainnet;
-    case SupportedNetworks.GOERLI:
-      return goerli;
-    case SupportedNetworks.SEPOLIA:
-      return sepolia;
-    case SupportedNetworks.POLYGON:
-      return polygon;
-    case SupportedNetworks.MUMBAI:
-      return mumbai;
-    case SupportedNetworks.BASE:
-      return baseMainnet;
-    case SupportedNetworks.BASE_GOERLI:
-      return baseGoerli;
-    case SupportedNetworks.BASE_SEPOLIA:
-      return baseSepolia;
-    case SupportedNetworks.ARBITRUM:
-      return arbitrum;
-    case SupportedNetworks.ARBITRUM_SEPOLIA:
-      return arbitrumSepolia;
-  }
+  return contracts[network];
 }
 
 /**
@@ -82,6 +78,7 @@ export function getLatestNetworkDeployment(
 }
 
 export {
+  contracts,
   mainnet,
   goerli,
   sepolia,
