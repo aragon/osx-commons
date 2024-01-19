@@ -49,24 +49,24 @@ export function getNetworkDeployments(
  *
  * @param {SupportedNetworks} network - The network to retrieve the deployment for.
  * @param {SupportedVersions} version - The version of the deployment.
- * @return {NetworkDeployment | undefined} The network deployment for the specified version, or undefined if not found.
+ * @return {NetworkDeployment | null} The network deployment for the specified version, or null if not found.
  */
 export function getNetworkDeploymentForVersion(
   network: SupportedNetworks,
   version: SupportedVersions
-): NetworkDeployment | undefined {
-  return getNetworkDeployments(network)[version];
+): NetworkDeployment | null {
+  return getNetworkDeployments(network)[version] || null;
 }
 
 /**
  * Retrieves the latest network deployment for the specified network.
  *
  * @param {SupportedNetworks} network - The network to retrieve the deployment for.
- * @return {NetworkDeployment | undefined} The latest network deployment, or undefined if not found.
+ * @return {NetworkDeployment | null} The latest network deployment, or null if not found.
  */
 export function getLatestNetworkDeployment(
   network: SupportedNetworks
-): NetworkDeployment | undefined {
+): NetworkDeployment | null {
   const versions = Object.values(SupportedVersions).reverse();
   for (const version of versions) {
     const deployment = getNetworkDeploymentForVersion(network, version);
@@ -74,7 +74,7 @@ export function getLatestNetworkDeployment(
       return deployment;
     }
   }
-  return undefined;
+  return null;
 }
 
 export {

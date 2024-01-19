@@ -16,8 +16,8 @@ export type NetworkConfigs<T = NetworkConfig> = {
 };
 
 export enum SupportedAliases {
-  ETHERS5 = 'ethers5',
-  ETHERS6 = 'ethers6',
+  ETHERS_5 = 'ethers5',
+  ETHERS_6 = 'ethers6',
   ALCHEMY_SUBGRAPHS = 'alchemySubgraphs',
 }
 

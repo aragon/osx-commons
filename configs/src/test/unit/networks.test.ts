@@ -133,12 +133,12 @@ describe('Deployments', () => {
     it('should return the correct value', () => {
       const inputs = [
         {
-          aliasName: SupportedAliases.ETHERS5,
+          aliasName: SupportedAliases.ETHERS_5,
           network: SupportedNetworks.MAINNET,
           expected: 'homestead',
         },
         {
-          aliasName: SupportedAliases.ETHERS6,
+          aliasName: SupportedAliases.ETHERS_6,
           network: SupportedNetworks.POLYGON,
           expected: 'matic',
         },
@@ -148,12 +148,12 @@ describe('Deployments', () => {
           expected: 'matic',
         },
         {
-          aliasName: SupportedAliases.ETHERS5,
+          aliasName: SupportedAliases.ETHERS_5,
           network: SupportedNetworks.BASE,
           expected: SupportedNetworks.BASE,
         },
         {
-          aliasName: SupportedAliases.ETHERS5,
+          aliasName: SupportedAliases.ETHERS_5,
           network: 'otherNetwork' as SupportedNetworks,
           expected: null,
         },

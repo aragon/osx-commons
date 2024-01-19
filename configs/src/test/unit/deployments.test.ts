@@ -1,10 +1,17 @@
 import {
+  arbitrum,
+  arbitrumSepolia,
+  baseGoerli,
   baseMainnet,
+  baseSepolia,
   getLatestNetworkDeployment,
   getNetworkDeploymentForVersion,
   getNetworkDeployments,
+  goerli,
   mainnet,
+  mumbai,
   polygon,
+  sepolia,
 } from '../../deployments';
 import {SupportedNetworks, SupportedVersions} from '../../types';
 
@@ -17,12 +24,44 @@ describe('Deployments', () => {
           expected: mainnet,
         },
         {
+          network: SupportedNetworks.GOERLI,
+          expected: goerli,
+        },
+        {
+          network: SupportedNetworks.SEPOLIA,
+          expected: sepolia,
+        },
+        {
           network: SupportedNetworks.POLYGON,
           expected: polygon,
         },
         {
+          network: SupportedNetworks.MUMBAI,
+          expected: mumbai,
+        },
+        {
           network: SupportedNetworks.BASE,
           expected: baseMainnet,
+        },
+
+        {
+          network: SupportedNetworks.BASE_GOERLI,
+          expected: baseGoerli,
+        },
+
+        {
+          network: SupportedNetworks.BASE_SEPOLIA,
+          expected: baseSepolia,
+        },
+
+        {
+          network: SupportedNetworks.ARBITRUM,
+          expected: arbitrum,
+        },
+
+        {
+          network: SupportedNetworks.ARBITRUM_SEPOLIA,
+          expected: arbitrumSepolia,
         },
       ];
       inputs.map(({network, expected}) => {
@@ -51,15 +90,13 @@ describe('Deployments', () => {
         {
           network: SupportedNetworks.BASE,
           version: SupportedVersions.V1_0_0,
-          expected: undefined,
+          expected: null,
         },
       ];
 
       inputs.map(({network, version, expected}) => {
-        if (!expected) {
-          expect(
-            getNetworkDeploymentForVersion(network, version)
-          ).toBeUndefined();
+        if (expected === null) {
+          expect(getNetworkDeploymentForVersion(network, version)).toBeNull();
           return;
         }
         expect(getNetworkDeploymentForVersion(network, version)).toMatchObject(

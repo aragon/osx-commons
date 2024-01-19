@@ -32,5 +32,5 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true
   },
-  "include": ["src", "types", "test"]
+  "include": ["src", "types"],
 }
