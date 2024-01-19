@@ -11,7 +11,7 @@ import {NetworkConfig, SupportedAliases, SupportedNetworks} from '../../types';
 describe('Deployments', () => {
   describe('getNetwork', () => {
     it('should return the correct value', () => {
-      let inputs: {
+      const inputs: {
         network: SupportedNetworks;
         expected: NetworkConfig | null;
       }[] = Object.values(SupportedNetworks).map(network => {
@@ -91,7 +91,7 @@ describe('Deployments', () => {
   });
   describe('getNetworkNameByAlias', () => {
     it('should return the correct value', () => {
-      let inputs = Object.values(SupportedNetworks)
+      const inputs = Object.values(SupportedNetworks)
         .flatMap(nw => {
           return Object.values(SupportedAliases).map(alias => {
             return {
@@ -109,7 +109,7 @@ describe('Deployments', () => {
   });
   describe('getNetworkAlias', () => {
     it('should return the correct value', () => {
-      let inputs = Object.values(SupportedNetworks).flatMap(nw => {
+      const inputs = Object.values(SupportedNetworks).flatMap(nw => {
         return Object.values(SupportedAliases).map(alias => {
           return {
             aliasName: alias,
