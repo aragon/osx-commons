@@ -6,29 +6,25 @@ import {
   getNetworkNameByAlias,
   networks,
 } from '../../networks';
-import {SupportedAliases, SupportedNetworks} from '../../types';
+import {NetworkConfig, SupportedAliases, SupportedNetworks} from '../../types';
 
 describe('Deployments', () => {
   describe('getNetwork', () => {
     it('should return the correct value', () => {
-      const inputs = [
-        {
-          network: SupportedNetworks.MAINNET,
-          expected: networks.mainnet,
-        },
-        {
-          network: SupportedNetworks.POLYGON,
-          expected: networks.polygon,
-        },
-        {
-          network: SupportedNetworks.BASE,
-          expected: networks.baseMainnet,
-        },
-        {
-          network: '' as SupportedNetworks,
-          expected: null,
-        },
-      ];
+      let inputs: {
+        network: SupportedNetworks;
+        expected: NetworkConfig | null;
+      }[] = Object.values(SupportedNetworks).map(network => {
+        return {
+          network,
+          expected: networks[network],
+        };
+      });
+
+      inputs.push({
+        network: 'otherNetwork' as SupportedNetworks,
+        expected: null,
+      });
 
       inputs.map(({network, expected}) => {
         if (!expected) {
@@ -41,123 +37,87 @@ describe('Deployments', () => {
   });
   describe('getNetworkByNameOrAlias', () => {
     it('should return the correct value', () => {
-      const inputs = [
-        {
-          network: SupportedNetworks.MAINNET,
-          expected: networks.mainnet,
-        },
-        {
-          network: 'homestead',
-          expected: networks.mainnet,
-        },
-        {
-          network: 'maticmum',
-          expected: networks.mumbai,
-        },
-        {
-          network: 'matic',
-          expected: networks.polygon,
-        },
-        {
-          network: 'otherNetwork',
-          expected: null,
-        },
-      ];
+      let inputs = Object.values(SupportedNetworks)
+        .flatMap(nw => {
+          return Object.values(SupportedAliases).map(alias => {
+            return {
+              network: networks[nw].aliases[alias],
+              expected: networks[nw],
+            };
+          });
+        })
+        .filter(({network}) => network !== undefined);
+
+      inputs = inputs.concat(
+        Object.values(SupportedNetworks).map(network => {
+          return {
+            network,
+            expected: networks[network],
+          };
+        })
+      );
 
       inputs.map(({network, expected}) => {
         if (!expected) {
-          expect(getNetworkByNameOrAlias(network)).toBeNull();
+          expect(getNetworkByNameOrAlias(network as string)).toBeNull();
           return;
         }
-        expect(getNetworkByNameOrAlias(network)).toMatchObject(expected);
+        const res = getNetworkByNameOrAlias(network as string);
+        expect(res).toMatchObject(expected);
       });
     });
   });
   describe('getNetworkByAlias', () => {
     it('should return the correct value', () => {
-      const inputs = [
-        {
-          network: 'homestead',
-          expected: networks.mainnet,
-        },
-        {
-          network: 'maticmum',
-          expected: networks.mumbai,
-        },
-        {
-          network: 'matic',
-          expected: networks.polygon,
-        },
-        {
-          network: 'otherNetwork',
-          expected: null,
-        },
-      ];
+      const inputs = Object.values(SupportedNetworks)
+        .flatMap(nw => {
+          return Object.values(SupportedAliases).map(alias => {
+            return {
+              network: networks[nw].aliases[alias],
+              expected: networks[nw],
+            };
+          });
+        })
+        .filter(({network}) => network !== undefined);
 
       inputs.map(({network, expected}) => {
         if (!expected) {
-          expect(getNetworkByAlias(network)).toBeNull();
+          expect(getNetworkByAlias(network as string)).toBeNull();
           return;
         }
-        expect(getNetworkByAlias(network)).toMatchObject(expected);
+        expect(getNetworkByAlias(network as string)).toMatchObject(expected);
       });
     });
   });
   describe('getNetworkNameByAlias', () => {
     it('should return the correct value', () => {
-      const inputs = [
-        {
-          network: 'homestead',
-          expected: SupportedNetworks.MAINNET,
-        },
-        {
-          network: 'maticmum',
-          expected: SupportedNetworks.MUMBAI,
-        },
-        {
-          network: 'matic',
-          expected: SupportedNetworks.POLYGON,
-        },
-        {
-          network: 'otherNetwork',
-          expected: null,
-        },
-      ];
+      let inputs = Object.values(SupportedNetworks)
+        .flatMap(nw => {
+          return Object.values(SupportedAliases).map(alias => {
+            return {
+              network: networks[nw].aliases[alias],
+              expected: nw,
+            };
+          });
+        })
+        .filter(({network}) => network !== undefined);
 
       inputs.map(({network, expected}) => {
-        expect(getNetworkNameByAlias(network)).toBe(expected);
+        expect(getNetworkNameByAlias(network as string)).toBe(expected);
       });
     });
   });
   describe('getNetworkAlias', () => {
     it('should return the correct value', () => {
-      const inputs = [
-        {
-          aliasName: SupportedAliases.ETHERS_5,
-          network: SupportedNetworks.MAINNET,
-          expected: 'homestead',
-        },
-        {
-          aliasName: SupportedAliases.ETHERS_6,
-          network: SupportedNetworks.POLYGON,
-          expected: 'matic',
-        },
-        {
-          aliasName: SupportedAliases.ALCHEMY_SUBGRAPHS,
-          network: SupportedNetworks.POLYGON,
-          expected: 'matic',
-        },
-        {
-          aliasName: SupportedAliases.ETHERS_5,
-          network: SupportedNetworks.BASE,
-          expected: SupportedNetworks.BASE,
-        },
-        {
-          aliasName: SupportedAliases.ETHERS_5,
-          network: 'otherNetwork' as SupportedNetworks,
-          expected: null,
-        },
-      ];
+      let inputs = Object.values(SupportedNetworks).flatMap(nw => {
+        return Object.values(SupportedAliases).map(alias => {
+          return {
+            aliasName: alias,
+            network: nw,
+            expected: networks[nw].aliases[alias] || nw,
+          };
+        });
+      });
       inputs.map(({aliasName, network, expected}) => {
         expect(getNetworkAlias(aliasName, network)).toBe(expected);
       });
