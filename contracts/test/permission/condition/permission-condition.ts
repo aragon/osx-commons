@@ -35,9 +35,7 @@ describe('PermissionConditionUpgradeable', async () => {
   permissionConditionBaseTests(permissionConditionUpgradeableFixture);
 });
 
-function permissionConditionBaseTests(
-  fixture: () => Promise<PermissionConditionFixtureInput>
-) {
+function permissionConditionBaseTests(fixture: () => Promise<FixtureResult>) {
   describe('ProtocolVersion', async () => {
     it('returns the current protocol version matching the semantic version of the `osx-contracts-commons` package', async () => {
       const {conditionMock} = await loadFixture(fixture);
@@ -69,12 +67,12 @@ function permissionConditionBaseTests(
   });
 }
 
-type PermissionConditionFixtureInput = {
+type FixtureResult = {
   deployer: SignerWithAddress;
   conditionMock: PermissionConditionMock | PermissionConditionUpgradeableMock;
 };
 
-async function permissionConditionFixture(): Promise<PermissionConditionFixtureInput> {
+async function permissionConditionFixture(): Promise<FixtureResult> {
   const [deployer] = await ethers.getSigners();
   const conditionMock = await new PermissionConditionMock__factory(
     deployer
@@ -83,7 +81,7 @@ async function permissionConditionFixture(): Promise<PermissionConditionFixtureI
   return {deployer, conditionMock};
 }
 
-async function permissionConditionUpgradeableFixture(): Promise<PermissionConditionFixtureInput> {
+async function permissionConditionUpgradeableFixture(): Promise<FixtureResult> {
   const [deployer] = await ethers.getSigners();
   const conditionMock = await new PermissionConditionUpgradeableMock__factory(
     deployer

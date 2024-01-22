@@ -224,14 +224,14 @@ function proposalBaseTests(fixture: () => Promise<ProposalFixtureResult>) {
   });
 }
 
-type BaseFixtureInput = {
+type BaseFixtureResult = {
   alice: SignerWithAddress;
   bob: SignerWithAddress;
   daoMock: DAOMock;
   exampleData: ProposalData;
 };
 
-async function baseFixture(): Promise<BaseFixtureInput> {
+async function baseFixture(): Promise<BaseFixtureResult> {
   const [alice, bob] = await ethers.getSigners();
   const daoMock = await new DAOMock__factory(alice).deploy();
 
