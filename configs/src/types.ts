@@ -53,9 +53,9 @@ export type NetworkDeployment = {
   [index in Exclude<
     ContractNames,
     ContractNames.ENS_REGISTRY
-  >]: ContractDeployment & {
-    [ContractNames.ENS_REGISTRY]?: ContractDeployment;
-  };
+  >]: ContractDeployment;
+} & {
+  [ContractNames.ENS_REGISTRY]?: ContractDeployment;
 };
 
 export type ContractDeployment = {
