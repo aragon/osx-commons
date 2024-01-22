@@ -50,7 +50,10 @@ export type NetworkDeployments = {
 // this type defines the structure of the network deployment
 // the index is the contract name
 export type NetworkDeployment = {
-  [index in ContractNames]: ContractDeployment & {
+  [index in Exclude<
+    ContractNames,
+    ContractNames.ENS_REGISTRY
+  >]: ContractDeployment & {
     ENSRegistry?: ContractDeployment;
   };
 };
@@ -95,4 +98,5 @@ export enum ContractNames {
   MULTISIG_REPO_IMPLEMENTATION = 'MultisigRepoImplementation',
   TOKEN_VOTING_REPO_PROXY = 'TokenVotingRepoProxy',
   TOKEN_VOTING_REPO_IMPLEMENTATION = 'TokenVotingRepoImplementation',
+  ENS_REGISTRY = 'ENSRegistry',
 }
