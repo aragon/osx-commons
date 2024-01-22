@@ -7,15 +7,16 @@ export enum Operation {
   GrantWithCondition = 2,
 }
 
-const addressZero = getAddress(`0x${'0'.repeat(40)}`); // address(0)
-const addressTwo = getAddress(`0x${'0'.repeat(39)}2`); // address(2)
-const addressLast = getAddress(`0x${'f'.repeat(40)}`); // address(-1)
+export const ADDRESS_ZERO = getAddress(`0x${'0'.repeat(40)}`); // address(0)
+export const ADDRESS_ONE = getAddress(`0x${'0'.repeat(39)}1`); // address(1)
+export const ADDRESS_TWO = getAddress(`0x${'0'.repeat(39)}2`); // address(2)
+export const ADDRESS_LAST = getAddress(`0x${'f'.repeat(40)}`); // address(-1)
 
 export const PERMISSION_MANAGER_FLAGS = {
-  UNSET_FLAG: addressZero,
-  ALLOW_FLAG: addressTwo,
-  ANY_ADDR: addressLast,
-  NO_CONDITION: addressZero,
+  UNSET_FLAG: ADDRESS_ZERO,
+  ALLOW_FLAG: ADDRESS_TWO,
+  ANY_ADDR: ADDRESS_LAST,
+  NO_CONDITION: ADDRESS_ZERO,
 };
 
 export const DAO_PERMISSIONS = {
