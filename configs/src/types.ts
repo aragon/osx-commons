@@ -54,7 +54,7 @@ export type NetworkDeployment = {
     ContractNames,
     ContractNames.ENS_REGISTRY
   >]: ContractDeployment & {
-    ENSRegistry?: ContractDeployment;
+    [ContractNames.ENS_REGISTRY]?: ContractDeployment;
   };
 };
 
