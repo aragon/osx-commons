@@ -4,6 +4,8 @@ pragma solidity ^0.8.8;
 
 import {hasBit as _hasBit, flipBit as _flipBit} from "../../../utils/math/BitMap.sol";
 
+/// @notice A mock contract containing functions manipulating bitmaps.
+/// @dev DO NOT USE IN PRODUCTION!
 contract BitmapMock {
     function hasBit(uint256 _bitmap, uint8 _index) public pure returns (bool) {
         return _hasBit(_bitmap, _index);

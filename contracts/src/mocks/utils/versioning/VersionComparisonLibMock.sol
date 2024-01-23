@@ -4,6 +4,8 @@ pragma solidity ^0.8.8;
 
 import {VersionComparisonLib} from "../../../utils/versioning/VersionComparisonLib.sol";
 
+/// @notice A mock contract containing functions to compare semantic version numbers.
+/// @dev DO NOT USE IN PRODUCTION!
 contract VersionComparisonLibMock {
     using VersionComparisonLib for uint8[3];
 

@@ -4,6 +4,8 @@ pragma solidity ^0.8.8;
 
 import {IDAO} from "../../dao/IDAO.sol";
 
+/// @notice A mock DAO that anyone can set permissions in.
+/// @dev DO NOT USE IN PRODUCTION!
 contract DAOMock is IDAO {
     bool public hasPermissionReturnValueMock;
 

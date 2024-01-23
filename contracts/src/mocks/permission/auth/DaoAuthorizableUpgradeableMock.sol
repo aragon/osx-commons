@@ -6,6 +6,7 @@ import {DaoAuthorizableUpgradeable} from "../../../permission/auth/DaoAuthorizab
 import {IDAO} from "../../../dao/IDAO.sol";
 
 /// @notice A mock contract containing a function protected by the `auth` modifier.
+/// @dev DO NOT USE IN PRODUCTION!
 contract DaoAuthorizableUpgradeableMock is DaoAuthorizableUpgradeable {
     bytes32 public constant AUTHORIZED_FUNC_PERMISSION_ID = keccak256("AUTHORIZED_FUNC_PERMISSION");
 

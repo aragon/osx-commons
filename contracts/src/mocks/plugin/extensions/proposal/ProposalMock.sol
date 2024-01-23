@@ -5,6 +5,8 @@ pragma solidity ^0.8.8;
 import {Proposal} from "../../../../plugin/extensions/proposal/Proposal.sol";
 import {IDAO} from "../../../../dao/IDAO.sol";
 
+/// @notice A mock contract containing functions to create and execute proposals.
+/// @dev DO NOT USE IN PRODUCTION!
 contract ProposalMock is Proposal {
     function createProposalId() external returns (uint256 proposalId) {
         proposalId = _createProposalId();

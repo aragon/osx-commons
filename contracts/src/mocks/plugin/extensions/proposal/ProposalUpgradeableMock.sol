@@ -5,6 +5,8 @@ pragma solidity ^0.8.8;
 import {ProposalUpgradeable} from "../../../../plugin/extensions/proposal/ProposalUpgradeable.sol";
 import {IDAO} from "../../../../dao/IDAO.sol";
 
+/// @notice A mock contract containing functions to create and execute proposals as well as storage gaps in inherited contracts to be used in UUPS upgradeable contracts.
+/// @dev DO NOT USE IN PRODUCTION!
 contract ProposalUpgradeableMock is ProposalUpgradeable {
     function createProposalId() external returns (uint256 proposalId) {
         proposalId = _createProposalId();

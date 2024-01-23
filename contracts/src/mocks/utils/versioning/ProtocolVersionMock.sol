@@ -4,7 +4,8 @@ pragma solidity ^0.8.8;
 
 import {ProtocolVersion} from "../../../utils/versioning/ProtocolVersion.sol";
 
-/// @title ProtocolVersionMock
+/// @notice A mock contract returning the OSx protocol version number.
+/// @dev DO NOT USE IN PRODUCTION!
 // solhint-disable-next-line no-empty-blocks
 contract ProtocolVersionMock is ProtocolVersion {
 
