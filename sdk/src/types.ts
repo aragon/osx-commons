@@ -148,6 +148,12 @@ export enum PermissionOperationType {
   GRANT_WITH_CONDITION = 2,
 }
 
+export type SingleTargetPermission = {
+  operation: PermissionOperationType;
+  who: string;
+  permissionId: string;
+};
+
 export type MultiTargetPermission = {
   operation: PermissionOperationType;
   where: string;

@@ -44,22 +44,66 @@ export async function findEventTopicLog<T>(
   }
   return iface.parseLog(log) as LogDescription & (T | LogDescription);
 }
+
+export const CALLBACK_HANDLER_EVENTS = {
+  CallbackReceived: 'CallbackReceived',
+};
+
+export const DAO_EVENTS = {
+  NewURI: 'NewURI',
+};
+
+export const DAO_REGISTRY_EVENTS = {
+  DAORegistered: 'DAORegistered',
+};
+
 export const IPROPOSAL_EVENTS = {
-  PROPOSAL_CREATED: 'ProposalCreated',
-  PROPOSAL_EXECUTED: 'ProposalExecuted',
+  ProposalCreated: 'ProposalCreated',
+  ProposalExecuted: 'ProposalExecuted',
 };
 
 export const IDAO_EVENTS = {
-  METADATA_SET: 'MetadataSet',
-  EXECUTED: 'Executed',
-  DEPOSITED: 'Deposited',
-  STANDARD_CALLBACK_REGISTERED: 'StandardCallbackRegistered',
-  TRUSTED_FORWARDER_SET: 'TrustedForwarderSet',
-  NEW_URI: 'NewURI',
+  MetadataSet: 'MetadataSet',
+  Executed: 'Executed',
+  Deposited: 'Deposited',
+  StandardCallbackRegistered: 'StandardCallbackRegistered',
+  TrustedForwarderSet: 'TrustedForwarderSet',
+  NewURI: 'NewURI',
 };
 
 export const IMEMBERSHIP_EVENTS = {
-  MEMBERS_ADDED: 'MembersAdded',
-  MEMBERS_REMOVED: 'MembersRemoved',
-  MEMBERSHIP_CONTRACT_ANNOUNCED: 'MembershipContractAnnounced',
+  MembersAdded: 'MembersAdded',
+  MembersRemoved: 'MembersRemoved',
+  MembershipContractAnnounced: 'MembershipContractAnnounced',
+};
+
+export const INTERFACE_BASED_REGISTRY_EVENTS = {
+  Registered: 'Registered',
+};
+
+export const PERMISSION_MANAGER = {
+  Granted: 'Granted',
+  Revoked: 'Revoked',
+};
+
+export const PLUGIN_REPO_EVENTS = {
+  VersionCreated: 'VersionCreated',
+};
+
+export const PLUGIN_REPO_REGISTRY_EVENTS = {
+  PluginRepoRegistered: 'PluginRepoRegistered',
+  ReleaseMetadataUpdated: 'ReleaseMetadataUpdated',
+};
+
+export const PLUGIN_SETUP_PROCESSOR_EVENTS = {
+  InstallationPrepared: 'InstallationPrepared',
+  InstallationApplied: 'InstallationApplied',
+  UpdatePrepared: 'UpdatePrepared',
+  UpdateApplied: 'UpdateApplied',
+  UninstallationPrepared: 'UninstallationPrepared',
+  UninstallationApplied: 'UninstallationApplied',
+};
+
+export const UUPS_UPGRADEABLE_EVENTS = {
+  Upgraded: 'Upgraded',
 };

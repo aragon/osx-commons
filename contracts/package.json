@@ -42,7 +42,7 @@
     "tmp-promise": "^3.0.3",
     "ts-node": "^10.9.1",
     "typechain": "^8.3.2",
-    "typescript": "5.0.4"
+    "typescript": "5.2.2"
   },
   "dependencies": {
     "@openzeppelin/contracts": "4.9.5",
