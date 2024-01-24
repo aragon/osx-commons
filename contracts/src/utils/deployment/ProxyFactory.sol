@@ -11,7 +11,7 @@ import {ProxyLib} from "./ProxyLib.sol";
 contract ProxyFactory {
     using ProxyLib for address;
     /// @notice The immutable logic contract address.
-    address public immutable IMPLEMENTATION;
+    address internal immutable IMPLEMENTATION;
 
     /// @notice Emitted when an proxy contract is created.
     /// @param proxy The proxy address.
@@ -39,5 +39,12 @@ contract ProxyFactory {
     function deployMinimalProxy(bytes memory _data) external returns (address proxy) {
         proxy = IMPLEMENTATION.deployMinimalProxy(_data);
         emit ProxyCreated({proxy: proxy});
+    }
+
+    /// @notice Returns the implementation contract address.
+    /// @return The address of the implementation contract.
+    /// @dev The implementation can be cloned via the minimal proxy pattern (see [ERC-1167](https://eips.ethereum.org/EIPS/eip-1167)), or proxied via the UUPS proxy pattern (see [ERC-1822](https://eips.ethereum.org/EIPS/eip-1822)).
+    function implementation() public view returns (address) {
+        return IMPLEMENTATION;
     }
 }
