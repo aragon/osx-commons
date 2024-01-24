@@ -20,3 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - contracts `CloneFactory`
   - libraries `PermissionLib`, `VersionComparisonLib`
   - free functions `auth`, `Proxy`, `BitMap`, `Ratio`, `UncheckedMath`
+
+### Changed
+
+- Replaced `Proxy` and `CloneFactory` by `ProxyLib` and `ProxyFactory`.
