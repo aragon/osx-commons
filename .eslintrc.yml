@@ -31,3 +31,4 @@ ignorePatterns:
   - '.DS_Store'
   - .pnp.*
   - 'node_modules'
+  - '*.config.js'
