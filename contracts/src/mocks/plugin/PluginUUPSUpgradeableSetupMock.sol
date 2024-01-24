@@ -34,17 +34,6 @@ contract PluginUUPSUpgradeableSetupMockBuild1 is PluginUUPSUpgradeableSetup {
     }
 
     /// @inheritdoc IPluginSetup
-    /// @dev Build 1 is the first build so this function reverts.
-    function prepareUpdate(
-        address _dao,
-        uint16 _fromBuild,
-        SetupPayload calldata _payload
-    ) external pure returns (bytes memory, PreparedSetupData memory) {
-        (_dao, _fromBuild, _payload);
-        revert InvalidUpdatePath({fromBuild: 0, thisBuild: 1});
-    }
-
-    /// @inheritdoc IPluginSetup
     function prepareUninstallation(
         address _dao,
         SetupPayload calldata _payload
@@ -81,7 +70,12 @@ contract PluginUUPSUpgradeableSetupMockBuild2 is PluginUUPSUpgradeableSetup {
         address _dao,
         uint16 _fromBuild,
         SetupPayload calldata _payload
-    ) external pure returns (bytes memory initData, PreparedSetupData memory preparedSetupData) {
+    )
+        external
+        pure
+        override
+        returns (bytes memory initData, PreparedSetupData memory preparedSetupData)
+    {
         (_dao, _payload);
 
         // Update from Build 1
@@ -128,7 +122,12 @@ contract PluginUUPSUpgradeableSetupMockBuild3 is PluginUUPSUpgradeableSetup {
         address _dao,
         uint16 _fromBuild,
         SetupPayload calldata _payload
-    ) external pure returns (bytes memory initData, PreparedSetupData memory preparedSetupData) {
+    )
+        external
+        pure
+        override
+        returns (bytes memory initData, PreparedSetupData memory preparedSetupData)
+    {
         (_dao, _payload);
 
         // Update from Build 1

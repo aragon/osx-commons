@@ -28,7 +28,7 @@ abstract contract PluginSetup is ERC165, IPluginSetup, ProtocolVersion {
     }
 
     /// @inheritdoc IPluginSetup
-    /// @dev Since the plugin is not upgradeable, this function reverts.
+    /// @dev Since the underlying plugin is non-upgradeable, this non-virtual function must always revert.
     function prepareUpdate(
         address _dao,
         uint16 _fromBuild,
