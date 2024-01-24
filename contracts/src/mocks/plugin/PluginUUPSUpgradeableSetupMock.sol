@@ -34,6 +34,17 @@ contract PluginUUPSUpgradeableSetupMockBuild1 is PluginUUPSUpgradeableSetup {
     }
 
     /// @inheritdoc IPluginSetup
+    /// @dev Updating to the initial build 1 is not possible because no earlier build exists.
+    function prepareUpdate(
+        address _dao,
+        uint16 _fromBuild,
+        SetupPayload calldata _payload
+    ) external pure returns (bytes memory, PreparedSetupData memory) {
+        (_dao, _fromBuild, _payload);
+        revert InvalidUpdatePath({fromBuild: 0, thisBuild: 1});
+    }
+
+    /// @inheritdoc IPluginSetup
     function prepareUninstallation(
         address _dao,
         SetupPayload calldata _payload

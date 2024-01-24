@@ -28,18 +28,6 @@ abstract contract PluginUUPSUpgradeableSetup is ERC165, IPluginSetup, ProtocolVe
         IMPLEMENTATION_ = _implementation;
     }
 
-    /// @inheritdoc IPluginSetup
-    /// @dev A virtual function being already implemented for the initial build 1.
-    /// It should be overriden in subsequent builds to support updates from previous builds.
-    function prepareUpdate(
-        address _dao,
-        uint16 _fromBuild,
-        SetupPayload calldata _payload
-    ) external pure virtual returns (bytes memory, PreparedSetupData memory) {
-        (_dao, _fromBuild, _payload);
-        revert InvalidUpdatePath({fromBuild: 0, thisBuild: 1});
-    }
-
     /// @notice Checks if this or the parent contract supports an interface by its ID.
     /// @param _interfaceId The ID of the interface.
     /// @return Returns `true` if the interface is supported.
