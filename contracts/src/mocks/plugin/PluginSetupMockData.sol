@@ -13,6 +13,7 @@ error ConflictingValues();
 /// @param rangeEnd The end of the range (that is not included).
 /// @param op The permission operation type.
 /// @return permissions The mock array of permissions.
+/// @dev DO NOT USE IN PRODUCTION!
 function mockPermissions(
     uint160 rangeStart,
     uint160 rangeEnd,
@@ -36,6 +37,7 @@ function mockPermissions(
 /// @notice Creates a mock array of helper addresses of specified length by converting `uint160` values starting from 0 into `address` values.
 /// @param len The length of the helper array.
 /// @return helpers The mock array of helper addresses.
+/// @dev DO NOT USE IN PRODUCTION!
 function mockHelpers(uint160 len) pure returns (address[] memory helpers) {
     helpers = new address[](len);
 

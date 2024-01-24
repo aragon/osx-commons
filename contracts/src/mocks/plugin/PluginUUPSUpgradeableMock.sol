@@ -6,6 +6,9 @@ pragma solidity ^0.8.8;
 import {PluginUUPSUpgradeable} from "../../plugin/PluginUUPSUpgradeable.sol";
 import {IDAO} from "../../dao/IDAO.sol";
 
+/// @notice A mock cloneable plugin to be deployed via the UUPS proxy pattern.
+/// v1.1 (Release 1, Build 1)
+/// @dev DO NOT USE IN PRODUCTION!
 contract PluginUUPSUpgradeableMockBuild1 is PluginUUPSUpgradeable {
     uint256 public state1;
 
@@ -15,6 +18,9 @@ contract PluginUUPSUpgradeableMockBuild1 is PluginUUPSUpgradeable {
     }
 }
 
+/// @notice A mock cloneable plugin to be deployed via the UUPS proxy pattern.
+/// v1.1 (Release 1, Build 2)
+/// @dev DO NOT USE IN PRODUCTION!
 contract PluginUUPSUpgradeableMockBuild2 is PluginUUPSUpgradeable {
     uint256 public state1;
     uint256 public state2;
@@ -32,6 +38,9 @@ contract PluginUUPSUpgradeableMockBuild2 is PluginUUPSUpgradeable {
     }
 }
 
+/// @notice A mock cloneable plugin to be deployed via the UUPS proxy pattern.
+/// v1.1 (Release 1, Build 3)
+/// @dev DO NOT USE IN PRODUCTION!
 contract PluginUUPSUpgradeableMockBuild3 is PluginUUPSUpgradeable {
     uint256 public state1;
     uint256 public state2;

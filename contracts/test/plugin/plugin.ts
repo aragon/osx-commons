@@ -22,9 +22,17 @@ describe('Plugin', function () {
     );
   });
 
-  describe('Plugin Type', async () => {
+  describe('PluginType', async () => {
     it('returns the current protocol version', async () => {
       expect(await plugin.pluginType()).to.equal(PluginType.Constructable);
+    });
+  });
+
+  describe('ProtocolVersion', async () => {
+    it('returns the current protocol version matching the semantic version of the `osx-contracts-commons` package', async () => {
+      expect(await plugin.protocolVersion()).to.deep.equal(
+        osxCommonsContractsVersion()
+      );
     });
   });
 

@@ -10,6 +10,9 @@ import {IDAO} from "../../dao/IDAO.sol";
 import {mockPermissions, mockHelpers} from "./PluginSetupMockData.sol";
 import {PluginMockBuild1} from "./PluginMock.sol";
 
+/// @notice A mock plugin setup of a plugin to be deployed via the `new` keyword.
+/// v1.1 (Release 1, Build 1)
+/// @dev DO NOT USE IN PRODUCTION!
 contract PluginSetupMockBuild1 is PluginSetup {
     address internal pluginBase;
 

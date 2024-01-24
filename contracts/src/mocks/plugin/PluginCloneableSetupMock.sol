@@ -10,6 +10,9 @@ import {IDAO} from "../../dao/IDAO.sol";
 import {mockPermissions, mockHelpers} from "./PluginSetupMockData.sol";
 import {PluginCloneableMockBuild1, PluginCloneableMockBuild2} from "./PluginCloneableMock.sol";
 
+/// @notice A mock plugin setup of a cloneable plugin to be deployed via the minimal proxy pattern.
+/// v1.1 (Release 1, Build 1)
+/// @dev DO NOT USE IN PRODUCTION!
 contract PluginCloneableSetupMockBuild1 is PluginSetup {
     address internal pluginBase;
 
@@ -43,6 +46,9 @@ contract PluginCloneableSetupMockBuild1 is PluginSetup {
     }
 }
 
+/// @notice A mock plugin setup of a cloneable plugin to be deployed via the minimal proxy pattern.
+/// v1.2 (Release 1, Build 2)
+/// @dev DO NOT USE IN PRODUCTION!
 contract PluginCloneableSetupMockBuild2 is PluginSetup {
     address internal pluginBase;
 

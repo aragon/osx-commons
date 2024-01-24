@@ -10,6 +10,9 @@ import {IDAO} from "../../dao/IDAO.sol";
 import {mockPermissions, mockHelpers} from "./PluginSetupMockData.sol";
 import {PluginUUPSUpgradeableMockBuild1, PluginUUPSUpgradeableMockBuild2, PluginUUPSUpgradeableMockBuild3} from "./PluginUUPSUpgradeableMock.sol";
 
+/// @notice A mock plugin setup of an upgradeable plugin to be deployed via the UUPS pattern.
+/// v1.1 (Release 1, Build 1)
+/// @dev DO NOT USE IN PRODUCTION!
 contract PluginUUPSUpgradeableSetupMockBuild1 is PluginSetup {
     address internal pluginBase;
 
@@ -46,6 +49,8 @@ contract PluginUUPSUpgradeableSetupMockBuild1 is PluginSetup {
     }
 }
 
+/// @notice A mock plugin setup of an upgradeable plugin to be deployed via the UUPS pattern.
+/// v1.2 (Release 1, Build 2)
 /// @dev DO NOT USE IN PRODUCTION!
 contract PluginUUPSUpgradeableSetupMockBuild2 is PluginSetup {
     address internal pluginBase;
@@ -107,6 +112,8 @@ contract PluginUUPSUpgradeableSetupMockBuild2 is PluginSetup {
     }
 }
 
+/// @notice A mock plugin setup of an upgradeable plugin to be deployed via the UUPS pattern.
+/// v1.3 (Release 1, Build 3)
 contract PluginUUPSUpgradeableSetupMockBuild3 is PluginSetup {
     address internal pluginBase;
 

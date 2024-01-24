@@ -1,4 +1,5 @@
 import '@nomicfoundation/hardhat-chai-matchers';
+import '@nomicfoundation/hardhat-network-helpers';
 import '@nomicfoundation/hardhat-toolbox';
 import '@nomiclabs/hardhat-etherscan';
 import '@openzeppelin/hardhat-upgrades';
