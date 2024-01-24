@@ -17,6 +17,8 @@ import {PluginUUPSUpgradeableMockBuild1, PluginUUPSUpgradeableMockBuild2, Plugin
 contract PluginUUPSUpgradeableSetupMockBuild1 is PluginUUPSUpgradeableSetup {
     using ProxyLib for address;
 
+    uint16 internal constant THIS_BUILD = 1;
+
     constructor() PluginUUPSUpgradeableSetup(address(new PluginUUPSUpgradeableMockBuild1())) {}
 
     /// @inheritdoc IPluginSetup
@@ -41,7 +43,7 @@ contract PluginUUPSUpgradeableSetupMockBuild1 is PluginUUPSUpgradeableSetup {
         SetupPayload calldata _payload
     ) external pure returns (bytes memory, PreparedSetupData memory) {
         (_dao, _fromBuild, _payload);
-        revert InvalidUpdatePath({fromBuild: 0, thisBuild: 1});
+        revert InvalidUpdatePath({fromBuild: 0, thisBuild: THIS_BUILD});
     }
 
     /// @inheritdoc IPluginSetup
@@ -50,7 +52,7 @@ contract PluginUUPSUpgradeableSetupMockBuild1 is PluginUUPSUpgradeableSetup {
         SetupPayload calldata _payload
     ) external pure returns (PermissionLib.MultiTargetPermission[] memory permissions) {
         (_dao, _payload);
-        permissions = mockPermissions(0, 1, PermissionLib.Operation.Revoke);
+        permissions = mockPermissions(0, THIS_BUILD, PermissionLib.Operation.Revoke);
     }
 }
 
@@ -59,6 +61,8 @@ contract PluginUUPSUpgradeableSetupMockBuild1 is PluginUUPSUpgradeableSetup {
 /// @dev DO NOT USE IN PRODUCTION!
 contract PluginUUPSUpgradeableSetupMockBuild2 is PluginUUPSUpgradeableSetup {
     using ProxyLib for address;
+
+    uint16 internal constant THIS_BUILD = 2;
 
     constructor() PluginUUPSUpgradeableSetup(address(new PluginUUPSUpgradeableMockBuild2())) {}
 
@@ -72,8 +76,12 @@ contract PluginUUPSUpgradeableSetupMockBuild2 is PluginUUPSUpgradeableSetup {
             (IDAO(_dao))
         );
         plugin = implementation().deployUUPSProxy(initData);
-        preparedSetupData.helpers = mockHelpers(2);
-        preparedSetupData.permissions = mockPermissions(0, 2, PermissionLib.Operation.Grant);
+        preparedSetupData.helpers = mockHelpers(THIS_BUILD);
+        preparedSetupData.permissions = mockPermissions(
+            0,
+            THIS_BUILD,
+            PermissionLib.Operation.Grant
+        );
     }
 
     /// @inheritdoc IPluginSetup
@@ -91,9 +99,13 @@ contract PluginUUPSUpgradeableSetupMockBuild2 is PluginUUPSUpgradeableSetup {
 
         // Update from Build 1
         if (_fromBuild == 1) {
-            preparedSetupData.helpers = mockHelpers(2);
+            preparedSetupData.helpers = mockHelpers(THIS_BUILD);
             initData = abi.encodeCall(PluginUUPSUpgradeableMockBuild2.initializeFrom, (_fromBuild));
-            preparedSetupData.permissions = mockPermissions(1, 2, PermissionLib.Operation.Grant);
+            preparedSetupData.permissions = mockPermissions(
+                _fromBuild,
+                THIS_BUILD,
+                PermissionLib.Operation.Grant
+            );
         }
     }
 
@@ -103,7 +115,7 @@ contract PluginUUPSUpgradeableSetupMockBuild2 is PluginUUPSUpgradeableSetup {
         SetupPayload calldata _payload
     ) external pure returns (PermissionLib.MultiTargetPermission[] memory permissions) {
         (_dao, _payload);
-        permissions = mockPermissions(0, 2, PermissionLib.Operation.Revoke);
+        permissions = mockPermissions(0, THIS_BUILD, PermissionLib.Operation.Revoke);
     }
 }
 
@@ -111,6 +123,8 @@ contract PluginUUPSUpgradeableSetupMockBuild2 is PluginUUPSUpgradeableSetup {
 /// v1.3 (Release 1, Build 3)
 contract PluginUUPSUpgradeableSetupMockBuild3 is PluginUUPSUpgradeableSetup {
     using ProxyLib for address;
+
+    uint16 internal constant THIS_BUILD = 3;
 
     constructor() PluginUUPSUpgradeableSetup(address(new PluginUUPSUpgradeableMockBuild3())) {}
 
@@ -124,11 +138,16 @@ contract PluginUUPSUpgradeableSetupMockBuild3 is PluginUUPSUpgradeableSetup {
             (IDAO(_dao))
         );
         plugin = implementation().deployUUPSProxy(initData);
-        preparedSetupData.helpers = mockHelpers(3);
-        preparedSetupData.permissions = mockPermissions(0, 3, PermissionLib.Operation.Grant);
+        preparedSetupData.helpers = mockHelpers(THIS_BUILD);
+        preparedSetupData.permissions = mockPermissions(
+            0,
+            THIS_BUILD,
+            PermissionLib.Operation.Grant
+        );
     }
 
     /// @inheritdoc IPluginSetup
+
     function prepareUpdate(
         address _dao,
         uint16 _fromBuild,
@@ -143,16 +162,27 @@ contract PluginUUPSUpgradeableSetupMockBuild3 is PluginUUPSUpgradeableSetup {
 
         // Update from Build 1
         if (_fromBuild == 1) {
-            preparedSetupData.helpers = mockHelpers(3);
+            preparedSetupData.helpers = mockHelpers(THIS_BUILD);
             initData = abi.encodeCall(PluginUUPSUpgradeableMockBuild3.initializeFrom, (_fromBuild));
-            preparedSetupData.permissions = mockPermissions(1, 3, PermissionLib.Operation.Grant);
+            preparedSetupData.permissions = mockPermissions(
+                _fromBuild,
+                THIS_BUILD,
+                PermissionLib.Operation.Grant
+            );
+
+            // If this update path should not be supported, you can revert with an error, e.g.,
+            // revert InvalidUpdatePath({fromBuild: _fromBuild, thisBuild: THIS_BUILD});
         }
 
         // Update from Build 2
         if (_fromBuild == 2) {
-            preparedSetupData.helpers = mockHelpers(3);
+            preparedSetupData.helpers = mockHelpers(THIS_BUILD);
             initData = abi.encodeCall(PluginUUPSUpgradeableMockBuild3.initializeFrom, (_fromBuild));
-            preparedSetupData.permissions = mockPermissions(2, 3, PermissionLib.Operation.Grant);
+            preparedSetupData.permissions = mockPermissions(
+                _fromBuild,
+                THIS_BUILD,
+                PermissionLib.Operation.Grant
+            );
         }
     }
 
@@ -162,6 +192,6 @@ contract PluginUUPSUpgradeableSetupMockBuild3 is PluginUUPSUpgradeableSetup {
         SetupPayload calldata _payload
     ) external pure returns (PermissionLib.MultiTargetPermission[] memory permissions) {
         (_dao, _payload);
-        permissions = mockPermissions(0, 3, PermissionLib.Operation.Revoke);
+        permissions = mockPermissions(0, THIS_BUILD, PermissionLib.Operation.Revoke);
     }
 }

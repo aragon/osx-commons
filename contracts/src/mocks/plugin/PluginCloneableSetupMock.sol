@@ -17,6 +17,8 @@ import {PluginCloneableMockBuild1, PluginCloneableMockBuild2} from "./PluginClon
 contract PluginCloneableSetupMockBuild1 is PluginSetup {
     using ProxyLib for address;
 
+    uint16 internal constant THIS_BUILD = 1;
+
     constructor() PluginSetup(address(new PluginCloneableMockBuild1())) {}
 
     /// @inheritdoc IPluginSetup
@@ -26,8 +28,12 @@ contract PluginCloneableSetupMockBuild1 is PluginSetup {
     ) external returns (address plugin, PreparedSetupData memory preparedSetupData) {
         bytes memory initData = abi.encodeCall(PluginCloneableMockBuild1.initialize, (IDAO(_dao)));
         plugin = implementation().deployMinimalProxy(initData);
-        preparedSetupData.helpers = mockHelpers(1);
-        preparedSetupData.permissions = mockPermissions(0, 1, PermissionLib.Operation.Grant);
+        preparedSetupData.helpers = mockHelpers(THIS_BUILD);
+        preparedSetupData.permissions = mockPermissions(
+            0,
+            THIS_BUILD,
+            PermissionLib.Operation.Grant
+        );
     }
 
     /// @inheritdoc IPluginSetup
@@ -36,7 +42,7 @@ contract PluginCloneableSetupMockBuild1 is PluginSetup {
         SetupPayload calldata _payload
     ) external pure returns (PermissionLib.MultiTargetPermission[] memory permissions) {
         (_dao, _payload);
-        permissions = mockPermissions(0, 1, PermissionLib.Operation.Revoke);
+        permissions = mockPermissions(0, THIS_BUILD, PermissionLib.Operation.Revoke);
     }
 }
 
@@ -45,6 +51,8 @@ contract PluginCloneableSetupMockBuild1 is PluginSetup {
 /// @dev DO NOT USE IN PRODUCTION!
 contract PluginCloneableSetupMockBuild2 is PluginSetup {
     using ProxyLib for address;
+
+    uint16 internal constant THIS_BUILD = 2;
 
     constructor() PluginSetup(address(new PluginCloneableMockBuild2())) {}
 
@@ -55,8 +63,12 @@ contract PluginCloneableSetupMockBuild2 is PluginSetup {
     ) external returns (address plugin, PreparedSetupData memory preparedSetupData) {
         bytes memory initData = abi.encodeCall(PluginCloneableMockBuild2.initialize, (IDAO(_dao)));
         plugin = implementation().deployMinimalProxy(initData);
-        preparedSetupData.helpers = mockHelpers(2);
-        preparedSetupData.permissions = mockPermissions(0, 2, PermissionLib.Operation.Grant);
+        preparedSetupData.helpers = mockHelpers(THIS_BUILD);
+        preparedSetupData.permissions = mockPermissions(
+            0,
+            THIS_BUILD,
+            PermissionLib.Operation.Grant
+        );
     }
 
     /// @inheritdoc IPluginSetup
@@ -65,6 +77,6 @@ contract PluginCloneableSetupMockBuild2 is PluginSetup {
         SetupPayload calldata _payload
     ) external pure returns (PermissionLib.MultiTargetPermission[] memory permissions) {
         (_dao, _payload);
-        permissions = mockPermissions(0, 2, PermissionLib.Operation.Revoke);
+        permissions = mockPermissions(0, THIS_BUILD, PermissionLib.Operation.Revoke);
     }
 }

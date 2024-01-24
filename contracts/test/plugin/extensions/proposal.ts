@@ -49,7 +49,7 @@ describe('ProposalUpgradeable', async () => {
 });
 
 // Contains tests for functionality common for `ProposalMock` and `ProposalUpgradeableMock` to avoid duplication.
-function proposalBaseTests(fixture: () => Promise<ProposalFixtureResult>) {
+function proposalBaseTests(fixture: () => Promise<FixtureResult>) {
   it('counts proposals', async () => {
     const {alice, bob, proposalMock, exampleData} = await loadFixture(fixture);
 
@@ -117,7 +117,7 @@ function proposalBaseTests(fixture: () => Promise<ProposalFixtureResult>) {
           exampleData.allowFailureMap
         )
     )
-      .to.emit(proposalMock, IPROPOSAL_EVENTS.PROPOSAL_CREATED)
+      .to.emit(proposalMock, IPROPOSAL_EVENTS.ProposalCreated)
       .withArgs(
         expectedProposalId,
         creator.address,
@@ -168,7 +168,7 @@ function proposalBaseTests(fixture: () => Promise<ProposalFixtureResult>) {
           exampleData.allowFailureMap
         )
     )
-      .to.emit(proposalMock, IPROPOSAL_EVENTS.PROPOSAL_EXECUTED)
+      .to.emit(proposalMock, IPROPOSAL_EVENTS.ProposalExecuted)
       .withArgs(proposalId);
   });
 
@@ -198,7 +198,7 @@ function proposalBaseTests(fixture: () => Promise<ProposalFixtureResult>) {
     const event = await findEventTopicLog<ExecutedEvent>(
       tx,
       IDAO__factory.createInterface(),
-      IDAO_EVENTS.EXECUTED
+      IDAO_EVENTS.Executed
     );
 
     expect(event.args.actor).to.equal(expectedActor);
@@ -253,7 +253,7 @@ async function baseFixture(): Promise<BaseFixtureResult> {
   return {alice, bob, daoMock, exampleData};
 }
 
-type ProposalFixtureResult = {
+type FixtureResult = {
   proposalMock: ProposalMock | ProposalUpgradeableMock;
   alice: SignerWithAddress;
   bob: SignerWithAddress;
@@ -261,7 +261,7 @@ type ProposalFixtureResult = {
   exampleData: ProposalData;
 };
 
-async function proposalFixture(): Promise<ProposalFixtureResult> {
+async function proposalFixture(): Promise<FixtureResult> {
   const {alice, bob, daoMock, exampleData} = await baseFixture();
 
   const proposalMock = await new ProposalMock__factory(alice).deploy();
@@ -269,7 +269,7 @@ async function proposalFixture(): Promise<ProposalFixtureResult> {
   return {alice, bob, proposalMock, daoMock, exampleData};
 }
 
-async function proposalUpgradeableFixture(): Promise<ProposalFixtureResult> {
+async function proposalUpgradeableFixture(): Promise<FixtureResult> {
   const {alice, bob, daoMock, exampleData} = await baseFixture();
 
   const proposalMock = await new ProposalUpgradeableMock__factory(

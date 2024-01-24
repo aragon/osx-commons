@@ -1,15 +1,21 @@
 import {
   IPluginSetup__factory,
+  IPlugin__factory,
   IProtocolVersion__factory,
   PluginCloneableSetupMockBuild1,
   PluginCloneableSetupMockBuild1__factory,
-  PluginUUPSUpgradeableMockBuild1,
+  PluginUUPSUpgradeableSetupMockBuild1,
   PluginUUPSUpgradeableSetupMockBuild1__factory,
+  PluginUUPSUpgradeableSetupMockBuild2__factory,
 } from '../../../typechain';
+import {IPluginSetup} from '../../../typechain/src/plugin/setup/PluginSetup';
 import {erc165ComplianceTests} from '../../helpers';
 import {osxCommonsContractsVersion} from '../../utils/versioning/protocol-version';
-import {getInterfaceId} from '@aragon/osx-commons-sdk';
-import {IPluginSetup__factory as IPluginSetup_V1_0_0__factory} from '@aragon/osx-ethers-v1.0.0';
+import {ADDRESS, getInterfaceId} from '@aragon/osx-commons-sdk';
+import {
+  IPluginSetup__factory as IPluginSetup_V1_0_0__factory,
+  Plugin__factory,
+} from '@aragon/osx-ethers-v1.0.0';
 import {loadFixture} from '@nomicfoundation/hardhat-network-helpers';
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
 import {expect} from 'chai';
@@ -26,16 +32,109 @@ describe('IPluginSetup', function () {
 });
 
 describe('PluginSetup', async () => {
-  permissionConditionBaseTests(pluginSetupFixture);
+  pluginSetupBaseTests(pluginSetupFixture);
+
+  describe('prepareUpdate', async () => {
+    it('reverts when called', async () => {
+      const {pluginSetupMock} = await loadFixture(pluginSetupFixture);
+
+      const dummyDaoAddr = ADDRESS.ONE;
+      const dummyPluginAddr = ADDRESS.TWO;
+      const dummyFromBuildNumber = 123;
+      const setupPayload: IPluginSetup.SetupPayloadStruct = {
+        plugin: dummyPluginAddr,
+        currentHelpers: [],
+        data: [],
+      };
+
+      await expect(
+        pluginSetupMock.prepareUpdate(
+          dummyDaoAddr,
+          dummyFromBuildNumber,
+          setupPayload
+        )
+      )
+        .to.be.revertedWithCustomError(pluginSetupMock, 'NonUpgradeablePlugin')
+        .withArgs();
+    });
+  });
 });
 
 describe('PluginUUPSUpgradeableSetup', async () => {
-  permissionConditionBaseTests(pluginUUPSUpgradeableSetupFixture);
+  pluginSetupBaseTests(pluginUUPSUpgradeableSetupFixture);
+
+  describe('prepareUpdate', async () => {
+    // TODO This should be the default behavior that must explicitly be overridden, which is currently not the case.
+    it('should revert when called on the initial build 1', async () => {
+      const {pluginSetupMock: setupBuild1} = await loadFixture(
+        pluginUUPSUpgradeableSetupFixture
+      );
+
+      const dummyDaoAddr = ADDRESS.ONE;
+      const dummyPluginAddr = ADDRESS.TWO;
+      const setupPayload: IPluginSetup.SetupPayloadStruct = {
+        plugin: dummyPluginAddr,
+        currentHelpers: [],
+        data: [],
+      };
+
+      const fromBuildNumber = 0;
+      const thisBuildNumber = 1;
+
+      await expect(
+        setupBuild1.prepareUpdate(dummyDaoAddr, fromBuildNumber, setupPayload)
+      )
+        .to.be.revertedWithCustomError(
+          setupBuild1 as PluginUUPSUpgradeableSetupMockBuild1,
+          'InvalidUpdatePath'
+        )
+        .withArgs(fromBuildNumber, thisBuildNumber);
+    });
+
+    it('can be called on builds that are not the initial build', async () => {
+      const {deployer} = await loadFixture(pluginSetupFixture);
+      const setupBuild2 =
+        await new PluginUUPSUpgradeableSetupMockBuild2__factory(
+          deployer
+        ).deploy();
+
+      const dummyDaoAddr = ADDRESS.ONE;
+      const dummyPluginAddr = ADDRESS.TWO;
+      const dummyFromBuildNumber = 123;
+      const setupPayload: IPluginSetup.SetupPayloadStruct = {
+        plugin: dummyPluginAddr,
+        currentHelpers: [],
+        data: [],
+      };
+
+      await expect(
+        setupBuild2.prepareUpdate(
+          dummyDaoAddr,
+          dummyFromBuildNumber,
+          setupPayload
+        )
+      ).to.be.not.reverted;
+    });
+  });
 });
 
-function permissionConditionBaseTests(
-  fixture: () => Promise<PluginSetupFixtureInput>
-) {
+function pluginSetupBaseTests(fixture: () => Promise<FixtureResult>) {
+  it('returns the implementation contract', async () => {
+    const {deployer, pluginSetupMock} = await loadFixture(fixture);
+
+    const implementation = await pluginSetupMock.implementation();
+
+    // Check that an address is returned
+    expect(implementation).to.not.equal(ADDRESS.ZERO);
+
+    // Check that it supports the `IPlugin` interface
+    const plugin = Plugin__factory.connect(implementation, deployer);
+    const IPluginInterfaceId = getInterfaceId(
+      IPlugin__factory.createInterface()
+    );
+    expect(await plugin.supportsInterface(IPluginInterfaceId));
+  });
+
   describe('ProtocolVersion', async () => {
     it('returns the current protocol version matching the semantic version of the `osx-contracts-commons` package', async () => {
       const {pluginSetupMock} = await loadFixture(fixture);
@@ -67,14 +166,14 @@ function permissionConditionBaseTests(
   });
 }
 
-type PluginSetupFixtureInput = {
+type FixtureResult = {
   deployer: SignerWithAddress;
   pluginSetupMock:
     | PluginCloneableSetupMockBuild1
-    | PluginUUPSUpgradeableMockBuild1;
+    | PluginUUPSUpgradeableSetupMockBuild1;
 };
 
-async function pluginSetupFixture(): Promise<PluginSetupFixtureInput> {
+async function pluginSetupFixture(): Promise<FixtureResult> {
   const [deployer] = await ethers.getSigners();
   const pluginSetupMock = await new PluginCloneableSetupMockBuild1__factory(
     deployer
@@ -82,7 +181,7 @@ async function pluginSetupFixture(): Promise<PluginSetupFixtureInput> {
   return {deployer, pluginSetupMock};
 }
 
-async function pluginUUPSUpgradeableSetupFixture(): Promise<PluginSetupFixtureInput> {
+async function pluginUUPSUpgradeableSetupFixture(): Promise<FixtureResult> {
   const [deployer] = await ethers.getSigners();
   const pluginSetupMock =
     await new PluginUUPSUpgradeableSetupMockBuild1__factory(deployer).deploy();
