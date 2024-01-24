@@ -1,6 +1,7 @@
 import {
   IPlugin__factory,
   IProtocolVersion__factory,
+  PluginCloneableMockBad__factory,
   PluginCloneableMockBuild1,
   PluginCloneableMockBuild1__factory,
   ProxyFactory__factory,
@@ -66,6 +67,16 @@ describe('PluginCloneable', function () {
       expect(
         await getOzInitializedSlotValue(ethers.provider, implementation.address)
       ).to.equal(255);
+    });
+
+    it('reverts if an function tries to call `__PluginCloneable_init` without being an initializer', async () => {
+      const badPlugin = await new PluginCloneableMockBad__factory(
+        deployer
+      ).deploy();
+      const dummyDaoAddr = ADDRESS.ONE;
+      await expect(badPlugin.notAnInitializer(dummyDaoAddr)).to.be.revertedWith(
+        'Initializable: contract is not initializing'
+      );
     });
   });
 

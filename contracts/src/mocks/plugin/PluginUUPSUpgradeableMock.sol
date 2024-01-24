@@ -6,7 +6,7 @@ pragma solidity ^0.8.8;
 import {PluginUUPSUpgradeable} from "../../plugin/PluginUUPSUpgradeable.sol";
 import {IDAO} from "../../dao/IDAO.sol";
 
-/// @notice A mock cloneable plugin to be deployed via the UUPS proxy pattern.
+/// @notice A mock upgradeable plugin to be deployed via the UUPS proxy pattern.
 /// v1.1 (Release 1, Build 1)
 /// @dev DO NOT USE IN PRODUCTION!
 contract PluginUUPSUpgradeableMockBuild1 is PluginUUPSUpgradeable {
@@ -18,7 +18,7 @@ contract PluginUUPSUpgradeableMockBuild1 is PluginUUPSUpgradeable {
     }
 }
 
-/// @notice A mock cloneable plugin to be deployed via the UUPS proxy pattern.
+/// @notice A mock upgradeable plugin to be deployed via the UUPS proxy pattern.
 /// v1.1 (Release 1, Build 2)
 /// @dev DO NOT USE IN PRODUCTION!
 contract PluginUUPSUpgradeableMockBuild2 is PluginUUPSUpgradeable {
@@ -38,7 +38,7 @@ contract PluginUUPSUpgradeableMockBuild2 is PluginUUPSUpgradeable {
     }
 }
 
-/// @notice A mock cloneable plugin to be deployed via the UUPS proxy pattern.
+/// @notice A mock upgradeable plugin to be deployed via the UUPS proxy pattern.
 /// v1.1 (Release 1, Build 3)
 /// @dev DO NOT USE IN PRODUCTION!
 contract PluginUUPSUpgradeableMockBuild3 is PluginUUPSUpgradeable {
@@ -60,5 +60,16 @@ contract PluginUUPSUpgradeableMockBuild3 is PluginUUPSUpgradeable {
         if (_previousBuild < 3) {
             state2 = 3;
         }
+    }
+}
+
+/// @notice A mock upgradeable plugin missing an initializer function.
+/// @dev DO NOT USE IN PRODUCTION!
+contract PluginUUPSUpgradeableMockBad is PluginUUPSUpgradeable {
+    uint256 public state1;
+
+    function notAnInitializer(IDAO _dao) external {
+        __PluginUUPSUpgradeable_init(_dao);
+        state1 = 1;
     }
 }

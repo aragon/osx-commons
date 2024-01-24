@@ -6,10 +6,12 @@ import {
   PluginUUPSUpgradeableMockBuild1,
   PluginUUPSUpgradeableMockBuild1__factory,
   PluginUUPSUpgradeableMockBuild2__factory,
+  PluginUUPSUpgradeableMockBad__factory,
 } from '../../typechain';
 import {erc165ComplianceTests, getOzInitializedSlotValue} from '../helpers';
 import {osxCommonsContractsVersion} from '../utils/versioning/protocol-version';
 import {
+  ADDRESS,
   getInterfaceId,
   PLUGIN_UUPS_UPGRADEABLE_PERMISSIONS,
   PluginType,
@@ -81,6 +83,16 @@ describe('PluginUUPSUpgradeable', function () {
       expect(
         await getOzInitializedSlotValue(ethers.provider, implementation.address)
       ).to.equal(255);
+    });
+
+    it('reverts if an function tries to call `__PluginUUPSUpgradeable_init` without being an initializer', async () => {
+      const badPlugin = await new PluginUUPSUpgradeableMockBad__factory(
+        deployer
+      ).deploy();
+      const dummyDaoAddr = ADDRESS.ONE;
+      await expect(badPlugin.notAnInitializer(dummyDaoAddr)).to.be.revertedWith(
+        'Initializable: contract is not initializing'
+      );
     });
   });
 

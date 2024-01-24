@@ -31,3 +31,14 @@ contract PluginCloneableMockBuild2 is PluginCloneable {
         state2 = 2;
     }
 }
+
+/// @notice A mock cloneable plugin missing an initializer function.
+/// @dev DO NOT USE IN PRODUCTION!
+contract PluginCloneableMockBad is PluginCloneable {
+    uint256 public state1;
+
+    function notAnInitializer(IDAO _dao) external {
+        __PluginCloneable_init(_dao);
+        state1 = 1;
+    }
+}
