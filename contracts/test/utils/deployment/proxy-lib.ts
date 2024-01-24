@@ -15,7 +15,6 @@ import {ethers} from 'hardhat';
 
 type FixtureResult = {
   deployer: SignerWithAddress;
-
   implementation: PluginUUPSUpgradeableMockBuild1 | PluginCloneableMockBuild1;
   proxyFactory: ProxyFactory;
   daoMockAddr: string;
@@ -144,9 +143,7 @@ describe('ProxyFactory', function () {
     });
 
     it('deploys an uninitialized proxy if no initialization data is provided', async () => {
-      const {deployer, proxyFactory, implementation} = await loadFixture(
-        minimalProxyFixture
-      );
+      const {deployer, proxyFactory} = await loadFixture(minimalProxyFixture);
 
       // Deploy the proxy without initialization data
       const tx = await proxyFactory.deployMinimalProxy([]);
