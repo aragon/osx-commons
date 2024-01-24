@@ -7,6 +7,7 @@ export * from './utils';
 export * from './schemas';
 export * from './validation';
 export * from './multiuri';
+export * from './ipfs';
 export * from './metadata';
 export * from './interfaces';
 export * from './encoding';
