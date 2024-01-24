@@ -74,7 +74,7 @@
     "lint:ts": "cd .. && yarn run lint:contracts:ts",
     "test": "hardhat test",
     "typechain": "cross-env TS_NODE_TRANSPILE_ONLY=true hardhat typechain",
-    "clean": "rimraf ./artifacts ./cache ./coverage ./types ./coverage.json && yarn typechain",
+    "clean": "rimraf ./artifacts ./cache ./coverage ./typechain ./types ./coverage.json && yarn typechain",
     "docgen": "hardhat docgen"
   }
 }
