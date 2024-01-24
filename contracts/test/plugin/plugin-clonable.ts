@@ -7,13 +7,13 @@ import {
 } from '../../typechain';
 import {erc165ComplianceTests, getOzInitializedSlotValue} from '../helpers';
 import {osxCommonsContractsVersion} from '../utils/versioning/protocol-version';
-import {getInterfaceId, PluginType} from '@aragon/osx-commons-sdk';
+import {ADDRESS, getInterfaceId, PluginType} from '@aragon/osx-commons-sdk';
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
 
 describe('PluginCloneable', function () {
-  const dummyDaoAddress = `0x${'1234'.repeat(10)}`;
+  const dummyDaoAddress = ADDRESS.ONE;
   let deployer: SignerWithAddress;
   let plugin: PluginCloneableMockBuild1;
 
