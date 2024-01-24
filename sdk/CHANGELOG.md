@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Created `SingleTargetPermission` type.
 - Copied files from [aragon/sdk commit 76b4fc](https://github.com/aragon/sdk/tree/76b4fc815cfacce60b7c983ef0ce53110761f23a)
 
   - Classes `ClientCore`, `ContextCore`, `Context`, `GraphQLModule`, `Web3Module`, `IPFSModule`, `MultiUri`.

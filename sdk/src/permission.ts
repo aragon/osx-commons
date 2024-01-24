@@ -1,3 +1,4 @@
+import {ADDRESS} from './constants';
 import {id} from '@ethersproject/hash';
 
 export enum Operation {
@@ -5,6 +6,13 @@ export enum Operation {
   Revoke = 1,
   GrantWithCondition = 2,
 }
+
+export const PERMISSION_MANAGER_FLAGS = {
+  UNSET_FLAG: ADDRESS.ZERO,
+  ALLOW_FLAG: ADDRESS.TWO,
+  ANY_ADDR: ADDRESS.LAST,
+  NO_CONDITION: ADDRESS.ZERO,
+};
 
 export const DAO_PERMISSIONS = {
   ROOT_PERMISSION_ID: id('ROOT_PERMISSION'),
