@@ -38,6 +38,13 @@ const SupportedNetworksToGraphqlNetworks: {
   [SupportedNetwork.LOCAL]: 'local',
 };
 
+export const ADDRESS = {
+  ZERO: `0x${'0'.repeat(40)}`, // address(0)
+  ONE: `0x${'0'.repeat(39)}1`, // address(1)
+  TWO: `0x${'0'.repeat(39)}2`, // address(2)
+  LAST: `0x${'f'.repeat(40)}`, // address(-1)
+};
+
 export const UNSUPPORTED_PROPOSAL_METADATA_LINK: ProposalMetadata = {
   title: '(unsupported metadata link)',
   summary: '(the link to the metadata is not supported)',
