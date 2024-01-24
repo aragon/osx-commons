@@ -45,7 +45,7 @@ export async function findEventTopicLog<T>(
   return iface.parseLog(log) as LogDescription & (T | LogDescription);
 }
 
-export const CALLBACKHANDLER_EVENTS = {
+export const CALLBACK_HANDLER_EVENTS = {
   CallbackReceived: 'CallbackReceived',
 };
 
