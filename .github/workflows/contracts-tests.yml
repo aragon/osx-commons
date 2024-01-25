@@ -1,4 +1,4 @@
-name: 'contracts'
+name: Contracts Tests
 
 on:
   workflow_dispatch:
