@@ -68,8 +68,6 @@ async function fixture(): Promise<FixtureResult> {
 }
 
 describe('PluginUUPSUpgradeable', function () {
-  before(async () => {});
-
   describe('Initializable', async () => {
     it('initialize', async () => {
       const {proxyFactory, Build1Factory, daoMock} = await loadFixture(fixture);
