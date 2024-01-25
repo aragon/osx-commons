@@ -1,5 +1,5 @@
 module.exports = {
-  istanbulReporter: ['html', 'lcov'],
+  istanbulReporter: ['html', 'lcov', 'text'],
   providerOptions: {
     privateKey: process.env.PRIVATE_KEY,
   },
