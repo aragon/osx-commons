@@ -6,9 +6,16 @@ import {
   PluginCloneableMockBuild1__factory,
   ProxyFactory__factory,
 } from '../../typechain';
+import {ProxyCreatedEvent} from '../../typechain/src/utils/deployment/ProxyFactory';
 import {erc165ComplianceTests, getOzInitializedSlotValue} from '../helpers';
 import {osxCommonsContractsVersion} from '../utils/versioning/protocol-version';
-import {ADDRESS, getInterfaceId, PluginType} from '@aragon/osx-commons-sdk';
+import {
+  ADDRESS,
+  findEvent,
+  getInterfaceId,
+  PluginType,
+  PROXY_FACTORY_EVENTS,
+} from '@aragon/osx-commons-sdk';
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
@@ -17,10 +24,12 @@ describe('PluginCloneable', function () {
   const dummyDaoAddress = ADDRESS.ONE;
   let deployer: SignerWithAddress;
   let plugin: PluginCloneableMockBuild1;
+  let Build1Factory: PluginCloneableMockBuild1__factory;
 
   before(async () => {
     [deployer] = await ethers.getSigners();
-    plugin = await new PluginCloneableMockBuild1__factory(deployer).deploy();
+    Build1Factory = new PluginCloneableMockBuild1__factory(deployer);
+    plugin = await Build1Factory.deploy();
   });
 
   describe('Initializable', async () => {
@@ -30,19 +39,22 @@ describe('PluginCloneable', function () {
         plugin.address
       );
 
-      // Deploy and initialize the clone
-      const initCalldata = new PluginCloneableMockBuild1__factory(
-        deployer
-      ).interface.encodeFunctionData('initialize', [dummyDaoAddress]);
-
-      const expectedAddress = await proxyFactory.callStatic.deployMinimalProxy(
-        initCalldata
+      // Deploy an uninitialized clone
+      const tx = await proxyFactory.deployMinimalProxy([]);
+      const event = await findEvent<ProxyCreatedEvent>(
+        tx,
+        PROXY_FACTORY_EVENTS.ProxyCreated
       );
-      await proxyFactory.deployMinimalProxy(initCalldata);
+      const clone = Build1Factory.attach(event.args.proxy);
 
-      const clone = new PluginCloneableMockBuild1__factory(deployer).attach(
-        expectedAddress
-      );
+      // Check the clone before initialization
+      expect(
+        await getOzInitializedSlotValue(ethers.provider, clone.address)
+      ).to.equal(0);
+      expect(await clone.dao()).to.equal(ethers.constants.AddressZero);
+      expect(await clone.state1()).to.equal(0);
+
+      await clone.initialize(dummyDaoAddress);
 
       // Check the clone after initialization
       expect(

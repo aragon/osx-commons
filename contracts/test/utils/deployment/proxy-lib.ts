@@ -7,7 +7,11 @@ import {
   ProxyFactory__factory,
 } from '../../../typechain';
 import {ProxyCreatedEvent} from '../../../typechain/src/utils/deployment/ProxyFactory';
-import {ADDRESS, findEvent} from '@aragon/osx-commons-sdk';
+import {
+  ADDRESS,
+  findEvent,
+  PROXY_FACTORY_EVENTS,
+} from '@aragon/osx-commons-sdk';
 import {loadFixture} from '@nomicfoundation/hardhat-network-helpers';
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
 import {expect} from 'chai';
@@ -80,7 +84,10 @@ describe('ProxyFactory', function () {
       const tx = await proxyFactory.deployUUPSProxy(initCalldata);
 
       // Get the proxy address from the event
-      const event = await findEvent<ProxyCreatedEvent>(tx, 'ProxyCreated');
+      const event = await findEvent<ProxyCreatedEvent>(
+        tx,
+        PROXY_FACTORY_EVENTS.ProxyCreated
+      );
       const proxy = PluginUUPSUpgradeableMockBuild1__factory.connect(
         event.args.proxy,
         deployer
@@ -105,7 +112,10 @@ describe('ProxyFactory', function () {
       const tx = await proxyFactory.deployUUPSProxy([]);
 
       // Get the proxy address from the event
-      const event = await findEvent<ProxyCreatedEvent>(tx, 'ProxyCreated');
+      const event = await findEvent<ProxyCreatedEvent>(
+        tx,
+        PROXY_FACTORY_EVENTS.ProxyCreated
+      );
       const proxy = PluginUUPSUpgradeableMockBuild1__factory.connect(
         event.args.proxy,
         deployer
@@ -131,7 +141,10 @@ describe('ProxyFactory', function () {
       const tx = await proxyFactory.deployMinimalProxy(initCalldata);
 
       // Get the proxy address from the event
-      const event = await findEvent<ProxyCreatedEvent>(tx, 'ProxyCreated');
+      const event = await findEvent<ProxyCreatedEvent>(
+        tx,
+        PROXY_FACTORY_EVENTS.ProxyCreated
+      );
       const proxy = PluginCloneableMockBuild1__factory.connect(
         event.args.proxy,
         deployer
@@ -149,7 +162,10 @@ describe('ProxyFactory', function () {
       const tx = await proxyFactory.deployMinimalProxy([]);
 
       // Get the proxy address from the event
-      const event = await findEvent<ProxyCreatedEvent>(tx, 'ProxyCreated');
+      const event = await findEvent<ProxyCreatedEvent>(
+        tx,
+        PROXY_FACTORY_EVENTS.ProxyCreated
+      );
       const proxy = PluginCloneableMockBuild1__factory.connect(
         event.args.proxy,
         deployer

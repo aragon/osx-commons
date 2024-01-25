@@ -7,21 +7,25 @@ import {
   PluginUUPSUpgradeableMockBuild1__factory,
   PluginUUPSUpgradeableMockBuild2__factory,
   PluginUUPSUpgradeableMockBad__factory,
+  ProxyFactory__factory,
 } from '../../typechain';
+import {ProxyCreatedEvent} from '../../typechain/src/utils/deployment/ProxyFactory';
 import {erc165ComplianceTests, getOzInitializedSlotValue} from '../helpers';
 import {osxCommonsContractsVersion} from '../utils/versioning/protocol-version';
 import {
   ADDRESS,
+  findEvent,
   getInterfaceId,
   PLUGIN_UUPS_UPGRADEABLE_PERMISSIONS,
   PluginType,
+  PROXY_FACTORY_EVENTS,
 } from '@aragon/osx-commons-sdk';
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
 import {expect} from 'chai';
 import {ethers, upgrades} from 'hardhat';
 
 describe('PluginUUPSUpgradeable', function () {
-  const dummyDaoAddress = `0x${'1234'.repeat(10)}`;
+  const dummyDaoAddress = ADDRESS.ONE;
 
   let Build1Factory: PluginUUPSUpgradeableMockBuild1__factory;
   let Build2Factory: PluginUUPSUpgradeableMockBuild2__factory;
@@ -42,13 +46,18 @@ describe('PluginUUPSUpgradeable', function () {
 
   describe('Initializable', async () => {
     it('initialize', async () => {
-      // Deploy a proxy
-      const proxy = await upgrades.deployProxy(Build1Factory, [], {
-        kind: 'uups',
-        initializer: false, // DO NOT USE THIS CODE IN PRODUCTION. This deploys an initialized proxy.
-        unsafeAllow: ['constructor'],
-        constructorArgs: [],
-      });
+      // Deploy a proxy factory
+      const proxyFactory = await new ProxyFactory__factory(deployer).deploy(
+        plugin.address
+      );
+
+      // Deploy an uninitialized proxy
+      const tx = await proxyFactory.deployMinimalProxy([]);
+      const event = await findEvent<ProxyCreatedEvent>(
+        tx,
+        PROXY_FACTORY_EVENTS.ProxyCreated
+      );
+      const proxy = Build1Factory.attach(event.args.proxy);
 
       // Check the clone before initialization
       expect(
