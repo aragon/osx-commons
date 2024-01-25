@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Added a `address internal immutable implementation` variable to `PluginSetup` and `PluginSetupUpgradeable` and its initialization through the respective constructors.
+- Added an `address internal immutable implementation` variable to `PluginSetup` and `PluginSetupUpgradeable` and its initialization through the respective constructors.
 
 - Added an abstract `PluginUUPSUpgradeableSetup` base contract.
 
