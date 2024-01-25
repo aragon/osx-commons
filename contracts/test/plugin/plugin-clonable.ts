@@ -1,4 +1,6 @@
 import {
+  DAOMock,
+  DAOMock__factory,
   IPlugin__factory,
   IProtocolVersion__factory,
   PluginCloneableMockBad__factory,
@@ -6,38 +8,63 @@ import {
   PluginCloneableMockBuild1__factory,
   ProxyFactory__factory,
 } from '../../typechain';
-import {ProxyCreatedEvent} from '../../typechain/src/utils/deployment/ProxyFactory';
+import {
+  ProxyCreatedEvent,
+  ProxyFactory,
+} from '../../typechain/src/utils/deployment/ProxyFactory';
 import {erc165ComplianceTests, getOzInitializedSlotValue} from '../helpers';
 import {osxCommonsContractsVersion} from '../utils/versioning/protocol-version';
 import {
-  ADDRESS,
   findEvent,
   getInterfaceId,
   PluginType,
   PROXY_FACTORY_EVENTS,
 } from '@aragon/osx-commons-sdk';
+import {loadFixture} from '@nomicfoundation/hardhat-network-helpers';
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
 
+type FixtureResult = {
+  deployer: SignerWithAddress;
+  implementation: PluginCloneableMockBuild1;
+  proxyFactory: ProxyFactory;
+  daoMock: DAOMock;
+  initCalldata: string;
+  Build1Factory: PluginCloneableMockBuild1__factory;
+};
+
+async function fixture(): Promise<FixtureResult> {
+  const [deployer] = await ethers.getSigners();
+
+  const Build1Factory = new PluginCloneableMockBuild1__factory(deployer);
+  const daoMock = await new DAOMock__factory(deployer).deploy();
+
+  const implementation = await Build1Factory.deploy();
+
+  const proxyFactory = await new ProxyFactory__factory(deployer).deploy(
+    implementation.address
+  );
+
+  const initCalldata = implementation.interface.encodeFunctionData(
+    'initialize',
+    [daoMock.address]
+  );
+
+  return {
+    deployer,
+    implementation,
+    proxyFactory,
+    daoMock,
+    initCalldata,
+    Build1Factory,
+  };
+}
+
 describe('PluginCloneable', function () {
-  const dummyDaoAddress = ADDRESS.ONE;
-  let deployer: SignerWithAddress;
-  let plugin: PluginCloneableMockBuild1;
-  let Build1Factory: PluginCloneableMockBuild1__factory;
-
-  before(async () => {
-    [deployer] = await ethers.getSigners();
-    Build1Factory = new PluginCloneableMockBuild1__factory(deployer);
-    plugin = await Build1Factory.deploy();
-  });
-
   describe('Initializable', async () => {
     it('initialize', async () => {
-      // Deploy a proxy factory
-      const proxyFactory = await new ProxyFactory__factory(deployer).deploy(
-        plugin.address
-      );
+      const {proxyFactory, Build1Factory, daoMock} = await loadFixture(fixture);
 
       // Deploy an uninitialized clone
       const tx = await proxyFactory.deployMinimalProxy([]);
@@ -54,21 +81,18 @@ describe('PluginCloneable', function () {
       expect(await clone.dao()).to.equal(ethers.constants.AddressZero);
       expect(await clone.state1()).to.equal(0);
 
-      await clone.initialize(dummyDaoAddress);
+      await clone.initialize(daoMock.address);
 
       // Check the clone after initialization
       expect(
         await getOzInitializedSlotValue(ethers.provider, clone.address)
       ).to.equal(1);
-      expect(await clone.dao()).to.equal(dummyDaoAddress);
+      expect(await clone.dao()).to.equal(daoMock.address);
       expect(await clone.state1()).to.equal(1);
     });
 
     it('disables initializers for the implementation', async () => {
-      // Deploy the implementation contract
-      const implementation = await new PluginCloneableMockBuild1__factory(
-        deployer
-      ).deploy();
+      const {implementation} = await loadFixture(fixture);
 
       // Check that the implementation is uninitialized.
       expect(await implementation.dao()).to.equal(ethers.constants.AddressZero);
@@ -82,25 +106,29 @@ describe('PluginCloneable', function () {
     });
 
     it('reverts if an function tries to call `__PluginCloneable_init` without being an initializer', async () => {
+      const {deployer, daoMock} = await loadFixture(fixture);
+
       const badPlugin = await new PluginCloneableMockBad__factory(
         deployer
       ).deploy();
-      const dummyDaoAddr = ADDRESS.ONE;
-      await expect(badPlugin.notAnInitializer(dummyDaoAddr)).to.be.revertedWith(
-        'Initializable: contract is not initializing'
-      );
+
+      await expect(
+        badPlugin.notAnInitializer(daoMock.address)
+      ).to.be.revertedWith('Initializable: contract is not initializing');
     });
   });
 
   describe('PluginType', async () => {
     it('returns the current protocol version', async () => {
-      expect(await plugin.pluginType()).to.equal(PluginType.Cloneable);
+      const {implementation} = await loadFixture(fixture);
+      expect(await implementation.pluginType()).to.equal(PluginType.Cloneable);
     });
   });
 
   describe('ProtocolVersion', async () => {
     it('returns the current protocol version matching the semantic version of the `osx-contracts-commons` package', async () => {
-      expect(await plugin.protocolVersion()).to.deep.equal(
+      const {implementation} = await loadFixture(fixture);
+      expect(await implementation.protocolVersion()).to.deep.equal(
         osxCommonsContractsVersion()
       );
     });
@@ -108,23 +136,29 @@ describe('PluginCloneable', function () {
 
   describe('ERC-165', async () => {
     it('supports the `ERC-165` standard', async () => {
-      await erc165ComplianceTests(plugin, deployer);
+      const {deployer, implementation} = await loadFixture(fixture);
+      await erc165ComplianceTests(implementation, deployer);
     });
 
     it('supports the `IPlugin` interface', async () => {
+      const {implementation} = await loadFixture(fixture);
       const iface = IPlugin__factory.createInterface();
-      expect(await plugin.supportsInterface(getInterfaceId(iface))).to.be.true;
+      expect(await implementation.supportsInterface(getInterfaceId(iface))).to
+        .be.true;
     });
 
     it('supports the `IProtocolVersion` interface', async () => {
+      const {implementation} = await loadFixture(fixture);
       const iface = IProtocolVersion__factory.createInterface();
-      expect(await plugin.supportsInterface(getInterfaceId(iface))).to.be.true;
+      expect(await implementation.supportsInterface(getInterfaceId(iface))).to
+        .be.true;
     });
   });
 
   describe('Protocol version', async () => {
     it('returns the current protocol version', async () => {
-      expect(await plugin.protocolVersion()).to.deep.equal(
+      const {implementation} = await loadFixture(fixture);
+      expect(await implementation.protocolVersion()).to.deep.equal(
         osxCommonsContractsVersion()
       );
     });
