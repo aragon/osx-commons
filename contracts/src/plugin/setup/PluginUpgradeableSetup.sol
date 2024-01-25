@@ -17,7 +17,7 @@ abstract contract PluginUpgradeableSetup is ERC165, IPluginSetup, ProtocolVersio
     /// and to create [ERC-1967](https://eips.ethereum.org/EIPS/eip-1967) UUPS proxies from.
     address internal immutable IMPLEMENTATION;
 
-    /// @notice Thrown when an update is not available, for example, if this is the initial build.
+    /// @notice Thrown when an update path is not available, for example, if this is the initial build.
     /// @param fromBuild The build number to update from.
     /// @param thisBuild The build number of this setup to update to.
     error InvalidUpdatePath(uint16 fromBuild, uint16 thisBuild);

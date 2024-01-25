@@ -14,7 +14,7 @@ import {PluginUUPSUpgradeableMockBuild1, PluginUUPSUpgradeableMockBuild2, Plugin
 /// @notice A mock plugin setup of an upgradeable plugin to be deployed via the UUPS pattern.
 /// v1.1 (Release 1, Build 1)
 /// @dev DO NOT USE IN PRODUCTION!
-contract PluginUpgradeableSetupMockBuild1 is PluginUpgradeableSetup {
+contract PluginUUPSUpgradeableSetupMockBuild1 is PluginUpgradeableSetup {
     using ProxyLib for address;
 
     uint16 internal constant THIS_BUILD = 1;
@@ -59,7 +59,7 @@ contract PluginUpgradeableSetupMockBuild1 is PluginUpgradeableSetup {
 /// @notice A mock plugin setup of an upgradeable plugin to be deployed via the UUPS pattern.
 /// v1.2 (Release 1, Build 2)
 /// @dev DO NOT USE IN PRODUCTION!
-contract PluginUpgradeableSetupMockBuild2 is PluginUpgradeableSetup {
+contract PluginUUPSUpgradeableSetupMockBuild2 is PluginUpgradeableSetup {
     using ProxyLib for address;
 
     uint16 internal constant THIS_BUILD = 2;
@@ -121,7 +121,7 @@ contract PluginUpgradeableSetupMockBuild2 is PluginUpgradeableSetup {
 
 /// @notice A mock plugin setup of an upgradeable plugin to be deployed via the UUPS pattern.
 /// v1.3 (Release 1, Build 3)
-contract PluginUpgradeableSetupMockBuild3 is PluginUpgradeableSetup {
+contract PluginUUPSUpgradeableSetupMockBuild3 is PluginUpgradeableSetup {
     using ProxyLib for address;
 
     uint16 internal constant THIS_BUILD = 3;
