@@ -9,10 +9,10 @@ import {ProtocolVersion} from "../../utils/versioning/ProtocolVersion.sol";
 import {IPluginSetup} from "./IPluginSetup.sol";
 
 /// @title PluginSetup
-/// @author Aragon Association - 2022-2023
-/// @notice An abstract contract to inherit from to implement the plugin setup for plugins of
-/// - `Plugin` type being deployed via the `new` keyword
-/// - `PluginCloneable` type being deployed via the minimal proxy pattern (see [ERC-1167](https://eips.ethereum.org/EIPS/eip-1167)).
+/// @author Aragon Association - 2022-2024
+/// @notice An abstract contract to inherit from to implement the plugin setup for non-upgradeable plugins, i.e,
+/// - `Plugin` being deployed via the `new` keyword
+/// - `PluginCloneable` being deployed via the minimal proxy pattern (see [ERC-1167](https://eips.ethereum.org/EIPS/eip-1167)).
 /// @custom:security-contact sirt@aragon.org
 abstract contract PluginSetup is ERC165, IPluginSetup, ProtocolVersion {
     /// @notice The address of the plugin implementation contract for initial block explorer verification and, in the case of `PluginClonable` implementations, to create [ERC-1167](https://eips.ethereum.org/EIPS/eip-1167) clones from.

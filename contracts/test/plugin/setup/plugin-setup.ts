@@ -4,9 +4,9 @@ import {
   IProtocolVersion__factory,
   PluginCloneableSetupMockBuild1,
   PluginCloneableSetupMockBuild1__factory,
-  PluginUUPSUpgradeableSetupMockBuild1,
-  PluginUUPSUpgradeableSetupMockBuild1__factory,
-  PluginUUPSUpgradeableSetupMockBuild2__factory,
+  PluginUpgradeableSetupMockBuild1,
+  PluginUpgradeableSetupMockBuild1__factory,
+  PluginUpgradeableSetupMockBuild2__factory,
 } from '../../../typechain';
 import {IPluginSetup} from '../../../typechain/src/plugin/setup/PluginSetup';
 import {erc165ComplianceTests} from '../../helpers';
@@ -60,7 +60,7 @@ describe('PluginSetup', async () => {
   });
 });
 
-describe('PluginUUPSUpgradeableSetup', async () => {
+describe('PluginUpgradeableSetup', async () => {
   pluginSetupBaseTests(pluginUUPSUpgradeableSetupFixture);
 
   describe('prepareUpdate', async () => {
@@ -85,7 +85,7 @@ describe('PluginUUPSUpgradeableSetup', async () => {
         setupBuild1.prepareUpdate(dummyDaoAddr, fromBuildNumber, setupPayload)
       )
         .to.be.revertedWithCustomError(
-          setupBuild1 as PluginUUPSUpgradeableSetupMockBuild1,
+          setupBuild1 as PluginUpgradeableSetupMockBuild1,
           'InvalidUpdatePath'
         )
         .withArgs(fromBuildNumber, thisBuildNumber);
@@ -93,10 +93,9 @@ describe('PluginUUPSUpgradeableSetup', async () => {
 
     it('can be called on builds that are not the initial build', async () => {
       const {deployer} = await loadFixture(pluginSetupFixture);
-      const setupBuild2 =
-        await new PluginUUPSUpgradeableSetupMockBuild2__factory(
-          deployer
-        ).deploy();
+      const setupBuild2 = await new PluginUpgradeableSetupMockBuild2__factory(
+        deployer
+      ).deploy();
 
       const dummyDaoAddr = ADDRESS.ONE;
       const dummyPluginAddr = ADDRESS.TWO;
@@ -170,7 +169,7 @@ type FixtureResult = {
   deployer: SignerWithAddress;
   pluginSetupMock:
     | PluginCloneableSetupMockBuild1
-    | PluginUUPSUpgradeableSetupMockBuild1;
+    | PluginUpgradeableSetupMockBuild1;
 };
 
 async function pluginSetupFixture(): Promise<FixtureResult> {
@@ -183,7 +182,8 @@ async function pluginSetupFixture(): Promise<FixtureResult> {
 
 async function pluginUUPSUpgradeableSetupFixture(): Promise<FixtureResult> {
   const [deployer] = await ethers.getSigners();
-  const pluginSetupMock =
-    await new PluginUUPSUpgradeableSetupMockBuild1__factory(deployer).deploy();
+  const pluginSetupMock = await new PluginUpgradeableSetupMockBuild1__factory(
+    deployer
+  ).deploy();
   return {deployer, pluginSetupMock};
 }

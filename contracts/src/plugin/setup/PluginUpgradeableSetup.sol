@@ -8,11 +8,11 @@ import {IProtocolVersion} from "../../utils/versioning/IProtocolVersion.sol";
 import {ProtocolVersion} from "../../utils/versioning/ProtocolVersion.sol";
 import {IPluginSetup} from "./IPluginSetup.sol";
 
-/// @title PluginUUPSUpgradeableSetup
-/// @author Aragon Association - 2022-2023
-/// @notice An abstract contract to inherit from to implement the plugin setup for `PluginUUPSUpgradeable` plugins being deployed via the UUPS pattern (see [ERC-1822](https://eips.ethereum.org/EIPS/eip-1822)).
+/// @title PluginUpgradeableSetup
+/// @author Aragon Association - 2022-2024
+/// @notice An abstract contract to inherit from to implement the plugin setup for upgradeable plugins, i.e, `PluginUUPSUpgradeable` being deployed via the UUPS pattern (see [ERC-1822](https://eips.ethereum.org/EIPS/eip-1822) and [ERC-1967](https://eips.ethereum.org/EIPS/eip-1967)).
 /// @custom:security-contact sirt@aragon.org
-abstract contract PluginUUPSUpgradeableSetup is ERC165, IPluginSetup, ProtocolVersion {
+abstract contract PluginUpgradeableSetup is ERC165, IPluginSetup, ProtocolVersion {
     /// @notice The address of the plugin implementation contract for initial block explorer verification
     /// and to create [ERC-1967](https://eips.ethereum.org/EIPS/eip-1967) UUPS proxies from.
     address internal immutable IMPLEMENTATION_;

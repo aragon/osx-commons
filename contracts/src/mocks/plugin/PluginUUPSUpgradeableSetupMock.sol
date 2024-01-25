@@ -5,7 +5,7 @@ pragma solidity ^0.8.8;
 
 import {PermissionLib} from "../../permission/PermissionLib.sol";
 import {IPluginSetup} from "../../plugin/setup/IPluginSetup.sol";
-import {PluginUUPSUpgradeableSetup} from "../../plugin/setup/PluginUUPSUpgradeableSetup.sol";
+import {PluginUpgradeableSetup} from "../../plugin/setup/PluginUpgradeableSetup.sol";
 import {ProxyLib} from "../../utils/deployment/ProxyLib.sol";
 import {IDAO} from "../../dao/IDAO.sol";
 import {mockPermissions, mockHelpers} from "./PluginSetupMockData.sol";
@@ -14,12 +14,12 @@ import {PluginUUPSUpgradeableMockBuild1, PluginUUPSUpgradeableMockBuild2, Plugin
 /// @notice A mock plugin setup of an upgradeable plugin to be deployed via the UUPS pattern.
 /// v1.1 (Release 1, Build 1)
 /// @dev DO NOT USE IN PRODUCTION!
-contract PluginUUPSUpgradeableSetupMockBuild1 is PluginUUPSUpgradeableSetup {
+contract PluginUpgradeableSetupMockBuild1 is PluginUpgradeableSetup {
     using ProxyLib for address;
 
     uint16 internal constant THIS_BUILD = 1;
 
-    constructor() PluginUUPSUpgradeableSetup(address(new PluginUUPSUpgradeableMockBuild1())) {}
+    constructor() PluginUpgradeableSetup(address(new PluginUUPSUpgradeableMockBuild1())) {}
 
     /// @inheritdoc IPluginSetup
     function prepareInstallation(
@@ -59,12 +59,12 @@ contract PluginUUPSUpgradeableSetupMockBuild1 is PluginUUPSUpgradeableSetup {
 /// @notice A mock plugin setup of an upgradeable plugin to be deployed via the UUPS pattern.
 /// v1.2 (Release 1, Build 2)
 /// @dev DO NOT USE IN PRODUCTION!
-contract PluginUUPSUpgradeableSetupMockBuild2 is PluginUUPSUpgradeableSetup {
+contract PluginUpgradeableSetupMockBuild2 is PluginUpgradeableSetup {
     using ProxyLib for address;
 
     uint16 internal constant THIS_BUILD = 2;
 
-    constructor() PluginUUPSUpgradeableSetup(address(new PluginUUPSUpgradeableMockBuild2())) {}
+    constructor() PluginUpgradeableSetup(address(new PluginUUPSUpgradeableMockBuild2())) {}
 
     /// @inheritdoc IPluginSetup
     function prepareInstallation(
@@ -121,12 +121,12 @@ contract PluginUUPSUpgradeableSetupMockBuild2 is PluginUUPSUpgradeableSetup {
 
 /// @notice A mock plugin setup of an upgradeable plugin to be deployed via the UUPS pattern.
 /// v1.3 (Release 1, Build 3)
-contract PluginUUPSUpgradeableSetupMockBuild3 is PluginUUPSUpgradeableSetup {
+contract PluginUpgradeableSetupMockBuild3 is PluginUpgradeableSetup {
     using ProxyLib for address;
 
     uint16 internal constant THIS_BUILD = 3;
 
-    constructor() PluginUUPSUpgradeableSetup(address(new PluginUUPSUpgradeableMockBuild3())) {}
+    constructor() PluginUpgradeableSetup(address(new PluginUUPSUpgradeableMockBuild3())) {}
 
     /// @inheritdoc IPluginSetup
     function prepareInstallation(

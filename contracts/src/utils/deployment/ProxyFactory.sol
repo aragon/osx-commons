@@ -5,7 +5,7 @@ pragma solidity ^0.8.8;
 import {ProxyLib} from "./ProxyLib.sol";
 
 /// @title ProxyFactory
-/// @author Aragon Association - 2023
+/// @author Aragon Association - 2024
 /// @notice A factory to deploy proxies via the UUPS pattern (see [ERC-1822](https://eips.ethereum.org/EIPS/eip-1822)) and minimal proxy pattern (see [ERC-1167](https://eips.ethereum.org/EIPS/eip-1167)).
 /// @custom:security-contact sirt@aragon.org
 contract ProxyFactory {
