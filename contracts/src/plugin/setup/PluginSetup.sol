@@ -16,7 +16,7 @@ import {IPluginSetup} from "./IPluginSetup.sol";
 /// @custom:security-contact sirt@aragon.org
 abstract contract PluginSetup is ERC165, IPluginSetup, ProtocolVersion {
     /// @notice The address of the plugin implementation contract for initial block explorer verification and, in the case of `PluginClonable` implementations, to create [ERC-1167](https://eips.ethereum.org/EIPS/eip-1167) clones from.
-    address internal immutable IMPLEMENTATION_;
+    address internal immutable IMPLEMENTATION;
 
     /// @notice Thrown when attempting to prepare an update on a non-upgradeable plugin.
     error NonUpgradeablePlugin();
@@ -24,7 +24,7 @@ abstract contract PluginSetup is ERC165, IPluginSetup, ProtocolVersion {
     /// @notice The contract constructor, that setting the plugin implementation contract.
     /// @param _implementation The address of the plugin implementation contract.
     constructor(address _implementation) {
-        IMPLEMENTATION_ = _implementation;
+        IMPLEMENTATION = _implementation;
     }
 
     /// @inheritdoc IPluginSetup
@@ -50,6 +50,6 @@ abstract contract PluginSetup is ERC165, IPluginSetup, ProtocolVersion {
 
     /// @inheritdoc IPluginSetup
     function implementation() public view returns (address) {
-        return IMPLEMENTATION_;
+        return IMPLEMENTATION;
     }
 }
