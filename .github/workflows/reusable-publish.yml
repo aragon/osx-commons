@@ -29,6 +29,7 @@ jobs:
           node-version: 18.x
           registry-url: https://registry.npmjs.org
       - name: Install deps
+        working-directory: ./${{ inputs.package }}
         run: yarn install --frozen-lockfile
       - name: Publish NPM pkg (${{ inputs.package }} - ${{ inputs.version }})
         run: yarn publish --no-git-tag-version --new-version ${{ inputs.version }}

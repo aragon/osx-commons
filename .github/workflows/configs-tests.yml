@@ -1,13 +1,12 @@
-name: Subgraph Tests
+name: Configs Tests
 
 on:
   workflow_dispatch:
   workflow_call:
   push:
     paths:
-      - 'contracts/**'
-      - 'subgraph/**'
-      - '.github/workflows/subgraph-*.yml'
+      - 'configs/**'
+      - '.github/workflows/configs-*.yml'
 
 jobs:
   formatting-linting:
@@ -16,7 +15,7 @@ jobs:
     runs-on: 'ubuntu-latest'
     defaults:
       run:
-        working-directory: subgraph
+        working-directory: configs
     steps:
       - name: 'Check out the repo'
         uses: 'actions/checkout@v3'
@@ -30,5 +29,8 @@ jobs:
       - name: 'Install the dependencies'
         run: 'yarn install'
 
-      - name: 'Test the subgraph'
+      - name: 'Build the configs'
+        run: 'yarn build'
+
+      - name: 'Test the configs'
         run: 'yarn test >> $GITHUB_STEP_SUMMARY'
