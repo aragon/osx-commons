@@ -64,7 +64,6 @@ describe('PluginUpgradeableSetup', async () => {
   pluginSetupBaseTests(pluginUUPSUpgradeableSetupFixture);
 
   describe('prepareUpdate', async () => {
-    // TODO This should be the default behavior that must explicitly be overridden, which is currently not the case.
     it('should revert when called on the initial build 1', async () => {
       const {pluginSetupMock: setupBuild1} = await loadFixture(
         pluginUUPSUpgradeableSetupFixture
