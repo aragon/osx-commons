@@ -2,6 +2,7 @@ export type NetworkConfig = {
   url: string;
   isTestnet: boolean;
   chainId: number;
+  name: SupportedNetworks;
   feesUrl?: string;
   gasPrice?: number;
   aliases: NetworkAliases;
@@ -32,6 +33,7 @@ export enum SupportedNetworks {
   BASE_SEPOLIA = 'baseSepolia',
   ARBITRUM = 'arbitrum',
   ARBITRUM_SEPOLIA = 'arbitrumSepolia',
+  LOCAL = 'local',
 }
 
 // the entries in this enum has to be in order from

@@ -2,7 +2,7 @@ import {
   getNetwork,
   getNetworkAlias,
   getNetworkByAlias,
-  getNetworkByNameOrAlias,
+  getNetworkByNameAliasOrChainId,
   getNetworkNameByAlias,
   networks,
 } from '../../networks';
@@ -36,8 +36,19 @@ describe('Deployments', () => {
     });
   });
   describe('getNetworkByNameOrAlias', () => {
-    it('should return the correct value', () => {
-      let inputs = Object.values(SupportedNetworks)
+    it('should return a network given a name', () => {
+      const inputs = Object.values(SupportedNetworks).map(network => {
+        return {
+          network,
+          expected: networks[network],
+        };
+      });
+      inputs.map(({network, expected}) => {
+        expect(getNetworkByNameAliasOrChainId(network)).toMatchObject(expected);
+      });
+    });
+    it('should return a network given an alias', () => {
+      const inputs = Object.values(SupportedNetworks)
         .flatMap(nw => {
           return Object.values(SupportedAliases).map(alias => {
             return {
@@ -47,23 +58,21 @@ describe('Deployments', () => {
           });
         })
         .filter(({network}) => network !== undefined);
-
-      inputs = inputs.concat(
-        Object.values(SupportedNetworks).map(network => {
-          return {
-            network,
-            expected: networks[network],
-          };
-        })
-      );
-
       inputs.map(({network, expected}) => {
-        if (!expected) {
-          expect(getNetworkByNameOrAlias(network as string)).toBeNull();
-          return;
-        }
-        const res = getNetworkByNameOrAlias(network as string);
-        expect(res).toMatchObject(expected);
+        expect(getNetworkByNameAliasOrChainId(network as string)).toMatchObject(
+          expected
+        );
+      });
+    });
+    it('should return a network given a chainId', () => {
+      const inputs = Object.values(SupportedNetworks).map(network => {
+        return {
+          network: networks[network].chainId,
+          expected: networks[network],
+        };
+      });
+      inputs.map(({network, expected}) => {
+        expect(getNetworkByNameAliasOrChainId(network)).toMatchObject(expected);
       });
     });
   });
