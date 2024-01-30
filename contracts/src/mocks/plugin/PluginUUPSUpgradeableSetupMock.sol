@@ -36,6 +36,17 @@ contract PluginUUPSUpgradeableSetupMockBuild1 is PluginUpgradeableSetup {
     }
 
     /// @inheritdoc IPluginSetup
+    /// @dev The default implementation for the initial build 1 that reverts because no earlier build exists.
+    function prepareUpdate(
+        address _dao,
+        uint16 _fromBuild,
+        SetupPayload calldata _payload
+    ) external pure virtual returns (bytes memory, PreparedSetupData memory) {
+        (_dao, _fromBuild, _payload);
+        revert InvalidUpdatePath({fromBuild: 0, thisBuild: THIS_BUILD});
+    }
+
+    /// @inheritdoc IPluginSetup
     function prepareUninstallation(
         address _dao,
         SetupPayload calldata _payload

@@ -28,17 +28,6 @@ abstract contract PluginUpgradeableSetup is ERC165, IPluginSetup, ProtocolVersio
         IMPLEMENTATION = _implementation;
     }
 
-    /// @inheritdoc IPluginSetup
-    /// @dev The default implementation for the initial build 1 that reverts because no earlier build exists.
-    function prepareUpdate(
-        address _dao,
-        uint16 _fromBuild,
-        SetupPayload calldata _payload
-    ) external pure virtual returns (bytes memory, PreparedSetupData memory) {
-        (_dao, _fromBuild, _payload);
-        revert InvalidUpdatePath({fromBuild: 0, thisBuild: 1});
-    }
-
     /// @notice Checks if this or the parent contract supports an interface by its ID.
     /// @param _interfaceId The ID of the interface.
     /// @return Returns `true` if the interface is supported.
