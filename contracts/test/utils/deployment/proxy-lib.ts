@@ -17,58 +17,6 @@ import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
 
-type FixtureResult = {
-  deployer: SignerWithAddress;
-  implementation: PluginUUPSUpgradeableMockBuild1 | PluginCloneableMockBuild1;
-  proxyFactory: ProxyFactory;
-  daoMockAddr: string;
-  initCalldata: string;
-};
-
-async function uupsProxyFixture(): Promise<FixtureResult> {
-  const [deployer] = await ethers.getSigners();
-
-  const implementation = await new PluginUUPSUpgradeableMockBuild1__factory(
-    deployer
-  ).deploy();
-
-  const proxyFactory = await new ProxyFactory__factory(deployer).deploy(
-    implementation.address
-  );
-
-  // Create a mock address with a valid checksum
-  const daoMockAddr = ethers.utils.getAddress(ADDRESS.LAST);
-
-  const initCalldata = implementation.interface.encodeFunctionData(
-    'initialize',
-    [daoMockAddr]
-  );
-
-  return {deployer, implementation, proxyFactory, daoMockAddr, initCalldata};
-}
-
-async function minimalProxyFixture(): Promise<FixtureResult> {
-  const [deployer] = await ethers.getSigners();
-
-  const implementation = await new PluginCloneableMockBuild1__factory(
-    deployer
-  ).deploy();
-
-  const proxyFactory = await new ProxyFactory__factory(deployer).deploy(
-    implementation.address
-  );
-
-  // Create a mock address with a valid checksum
-  const daoMockAddr = ethers.utils.getAddress(ADDRESS.LAST);
-
-  const initCalldata = implementation.interface.encodeFunctionData(
-    'initialize',
-    [daoMockAddr]
-  );
-
-  return {deployer, implementation, proxyFactory, daoMockAddr, initCalldata};
-}
-
 describe('ProxyFactory', function () {
   describe('deployUUPSProxy', function () {
     it('deploys an initialized proxy if initialization data is provided', async () => {
@@ -177,3 +125,55 @@ describe('ProxyFactory', function () {
     });
   });
 });
+
+type FixtureResult = {
+  deployer: SignerWithAddress;
+  implementation: PluginUUPSUpgradeableMockBuild1 | PluginCloneableMockBuild1;
+  proxyFactory: ProxyFactory;
+  daoMockAddr: string;
+  initCalldata: string;
+};
+
+async function uupsProxyFixture(): Promise<FixtureResult> {
+  const [deployer] = await ethers.getSigners();
+
+  const implementation = await new PluginUUPSUpgradeableMockBuild1__factory(
+    deployer
+  ).deploy();
+
+  const proxyFactory = await new ProxyFactory__factory(deployer).deploy(
+    implementation.address
+  );
+
+  // Create a mock address with a valid checksum
+  const daoMockAddr = ethers.utils.getAddress(ADDRESS.LAST);
+
+  const initCalldata = implementation.interface.encodeFunctionData(
+    'initialize',
+    [daoMockAddr]
+  );
+
+  return {deployer, implementation, proxyFactory, daoMockAddr, initCalldata};
+}
+
+async function minimalProxyFixture(): Promise<FixtureResult> {
+  const [deployer] = await ethers.getSigners();
+
+  const implementation = await new PluginCloneableMockBuild1__factory(
+    deployer
+  ).deploy();
+
+  const proxyFactory = await new ProxyFactory__factory(deployer).deploy(
+    implementation.address
+  );
+
+  // Create a mock address with a valid checksum
+  const daoMockAddr = ethers.utils.getAddress(ADDRESS.LAST);
+
+  const initCalldata = implementation.interface.encodeFunctionData(
+    'initialize',
+    [daoMockAddr]
+  );
+
+  return {deployer, implementation, proxyFactory, daoMockAddr, initCalldata};
+}
