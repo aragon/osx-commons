@@ -65,7 +65,6 @@ describe('Deployments', () => {
         );
       });
     });
-    
   });
   describe('getNetworkByAlias', () => {
     it('should return the correct value', () => {
