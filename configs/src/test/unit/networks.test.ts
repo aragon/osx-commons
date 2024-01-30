@@ -2,7 +2,8 @@ import {
   getNetwork,
   getNetworkAlias,
   getNetworkByAlias,
-  getNetworkByNameAliasOrChainId,
+  getNetworkByChainId,
+  getNetworkByNameOrAlias,
   getNetworkNameByAlias,
   networks,
 } from '../../networks';
@@ -44,7 +45,7 @@ describe('Deployments', () => {
         };
       });
       inputs.map(({network, expected}) => {
-        expect(getNetworkByNameAliasOrChainId(network)).toMatchObject(expected);
+        expect(getNetworkByNameOrAlias(network)).toMatchObject(expected);
       });
     });
     it('should return a network given an alias', () => {
@@ -59,22 +60,12 @@ describe('Deployments', () => {
         })
         .filter(({network}) => network !== undefined);
       inputs.map(({network, expected}) => {
-        expect(getNetworkByNameAliasOrChainId(network as string)).toMatchObject(
+        expect(getNetworkByNameOrAlias(network as string)).toMatchObject(
           expected
         );
       });
     });
-    it('should return a network given a chainId', () => {
-      const inputs = Object.values(SupportedNetworks).map(network => {
-        return {
-          network: networks[network].chainId,
-          expected: networks[network],
-        };
-      });
-      inputs.map(({network, expected}) => {
-        expect(getNetworkByNameAliasOrChainId(network)).toMatchObject(expected);
-      });
-    });
+    
   });
   describe('getNetworkByAlias', () => {
     it('should return the correct value', () => {
@@ -129,6 +120,19 @@ describe('Deployments', () => {
       });
       inputs.map(({aliasName, network, expected}) => {
         expect(getNetworkAlias(aliasName, network)).toBe(expected);
+      });
+    });
+  });
+  describe('getNetworkByChainId', () => {
+    it('should get the network given the chainId', () => {
+      const inputs = Object.values(SupportedNetworks).map(network => {
+        return {
+          network: networks[network].chainId,
+          expected: networks[network],
+        };
+      });
+      inputs.map(({network, expected}) => {
+        expect(getNetworkByChainId(network)).toBe(expected);
       });
     });
   });

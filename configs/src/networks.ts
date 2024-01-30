@@ -28,19 +28,14 @@ export function getNetworkByChainId(chainId: number): NetworkConfig | null {
 /**
  * Retrieves the network configuration object by name or alias.
  *
- * @param {string | SupportedNetworks | number} network - The name or alias of the network.
+ * @param {string | SupportedNetworks} network - The name or alias of the network.
  * @return {NetworkConfig | null} The network configuration object if found, or `null` if not found.
  */
-export function getNetworkByNameAliasOrChainId(
-  network: string | SupportedNetworks | number
+export function getNetworkByNameOrAlias(
+  network: string | SupportedNetworks
 ): NetworkConfig | null {
-  let networkConfig: NetworkConfig | null = null;
-  if (typeof network === 'number') {
-    networkConfig = getNetworkByChainId(network);
-  } else {
-    networkConfig =
-      getNetworkByAlias(network) || getNetwork(network as SupportedNetworks);
-  }
+  const networkConfig =
+    getNetworkByAlias(network) || getNetwork(network as SupportedNetworks);
   if (networkConfig) {
     return networkConfig;
   }

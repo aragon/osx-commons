@@ -14,7 +14,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- `getNetworkByNameOrAlias` to `getNetworkByNameOrAliasOrChainId`
 - All undefined return values to `null` instead of `undefined`
 
 ## v0.1.0
