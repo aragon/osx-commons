@@ -28,45 +28,6 @@ import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
 
-type FixtureResult = {
-  deployer: SignerWithAddress;
-  implementation: PluginUUPSUpgradeableMockBuild1;
-  proxyFactory: ProxyFactory;
-  daoMock: DAOMock;
-  initCalldata: string;
-  Build1Factory: PluginUUPSUpgradeableMockBuild1__factory;
-  Build2Factory: PluginUUPSUpgradeableMockBuild2__factory;
-};
-
-async function fixture(): Promise<FixtureResult> {
-  const [deployer] = await ethers.getSigners();
-
-  const Build1Factory = new PluginUUPSUpgradeableMockBuild1__factory(deployer);
-  const Build2Factory = new PluginUUPSUpgradeableMockBuild2__factory(deployer);
-  const daoMock = await new DAOMock__factory(deployer).deploy();
-
-  const implementation = await Build1Factory.deploy();
-
-  const proxyFactory = await new ProxyFactory__factory(deployer).deploy(
-    implementation.address
-  );
-
-  const initCalldata = implementation.interface.encodeFunctionData(
-    'initialize',
-    [daoMock.address]
-  );
-
-  return {
-    deployer,
-    implementation,
-    proxyFactory,
-    initCalldata,
-    daoMock,
-    Build1Factory,
-    Build2Factory,
-  };
-}
-
 describe('PluginUUPSUpgradeable', function () {
   describe('Initializable', async () => {
     it('initialize', async () => {
@@ -308,3 +269,42 @@ describe('PluginUUPSUpgradeable', function () {
     });
   });
 });
+
+type FixtureResult = {
+  deployer: SignerWithAddress;
+  implementation: PluginUUPSUpgradeableMockBuild1;
+  proxyFactory: ProxyFactory;
+  daoMock: DAOMock;
+  initCalldata: string;
+  Build1Factory: PluginUUPSUpgradeableMockBuild1__factory;
+  Build2Factory: PluginUUPSUpgradeableMockBuild2__factory;
+};
+
+async function fixture(): Promise<FixtureResult> {
+  const [deployer] = await ethers.getSigners();
+
+  const Build1Factory = new PluginUUPSUpgradeableMockBuild1__factory(deployer);
+  const Build2Factory = new PluginUUPSUpgradeableMockBuild2__factory(deployer);
+  const daoMock = await new DAOMock__factory(deployer).deploy();
+
+  const implementation = await Build1Factory.deploy();
+
+  const proxyFactory = await new ProxyFactory__factory(deployer).deploy(
+    implementation.address
+  );
+
+  const initCalldata = implementation.interface.encodeFunctionData(
+    'initialize',
+    [daoMock.address]
+  );
+
+  return {
+    deployer,
+    implementation,
+    proxyFactory,
+    initCalldata,
+    daoMock,
+    Build1Factory,
+    Build2Factory,
+  };
+}

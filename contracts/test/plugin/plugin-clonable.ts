@@ -25,42 +25,6 @@ import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
 
-type FixtureResult = {
-  deployer: SignerWithAddress;
-  implementation: PluginCloneableMockBuild1;
-  proxyFactory: ProxyFactory;
-  daoMock: DAOMock;
-  initCalldata: string;
-  Build1Factory: PluginCloneableMockBuild1__factory;
-};
-
-async function fixture(): Promise<FixtureResult> {
-  const [deployer] = await ethers.getSigners();
-
-  const Build1Factory = new PluginCloneableMockBuild1__factory(deployer);
-  const daoMock = await new DAOMock__factory(deployer).deploy();
-
-  const implementation = await Build1Factory.deploy();
-
-  const proxyFactory = await new ProxyFactory__factory(deployer).deploy(
-    implementation.address
-  );
-
-  const initCalldata = implementation.interface.encodeFunctionData(
-    'initialize',
-    [daoMock.address]
-  );
-
-  return {
-    deployer,
-    implementation,
-    proxyFactory,
-    daoMock,
-    initCalldata,
-    Build1Factory,
-  };
-}
-
 describe('PluginCloneable', function () {
   describe('Initializable', async () => {
     it('initialize', async () => {
@@ -164,3 +128,39 @@ describe('PluginCloneable', function () {
     });
   });
 });
+
+type FixtureResult = {
+  deployer: SignerWithAddress;
+  implementation: PluginCloneableMockBuild1;
+  proxyFactory: ProxyFactory;
+  daoMock: DAOMock;
+  initCalldata: string;
+  Build1Factory: PluginCloneableMockBuild1__factory;
+};
+
+async function fixture(): Promise<FixtureResult> {
+  const [deployer] = await ethers.getSigners();
+
+  const Build1Factory = new PluginCloneableMockBuild1__factory(deployer);
+  const daoMock = await new DAOMock__factory(deployer).deploy();
+
+  const implementation = await Build1Factory.deploy();
+
+  const proxyFactory = await new ProxyFactory__factory(deployer).deploy(
+    implementation.address
+  );
+
+  const initCalldata = implementation.interface.encodeFunctionData(
+    'initialize',
+    [daoMock.address]
+  );
+
+  return {
+    deployer,
+    implementation,
+    proxyFactory,
+    daoMock,
+    initCalldata,
+    Build1Factory,
+  };
+}

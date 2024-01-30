@@ -21,22 +21,6 @@ type FixtureResult = {
   Build1Factory: PluginMockBuild1__factory;
 };
 
-async function fixture(): Promise<FixtureResult> {
-  const [deployer] = await ethers.getSigners();
-
-  const Build1Factory = new PluginMockBuild1__factory(deployer);
-  const daoMock = await new DAOMock__factory(deployer).deploy();
-
-  const plugin = await Build1Factory.deploy(daoMock.address);
-
-  return {
-    deployer,
-    plugin,
-    daoMock,
-    Build1Factory,
-  };
-}
-
 describe('Plugin', function () {
   describe('PluginType', async () => {
     it('returns the current protocol version', async () => {
@@ -82,3 +66,19 @@ describe('Plugin', function () {
     });
   });
 });
+
+async function fixture(): Promise<FixtureResult> {
+  const [deployer] = await ethers.getSigners();
+
+  const Build1Factory = new PluginMockBuild1__factory(deployer);
+  const daoMock = await new DAOMock__factory(deployer).deploy();
+
+  const plugin = await Build1Factory.deploy(daoMock.address);
+
+  return {
+    deployer,
+    plugin,
+    daoMock,
+    Build1Factory,
+  };
+}
