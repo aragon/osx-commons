@@ -7,14 +7,14 @@ This includes:
 - Networks
   - RPC url
   - if it is a testnet or not
-  - chainID
+  - chain ID
   - alias for ethers and Alchemy subgraph
 - Deployments of the OSx protocol grouped by network
   - Version
   - Contract name
   - Contract address
   - Deployment transaction
-  - Block number when the contract was deployed (This can differ from when the
+  - Block number when the contract was deployed (which can differ from when the
     contract was activated and put in use)
 
 ## Installation
