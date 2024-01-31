@@ -1,50 +1,45 @@
 import {
+  DAOMock,
+  DAOMock__factory,
   IERC1822ProxiableUpgradeable__factory,
   IPlugin__factory,
-  DAOMock__factory,
   IProtocolVersion__factory,
   PluginUUPSUpgradeableMockBuild1,
   PluginUUPSUpgradeableMockBuild1__factory,
   PluginUUPSUpgradeableMockBuild2__factory,
+  PluginUUPSUpgradeableMockBad__factory,
+  ProxyFactory__factory,
 } from '../../typechain';
+import {
+  ProxyCreatedEvent,
+  ProxyFactory,
+} from '../../typechain/src/utils/deployment/ProxyFactory';
 import {erc165ComplianceTests, getOzInitializedSlotValue} from '../helpers';
 import {osxCommonsContractsVersion} from '../utils/versioning/protocol-version';
 import {
+  findEvent,
   getInterfaceId,
   PLUGIN_UUPS_UPGRADEABLE_PERMISSIONS,
   PluginType,
+  PROXY_FACTORY_EVENTS,
 } from '@aragon/osx-commons-sdk';
+import {loadFixture} from '@nomicfoundation/hardhat-network-helpers';
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
 import {expect} from 'chai';
-import {ethers, upgrades} from 'hardhat';
+import {ethers} from 'hardhat';
 
 describe('PluginUUPSUpgradeable', function () {
-  let Build1Factory: PluginUUPSUpgradeableMockBuild1__factory;
-  let Build2Factory: PluginUUPSUpgradeableMockBuild2__factory;
-  let DAOMockFactory: DAOMock__factory;
-
-  let plugin: PluginUUPSUpgradeableMockBuild1;
-  let deployer: SignerWithAddress;
-
-  before(async () => {
-    [deployer] = await ethers.getSigners();
-
-    Build1Factory = new PluginUUPSUpgradeableMockBuild1__factory(deployer);
-    Build2Factory = new PluginUUPSUpgradeableMockBuild2__factory(deployer);
-    DAOMockFactory = new DAOMock__factory(deployer);
-
-    plugin = await Build1Factory.deploy();
-  });
-
   describe('Initializable', async () => {
     it('initialize', async () => {
-      // Deploy a proxy
-      const proxy = await upgrades.deployProxy(Build1Factory, [], {
-        kind: 'uups',
-        initializer: false, // DO NOT USE THIS CODE IN PRODUCTION. This deploys an initialized proxy.
-        unsafeAllow: ['constructor'],
-        constructorArgs: [],
-      });
+      const {proxyFactory, Build1Factory, daoMock} = await loadFixture(fixture);
+
+      // Deploy an uninitialized proxy
+      const tx = await proxyFactory.deployUUPSProxy([]);
+      const event = await findEvent<ProxyCreatedEvent>(
+        tx,
+        PROXY_FACTORY_EVENTS.ProxyCreated
+      );
+      const proxy = Build1Factory.attach(event.args.proxy);
 
       // Check the clone before initialization
       expect(
@@ -54,27 +49,52 @@ describe('PluginUUPSUpgradeable', function () {
       expect(await proxy.state1()).to.equal(0);
 
       // Initialize the clone
-      const dummyDaoAddress = plugin.address;
-      await proxy.initialize(dummyDaoAddress);
+      await proxy.initialize(daoMock.address);
 
       // Check the clone after initialization
       expect(
         await getOzInitializedSlotValue(ethers.provider, proxy.address)
       ).to.equal(1);
-      expect(await proxy.dao()).to.equal(dummyDaoAddress);
+      expect(await proxy.dao()).to.equal(daoMock.address);
       expect(await proxy.state1()).to.equal(1);
+    });
+
+    it('disables initializers for the implementation', async () => {
+      const {implementation} = await loadFixture(fixture);
+
+      // Check that the implementation is uninitialized.
+      expect(await implementation.dao()).to.equal(ethers.constants.AddressZero);
+      expect(await implementation.state1()).to.equal(0);
+
+      // Check that the implementation initialization is disabled.
+      expect(
+        await getOzInitializedSlotValue(ethers.provider, implementation.address)
+      ).to.equal(255);
+    });
+
+    it('reverts if an function tries to call `__PluginUUPSUpgradeable_init` without being an initializer', async () => {
+      const {deployer, daoMock} = await loadFixture(fixture);
+
+      const badPlugin = await new PluginUUPSUpgradeableMockBad__factory(
+        deployer
+      ).deploy();
+      await expect(
+        badPlugin.notAnInitializer(daoMock.address)
+      ).to.be.revertedWith('Initializable: contract is not initializing');
     });
   });
 
   describe('PluginType', async () => {
     it('returns the current protocol version', async () => {
-      expect(await plugin.pluginType()).to.equal(PluginType.UUPS);
+      const {implementation} = await loadFixture(fixture);
+      expect(await implementation.pluginType()).to.equal(PluginType.UUPS);
     });
   });
 
   describe('ProtocolVersion', async () => {
     it('returns the current protocol version matching the semantic version of the `osx-contracts-commons` package', async () => {
-      expect(await plugin.protocolVersion()).to.deep.equal(
+      const {implementation} = await loadFixture(fixture);
+      expect(await implementation.protocolVersion()).to.deep.equal(
         osxCommonsContractsVersion()
       );
     });
@@ -82,28 +102,36 @@ describe('PluginUUPSUpgradeable', function () {
 
   describe('ERC-165', async () => {
     it('supports the `ERC-165` standard', async () => {
-      await erc165ComplianceTests(plugin, deployer);
+      const {deployer, implementation} = await loadFixture(fixture);
+      await erc165ComplianceTests(implementation, deployer);
     });
 
     it('supports the `IPlugin` interface', async () => {
+      const {implementation} = await loadFixture(fixture);
       const iface = IPlugin__factory.createInterface();
-      expect(await plugin.supportsInterface(getInterfaceId(iface))).to.be.true;
+      expect(await implementation.supportsInterface(getInterfaceId(iface))).to
+        .be.true;
     });
 
     it('supports the `IProtocolVersion` interface', async () => {
+      const {implementation} = await loadFixture(fixture);
       const iface = IProtocolVersion__factory.createInterface();
-      expect(await plugin.supportsInterface(getInterfaceId(iface))).to.be.true;
+      expect(await implementation.supportsInterface(getInterfaceId(iface))).to
+        .be.true;
     });
 
     it('supports the `IERC1822ProxiableUpgradeable` interface', async () => {
+      const {implementation} = await loadFixture(fixture);
       const iface = IERC1822ProxiableUpgradeable__factory.createInterface();
-      expect(await plugin.supportsInterface(getInterfaceId(iface))).to.be.true;
+      expect(await implementation.supportsInterface(getInterfaceId(iface))).to
+        .be.true;
     });
   });
 
   describe('Protocol version', async () => {
     it('returns the current protocol version', async () => {
-      expect(await plugin.protocolVersion()).to.deep.equal(
+      const {implementation} = await loadFixture(fixture);
+      expect(await implementation.protocolVersion()).to.deep.equal(
         osxCommonsContractsVersion()
       );
     });
@@ -111,41 +139,38 @@ describe('PluginUUPSUpgradeable', function () {
 
   describe('Upgradeability', async () => {
     it('returns the implementation', async () => {
-      const dummyDaoAddress = ethers.constants.AddressZero;
-
-      const predeployedImplementation = await upgrades.deployImplementation(
-        Build1Factory
+      const {proxyFactory, Build1Factory, implementation} = await loadFixture(
+        fixture
       );
 
-      const proxy = await upgrades.deployProxy(
-        Build1Factory,
-        [dummyDaoAddress],
-        {
-          useDeployedImplementation: true,
-          kind: 'uups',
-          initializer: 'initialize',
-          unsafeAllow: ['constructor'],
-          constructorArgs: [],
-        }
+      // Deploy an uninitialized build 1 proxy
+      const tx = await proxyFactory.deployUUPSProxy([]);
+      const event = await findEvent<ProxyCreatedEvent>(
+        tx,
+        PROXY_FACTORY_EVENTS.ProxyCreated
       );
+      const proxy = Build1Factory.attach(event.args.proxy);
 
-      expect(await proxy.implementation()).to.equal(predeployedImplementation);
+      expect(await proxy.implementation()).to.equal(implementation.address);
     });
 
     it('reverts the upgrade if caller caller does not have the `UPGRADE_PLUGIN_PERMISSION_ID` permission on the plugin proxy', async () => {
-      const daoMock = await DAOMockFactory.deploy();
-
-      // Deploy a build 1 proxy
-      const proxy = await upgrades.deployProxy(
+      const {
+        deployer,
+        proxyFactory,
+        initCalldata,
         Build1Factory,
-        [daoMock.address],
-        {
-          kind: 'uups',
-          initializer: 'initialize',
-          unsafeAllow: ['constructor'],
-          constructorArgs: [],
-        }
+        Build2Factory,
+        daoMock,
+      } = await loadFixture(fixture);
+
+      // Deploy an initialized build 1 proxy
+      const tx = await proxyFactory.deployUUPSProxy(initCalldata);
+      const event = await findEvent<ProxyCreatedEvent>(
+        tx,
+        PROXY_FACTORY_EVENTS.ProxyCreated
       );
+      const proxy = Build1Factory.attach(event.args.proxy);
 
       // Deploy the build 2 implementation
       const newImplementation = await Build2Factory.deploy();
@@ -165,19 +190,21 @@ describe('PluginUUPSUpgradeable', function () {
     });
 
     it('upgrades if the caller has the `UPGRADE_PLUGIN_PERMISSION_ID` permission', async () => {
-      const daoMock = await DAOMockFactory.deploy();
-
-      // Create a build 1 proxy
-      const proxy = await upgrades.deployProxy(
+      const {
+        proxyFactory,
+        initCalldata,
         Build1Factory,
-        [daoMock.address],
-        {
-          kind: 'uups',
-          initializer: 'initialize',
-          unsafeAllow: ['constructor'],
-          constructorArgs: [],
-        }
+        Build2Factory,
+        daoMock,
+      } = await loadFixture(fixture);
+
+      // Create an initialized build 1 proxy
+      const tx = await proxyFactory.deployUUPSProxy(initCalldata);
+      const event = await findEvent<ProxyCreatedEvent>(
+        tx,
+        PROXY_FACTORY_EVENTS.ProxyCreated
       );
+      const proxy = Build1Factory.attach(event.args.proxy);
 
       // Deploy the build 2 implementation
       const newImplementation = await Build2Factory.deploy();
@@ -198,19 +225,21 @@ describe('PluginUUPSUpgradeable', function () {
     });
 
     it('can be reinitialzed', async () => {
-      const daoMock = await DAOMockFactory.deploy();
-
-      // Deploy a build 1 proxy
-      const proxy = await upgrades.deployProxy(
+      const {
+        proxyFactory,
+        initCalldata,
         Build1Factory,
-        [daoMock.address],
-        {
-          kind: 'uups',
-          initializer: 'initialize',
-          unsafeAllow: ['constructor'],
-          constructorArgs: [],
-        }
+        Build2Factory,
+        daoMock,
+      } = await loadFixture(fixture);
+
+      // Deploy an initialized build 1 proxy
+      const tx = await proxyFactory.deployUUPSProxy(initCalldata);
+      const event = await findEvent<ProxyCreatedEvent>(
+        tx,
+        PROXY_FACTORY_EVENTS.ProxyCreated
       );
+      const proxy = Build1Factory.attach(event.args.proxy);
 
       // Deploy the build 2 implementation
       const newImplementation = await Build2Factory.deploy();
@@ -240,3 +269,42 @@ describe('PluginUUPSUpgradeable', function () {
     });
   });
 });
+
+type FixtureResult = {
+  deployer: SignerWithAddress;
+  implementation: PluginUUPSUpgradeableMockBuild1;
+  proxyFactory: ProxyFactory;
+  daoMock: DAOMock;
+  initCalldata: string;
+  Build1Factory: PluginUUPSUpgradeableMockBuild1__factory;
+  Build2Factory: PluginUUPSUpgradeableMockBuild2__factory;
+};
+
+async function fixture(): Promise<FixtureResult> {
+  const [deployer] = await ethers.getSigners();
+
+  const Build1Factory = new PluginUUPSUpgradeableMockBuild1__factory(deployer);
+  const Build2Factory = new PluginUUPSUpgradeableMockBuild2__factory(deployer);
+  const daoMock = await new DAOMock__factory(deployer).deploy();
+
+  const implementation = await Build1Factory.deploy();
+
+  const proxyFactory = await new ProxyFactory__factory(deployer).deploy(
+    implementation.address
+  );
+
+  const initCalldata = implementation.interface.encodeFunctionData(
+    'initialize',
+    [daoMock.address]
+  );
+
+  return {
+    deployer,
+    implementation,
+    proxyFactory,
+    initCalldata,
+    daoMock,
+    Build1Factory,
+    Build2Factory,
+  };
+}

@@ -49,6 +49,10 @@ export const CALLBACK_HANDLER_EVENTS = {
   CallbackReceived: 'CallbackReceived',
 };
 
+export const PROXY_FACTORY_EVENTS = {
+  ProxyCreated: 'ProxyCreated',
+};
+
 export const DAO_EVENTS = {
   NewURI: 'NewURI',
 };

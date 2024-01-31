@@ -2,13 +2,13 @@
   "name": "@aragon/osx-commons-contracts",
   "license": "AGPL-3.0-or-later",
   "description": "The Aragon OSx contracts package containing common utilities",
-  "version": "1.4.0-alpha.2",
+  "version": "1.4.0-alpha.3",
   "author": {
     "name": "aragon",
     "url": "https://github.com/aragon"
   },
   "devDependencies": {
-    "@aragon/osx-commons-sdk": "0.0.1-alpha.3",
+    "@aragon/osx-commons-sdk": "0.0.1-alpha.5",
     "@aragon/osx-ethers-v1.0.0": "npm:@aragon/osx-ethers@1.0.0",
     "@aragon/osx-ethers-v1.3.0": "npm:@aragon/osx-ethers@1.3.0",
     "@ethersproject/abi": "^5.7.0",
@@ -74,7 +74,7 @@
     "lint:ts": "cd .. && yarn run lint:contracts:ts",
     "test": "hardhat test",
     "typechain": "cross-env TS_NODE_TRANSPILE_ONLY=true hardhat typechain",
-    "clean": "rimraf ./artifacts ./cache ./coverage ./types ./coverage.json && yarn typechain",
+    "clean": "rimraf ./artifacts ./cache ./coverage ./typechain ./types ./coverage.json && yarn typechain",
     "docgen": "hardhat docgen"
   }
 }

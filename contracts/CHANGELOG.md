@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Added an `address internal immutable IMPLEMENTATION` variable to `PluginSetup` and `PluginSetupUpgradeable` and its initialization through the respective constructors.
+
+- Added an abstract `PluginUpgradeableSetup` base contract.
+
 - Copied files from [aragon/osx commit e7ba46](https://github.com/aragon/osx/tree/e7ba46026db96931d3e4a585e8f30c585906e1fc)
 
   - interfaces `IDAO`, `IPermissionCondition`, `IPlugin`, `IMembership`, `IProposal`, `IPluginSetup`, `IProtocolVersion`,
@@ -16,3 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - contracts `CloneFactory`
   - libraries `PermissionLib`, `VersionComparisonLib`
   - free functions `auth`, `Proxy`, `BitMap`, `Ratio`, `UncheckedMath`
+
+### Changed
+
+- Replaced `Proxy` and `CloneFactory` by `ProxyLib` and `ProxyFactory`.

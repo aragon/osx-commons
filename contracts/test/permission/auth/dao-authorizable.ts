@@ -51,9 +51,7 @@ describe('DaoAuthorizableUpgradeable', async () => {
 });
 
 // Contains tests for functionality common for `DaoAuthorizableMock` and `DaoAuthorizableUpgradeableMock` to avoid duplication.
-function daoAuthorizableBaseTests(
-  fixture: () => Promise<DaoAuthorizableFixtureResult>
-) {
+function daoAuthorizableBaseTests(fixture: () => Promise<FixtureResult>) {
   const permissionId = ethers.utils.id('AUTHORIZED_FUNC_PERMISSION');
 
   it('initializes the contract with a DAO address', async () => {
@@ -91,14 +89,14 @@ function daoAuthorizableBaseTests(
   });
 }
 
-type DaoAuthorizableFixtureResult = {
+type FixtureResult = {
   alice: SignerWithAddress;
   bob: SignerWithAddress;
   daoAuthorizableMock: DaoAuthorizableMock | DaoAuthorizableUpgradeableMock;
   daoMock: DAOMock;
 };
 
-async function daoAuthorizableFixture(): Promise<DaoAuthorizableFixtureResult> {
+async function daoAuthorizableFixture(): Promise<FixtureResult> {
   const [alice, bob] = await ethers.getSigners();
   const daoMock = await new DAOMock__factory(alice).deploy();
   const daoAuthorizableMock = await new DaoAuthorizableMock__factory(
@@ -108,7 +106,7 @@ async function daoAuthorizableFixture(): Promise<DaoAuthorizableFixtureResult> {
   return {alice, bob, daoAuthorizableMock, daoMock};
 }
 
-async function daoAuthorizableUpgradeableFixture(): Promise<DaoAuthorizableFixtureResult> {
+async function daoAuthorizableUpgradeableFixture(): Promise<FixtureResult> {
   const [alice, bob] = await ethers.getSigners();
   const daoMock = await new DAOMock__factory(alice).deploy();
   const daoAuthorizableMock = await new DaoAuthorizableUpgradeableMock__factory(
