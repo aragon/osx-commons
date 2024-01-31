@@ -14,7 +14,7 @@
 - Extendable JS client with built-in Web3, Subgraph and IPFS
 - Extendable context for holding inheritable configuration
 
-# Installation
+## Installation
 
 Use [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/) to install
 @aragon/osx-commons-sdk.
@@ -24,7 +24,7 @@ npm install @aragon/osx-commons-sdk
 yarn add @aragon/osx-commons-sdk
 ```
 
-# Usage
+## Usage
 
 The SDK usage is demonstrated in the
 [SDK examples section of the Developer Portal](https://devs.aragon.org/docs/sdk/examples/).
@@ -64,7 +64,7 @@ When updating the `ClientCore` class:
 - **Update first** all affected enum's, types and interfaces in
   `src/internal/interfaces.ts`
 
-# Testing
+## Testing
 
 To execute library tests just run:
 
