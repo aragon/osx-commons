@@ -1,6 +1,6 @@
 {
   "name": "@aragon/osx-commons-subgraph",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "The Aragon OSx subgraph package containing common utilities",
   "module": "index.ts",
   "types": "index.ts",
