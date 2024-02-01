@@ -28,7 +28,7 @@ jobs:
           node-version: 18
 
       - name: 'Install the dependencies'
-        run: 'yarn install'
+        run: 'yarn install --frozen-lockfile'
 
       - name: 'Test the subgraph'
         run: 'yarn test >> $GITHUB_STEP_SUMMARY'
