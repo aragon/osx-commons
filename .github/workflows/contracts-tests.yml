@@ -30,7 +30,7 @@ jobs:
           node-version: 18
 
       - name: 'Install the dependencies'
-        run: 'yarn install'
+        run: 'yarn install --frozen-lockfile'
 
       - name: 'Build the contracts'
         run: 'yarn build'
