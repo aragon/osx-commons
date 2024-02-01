@@ -68,7 +68,7 @@ export function createWrappedERC20TokenCalls(
   symbol: string = 'MT',
   decimals: string = '18'
 ): void {
-  createERC20TokenCalls(tokenAddress, name, symbol, decimals, totalSupply);
+  createERC20TokenCalls(tokenAddress, totalSupply, name, symbol, decimals);
   createMockGetter(tokenAddress, 'underlying', 'underlying():(address)', [
     ethereum.Value.fromAddress(Address.fromString(underlyingTokenAddress)),
   ]);
