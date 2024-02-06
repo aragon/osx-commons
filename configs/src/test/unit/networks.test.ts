@@ -1,8 +1,17 @@
-import { NetworkConfig, SupportedAliases, SupportedNetworks } from "../../networks";
-import { networks } from "../../networks/networks";
-import { getNetwork, getNetworkAlias, getNetworkByAlias, getNetworkByChainId, getNetworkByNameOrAlias, getNetworkNameByAlias } from "../../networks/utils";
-
-
+import {
+  NetworkConfig,
+  SupportedAliases,
+  SupportedNetworks,
+} from '../../networks';
+import {networks} from '../../networks/networks';
+import {
+  getNetwork,
+  getNetworkAlias,
+  getNetworkByAlias,
+  getNetworkByChainId,
+  getNetworkByNameOrAlias,
+  getNetworkNameByAlias,
+} from '../../networks/utils';
 
 describe('Deployments', () => {
   describe('getNetwork', () => {
