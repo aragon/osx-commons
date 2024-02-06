@@ -2,6 +2,7 @@ import {
   getNetwork,
   getNetworkAlias,
   getNetworkByAlias,
+  getNetworkByChainId,
   getNetworkByNameOrAlias,
   getNetworkNameByAlias,
   networks,
@@ -36,8 +37,19 @@ describe('Deployments', () => {
     });
   });
   describe('getNetworkByNameOrAlias', () => {
-    it('should return the correct value', () => {
-      let inputs = Object.values(SupportedNetworks)
+    it('should return a network given a name', () => {
+      const inputs = Object.values(SupportedNetworks).map(network => {
+        return {
+          network,
+          expected: networks[network],
+        };
+      });
+      inputs.map(({network, expected}) => {
+        expect(getNetworkByNameOrAlias(network)).toMatchObject(expected);
+      });
+    });
+    it('should return a network given an alias', () => {
+      const inputs = Object.values(SupportedNetworks)
         .flatMap(nw => {
           return Object.values(SupportedAliases).map(alias => {
             return {
@@ -47,23 +59,10 @@ describe('Deployments', () => {
           });
         })
         .filter(({network}) => network !== undefined);
-
-      inputs = inputs.concat(
-        Object.values(SupportedNetworks).map(network => {
-          return {
-            network,
-            expected: networks[network],
-          };
-        })
-      );
-
       inputs.map(({network, expected}) => {
-        if (!expected) {
-          expect(getNetworkByNameOrAlias(network as string)).toBeNull();
-          return;
-        }
-        const res = getNetworkByNameOrAlias(network as string);
-        expect(res).toMatchObject(expected);
+        expect(getNetworkByNameOrAlias(network as string)).toMatchObject(
+          expected
+        );
       });
     });
   });
@@ -120,6 +119,19 @@ describe('Deployments', () => {
       });
       inputs.map(({aliasName, network, expected}) => {
         expect(getNetworkAlias(aliasName, network)).toBe(expected);
+      });
+    });
+  });
+  describe('getNetworkByChainId', () => {
+    it('should get the network given the chainId', () => {
+      const inputs = Object.values(SupportedNetworks).map(network => {
+        return {
+          network: networks[network].chainId,
+          expected: networks[network],
+        };
+      });
+      inputs.map(({network, expected}) => {
+        expect(getNetworkByChainId(network)).toBe(expected);
       });
     });
   });

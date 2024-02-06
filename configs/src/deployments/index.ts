@@ -30,6 +30,10 @@ const contracts: {
   baseSepolia,
   arbitrum,
   arbitrumSepolia,
+  local: {
+    [SupportedVersions.V1_0_0]: {} as NetworkDeployment,
+    [SupportedVersions.V1_3_0]: {} as NetworkDeployment,
+  },
 };
 
 /**
