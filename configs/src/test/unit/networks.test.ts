@@ -11,7 +11,7 @@ import {
   getNetworkByChainId,
   getNetworkByNameOrAlias,
   getNetworkNameByAlias,
-} from '../../networks/utils';
+} from '../../networks/getters';
 
 describe('Deployments', () => {
   describe('getNetwork', () => {

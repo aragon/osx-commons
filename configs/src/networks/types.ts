@@ -32,6 +32,6 @@ export type NetworkAliases = {
   [index in SupportedAliases]?: string;
 };
 
-export type NetworkConfigs<T = NetworkConfig> = {
-  [network in SupportedNetworks]: T;
+export type NetworkConfigs = {
+  [network in SupportedNetworks]: NetworkConfig;
 };
