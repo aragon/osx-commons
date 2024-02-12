@@ -3,7 +3,6 @@ import {
   SupportedAliases,
   SupportedNetworks,
 } from '../../networks';
-import {networks} from '../../networks/networks';
 import {
   getNetwork,
   getNetworkAlias,
@@ -12,6 +11,7 @@ import {
   getNetworkByNameOrAlias,
   getNetworkNameByAlias,
 } from '../../networks/getters';
+import {networks} from '../../networks/networks';
 
 describe('Deployments', () => {
   describe('getNetwork', () => {
