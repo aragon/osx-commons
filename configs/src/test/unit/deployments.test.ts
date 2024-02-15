@@ -1,10 +1,11 @@
 import {
+  SupportedVersions,
   contracts,
   getLatestNetworkDeployment,
   getNetworkDeploymentForVersion,
   getNetworkDeployments,
 } from '../../deployments';
-import {SupportedNetworks, SupportedVersions} from '../../types';
+import {SupportedNetworks} from '../../networks';
 
 describe('Deployments', () => {
   describe('getNetworkDeployments', () => {

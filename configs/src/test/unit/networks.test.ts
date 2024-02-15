@@ -1,13 +1,17 @@
 import {
+  NetworkConfig,
+  SupportedAliases,
+  SupportedNetworks,
+} from '../../networks';
+import {
   getNetwork,
   getNetworkAlias,
   getNetworkByAlias,
   getNetworkByChainId,
   getNetworkByNameOrAlias,
   getNetworkNameByAlias,
-  networks,
-} from '../../networks';
-import {NetworkConfig, SupportedAliases, SupportedNetworks} from '../../types';
+} from '../../networks/getters';
+import {networks} from '../../networks/networks';
 
 describe('Deployments', () => {
   describe('getNetwork', () => {
