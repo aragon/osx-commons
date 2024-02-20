@@ -160,9 +160,9 @@ export async function* prepareGenericInstallation(
     key: PrepareInstallationStep.PREPARING,
     txHash: tx.hash,
   };
-
-  const event = await findEventTopicLog(
-    tx,
+  const cr = await tx.wait();
+  const event = findEventTopicLog(
+    cr,
     PluginSetupProcessor__factory.createInterface(),
     'InstallationPrepared'
   );
@@ -290,9 +290,9 @@ export async function* prepareGenericUpdate(
     key: PrepareUpdateStep.PREPARING,
     txHash: tx.hash,
   };
-
-  const event = await findEventTopicLog(
-    tx,
+  const cr = await tx.wait();
+  const event = findEventTopicLog(
+    cr,
     PluginSetupProcessor__factory.createInterface(),
     'UpdatePrepared'
   );
