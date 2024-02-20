@@ -29,7 +29,8 @@ export function encodeProposalId(pluginAddress: string, id: number) {
  *
  * @export
  * @param {string} proposalId
- * @return {*}  {{ pluginAddress: string; id: number }}
+ * @return {string} pluginAddress
+ * @return {number} id
  */
 export function decodeProposalId(proposalId: string): {
   pluginAddress: string;
@@ -56,7 +57,7 @@ export function decodeProposalId(proposalId: string): {
  *
  * @export
  * @param {string} proposalId
- * @returns {*} {string}
+ * @returns {string}
  */
 export const getExtendedProposalId = (proposalId: string): string => {
   if (!isProposalId(proposalId)) {
@@ -71,7 +72,7 @@ export const getExtendedProposalId = (proposalId: string): string => {
  *
  * @export
  * @param {string} proposalId
- * @returns {*} {string}
+ * @returns {string}
  */
 export const getCompactProposalId = (proposalId: string): string => {
   if (!isExtendedProposalId(proposalId)) {
