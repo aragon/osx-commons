@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+import {ContractTransaction} from '@ethersproject/contracts';
+
+>>>>>>> 08b0f9d (add hex and plugin folders)
 export class SdkError extends Error {
   public cause?: Error | string;
   constructor(message: string, cause?: any) {
@@ -35,19 +40,9 @@ export class InvalidAddressOrEnsError extends SdkError {
     super('Invalid address or ENS', cause);
   }
 }
-export class InvalidAddressError extends SdkError {
-  constructor(cause?: any) {
-    super('Invalid address', cause);
-  }
-}
 export class InvalidCidError extends SdkError {
   constructor(cause?: any) {
     super('The value does not contain a valid CiD', cause);
-  }
-}
-export class InvalidProposalIdError extends SdkError {
-  constructor(cause?: any) {
-    super('Invalid proposal ID', cause);
   }
 }
 export class NoProviderError extends SdkError {
@@ -321,6 +316,18 @@ export class ValueOutOfRangeError extends SdkError {
     super(`The value is out of range`, cause);
   }
 }
+export class InvalidArraySizeError extends SdkError {
+  constructor(size: number, cause?: any) {
+    super(`Invalid array size: ${size}`, cause);
+  }
+}
+
+export class InvalidBitMapValueError extends SdkError {
+  constructor(cause?: any) {
+    super('The bitmap value is too big', cause);
+  }
+}
+
 export class EmptyMultiUriError extends SdkError {
   constructor(cause?: any) {
     super('The multi URI is empty', cause);

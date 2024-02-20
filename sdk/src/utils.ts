@@ -1,14 +1,13 @@
 import {ADDITIONAL_NETWORKS, LIVE_CONTRACTS} from './constants';
-import {bytesToHex, hexToBytes} from './encoding';
 import {
   InstallationNotFoundError,
-  InvalidAddressError,
   InvalidVersionError,
   PluginInstallationPreparationError,
   PluginUpdatePreparationError,
   UnsupportedNetworkError,
 } from './errors';
 import {findEventTopicLog} from './events';
+import {InvalidAddressError, bytesToHex, hexToBytes} from './hex';
 import {
   IClientGraphQLCore,
   IClientWeb3Core,
@@ -72,7 +71,7 @@ export async function prepareGenericInstallationEstimation(
 ) {
   const provider = web3.getProvider();
   if (!isAddress(params.pluginRepo)) {
-    throw new InvalidAddressError();
+    throw new InvalidAddressError(params.pluginRepo);
   }
   const networkName = (await provider.getNetwork()).name as SupportedNetwork;
   let version = params.version;
@@ -125,7 +124,7 @@ export async function* prepareGenericInstallation(
 ): AsyncGenerator<PrepareInstallationStepValue> {
   const signer = web3.getConnectedSigner();
   if (!isAddress(params.pluginRepo)) {
-    throw new InvalidAddressError();
+    throw new InvalidAddressError(params.pluginRepo);
   }
   let version = params.version;
   // if version is not specified install latest version

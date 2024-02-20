@@ -25,3 +25,5 @@ export * from './proposal';
 export * from './time';
 
 export * from './ens';
+export * from './plugin';
+export * from './hex';
