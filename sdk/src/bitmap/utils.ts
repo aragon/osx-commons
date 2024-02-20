@@ -7,7 +7,7 @@ import {BigNumber} from 'ethers';
  * @export
  * @param {number} index
  * @param {BigNumber} num
- * @return {*}  {BigNumber}
+ * @return {BigNumber}
  */
 export function flipBit(index: number, num: BigNumber): BigNumber {
   const mask = BigNumber.from(1).shl(index & 0xff);
@@ -20,7 +20,7 @@ export function flipBit(index: number, num: BigNumber): BigNumber {
  * @export
  * @param {number} index
  * @param {BigNumber} num
- * @return {*}  {boolean}
+ * @return {boolean}
  */
 export function getBit(index: number, num: BigNumber): boolean {
   const mask = BigNumber.from(1).shl(index & 0xff);
@@ -31,7 +31,7 @@ export function getBit(index: number, num: BigNumber): boolean {
  * Transforms a bigint into an array of booleans
  *
  * @param {bigint} bitmap
- * @return {*}  {Array<boolean>}
+ * @return {Array<boolean>}
  */
 export function bitmapToBoolArray(bitmap: bigint): Array<boolean> {
   if (bitmap >= BigInt(1) << BigInt(256)) {
@@ -52,9 +52,9 @@ export function bitmapToBoolArray(bitmap: bigint): Array<boolean> {
  *
  * @export
  * @param {Array<boolean>} [bools]
- * @return {*}
+ * @return {bigint}
  */
-export function boolArrayToBitmap(bools?: Array<boolean>) {
+export function boolArrayToBitmap(bools?: Array<boolean>): bigint {
   if (!bools || !bools.length) return BigInt(0);
   else if (bools.length > 256) throw new InvalidArraySizeError(bools.length);
 

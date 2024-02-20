@@ -14,6 +14,9 @@ describe('bitmap', () => {
         {index: 0, num: BigNumber.from(0), expected: BigNumber.from(1)},
         {index: 2, num: BigNumber.from(0), expected: BigNumber.from(4)},
         {index: 2, num: BigNumber.from(10), expected: BigNumber.from(14)},
+        {index: 256, num: BigNumber.from(0), expected: BigNumber.from(1)},
+        {index: 258, num: BigNumber.from(0), expected: BigNumber.from(4)},
+        {index: 258, num: BigNumber.from(10), expected: BigNumber.from(14)},
       ];
       for (const input of inputs) {
         const flippedNum = flipBit(input.index, input.num);
@@ -27,6 +30,9 @@ describe('bitmap', () => {
         {index: 0, num: BigNumber.from(1), expected: true},
         {index: 2, num: BigNumber.from(4), expected: true},
         {index: 2, num: BigNumber.from(14), expected: true},
+        {index: 256, num: BigNumber.from(1), expected: true},
+        {index: 258, num: BigNumber.from(4), expected: true},
+        {index: 258, num: BigNumber.from(14), expected: true},
       ];
       for (const input of inputs) {
         const isSet = getBit(input.index, input.num);
