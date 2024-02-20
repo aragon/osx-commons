@@ -1,7 +1,5 @@
 import {HEX_STRING_REGEX, OSX_PROPOSAL_ID_REGEX} from './constants';
 import {
-  InvalidArraySizeError,
-  InvalidBitMapValueError,
   InvalidDigitsValueError,
   InvalidProposalIdError,
   InvalidRatioValueError,
@@ -153,45 +151,7 @@ export function decodeProposalId(proposalId: string): {
   };
 }
 
-/**
- * Transforms an array of booleans into a bitmap big integer
- *
- * @export
- * @param {Array<boolean>} [bools]
- * @return {*}
- */
-export function boolArrayToBitmap(bools?: Array<boolean>) {
-  if (!bools || !bools.length) return BigInt(0);
-  else if (bools.length > 256) throw new InvalidArraySizeError(bools.length);
 
-  let result = BigInt(0);
-  for (let i = 0; i < 256; i++) {
-    if (!bools[i]) continue;
-    result |= BigInt(1) << BigInt(i);
-  }
-
-  return result;
-}
-
-/**
- * Transforms a bigint into an array of booleans
- *
- * @param {bigint} bitmap
- * @return {*}  {Array<boolean>}
- */
-export function bitmapToBoolArray(bitmap: bigint): Array<boolean> {
-  if (bitmap >= BigInt(1) << BigInt(256)) {
-    throw new InvalidBitMapValueError();
-  }
-
-  const result: Array<boolean> = [];
-  for (let i = 0; i < 256; i++) {
-    const mask = BigInt(1) << BigInt(i);
-    result.push((bitmap & mask) != BigInt(0));
-  }
-
-  return result;
-}
 
 /**
  * Gets the extended version of a proposal id from the compact one
