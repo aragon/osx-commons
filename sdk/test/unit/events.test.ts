@@ -1,5 +1,5 @@
 import {DaoEvents, IDaoEvents, findEvent, findEventTopicLog} from '../../src';
-import {getContractReceipt} from '../utils';
+import {getDummyContractReceipt} from '../utils';
 import {DAO__factory} from '@aragon/osx-ethers';
 import {EventFragment, Interface} from '@ethersproject/abi';
 import {Event} from '@ethersproject/contracts';
@@ -14,7 +14,7 @@ describe('events', () => {
   beforeAll(() => {
     iface = DAO__factory.createInterface();
     event = iface.getEvent(eventName);
-    cr = getContractReceipt(event, eventArgs);
+    cr = getDummyContractReceipt(event, eventArgs);
   });
   describe('findEvent', () => {
     it('should not find the event in the contract receipt and throw an error', () => {
@@ -23,7 +23,7 @@ describe('events', () => {
       }).toThrow();
     });
     it('should find the event in the contract receipt', () => {
-      const cr = getContractReceipt(event, eventArgs);
+      const cr = getDummyContractReceipt(event, eventArgs);
       const e = findEvent<Event>(cr, eventName);
       expect(e).toBeDefined();
       expect(e.event).toEqual(eventName);
