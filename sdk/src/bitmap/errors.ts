@@ -20,4 +20,3 @@ export class InvalidBitPositionError extends SdkError {
     );
   }
 }
-

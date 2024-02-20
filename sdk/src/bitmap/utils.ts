@@ -1,4 +1,8 @@
-import {InvalidArraySizeError, InvalidBitMapValueError, InvalidBitPositionError} from './errors';
+import {
+  InvalidArraySizeError,
+  InvalidBitMapValueError,
+  InvalidBitPositionError,
+} from './errors';
 import {BigNumber} from 'ethers';
 
 /**
