@@ -3,6 +3,7 @@ import {
   flipBit,
   getBit,
   boolArrayToBitmap,
+  InvalidBitPositionError,
 } from '../../src/bitmap';
 import {getEmpty256Array} from '../utils';
 import {BigNumber} from '@ethersproject/bignumber';
@@ -14,11 +15,26 @@ describe('bitmap', () => {
         {index: 0, num: BigNumber.from(0), expected: BigNumber.from(1)},
         {index: 2, num: BigNumber.from(0), expected: BigNumber.from(4)},
         {index: 2, num: BigNumber.from(10), expected: BigNumber.from(14)},
-        {index: 256, num: BigNumber.from(0), expected: BigNumber.from(1)},
-        {index: 258, num: BigNumber.from(0), expected: BigNumber.from(4)},
-        {index: 258, num: BigNumber.from(10), expected: BigNumber.from(14)},
+        {
+          index: -30,
+          num: BigNumber.from(0),
+          expected: null,
+          error: new InvalidBitPositionError(-30),
+        },
+        {
+          index: 280,
+          num: BigNumber.from(0),
+          expected: null,
+          error: new InvalidBitPositionError(280),
+        },
       ];
       for (const input of inputs) {
+        if (input.error) {
+          expect(() => {
+            flipBit(input.index, input.num);
+          }).toThrow(input.error);
+          continue;
+        }
         const flippedNum = flipBit(input.index, input.num);
         expect(flippedNum.toString()).toEqual(input.expected.toString());
       }
@@ -30,11 +46,26 @@ describe('bitmap', () => {
         {index: 0, num: BigNumber.from(1), expected: true},
         {index: 2, num: BigNumber.from(4), expected: true},
         {index: 2, num: BigNumber.from(14), expected: true},
-        {index: 256, num: BigNumber.from(1), expected: true},
-        {index: 258, num: BigNumber.from(4), expected: true},
-        {index: 258, num: BigNumber.from(14), expected: true},
+        {
+          index: -30,
+          num: BigNumber.from(0),
+          expected: null,
+          error: new InvalidBitPositionError(-30),
+        },
+        {
+          index: 280,
+          num: BigNumber.from(0),
+          expected: null,
+          error: new InvalidBitPositionError(280),
+        },
       ];
       for (const input of inputs) {
+        if (input.error) {
+          expect(() => {
+            flipBit(input.index, input.num);
+          }).toThrow(input.error);
+          continue;
+        }
         const isSet = getBit(input.index, input.num);
         expect(isSet).toEqual(input.expected);
       }

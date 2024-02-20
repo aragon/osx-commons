@@ -1,4 +1,4 @@
-import {InvalidArraySizeError, InvalidBitMapValueError} from './errors';
+import {InvalidArraySizeError, InvalidBitMapValueError, InvalidBitPositionError} from './errors';
 import {BigNumber} from 'ethers';
 
 /**
@@ -10,7 +10,10 @@ import {BigNumber} from 'ethers';
  * @return {BigNumber}
  */
 export function flipBit(index: number, num: BigNumber): BigNumber {
-  const mask = BigNumber.from(1).shl(index & 0xff);
+  if (index < 0 || index > 255) {
+    throw new InvalidBitPositionError(index);
+  }
+  const mask = BigNumber.from(1).shl(index);
   return num.xor(mask);
 }
 
@@ -23,7 +26,10 @@ export function flipBit(index: number, num: BigNumber): BigNumber {
  * @return {boolean}
  */
 export function getBit(index: number, num: BigNumber): boolean {
-  const mask = BigNumber.from(1).shl(index & 0xff);
+  if (index < 0 || index > 255) {
+    throw new InvalidBitPositionError(index);
+  }
+  const mask = BigNumber.from(1).shl(index);
   return !num.and(mask).eq(0);
 }
 
