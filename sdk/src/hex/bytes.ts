@@ -9,7 +9,7 @@ import {ensure0x, isHexString, strip0x} from './strings';
  * @return {Uint8Array}
  */
 export function hexToBytes(hexString: string): Uint8Array {
-  if (!hexString) return new Uint8Array();
+  if (hexString === '') return new Uint8Array();
   else if (!isHexString(hexString)) {
     throw new InvalidHexStringError(hexString);
   } else if (hexString.length % 2 !== 0) {

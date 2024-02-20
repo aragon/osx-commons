@@ -46,9 +46,12 @@ export function decodeProposalId(proposalId: string): {
     throw new InvalidProposalIdError(proposalId);
   }
 
+  const pluginAddress = matchedRegexResult[1];
+  const hexProposalNonce = matchedRegexResult[2];
+
   return {
-    pluginAddress: matchedRegexResult[1],
-    id: parseInt(strip0x(matchedRegexResult[2]), 16),
+    pluginAddress,
+    id: parseInt(strip0x(hexProposalNonce), 16),
   };
 }
 
