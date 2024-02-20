@@ -10,6 +10,12 @@ export * from './encoding';
 export * from './promises';
 export * from './errors';
 
+// SDK
+export * from './client-core';
+export * from './context-core';
+export * from './context';
+export * from './utils';
+
 // From OSX
 export * from './bitmap';
 export * from './events';
