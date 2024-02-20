@@ -1,4 +1,5 @@
 import {ADDRESS_REGEX} from './constants';
+
 /**
  * Returns true if the given string is a valid Ethereum address
  *
