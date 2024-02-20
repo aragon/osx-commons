@@ -11,7 +11,6 @@ import {
   hexToBytes,
   strip0x,
 } from '../../src/encoding';
-import {getEmpty256Array} from '../utils';
 
 describe('Test encoding helper functions', () => {
   describe('ensure0x', () => {

@@ -28,7 +28,10 @@ describe('events', () => {
       expect(e).toBeDefined();
       expect(e.event).toEqual(eventName);
       expect(e.args).toBeDefined();
-      for (const [i, arg] of e.args!.entries()) {
+      if (!e.args) {
+        throw new Error('e.args is undefined');
+      }
+      for (const [i, arg] of e.args.entries()) {
         expect(arg).toBe(eventArgs[i]);
       }
     });
@@ -44,7 +47,10 @@ describe('events', () => {
       expect(log).toBeDefined();
       expect(log.name).toEqual(eventName);
       expect(log.args).toBeDefined();
-      for (const [i, arg] of log.args!.entries()) {
+      if (!log.args) {
+        throw new Error('log.args is undefined');
+      }
+      for (const [i, arg] of log.args.entries()) {
         expect(arg).toBe(eventArgs[i]);
       }
     });
