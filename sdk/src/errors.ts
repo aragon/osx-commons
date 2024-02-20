@@ -1,4 +1,3 @@
-
 export class SdkError extends Error {
   public cause?: Error | string;
   constructor(message: string, cause?: any) {
@@ -298,7 +297,6 @@ export class ProposalNotFoundError extends SdkError {
     super('Proposal not found', cause);
   }
 }
-
 
 export class InvalidRatioValueError extends SdkError {
   constructor(ratio: number, cause?: any) {

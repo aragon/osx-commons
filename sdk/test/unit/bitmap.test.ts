@@ -94,7 +94,10 @@ describe('bitmap', () => {
     it('should transform a boolean array into a bigint bitmap', () => {
       const tests = [
         {input: getEmpty256Array(), output: BigInt(0)},
-        {input: getEmpty256Array().fill(true), output: BigInt(2 ** 256) - BigInt(1)},
+        {
+          input: getEmpty256Array().fill(true),
+          output: BigInt(2 ** 256) - BigInt(1),
+        },
       ];
       let input = getEmpty256Array();
       input[0] = true;

@@ -64,4 +64,3 @@ export enum PluginSetupProcessorEvents {
 export enum UupsUpgradableEvents {
   UPGRADED = 'Upgraded',
 }
-

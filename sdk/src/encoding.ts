@@ -151,8 +151,6 @@ export function decodeProposalId(proposalId: string): {
   };
 }
 
-
-
 /**
  * Gets the extended version of a proposal id from the compact one
  *

@@ -1,5 +1,5 @@
-import { findEventTopicLog } from './utils';
-import { ContractReceipt, Interface, LogDescription } from 'ethers';
+import {findEventTopicLog} from './utils';
+import {ContractReceipt, Interface, LogDescription} from 'ethers';
 
 describe('findEventTopicLog', () => {
   const cr: ContractReceipt = {
