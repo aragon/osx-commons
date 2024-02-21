@@ -1,27 +1,18 @@
 contracts:
-- changed-files:
-  - any-glob-to-any-file:
-    - contracts/**/*
-    - contracts/*
-    - .github/workflows/contracts-*.yml
+    - changed-files:
+          - any-glob-to-any-file:
+                [contracts/**/*, contracts/*, .github/workflows/contracts-*.yml]
 
 sdk:
-- changed-files:
-  - any-glob-to-any-file:
-    - sdk/**/*
-    - sdk/*
-    - .github/workflows/sdk-*.yml
+    - changed-files:
+          - any-glob-to-any-file: [sdk/**/*, sdk/*, .github/workflows/sdk-*.yml]
 
 subgraph:
-- changed-files:
-  - any-glob-to-any-file:
-    - subgraph/**/*
-    - subgraph/*
-    - .github/workflows/subgraph-*.yml
+    - changed-files:
+          - any-glob-to-any-file:
+                [subgraph/**/*, subgraph/*, .github/workflows/subgraph-*.yml]
 
 configs:
-- changed-files:
-  - any-glob-to-any-file:
-    - configs/**/*
-    - configs/*
-    - .github/workflows/configs-*.yml
+    - changed-files:
+          - any-glob-to-any-file:
+                [configs/**/*, configs/*, .github/workflows/configs-*.yml]
