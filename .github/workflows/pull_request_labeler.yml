@@ -9,6 +9,6 @@ jobs:
       - name: 'Check out the repo'
         uses: 'actions/checkout@v3'
 
-      - uses: actions/labeler@v4
+      - uses: actions/labeler@v5
         with:
           sync-labels: true
