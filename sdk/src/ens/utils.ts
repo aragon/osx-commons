@@ -4,6 +4,14 @@ import {getNetworkByAlias} from '@aragon/osx-commons-configs';
 import {Networkish} from '@ethersproject/networks';
 import {JsonRpcProvider} from '@ethersproject/providers';
 
+/**
+ * Resolves an ENS name to an address given a provider
+ *
+ * @export
+ * @param {string} ensName
+ * @param {JsonRpcProvider} provider
+ * @return {(Promise<string | null>)}
+ */
 export function resolveEnsName(
   ensName: string,
   provider: JsonRpcProvider
@@ -14,6 +22,14 @@ export function resolveEnsName(
   return provider.resolveName(ensName);
 }
 
+/**
+ * Resolves an ENS name to an address given a network
+ *
+ * @export
+ * @param {string} ensName
+ * @param {Networkish} network
+ * @return {(Promise<string | null>)}
+ */
 export function resolveEnsNameWithProvider(
   ensName: string,
   network: Networkish
