@@ -23,3 +23,5 @@ export * from './math';
 export * from './permission';
 export * from './proposal';
 export * from './time';
+
+export * from './ens';
