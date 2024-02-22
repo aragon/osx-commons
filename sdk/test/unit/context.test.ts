@@ -284,10 +284,10 @@ describe('Context instances', () => {
     for (const provider of context.web3Providers) {
       expect(provider).toBeInstanceOf(JsonRpcProvider);
       expect(provider.connection.url).toBe('https://goerli.base.org/');
-      const nw = provider.network;
-      expect(nw.chainId).toEqual(84531);
-      expect(nw.name).toEqual('baseGoerli');
-      expect(nw.ensAddress).toEqual(
+      const network = provider.network;
+      expect(network.chainId).toEqual(84531);
+      expect(network.name).toEqual('baseGoerli');
+      expect(network.ensAddress).toEqual(
         LIVE_CONTRACTS[SupportedVersion.LATEST].baseGoerli.ensRegistryAddress
       );
     }

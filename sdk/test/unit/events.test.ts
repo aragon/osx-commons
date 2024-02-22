@@ -10,21 +10,20 @@ describe('events', () => {
   let iface: Interface;
   const eventName = DaoEvents.NEW_URI;
   const eventArgs = ['https://aragon.org'];
-  let cr: ContractReceipt;
+  let contractReceipt: ContractReceipt;
   beforeAll(() => {
     iface = DAO__factory.createInterface();
     event = iface.getEvent(eventName);
-    cr = getDummyContractReceipt(event, eventArgs);
+    contractReceipt = getDummyContractReceipt(event, eventArgs);
   });
   describe('findEvent', () => {
     it('should not find the event in the contract receipt and throw an error', () => {
       expect(() => {
-        findEvent(cr, IDaoEvents.DEPOSITED);
+        findEvent(contractReceipt, IDaoEvents.DEPOSITED);
       }).toThrow();
     });
     it('should find the event in the contract receipt', () => {
-      const cr = getDummyContractReceipt(event, eventArgs);
-      const e = findEvent<Event>(cr, eventName);
+      const e = findEvent<Event>(contractReceipt, eventName);
       expect(e).toBeDefined();
       expect(e.event).toEqual(eventName);
       expect(e.args).toBeDefined();
@@ -39,11 +38,11 @@ describe('events', () => {
   describe('findEventTopicLog', () => {
     it('should not find the event in the contract receipt and throw an error', () => {
       expect(() => {
-        findEventTopicLog(cr, iface, IDaoEvents.DEPOSITED);
+        findEventTopicLog(contractReceipt, iface, IDaoEvents.DEPOSITED);
       }).toThrow();
     });
     it('should find the event topic in the contract receipt', () => {
-      const log = findEventTopicLog(cr, iface, eventName);
+      const log = findEventTopicLog(contractReceipt, iface, eventName);
       expect(log).toBeDefined();
       expect(log.name).toEqual(eventName);
       expect(log.args).toBeDefined();

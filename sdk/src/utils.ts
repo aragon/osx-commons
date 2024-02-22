@@ -160,9 +160,9 @@ export async function* prepareGenericInstallation(
     key: PrepareInstallationStep.PREPARING,
     txHash: tx.hash,
   };
-  const cr = await tx.wait();
+  const contractReceipt = await tx.wait();
   const event = findEventTopicLog(
-    cr,
+    contractReceipt,
     PluginSetupProcessor__factory.createInterface(),
     'InstallationPrepared'
   );
