@@ -26,9 +26,9 @@ describe('ens', () => {
         // mocked provider
         const provider = new JsonRpcProvider();
         if (input.error) {
-          await expect(resolveEnsName(input.input, provider)).rejects.toThrow(
-            input.error
-          );
+          await expect(
+            async () => await resolveEnsName(input.input, provider)
+          ).rejects.toThrow(input.error);
           continue;
         }
         jest.spyOn(provider, 'resolveName').mockResolvedValue(input.output);
@@ -56,7 +56,8 @@ describe('ens', () => {
         // mocked provider
         if (input.error) {
           await expect(
-            resolveEnsNameWithProvider(input.input, input.network)
+            async () =>
+              await resolveEnsNameWithProvider(input.input, input.network)
           ).rejects.toThrow(input.error);
           continue;
         }
