@@ -26,8 +26,8 @@ describe('ens', () => {
         // mocked provider
         const provider = new JsonRpcProvider();
         if (input.error) {
-          expect(async () => {
-            await resolveEnsName(input.input, provider);
+          await expect(() => {
+            resolveEnsName(input.input, provider);
           }).toThrow(input.error);
           continue;
         }
@@ -55,8 +55,8 @@ describe('ens', () => {
       for (const input of inputs) {
         // mocked provider
         if (input.error) {
-          expect(async () => {
-            await resolveEnsNameWithProvider(input.input, input.network);
+          await expect(() => {
+            resolveEnsNameWithProvider(input.input, input.network);
           }).toThrow(input.error);
           continue;
         }
