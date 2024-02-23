@@ -3,7 +3,7 @@ import {ensure0x, strip0x} from '../../../src';
 describe('hex/strings', () => {
   describe('ensure0x', () => {
     it('Should ensure 0x prefixes', () => {
-      const inputs = [
+      const tests = [
         // strip
         {in: '0', out: '0x0'},
         {in: '00', out: '0x00'},
@@ -15,15 +15,15 @@ describe('hex/strings', () => {
         {in: '0x1234567890abcdef', out: '0x1234567890abcdef'},
       ];
 
-      for (const input of inputs) {
-        const result = ensure0x(input.in);
-        expect(result).toEqual(input.out);
+      for (const test of tests) {
+        const result = ensure0x(test.in);
+        expect(result).toEqual(test.out);
       }
     });
   });
   describe('strip0x', () => {
     it('Should strip 0x prefixes', () => {
-      const inputs = [
+      const tests = [
         // strip
         {in: '0x0', out: '0'},
         {in: '0x00', out: '00'},
@@ -35,9 +35,9 @@ describe('hex/strings', () => {
         {in: '1234567890abcdef', out: '1234567890abcdef'},
       ];
 
-      for (const input of inputs) {
-        const result = strip0x(input.in);
-        expect(result).toEqual(input.out);
+      for (const test of tests) {
+        const result = strip0x(test.in);
+        expect(result).toEqual(test.out);
       }
     });
   });

@@ -3,7 +3,7 @@ import {bytesToHex, hexToBytes} from '../../../src';
 describe('hex/bytes', () => {
   describe('hexToBytes', () => {
     it('Should convert hex strings to a buffer', () => {
-      const inputs = [
+      const tests = [
         {hex: '0x00', serializedBuffer: '0'},
         {hex: '0x10', serializedBuffer: '16'},
         {hex: '0xff', serializedBuffer: '255'},
@@ -23,9 +23,9 @@ describe('hex/bytes', () => {
         },
       ];
 
-      for (const input of inputs) {
-        const result = hexToBytes(input.hex);
-        expect(result.join(',')).toEqual(input.serializedBuffer);
+      for (const test of tests) {
+        const result = hexToBytes(test.hex);
+        expect(result.join(',')).toEqual(test.serializedBuffer);
       }
     });
   });

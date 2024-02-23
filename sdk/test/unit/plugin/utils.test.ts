@@ -8,7 +8,7 @@ import {
 describe('plugin/utils', () => {
   describe('encodeRatio', () => {
     it('Should encode a bigint from a float and the number of digits', () => {
-      const inputs = [
+      const tests = [
         {float: 0.5, digits: 1, out: BigInt(5), error: null},
         {float: 1, digits: 4, out: BigInt(10000), error: null},
         {float: 0.25555, digits: 2, out: BigInt(26), error: null},
@@ -22,15 +22,15 @@ describe('plugin/utils', () => {
         {float: 0.5, digits: 18, out: null, error: InvalidDigitsValueError},
       ];
 
-      for (const input of inputs) {
-        if (input.error) {
-          expect(() => encodeRatio(input.float, input.digits)).toThrow(
-            input.error
+      for (const test of tests) {
+        if (test.error) {
+          expect(() => encodeRatio(test.float, test.digits)).toThrow(
+            test.error
           );
           continue;
         }
-        const result = encodeRatio(input.float, input.digits);
-        expect(result.toString()).toEqual(input.out.toString());
+        const result = encodeRatio(test.float, test.digits);
+        expect(result.toString()).toEqual(test.out.toString());
       }
     });
   });

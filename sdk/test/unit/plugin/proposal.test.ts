@@ -10,7 +10,7 @@ import {ADDRESS_ONE, ADDRESS_ZERO} from '../../constants';
 describe('plugin/proposal', () => {
   describe('encodeProposalId', () => {
     it('Should encode a nonce-based proposalId', () => {
-      const entries = [
+      const tests = [
         {
           addr: ADDRESS_ZERO,
           nonce: 0,
@@ -48,14 +48,14 @@ describe('plugin/proposal', () => {
         },
       ];
 
-      for (const entry of entries) {
-        expect(encodeProposalId(entry.addr, entry.nonce)).toBe(entry.output);
+      for (const test of tests) {
+        expect(encodeProposalId(test.addr, test.nonce)).toBe(test.output);
       }
     });
   });
   describe('decodeProposalId', () => {
     it('Should decode a nonce-based proposalId', () => {
-      const entries = [
+      const tests = [
         {
           input: '0x0000000000000000000000000000000000000000_0x0',
           addr: '0x0000000000000000000000000000000000000000',
@@ -93,16 +93,16 @@ describe('plugin/proposal', () => {
         },
       ];
 
-      for (const entry of entries) {
-        const result = decodeProposalId(entry.input);
-        expect(result.pluginAddress).toBe(entry.addr);
-        expect(result.id).toBe(entry.nonce);
+      for (const test of tests) {
+        const result = decodeProposalId(test.input);
+        expect(result.pluginAddress).toBe(test.addr);
+        expect(result.id).toBe(test.nonce);
       }
     });
   });
   describe('getExtendedProposalId', () => {
     it('Should get an extended version of a proposal id', () => {
-      const entries = [
+      const tests = [
         {
           in: '0x0000000000000000000000000000000000000000_0x1',
           out: '0x0000000000000000000000000000000000000000_0x0000000000000000000000000000000000000000000000000000000000000001',
@@ -125,19 +125,19 @@ describe('plugin/proposal', () => {
         },
       ];
 
-      for (const entry of entries) {
-        if (entry.error) {
-          expect(() => getExtendedProposalId(entry.in)).toThrow(entry.error);
+      for (const test of tests) {
+        if (test.error) {
+          expect(() => getExtendedProposalId(test.in)).toThrow(test.error);
         } else {
-          const result = getExtendedProposalId(entry.in);
-          expect(result).toBe(entry.out);
+          const result = getExtendedProposalId(test.in);
+          expect(result).toBe(test.out);
         }
       }
     });
   });
   describe('getCompactProposalId', () => {
     it('Should get a compact version of a proposal id', () => {
-      const entries = [
+      const tests = [
         {
           in: '0x0000000000000000000000000000000000000000_0x0000000000000000000000000000000000000000000000000000000000000001',
           out: '0x0000000000000000000000000000000000000000_0x1',
@@ -167,12 +167,12 @@ describe('plugin/proposal', () => {
         },
       ];
 
-      for (const entry of entries) {
-        if (entry.error) {
-          expect(() => getCompactProposalId(entry.in)).toThrow(entry.error);
+      for (const test of tests) {
+        if (test.error) {
+          expect(() => getCompactProposalId(test.in)).toThrow(test.error);
         } else {
-          const result = getCompactProposalId(entry.in);
-          expect(result).toBe(entry.out);
+          const result = getCompactProposalId(test.in);
+          expect(result).toBe(test.out);
         }
       }
     });
