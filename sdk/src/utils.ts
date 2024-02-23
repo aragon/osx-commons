@@ -290,9 +290,9 @@ export async function* prepareGenericUpdate(
     key: PrepareUpdateStep.PREPARING,
     txHash: tx.hash,
   };
-  const cr = await tx.wait();
+  const contractReceipt = await tx.wait();
   const event = findEventTopicLog(
-    cr,
+    contractReceipt,
     PluginSetupProcessor__factory.createInterface(),
     'UpdatePrepared'
   );
