@@ -14,30 +14,24 @@ import {JsonRpcProvider} from '@ethersproject/providers';
  */
 export function resolveEnsName(
   ensName: string,
-  provider: JsonRpcProvider
+  providerOrNetwork: JsonRpcProvider | Networkish
 ): Promise<string | null> {
+  // check if the ensName is valid
   if (!isEnsName(ensName)) {
     throw new InvalidEnsError(ensName);
   }
-  return provider.resolveName(ensName);
-}
-
-/**
- * Resolves an ENS name to an address given a network
- *
- * @export
- * @param {string} ensName
- * @param {Networkish} network
- * @return {(Promise<string | null>)}
- */
-export function resolveEnsNameWithProvider(
-  ensName: string,
-  network: Networkish
-): Promise<string | null> {
-  const aragonNetwork = getNetworkByAlias(network.toString());
-  if (!aragonNetwork) {
-    throw new UnsupportedNetworkError(network.toString());
+  let provider: JsonRpcProvider;
+  // check if the providerOrNetwork is a provider or a network
+  // if it's a provider, use it
+  if (providerOrNetwork instanceof JsonRpcProvider) {
+    provider = providerOrNetwork;
+  // any other case, assume it's a network and create a provider
+  } else {
+    const aragonNetwork = getNetworkByAlias(providerOrNetwork.toString());
+    if (!aragonNetwork) {
+      throw new UnsupportedNetworkError(providerOrNetwork.toString());
+    }
+    provider = new JsonRpcProvider(aragonNetwork.url, providerOrNetwork);
   }
-  const provider = new JsonRpcProvider(aragonNetwork.url, network);
-  return resolveEnsName(ensName, provider);
+  return provider.resolveName(ensName);
 }

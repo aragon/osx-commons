@@ -1,15 +1,11 @@
-import {
-  InvalidEnsError,
-  resolveEnsName,
-  resolveEnsNameWithProvider,
-} from '../../src';
+import {InvalidEnsError, resolveEnsName} from '../../src';
 import {ADDRESS_ONE, TEST_ENS_NAME, TEST_HTTP_URI} from '../constants';
 import {JsonRpcProvider} from '@ethersproject/providers';
 
 describe('ens', () => {
   describe('resolveEnsName', () => {
-    it('should return the correct value', async () => {
-      const inputs = [
+    it('should receive a JsonRpcProvider and return the correct value', async () => {
+      const tests = [
         {
           input: TEST_ENS_NAME,
           network: 'mainnet',
@@ -22,24 +18,22 @@ describe('ens', () => {
           error: new InvalidEnsError(TEST_HTTP_URI),
         },
       ];
-      for (const input of inputs) {
+      for (const test of tests) {
         // mocked provider
         const provider = new JsonRpcProvider();
-        if (input.error) {
+        if (test.error) {
           await expect(
-            async () => await resolveEnsName(input.input, provider)
-          ).rejects.toThrow(input.error);
+            async () => await resolveEnsName(test.input, provider)
+          ).rejects.toThrow(test.error);
           continue;
         }
-        jest.spyOn(provider, 'resolveName').mockResolvedValue(input.output);
-        const resolvedAddress = await resolveEnsName(input.input, provider);
-        expect(resolvedAddress).toEqual(input.output);
+        jest.spyOn(provider, 'resolveName').mockResolvedValue(test.output);
+        const resolvedAddress = await resolveEnsName(test.input, provider);
+        expect(resolvedAddress).toEqual(test.output);
       }
     });
-  });
-  describe('resolveEnsNameWithProvider', () => {
-    it('should return the correct value', async () => {
-      const inputs = [
+    it('should receive a Networkish and return the correct value', async () => {
+      const tests = [
         {
           input: TEST_ENS_NAME,
           network: 'mainnet',
@@ -52,23 +46,19 @@ describe('ens', () => {
           error: new InvalidEnsError(TEST_HTTP_URI),
         },
       ];
-      for (const input of inputs) {
+      for (const test of tests) {
         // mocked provider
-        if (input.error) {
+        if (test.error) {
           await expect(
-            async () =>
-              await resolveEnsNameWithProvider(input.input, input.network)
-          ).rejects.toThrow(input.error);
+            async () => await resolveEnsName(test.input, test.network)
+          ).rejects.toThrow(test.error);
           continue;
         }
         jest
           .spyOn(JsonRpcProvider.prototype, 'resolveName')
-          .mockResolvedValue(input.output);
-        const resolvedAddress = await resolveEnsNameWithProvider(
-          input.input,
-          input.network
-        );
-        expect(resolvedAddress).toEqual(input.output);
+          .mockResolvedValue(test.output);
+        const resolvedAddress = await resolveEnsName(test.input, test.network);
+        expect(resolvedAddress).toEqual(test.output);
       }
     });
   });
