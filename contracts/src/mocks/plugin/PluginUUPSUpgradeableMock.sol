@@ -58,7 +58,7 @@ contract PluginUUPSUpgradeableMockBuild3 is PluginUUPSUpgradeable {
             state2 = 2;
         }
         if (_previousBuild < 3) {
-            state2 = 3;
+            state3 = 3;
         }
     }
 }

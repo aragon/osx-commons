@@ -147,7 +147,6 @@ contract PluginUUPSUpgradeableSetupMockBuild3 is PluginUpgradeableSetup {
     }
 
     /// @inheritdoc IPluginSetup
-
     function prepareUpdate(
         address _dao,
         uint16 _fromBuild,
