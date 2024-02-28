@@ -25,7 +25,7 @@ export function resolveEnsName(
   // if it's a provider, use it
   if (providerOrNetwork instanceof JsonRpcProvider) {
     provider = providerOrNetwork;
-  // any other case, assume it's a network and create a provider
+    // any other case, assume it's a network and create a provider
   } else {
     const aragonNetwork = getNetworkByAlias(providerOrNetwork.toString());
     if (!aragonNetwork) {
