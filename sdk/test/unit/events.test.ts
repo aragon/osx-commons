@@ -1,4 +1,4 @@
-import {DaoEvents, IDaoEvents, findEvent, findEventTopicLog} from '../../src';
+import {findEvent, findEventTopicLog} from '../../src';
 import {getDummyContractReceipt} from '../utils';
 import {DAO__factory} from '@aragon/osx-ethers';
 import {EventFragment, Interface} from '@ethersproject/abi';
@@ -7,25 +7,26 @@ import {ContractReceipt} from '@ethersproject/contracts';
 
 describe('events', () => {
   let event: EventFragment;
+  let nonExistingEvent: EventFragment;
   let iface: Interface;
-  const eventName = DaoEvents.NEW_URI;
   const eventArgs = ['https://aragon.org'];
-  let contractReceipt: ContractReceipt;
+  let receipt: ContractReceipt;
   beforeAll(() => {
     iface = DAO__factory.createInterface();
-    event = iface.getEvent(eventName);
-    contractReceipt = getDummyContractReceipt(event, eventArgs);
+    event = iface.getEvent('NewURI');
+    nonExistingEvent = iface.getEvent('Deposited');
+    receipt = getDummyContractReceipt(event, eventArgs);
   });
   describe('findEvent', () => {
     it('should not find the event in the contract receipt and throw an error', () => {
       expect(() => {
-        findEvent(contractReceipt, IDaoEvents.DEPOSITED);
+        findEvent(receipt, nonExistingEvent.name);
       }).toThrow();
     });
     it('should find the event in the contract receipt', () => {
-      const e = findEvent<Event>(contractReceipt, eventName);
+      const e = findEvent<Event>(receipt, event.name);
       expect(e).toBeDefined();
-      expect(e.event).toEqual(eventName);
+      expect(e.event).toEqual(event.name);
       expect(e.args).toBeDefined();
       if (!e.args) {
         throw new Error('e.args is undefined');
@@ -38,13 +39,13 @@ describe('events', () => {
   describe('findEventTopicLog', () => {
     it('should not find the event in the contract receipt and throw an error', () => {
       expect(() => {
-        findEventTopicLog(contractReceipt, iface, IDaoEvents.DEPOSITED);
+        findEventTopicLog(receipt, iface, nonExistingEvent.name);
       }).toThrow();
     });
     it('should find the event topic in the contract receipt', () => {
-      const log = findEventTopicLog(contractReceipt, iface, eventName);
+      const log = findEventTopicLog(receipt, iface, event.name);
       expect(log).toBeDefined();
-      expect(log.name).toEqual(eventName);
+      expect(log.name).toEqual(event.name);
       expect(log.args).toBeDefined();
       if (!log.args) {
         throw new Error('log.args is undefined');
