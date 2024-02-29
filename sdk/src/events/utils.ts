@@ -14,9 +14,7 @@ export function findEvent<T extends Event>(
   receipt: ContractReceipt,
   eventName: string
 ): T {
-  const event = (receipt.events || []).find(
-    event => event.event === eventName
-  );
+  const event = (receipt.events || []).find(event => event.event === eventName);
 
   if (!event) {
     throw new EventNotFoundError(eventName, receipt);
