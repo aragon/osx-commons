@@ -6,20 +6,20 @@ import {ContractReceipt, Event} from '@ethersproject/contracts';
  * Finds a typed event in transaction given the event name
  *
  * @export
- * @param {ContractReceipt} contractReceipt
+ * @param {ContractReceipt} receipt
  * @param {string} eventName
  * @return {T}
  */
 export function findEvent<T extends Event>(
-  contractReceipt: ContractReceipt,
+  receipt: ContractReceipt,
   eventName: string
 ): T {
-  const event = (contractReceipt.events || []).find(
+  const event = (receipt.events || []).find(
     event => event.event === eventName
   );
 
   if (!event) {
-    throw new EventNotFoundError(eventName, contractReceipt);
+    throw new EventNotFoundError(eventName, receipt);
   }
 
   return event as T;
@@ -29,20 +29,20 @@ export function findEvent<T extends Event>(
  * Finds a log in a transaction given the interface of the emitting contract and the event name
  *
  * @export
- * @param {ContractReceipt} contractReceipt
+ * @param {ContractReceipt} receipt
  * @param {Interface} iface
  * @param {string} eventName
  * @return {LogDescription & T}
  */
 export function findEventTopicLog<T extends Event>(
-  contractReceipt: ContractReceipt,
+  receipt: ContractReceipt,
   iface: Interface,
   eventName: string
 ): LogDescription & T {
   const topic = iface.getEventTopic(eventName);
-  const log = contractReceipt.logs.find(x => x.topics[0] === topic);
+  const log = receipt.logs.find(x => x.topics[0] === topic);
   if (!log) {
-    throw new EventNotFoundError(eventName, contractReceipt);
+    throw new EventNotFoundError(eventName, receipt);
   }
   return iface.parseLog(log) as LogDescription & T;
 }
