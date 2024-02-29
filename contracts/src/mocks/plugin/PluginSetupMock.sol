@@ -19,8 +19,9 @@ contract PluginSetupMockBuild1 is PluginSetup {
     /// @inheritdoc IPluginSetup
     function prepareInstallation(
         address _dao,
-        bytes memory
+        bytes memory _data
     ) external returns (address plugin, PreparedSetupData memory preparedSetupData) {
+        (_data);
         plugin = address(new PluginMockBuild1(IDAO(_dao)));
         preparedSetupData.helpers = mockHelpers(1);
         preparedSetupData.permissions = mockPermissions(0, 1, PermissionLib.Operation.Grant);
