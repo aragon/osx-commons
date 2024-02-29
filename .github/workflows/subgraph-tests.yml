@@ -4,11 +4,6 @@ on:
   workflow_dispatch:
   workflow_call:
   push:
-    paths:
-      - 'contracts/**'
-      - 'subgraph/**'
-      - '.github/workflows/subgraph-*.yml'
-
 jobs:
   formatting-linting:
     uses: ./.github/workflows/formatting-linting.yml

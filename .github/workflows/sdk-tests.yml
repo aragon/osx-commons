@@ -4,9 +4,6 @@ on:
   workflow_dispatch:
   workflow_call:
   push:
-    paths:
-      - 'sdk/**'
-      - '.github/workflows/sdk-*.yml'
 
 jobs:
   formatting-linting:
