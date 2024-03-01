@@ -7,9 +7,6 @@ on:
       INFURA_API_KEY:
         required: true
   push:
-    paths:
-      - 'contracts/**'
-      - '.github/workflows/contracts-*.yml'
 
 jobs:
   formatting-linting:
