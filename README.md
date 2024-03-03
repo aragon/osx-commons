@@ -4,7 +4,7 @@ OSX-Commons: A collection of shared resources and utilities for the Aragon OSX D
 
 ## Audits
 
-Our smart contracts undergo regular audits.
+Our smart contracts undergo regular audits. New Release
 
 ### v1.0.0
 
