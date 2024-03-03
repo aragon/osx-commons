@@ -6,7 +6,6 @@ OSX-Commons: A collection of shared resources and utilities for the Aragon OSX D
 
 Our smart contracts undergo regular audits. New Release
 
-
 ### v1.0.0
 
 _Version `1.0.0` of `osx-commons-contracts` has been audit when it was part of the `aragon/osx` repo._
