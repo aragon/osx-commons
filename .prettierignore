@@ -15,6 +15,7 @@ imported
 generated
 */sdk/test/integration/*.test.ts
 !configs/src/deployments/
+!configs/src/test/unit/deployments/
 
 # files
 *.env
