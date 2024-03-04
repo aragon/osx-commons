@@ -53,7 +53,6 @@ export function getLatestNetworkDeployment(
 }
 
 export function getDaoEnsDomain(networkName: string): string {
-  console.log('=======> pluggin', exceptionalDomains[networkName]);
   if (exceptionalDomains[networkName]) {
     return exceptionalDomains[networkName].daoEns;
   } else {
