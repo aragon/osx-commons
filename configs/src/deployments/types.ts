@@ -64,3 +64,12 @@ export enum ContractNames {
   TOKEN_VOTING_REPO_IMPLEMENTATION = 'TokenVotingRepoImplementation',
   ENS_REGISTRY = 'ENSRegistry',
 }
+
+export type NetworkDomain = {
+  daoEns: string;
+  pluginEns: string;
+};
+
+export type NetworkDomains = {
+  [network: string]: NetworkDomain;
+};
