@@ -12,19 +12,3 @@ export const exceptionalDomains: NetworkDomains = {
     pluginEns: 'plugin.aragon-dao.eth',
   },
 };
-
-export function getDaoEnsDomain(networkName: string): string {
-  if (exceptionalDomains[networkName]) {
-    return exceptionalDomains[networkName].daoEns;
-  } else {
-    return commonDomain.daoEns;
-  }
-}
-
-export function getPluginEnsDomain(networkName: string): string {
-  if (exceptionalDomains[networkName]) {
-    return exceptionalDomains[networkName].pluginEns;
-  } else {
-    return commonDomain.pluginEns;
-  }
-}

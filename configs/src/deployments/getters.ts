@@ -1,5 +1,6 @@
 import {SupportedNetworks} from '../networks';
 import {contracts} from './contracts';
+import {exceptionalDomains, commonDomain} from './osx-ens-domains';
 import {
   NetworkDeployment,
   NetworkDeployments,
@@ -49,4 +50,21 @@ export function getLatestNetworkDeployment(
     }
   }
   return null;
+}
+
+export function getDaoEnsDomain(networkName: string): string {
+  console.log('=======> pluggin', exceptionalDomains[networkName]);
+  if (exceptionalDomains[networkName]) {
+    return exceptionalDomains[networkName].daoEns;
+  } else {
+    return commonDomain.daoEns;
+  }
+}
+
+export function getPluginEnsDomain(networkName: string): string {
+  if (exceptionalDomains[networkName]) {
+    return exceptionalDomains[networkName].pluginEns;
+  } else {
+    return commonDomain.pluginEns;
+  }
 }
