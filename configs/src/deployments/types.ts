@@ -65,11 +65,11 @@ export enum ContractNames {
   ENS_REGISTRY = 'ENSRegistry',
 }
 
-export type NetworkDomain = {
+export type ENSNetworkDomain = {
   daoEns: string;
   pluginEns: string;
 };
 
-export type NetworkDomains = {
-  [network: string]: NetworkDomain;
+export type ENSNetworkDomainsMap = {
+  [network: string]: ENSNetworkDomain;
 };
