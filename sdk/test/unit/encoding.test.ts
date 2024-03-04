@@ -1,7 +1,5 @@
 import {InvalidProposalIdError} from '../../src';
 import {
-  bitmapToBoolArray,
-  boolArrayToBitmap,
   bytesToHex,
   decodeProposalId,
   decodeRatio,
@@ -13,7 +11,6 @@ import {
   hexToBytes,
   strip0x,
 } from '../../src/encoding';
-import {getEmpty256Array} from '../utils';
 
 describe('Test encoding helper functions', () => {
   describe('ensure0x', () => {
@@ -271,80 +268,6 @@ describe('Test encoding helper functions', () => {
         expect(result.pluginAddress).toBe(entry.addr);
         expect(result.id).toBe(entry.nonce);
       }
-    });
-  });
-  describe('boolArrayToBitmap', () => {
-    it('boolArrayToBitmap should fail when the array is too large', () => {
-      expect(() => {
-        const tmp = getEmpty256Array();
-        tmp.push(false);
-        boolArrayToBitmap(tmp);
-      }).toThrow();
-    });
-    it('should transform a boolean array into a bigint bitmap', () => {
-      const tests = [
-        {input: undefined, output: BigInt(0)},
-        {input: [], output: BigInt(0)},
-        {input: [false], output: BigInt(0)},
-        {input: [true], output: BigInt(1)},
-        {input: [true, false], output: BigInt(1)},
-        {input: [true, false, false, false, false, false], output: BigInt(1)},
-        {input: [false, true, false, true], output: BigInt(10)},
-        {input: getEmpty256Array(), output: BigInt(0)},
-      ];
-      let input = getEmpty256Array();
-      input[0] = true;
-      tests.push({input, output: BigInt(1) << BigInt(0)});
-
-      input = getEmpty256Array();
-      input[100] = true;
-      tests.push({input, output: BigInt(1) << BigInt(100)});
-
-      input = getEmpty256Array();
-      input[150] = true;
-      tests.push({input, output: BigInt(1) << BigInt(150)});
-
-      for (const entry of tests) {
-        expect(boolArrayToBitmap(entry.input)).toEqual(entry.output);
-      }
-    });
-  });
-  describe('bitmapToBoolArray', () => {
-    it('should transform a bigint bitmap into a boolean array', () => {
-      const tests = [{input: BigInt(0), output: getEmpty256Array()}];
-      let output = getEmpty256Array();
-      output[0] = true;
-      tests.push({input: BigInt(1) << BigInt(0), output});
-
-      output = getEmpty256Array();
-      output[1] = true;
-      tests.push({input: BigInt(1) << BigInt(1), output});
-
-      output = getEmpty256Array();
-      output[2] = true;
-      tests.push({input: BigInt(1) << BigInt(2), output});
-
-      output = getEmpty256Array();
-      output[5] = true;
-      tests.push({input: BigInt(1) << BigInt(5), output});
-
-      output = getEmpty256Array();
-      output[100] = true;
-      tests.push({input: BigInt(1) << BigInt(100), output});
-
-      output = getEmpty256Array();
-      output[150] = true;
-      tests.push({input: BigInt(1) << BigInt(150), output});
-
-      for (const entry of tests) {
-        expect(bitmapToBoolArray(entry.input)).toMatchObject(entry.output);
-      }
-    });
-
-    it('should fail when the bigint is too large', () => {
-      expect(() => {
-        bitmapToBoolArray(BigInt(1) << BigInt(256));
-      }).toThrow();
     });
   });
   describe('getExtendedProposalId', () => {

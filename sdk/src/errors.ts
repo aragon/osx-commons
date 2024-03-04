@@ -1,6 +1,4 @@
-import {ContractTransaction} from '@ethersproject/contracts';
-
-class SdkError extends Error {
+export class SdkError extends Error {
   public cause?: Error | string;
   constructor(message: string, cause?: any) {
     super(message);
@@ -300,12 +298,6 @@ export class ProposalNotFoundError extends SdkError {
   }
 }
 
-export class InvalidArraySizeError extends SdkError {
-  constructor(size: number, cause?: any) {
-    super(`Invalid array size: ${size}`, cause);
-  }
-}
-
 export class InvalidRatioValueError extends SdkError {
   constructor(ratio: number, cause?: any) {
     super(
@@ -329,13 +321,6 @@ export class ValueOutOfRangeError extends SdkError {
     super(`The value is out of range`, cause);
   }
 }
-
-export class InvalidBitMapValueError extends SdkError {
-  constructor(cause?: any) {
-    super('The bitmap value is too big', cause);
-  }
-}
-
 export class EmptyMultiUriError extends SdkError {
   constructor(cause?: any) {
     super('The multi URI is empty', cause);
@@ -357,14 +342,5 @@ export class InvalidTimeoutError extends SdkError {
 export class InvalidPermissionOperationType extends SdkError {
   constructor(cause?: any) {
     super('Invalid permission operation', cause);
-  }
-}
-
-export class EventNotFoundError extends SdkError {
-  constructor(eventName: string, tx: ContractTransaction) {
-    super(
-      `Event "${eventName}" could not be found in transaction ${tx.hash}.`,
-      tx
-    );
   }
 }
