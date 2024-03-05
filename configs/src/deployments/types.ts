@@ -71,5 +71,5 @@ export type ENSNetworkDomain = {
 };
 
 export type ENSNetworkDomainsMap = {
-  [network: string]: ENSNetworkDomain;
+  [index in SupportedNetworks]?: ENSNetworkDomain;
 };
