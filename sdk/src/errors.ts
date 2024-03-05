@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-=======
-import {ContractTransaction} from '@ethersproject/contracts';
-
->>>>>>> 08b0f9d (add hex and plugin folders)
 export class SdkError extends Error {
   public cause?: Error | string;
   constructor(message: string, cause?: any) {
@@ -290,41 +285,6 @@ export class PluginUpdatePreparationError extends SdkError {
 export class ProposalNotFoundError extends SdkError {
   constructor(cause?: any) {
     super('Proposal not found', cause);
-  }
-}
-
-export class InvalidRatioValueError extends SdkError {
-  constructor(ratio: number, cause?: any) {
-    super(
-      `The ratio value should range between 0 and 1, received value: ${ratio}`,
-      cause
-    );
-  }
-}
-
-export class InvalidDigitsValueError extends SdkError {
-  constructor(digits: number, cause?: any) {
-    super(
-      `The number of digits should range between 1 and 15, received value: ${digits}`,
-      cause
-    );
-  }
-}
-
-export class ValueOutOfRangeError extends SdkError {
-  constructor(cause?: any) {
-    super(`The value is out of range`, cause);
-  }
-}
-export class InvalidArraySizeError extends SdkError {
-  constructor(size: number, cause?: any) {
-    super(`Invalid array size: ${size}`, cause);
-  }
-}
-
-export class InvalidBitMapValueError extends SdkError {
-  constructor(cause?: any) {
-    super('The bitmap value is too big', cause);
   }
 }
 
