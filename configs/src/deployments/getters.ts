@@ -52,17 +52,21 @@ export function getLatestNetworkDeployment(
   return null;
 }
 
-export function getDaoEnsDomain(networkName: string): string {
+export function getDaoEnsDomain(
+  networkName: SupportedNetworks
+): string | undefined {
   if (exceptionalDomains[networkName]) {
-    return exceptionalDomains[networkName].daoEns;
+    return exceptionalDomains[networkName]?.daoEns;
   } else {
     return commonDomain.daoEns;
   }
 }
 
-export function getPluginEnsDomain(networkName: string): string {
+export function getPluginEnsDomain(
+  networkName: SupportedNetworks
+): string | undefined {
   if (exceptionalDomains[networkName]) {
-    return exceptionalDomains[networkName].pluginEns;
+    return exceptionalDomains[networkName]?.pluginEns;
   } else {
     return commonDomain.pluginEns;
   }

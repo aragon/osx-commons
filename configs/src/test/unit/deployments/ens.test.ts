@@ -12,7 +12,7 @@ describe('Domains', () => {
       for (const network of Object.values(SupportedNetworks)) {
         if (exceptionalDomains[network]) {
           expect(getDaoEnsDomain(network)).toMatch(
-            exceptionalDomains[network].daoEns
+            exceptionalDomains[network]?.daoEns ?? ''
           );
         } else {
           expect(getDaoEnsDomain(network)).toMatch(commonDomain.daoEns);
@@ -25,7 +25,7 @@ describe('Domains', () => {
       for (const network of Object.values(SupportedNetworks)) {
         if (exceptionalDomains[network]) {
           expect(getPluginEnsDomain(network)).toMatch(
-            exceptionalDomains[network].pluginEns
+            exceptionalDomains[network]?.daoEns ?? ''
           );
         } else {
           expect(getPluginEnsDomain(network)).toMatch(commonDomain.pluginEns);
@@ -42,12 +42,12 @@ describe('Domains', () => {
     });
     it('should return the new exceptional dao ens', () => {
       expect(getDaoEnsDomain(SupportedNetworks.LOCAL)).toMatch(
-        exceptionalDomains[SupportedNetworks.LOCAL].daoEns
+        exceptionalDomains[SupportedNetworks.LOCAL]?.daoEns ?? ''
       );
     });
     it('should return the new exceptional plugin ens', () => {
       expect(getPluginEnsDomain(SupportedNetworks.LOCAL)).toMatch(
-        exceptionalDomains[SupportedNetworks.LOCAL].pluginEns
+        exceptionalDomains[SupportedNetworks.LOCAL]?.pluginEns ?? ''
       );
     });
   });

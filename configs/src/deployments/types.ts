@@ -1,3 +1,5 @@
+import {SupportedNetworks} from '../networks/types';
+
 // the entries in this enum has to be in order from
 // oldest to newest so that getLatestNetworkVersion() works as expected
 export enum SupportedVersions {
@@ -71,5 +73,5 @@ export type ENSNetworkDomain = {
 };
 
 export type ENSNetworkDomainsMap = {
-  [index in SupportedNetworks]?: ENSNetworkDomain;
+  [network in SupportedNetworks]?: ENSNetworkDomain;
 };
