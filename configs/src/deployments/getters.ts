@@ -1,6 +1,6 @@
 import {SupportedNetworks} from '../networks';
 import {contracts} from './contracts';
-import {exceptionalDomains, commonDomain} from './osx-ens-domains';
+import {exceptionalDomains, commonDomain} from './ens';
 import {
   NetworkDeployment,
   NetworkDeployments,
