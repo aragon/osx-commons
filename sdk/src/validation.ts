@@ -1,9 +1,4 @@
-import {
-  ENS_REGEX,
-  IPFS_URI_REGEX,
-  OSX_PROPOSAL_ID_REGEX,
-  SUBDOMAIN_REGEX,
-} from './constants';
+import {ENS_REGEX, IPFS_URI_REGEX, SUBDOMAIN_REGEX} from './constants';
 import {InvalidCidError} from './errors';
 import {MultiUri} from './multiuri';
 
@@ -22,18 +17,6 @@ export function resolveIpfsCid(data: string): string {
     throw new InvalidCidError();
   }
   return cid;
-}
-
-/**
- * Checks if the given string is a valid proposal ID
- *
- * @export
- * @param {string} proposalId
- * @return {*}  {boolean}
- */
-export function isProposalId(proposalId: string): boolean {
-  const regex = new RegExp(OSX_PROPOSAL_ID_REGEX);
-  return regex.test(proposalId);
 }
 
 /**

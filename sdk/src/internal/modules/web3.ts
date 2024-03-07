@@ -1,13 +1,13 @@
 import {Context} from '../../context';
 import {
   CannotEstimateGasError,
-  InvalidAddressError,
   InvalidContractAbiError,
   NoNodesAvailableError,
   NoProviderError,
   NoSignerError,
   UnsupportedNetworkError,
 } from '../../errors';
+import {InvalidAddressError} from '../../hex';
 import {
   GasFeeEstimation,
   SupportedNetwork,
@@ -107,7 +107,7 @@ export class Web3Module implements IClientWeb3Core {
     address: string,
     abi: ContractInterface
   ): Contract & T {
-    if (!address || !isAddress(address)) throw new InvalidAddressError();
+    if (!address || !isAddress(address)) throw new InvalidAddressError(address);
     else if (!abi) throw new InvalidContractAbiError();
     const signer = this.getConnectedSigner();
     return new Contract(address, abi, signer) as Contract & T;
@@ -144,7 +144,7 @@ export class Web3Module implements IClientWeb3Core {
   public getAddress(addressName: DeployedAddresses): string {
     const address = this.context[addressName];
     if (!address || !isAddress(address)) {
-      throw new InvalidAddressError();
+      throw new InvalidAddressError(address || 'undefined address');
     }
     return address;
   }

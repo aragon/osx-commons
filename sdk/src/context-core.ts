@@ -1,10 +1,10 @@
 import {GRAPHQL_NODES, IPFS_NODES, LIVE_CONTRACTS} from './constants';
 import {
-  InvalidAddressError,
   InvalidGasEstimationFactorError,
   UnsupportedNetworkError,
   UnsupportedProtocolError,
 } from './errors';
+import {InvalidAddressError} from './hex';
 import {DeployedAddressesArray} from './internal';
 import {
   ContextParams,
@@ -353,7 +353,7 @@ export abstract class ContextCore {
 
     if (ensRegistryAddress) {
       if (!isAddress(ensRegistryAddress)) {
-        throw new InvalidAddressError();
+        throw new InvalidAddressError(ensRegistryAddress);
       } else {
         network.ensAddress = ensRegistryAddress;
       }

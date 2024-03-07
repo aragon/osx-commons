@@ -6,7 +6,6 @@ export * from './multiuri';
 export * from './ipfs';
 export * from './metadata';
 export * from './interfaces';
-export * from './encoding';
 export * from './promises';
 export * from './errors';
 
@@ -25,3 +24,5 @@ export * from './proposal';
 export * from './time';
 
 export * from './ens';
+export * from './plugin';
+export * from './hex';
