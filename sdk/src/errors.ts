@@ -35,19 +35,9 @@ export class InvalidAddressOrEnsError extends SdkError {
     super('Invalid address or ENS', cause);
   }
 }
-export class InvalidAddressError extends SdkError {
-  constructor(cause?: any) {
-    super('Invalid address', cause);
-  }
-}
 export class InvalidCidError extends SdkError {
   constructor(cause?: any) {
     super('The value does not contain a valid CiD', cause);
-  }
-}
-export class InvalidProposalIdError extends SdkError {
-  constructor(cause?: any) {
-    super('Invalid proposal ID', cause);
   }
 }
 export class NoProviderError extends SdkError {
@@ -298,29 +288,6 @@ export class ProposalNotFoundError extends SdkError {
   }
 }
 
-export class InvalidRatioValueError extends SdkError {
-  constructor(ratio: number, cause?: any) {
-    super(
-      `The ratio value should range between 0 and 1, received value: ${ratio}`,
-      cause
-    );
-  }
-}
-
-export class InvalidDigitsValueError extends SdkError {
-  constructor(digits: number, cause?: any) {
-    super(
-      `The number of digits should range between 1 and 15, received value: ${digits}`,
-      cause
-    );
-  }
-}
-
-export class ValueOutOfRangeError extends SdkError {
-  constructor(cause?: any) {
-    super(`The value is out of range`, cause);
-  }
-}
 export class EmptyMultiUriError extends SdkError {
   constructor(cause?: any) {
     super('The multi URI is empty', cause);

@@ -1,5 +1,6 @@
 import {SupportedNetworks} from '../networks';
 import {contracts} from './contracts';
+import {exceptionalDomains, commonDomain} from './ens';
 import {
   NetworkDeployment,
   NetworkDeployments,
@@ -49,4 +50,24 @@ export function getLatestNetworkDeployment(
     }
   }
   return null;
+}
+
+export function getDaoEnsDomain(
+  networkName: SupportedNetworks
+): string | undefined {
+  if (exceptionalDomains[networkName]) {
+    return exceptionalDomains[networkName]?.daoEns;
+  } else {
+    return commonDomain.daoEns;
+  }
+}
+
+export function getPluginEnsDomain(
+  networkName: SupportedNetworks
+): string | undefined {
+  if (exceptionalDomains[networkName]) {
+    return exceptionalDomains[networkName]?.pluginEns;
+  } else {
+    return commonDomain.pluginEns;
+  }
 }
