@@ -2,7 +2,7 @@ import {NetworkConfigs, SupportedNetworks} from './types';
 
 export const networks: NetworkConfigs = {
   [SupportedNetworks.MAINNET]: {
-    url: 'https://rpc.tenderly.co/fork/d3168a50-0941-42e2-8b9b-bf544c60c356',
+    url: 'https://rpc.ankr.com/eth',
     isTestnet: false,
     chainId: 1,
     name: SupportedNetworks.MAINNET,
@@ -11,21 +11,21 @@ export const networks: NetworkConfigs = {
     },
   },
   [SupportedNetworks.GOERLI]: {
-    url: 'https://goerli.infura.io/v3/481a4cdc7c774286b8627f21c6827f48',
+    url: 'https://rpc.ankr.com/eth_goerli',
     isTestnet: true,
     chainId: 5,
     name: SupportedNetworks.GOERLI,
     aliases: {},
   },
   [SupportedNetworks.SEPOLIA]: {
-    url: 'https://sepolia.infura.io/v3/481a4cdc7c774286b8627f21c6827f48',
+    url: 'https://rpc.ankr.com/eth_sepolia',
     isTestnet: true,
     chainId: 11155111,
     name: SupportedNetworks.SEPOLIA,
     aliases: {},
   },
   [SupportedNetworks.POLYGON]: {
-    url: 'https://polygon-mainnet.infura.io/v3/481a4cdc7c774286b8627f21c6827f48',
+    url: 'https://rpc.ankr.com/polygon',
     isTestnet: false,
     chainId: 137,
     feesUrl: 'https://gasstation-mainnet.matic.network/v2',
@@ -37,7 +37,7 @@ export const networks: NetworkConfigs = {
     },
   },
   [SupportedNetworks.MUMBAI]: {
-    url: 'https://polygon-mumbai.infura.io/v3/481a4cdc7c774286b8627f21c6827f48',
+    url: 'https://rpc.ankr.com/polygon_mumbai',
     isTestnet: true,
     chainId: 80001,
     feesUrl: 'https://gasstation-mumbai.matic.today/v2',
@@ -49,7 +49,7 @@ export const networks: NetworkConfigs = {
     },
   },
   [SupportedNetworks.BASE]: {
-    url: 'https://developer-access-mainnet.base.org',
+    url: 'https://rpc.ankr.com/base',
     isTestnet: false,
     chainId: 8453,
     gasPrice: 1000,
@@ -69,7 +69,7 @@ export const networks: NetworkConfigs = {
     },
   },
   [SupportedNetworks.BASE_SEPOLIA]: {
-    url: 'https://sepolia.base.org',
+    url: 'https://rpc.ankr.com/base_sepolia',
     isTestnet: true,
     chainId: 84532,
     gasPrice: 1000000,
@@ -79,7 +79,7 @@ export const networks: NetworkConfigs = {
     },
   },
   [SupportedNetworks.ARBITRUM]: {
-    url: 'https://arbitrum-mainnet.infura.io/v3/481a4cdc7c774286b8627f21c6827f48',
+    url: 'https://rpc.ankr.com/arbitrum',
     isTestnet: false,
     chainId: 42161,
     name: SupportedNetworks.ARBITRUM,
@@ -88,7 +88,7 @@ export const networks: NetworkConfigs = {
     },
   },
   [SupportedNetworks.ARBITRUM_SEPOLIA]: {
-    url: 'https://arbitrum-sepolia.infura.io/v3/481a4cdc7c774286b8627f21c6827f48',
+    url: 'https://rpc.ankr.com/arbitrum_sepolia',
     isTestnet: true,
     chainId: 421614,
     name: SupportedNetworks.ARBITRUM_SEPOLIA,
