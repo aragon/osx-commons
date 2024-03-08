@@ -1,8 +1,10 @@
+import {rpcApiKey} from './initializer';
 import {NetworkConfigs, SupportedNetworks} from './types';
 
+export const apiKey: string = '';
 export const networks: NetworkConfigs = {
   [SupportedNetworks.MAINNET]: {
-    url: 'https://eth-mainnet.g.alchemy.com/v2/',
+    url: `https://eth-mainnet.g.alchemy.com/v2/${rpcApiKey}`,
     isTestnet: false,
     chainId: 1,
     name: SupportedNetworks.MAINNET,
@@ -11,21 +13,21 @@ export const networks: NetworkConfigs = {
     },
   },
   [SupportedNetworks.GOERLI]: {
-    url: 'https://eth-goerli.g.alchemy.com/v2/',
+    url: `https://eth-goerli.g.alchemy.com/v2/${rpcApiKey}`,
     isTestnet: true,
     chainId: 5,
     name: SupportedNetworks.GOERLI,
     aliases: {},
   },
   [SupportedNetworks.SEPOLIA]: {
-    url: 'https://eth-sepolia.g.alchemy.com/v2/',
+    url: `https://eth-sepolia.g.alchemy.com/v2/${rpcApiKey}`,
     isTestnet: true,
     chainId: 11155111,
     name: SupportedNetworks.SEPOLIA,
     aliases: {},
   },
   [SupportedNetworks.POLYGON]: {
-    url: 'https://polygon-mainnet.g.alchemy.com/v2/',
+    url: `https://polygon-mainnet.g.alchemy.com/v2/${rpcApiKey}`,
     isTestnet: false,
     chainId: 137,
     feesUrl: 'https://gasstation-mainnet.matic.network/v2',
@@ -37,7 +39,7 @@ export const networks: NetworkConfigs = {
     },
   },
   [SupportedNetworks.MUMBAI]: {
-    url: 'https://polygon-mumbai.g.alchemy.com/v2/',
+    url: `https://polygon-mumbai.g.alchemy.com/v2/${rpcApiKey}`,
     isTestnet: true,
     chainId: 80001,
     feesUrl: 'https://gasstation-mumbai.matic.today/v2',
@@ -49,7 +51,7 @@ export const networks: NetworkConfigs = {
     },
   },
   [SupportedNetworks.BASE]: {
-    url: 'https://base-mainnet.g.alchemy.com/v2/',
+    url: `https://base-mainnet.g.alchemy.com/v2/${rpcApiKey}`,
     isTestnet: false,
     chainId: 8453,
     gasPrice: 1000,
@@ -69,7 +71,7 @@ export const networks: NetworkConfigs = {
     },
   },
   [SupportedNetworks.BASE_SEPOLIA]: {
-    url: 'https://base-sepolia.g.alchemy.com/v2/',
+    url: `https://base-sepolia.g.alchemy.com/v2/${rpcApiKey}`,
     isTestnet: true,
     chainId: 84532,
     gasPrice: 1000000,
@@ -79,7 +81,7 @@ export const networks: NetworkConfigs = {
     },
   },
   [SupportedNetworks.ARBITRUM]: {
-    url: 'https://arb-mainnet.g.alchemy.com/v2/',
+    url: `https://arb-mainnet.g.alchemy.com/v2/${rpcApiKey}`,
     isTestnet: false,
     chainId: 42161,
     name: SupportedNetworks.ARBITRUM,
@@ -88,7 +90,7 @@ export const networks: NetworkConfigs = {
     },
   },
   [SupportedNetworks.ARBITRUM_SEPOLIA]: {
-    url: 'https://arb-sepolia.g.alchemy.com/v2/',
+    url: `https://arb-sepolia.g.alchemy.com/v2/${rpcApiKey}`,
     isTestnet: true,
     chainId: 421614,
     name: SupportedNetworks.ARBITRUM_SEPOLIA,

@@ -1,3 +1,4 @@
 export * from './types';
-export * from './networks';
 export * from './getters';
+export * from './networks';
+export {init} from './initializer';
