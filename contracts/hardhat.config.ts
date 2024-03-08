@@ -1,8 +1,7 @@
 import {
   init,
-  networks as osxCommonsConfigNetworks,
+  networks as osxCommonsNetworks,
   getNetworkByNameOrAlias,
-  NetworkConfig,
 } from '@aragon/osx-commons-configs';
 import '@nomicfoundation/hardhat-chai-matchers';
 import '@nomicfoundation/hardhat-network-helpers';
@@ -22,35 +21,24 @@ import 'solidity-docgen';
 const dotenvConfigPath: string = process.env.DOTENV_CONFIG_PATH || '../.env';
 dotenvConfig({path: resolve(__dirname, dotenvConfigPath)});
 
-const osxCommonsNetworks: {[key: string]: NetworkConfig} =
-  osxCommonsConfigNetworks;
-
+// check alchemy Api key existence
 if (process.env.ALCHEMY_API_KEY) {
-  console.log('calling init');
   init(process.env.ALCHEMY_API_KEY);
 } else {
   // throw new Error('ALCHEMY_API_KEY in .env not set');
   console.error(
     '\x1b[33m%s\x1b[0m',
-    'ALCHEMY_API_KEY environment variable is not set in your .env file. Some functionalities may not work properly.'
+    'ALCHEMY_API_KEY variable is not set in your .env file. Some functionalities may not work properly.'
   );
-}
-
-for (const network in osxCommonsNetworks) {
-  const url: string = osxCommonsNetworks[network].url;
-  if (!url) {
-    throw new Error(`Network ${network} has no URL`);
-  }
-  osxCommonsNetworks[network].url = url + process.env.ALCHEMY_API_KEY;
 }
 
 export const networks: {[index: string]: NetworkUserConfig} = {
   hardhat: {
     chainId: 31337,
     forking: {
-      url: getNetworkByNameOrAlias(
-        process.env.NETWORK_NAME ? process.env.NETWORK_NAME : 'mainnet'
-      )?.url,
+      url:
+        getNetworkByNameOrAlias(process.env.NETWORK_NAME ?? 'mainnet')?.url ||
+        '',
     },
   },
   ...osxCommonsNetworks,
