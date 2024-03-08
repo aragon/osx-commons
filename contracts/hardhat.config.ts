@@ -1,4 +1,5 @@
 import {
+  init,
   networks as osxCommonsConfigNetworks,
   getNetworkByNameOrAlias,
   NetworkConfig,
@@ -24,7 +25,10 @@ dotenvConfig({path: resolve(__dirname, dotenvConfigPath)});
 const osxCommonsNetworks: {[key: string]: NetworkConfig} =
   osxCommonsConfigNetworks;
 
-if (!process.env.ALCHEMY_API_KEY) {
+if (process.env.ALCHEMY_API_KEY) {
+  console.log('calling init');
+  init(process.env.ALCHEMY_API_KEY);
+} else {
   // throw new Error('ALCHEMY_API_KEY in .env not set');
   console.error(
     '\x1b[33m%s\x1b[0m',
@@ -44,7 +48,9 @@ export const networks: {[index: string]: NetworkUserConfig} = {
   hardhat: {
     chainId: 31337,
     forking: {
-      url: getForkRpcUrl(),
+      url: getNetworkByNameOrAlias(
+        process.env.NETWORK_NAME ? process.env.NETWORK_NAME : 'mainnet'
+      )?.url,
     },
   },
   ...osxCommonsNetworks,
@@ -169,16 +175,5 @@ const config: HardhatUserConfig = {
     exclude: ['test'],
   },
 };
-
-function getForkRpcUrl(): string {
-  const network: string = process.env.NETWORK_NAME
-    ? process.env.NETWORK_NAME
-    : 'mainnet';
-  const forkingUrl: string | undefined = getNetworkByNameOrAlias(network)?.url;
-  if (!forkingUrl) {
-    throw new Error(`Network '${network}' not supported.`);
-  }
-  return forkingUrl;
-}
 
 export default config;
