@@ -1,4 +1,3 @@
-// import {rpcApiKey} from './initializer';
 import {NetworkConfigs, SupportedNetworks, NetworkRpcUrl} from './types';
 
 export const networks: NetworkConfigs = {
