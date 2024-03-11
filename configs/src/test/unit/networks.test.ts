@@ -11,7 +11,11 @@ import {
   getNetworkByNameOrAlias,
   getNetworkNameByAlias,
 } from '../../networks/getters';
-import {networks} from '../../networks/networks';
+import {
+  networks,
+  networksAlchemyRpcUrl,
+  addRpcUrlToNetwork,
+} from '../../networks/networks';
 
 describe('Deployments', () => {
   describe('getNetwork', () => {
@@ -136,6 +140,25 @@ describe('Deployments', () => {
       });
       inputs.map(({network, expected}) => {
         expect(getNetworkByChainId(network)).toBe(expected);
+      });
+    });
+  });
+  describe('addRpcUrlToNetwork', () => {
+    it('should add the rpc url to the networks', () => {
+      const apiKey: string = 'TEST_API_KEY';
+      addRpcUrlToNetwork(apiKey, networksAlchemyRpcUrl);
+      console.log(networks);
+
+      Object.values(SupportedNetworks).map(network => {
+        if (network === SupportedNetworks.LOCAL) {
+          expect(networks[network].url).toBe(
+            networksAlchemyRpcUrl[SupportedNetworks.LOCAL]
+          );
+        } else {
+          expect(networks[network].url).toBe(
+            `${networksAlchemyRpcUrl[network]}${apiKey}`
+          );
+        }
       });
     });
   });

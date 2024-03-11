@@ -9,7 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Update the RPC URLs to use alchemy.
+- Add `addRpcUrlToNetwork` function to set the network RPC url, the function will receive the API_KEY and the RPCs URL for the SupportedNetworks.
+
+### Removed
+
+- Removed the RPC URL from the networks configuration.
 
 ## v0.3.0
 
