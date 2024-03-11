@@ -5,7 +5,7 @@ configurations necessary for the development of plugins and the OSx protocol.
 This includes:
 
 - Networks
-  - RPC url
+  - RPC url (Not by default)
   - if it is a testnet or not
   - chain ID
   - alias for ethers and Alchemy subgraph
@@ -16,6 +16,8 @@ This includes:
   - Deployment transaction
   - Block number when the contract was deployed (which can differ from when the
     contract was activated and put in use)
+
+The configuration doesn't provide the RPC URL by default, but you can set your preferred ones with the `addRpcUrlToNetwork` function.
 
 ## Installation
 
