@@ -19,7 +19,7 @@ export enum SupportedNetworks {
 }
 
 export type NetworkConfig = {
-  url: string;
+  url?: string;
   isTestnet: boolean;
   chainId: number;
   name: SupportedNetworks;
@@ -34,4 +34,8 @@ export type NetworkAliases = {
 
 export type NetworkConfigs = {
   [network in SupportedNetworks]: NetworkConfig;
+};
+
+export type NetworkRpcUrl = {
+  [index in SupportedNetworks]: string;
 };

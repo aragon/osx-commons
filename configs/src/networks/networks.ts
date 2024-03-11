@@ -1,11 +1,8 @@
 // import {rpcApiKey} from './initializer';
-import {NetworkConfigs, SupportedNetworks} from './types';
-
-let rpcApiKey: string;
+import {NetworkConfigs, SupportedNetworks, NetworkRpcUrl} from './types';
 
 export const networks: NetworkConfigs = {
   [SupportedNetworks.MAINNET]: {
-    url: 'https://eth-mainnet.g.alchemy.com/v2/',
     isTestnet: false,
     chainId: 1,
     name: SupportedNetworks.MAINNET,
@@ -14,21 +11,18 @@ export const networks: NetworkConfigs = {
     },
   },
   [SupportedNetworks.GOERLI]: {
-    url: 'https://eth-goerli.g.alchemy.com/v2/',
     isTestnet: true,
     chainId: 5,
     name: SupportedNetworks.GOERLI,
     aliases: {},
   },
   [SupportedNetworks.SEPOLIA]: {
-    url: 'https://eth-sepolia.g.alchemy.com/v2/',
     isTestnet: true,
     chainId: 11155111,
     name: SupportedNetworks.SEPOLIA,
     aliases: {},
   },
   [SupportedNetworks.POLYGON]: {
-    url: 'https://polygon-mainnet.g.alchemy.com/v2/',
     isTestnet: false,
     chainId: 137,
     feesUrl: 'https://gasstation-mainnet.matic.network/v2',
@@ -40,7 +34,6 @@ export const networks: NetworkConfigs = {
     },
   },
   [SupportedNetworks.MUMBAI]: {
-    url: 'https://polygon-mumbai.g.alchemy.com/v2/',
     isTestnet: true,
     chainId: 80001,
     feesUrl: 'https://gasstation-mumbai.matic.today/v2',
@@ -52,7 +45,6 @@ export const networks: NetworkConfigs = {
     },
   },
   [SupportedNetworks.BASE]: {
-    url: 'https://base-mainnet.g.alchemy.com/v2/',
     isTestnet: false,
     chainId: 8453,
     gasPrice: 1000,
@@ -62,7 +54,6 @@ export const networks: NetworkConfigs = {
     },
   },
   [SupportedNetworks.BASE_GOERLI]: {
-    url: 'https://goerli.base.org',
     isTestnet: true,
     chainId: 84531,
     gasPrice: 1000000,
@@ -72,7 +63,6 @@ export const networks: NetworkConfigs = {
     },
   },
   [SupportedNetworks.BASE_SEPOLIA]: {
-    url: 'https://base-sepolia.g.alchemy.com/v2/',
     isTestnet: true,
     chainId: 84532,
     gasPrice: 1000000,
@@ -82,7 +72,6 @@ export const networks: NetworkConfigs = {
     },
   },
   [SupportedNetworks.ARBITRUM]: {
-    url: 'https://arb-mainnet.g.alchemy.com/v2/',
     isTestnet: false,
     chainId: 42161,
     name: SupportedNetworks.ARBITRUM,
@@ -91,7 +80,6 @@ export const networks: NetworkConfigs = {
     },
   },
   [SupportedNetworks.ARBITRUM_SEPOLIA]: {
-    url: 'https://arb-sepolia.g.alchemy.com/v2/',
     isTestnet: true,
     chainId: 421614,
     name: SupportedNetworks.ARBITRUM_SEPOLIA,
@@ -100,7 +88,6 @@ export const networks: NetworkConfigs = {
     },
   },
   [SupportedNetworks.LOCAL]: {
-    url: 'http://localhost:8545',
     isTestnet: true,
     chainId: 31337,
     name: SupportedNetworks.LOCAL,
@@ -108,11 +95,30 @@ export const networks: NetworkConfigs = {
   },
 };
 
-export function init(apiKey: string) {
-  rpcApiKey = apiKey;
+export const networksAlchemyRpcUrl: NetworkRpcUrl = {
+  [SupportedNetworks.MAINNET]: 'https://eth-mainnet.g.alchemy.com/v2/',
+  [SupportedNetworks.GOERLI]: 'https://eth-goerli.g.alchemy.com/v2/',
+  [SupportedNetworks.SEPOLIA]: 'https://eth-sepolia.g.alchemy.com/v2/',
+  [SupportedNetworks.POLYGON]: 'https://polygon-mainnet.g.alchemy.com/v2/',
+  [SupportedNetworks.MUMBAI]: 'https://polygon-mumbai.g.alchemy.com/v2/',
+  [SupportedNetworks.BASE]: 'https://base-mainnet.g.alchemy.com/v2/',
+  [SupportedNetworks.BASE_GOERLI]: 'https://goerli.base.org',
+  [SupportedNetworks.BASE_SEPOLIA]: 'https://base-sepolia.g.alchemy.com/v2/',
+  [SupportedNetworks.ARBITRUM]: 'https://arb-mainnet.g.alchemy.com/v2/',
+  [SupportedNetworks.ARBITRUM_SEPOLIA]: 'https://arb-sepolia.g.alchemy.com/v2/',
+  [SupportedNetworks.LOCAL]: 'http://localhost:8545',
+};
+
+export function addRpcUrlToNetwork(
+  apiKey: string,
+  networksRpcUrl: NetworkRpcUrl = networksAlchemyRpcUrl
+) {
   // add the api key to the network urls
   for (const network of Object.values(SupportedNetworks)) {
-    if (network == SupportedNetworks.LOCAL) continue;
-    networks[network].url += rpcApiKey;
+    if (network == SupportedNetworks.LOCAL) {
+      networks[network].url = networksRpcUrl[network];
+    } else {
+      networks[network].url = `${networksRpcUrl[network]}${apiKey}`;
+    }
   }
 }
