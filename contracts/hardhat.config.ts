@@ -1,5 +1,5 @@
 import {
-  init,
+  addRpcUrlToNetwork,
   networks as osxCommonsNetworks,
   getNetworkByNameOrAlias,
 } from '@aragon/osx-commons-configs';
@@ -23,13 +23,9 @@ dotenvConfig({path: resolve(__dirname, dotenvConfigPath)});
 
 // check alchemy Api key existence
 if (process.env.ALCHEMY_API_KEY) {
-  init(process.env.ALCHEMY_API_KEY);
+  addRpcUrlToNetwork(process.env.ALCHEMY_API_KEY);
 } else {
-  // throw new Error('ALCHEMY_API_KEY in .env not set');
-  console.error(
-    '\x1b[33m%s\x1b[0m',
-    'ALCHEMY_API_KEY variable is not set in your .env file. Some functionalities may not work properly.'
-  );
+  throw new Error('ALCHEMY_API_KEY in .env not set');
 }
 
 export const networks: {[index: string]: NetworkUserConfig} = {
