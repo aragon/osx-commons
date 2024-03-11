@@ -5,7 +5,6 @@ configurations necessary for the development of plugins and the OSx protocol.
 This includes:
 
 - Networks
-  - RPC url (Not by default)
   - if it is a testnet or not
   - chain ID
   - alias for ethers and Alchemy subgraph
