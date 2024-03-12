@@ -16,7 +16,7 @@ jobs:
     if: ${{ needs.check_tag.outputs.package == 'contracts' }}
     uses: ./.github/workflows/contracts-tests.yml
     secrets:
-      INFURA_API_KEY: ${{ secrets.INFURA_API_KEY }}
+      ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
 
   publish:
     needs: [check_tag, tests]
