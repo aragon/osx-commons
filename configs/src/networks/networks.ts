@@ -114,7 +114,10 @@ export function addRpcUrlToNetwork(
 ) {
   // add the api key to the network urls
   for (const network of Object.values(SupportedNetworks)) {
-    if (network == SupportedNetworks.LOCAL) {
+    if (
+      network == SupportedNetworks.LOCAL ||
+      network == SupportedNetworks.BASE_GOERLI
+    ) {
       networks[network].url = networksRpcUrl[network];
     } else {
       networks[network].url = `${networksRpcUrl[network]}${apiKey}`;

@@ -147,12 +147,14 @@ describe('Deployments', () => {
     it('should add the rpc url to the networks', () => {
       const apiKey: string = 'TEST_API_KEY';
       addRpcUrlToNetwork(apiKey, networksAlchemyRpcUrl);
-      console.log(networks);
-
       Object.values(SupportedNetworks).map(network => {
         if (network === SupportedNetworks.LOCAL) {
           expect(networks[network].url).toBe(
             networksAlchemyRpcUrl[SupportedNetworks.LOCAL]
+          );
+        } else if (network === SupportedNetworks.BASE_GOERLI) {
+          expect(networks[network].url).toBe(
+            networksAlchemyRpcUrl[SupportedNetworks.BASE_GOERLI]
           );
         } else {
           expect(networks[network].url).toBe(
