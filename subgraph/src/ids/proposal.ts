@@ -7,20 +7,6 @@ import {
 import {Address, BigInt, Bytes} from '@graphprotocol/graph-ts';
 
 /**
- * Generates a unique action ID using the given parameters.
- *
- * @param proposalId - The id of the proposal that the action belongs to.
- * @param index - The index of the action within the proposal.
- * @returns A concatenated ID string for the Action entity.
- */
-export function generateActionEntityId(
-  proposalEntityId: string,
-  index: i32
-): string {
-  return [proposalEntityId, index.toString()].join('_');
-}
-
-/**
  * Generates a unique identifier for a transaction action proposal entity.
  * @param proposalEntityId - The ID of the proposal entity.
  * @param txHash - The hash of the transaction.
