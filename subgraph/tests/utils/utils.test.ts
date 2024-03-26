@@ -1,5 +1,5 @@
 import {bigIntToBytes32} from '../../src/utils/utils';
-import {Address, BigInt} from '@graphprotocol/graph-ts';
+import {BigInt} from '@graphprotocol/graph-ts';
 import {assert, describe, test} from 'matchstick-as/assembly/index';
 
 const ZERO_BYTES32 =

@@ -9,12 +9,12 @@ function checksum(s: string): string {
 
 describe('Actions ID generation', () => {
   test('We correctly generate the action ID', () => {
-    let caller = ADDRESS_ONE;
-    let daoAddress = ADDRESS_TWO;
-    let callId = 'c4ll me';
-    let index = 255;
+    const caller = ADDRESS_ONE;
+    const daoAddress = ADDRESS_TWO;
+    const callId = 'c4ll me';
+    const index = 255;
 
-    let actionId = generateActionEntityId(
+    const actionId = generateActionEntityId(
       Address.fromString(caller),
       Address.fromString(daoAddress),
       callId,
