@@ -1,5 +1,5 @@
-import {Address } from '@graphprotocol/graph-ts';
-import { generateEntityIdFromAddress } from "./ids";
+import {generateEntityIdFromAddress} from './ids';
+import {Address} from '@graphprotocol/graph-ts';
 
 /**
  * @param caller the user/plugin that will invoke the execute function on the DAO
@@ -26,4 +26,3 @@ export function generateActionEntityId(
     index.toString(),
   ].join('_');
 }
-
