@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-`getActionEntityId` now is composed of the caller, daoAddress, callId and the actionIndex.
+- `getActionEntityId` now is composed of the caller, daoAddress, callId and the actionIndex.
 
 ## v0.0.4
 
