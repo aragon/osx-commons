@@ -1,12 +1,12 @@
-import { SupportedVersions } from "../deployments"
+import {SupportedVersions} from '../deployments';
 
 export type Abi = {
-    [version in SupportedVersions]: {
-        [contractName in ContractAbiNames]: Object;
-    }
-}
+  [version in SupportedVersions]: {
+    [contractName in ContractAbiNames]: Object;
+  };
+};
 
 export enum ContractAbiNames {
-    DAO = "DAO",
-    DAOFactory = "DAOFactory",
+  DAO = 'DAO',
+  DAOFactory = 'DAOFactory',
 }
