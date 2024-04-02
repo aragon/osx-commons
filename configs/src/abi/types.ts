@@ -2,7 +2,7 @@ import {SupportedVersions} from '../deployments';
 
 export type Abi = {
   [version in SupportedVersions]: {
-    [contractName in ContractAbiNames]: Object;
+    [contractName in ContractAbiNames]: object;
   };
 };
 
