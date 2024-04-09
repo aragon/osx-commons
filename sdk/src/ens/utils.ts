@@ -1,8 +1,8 @@
 import {InvalidEnsError, UnsupportedNetworkError} from '../errors';
-import {isEnsName} from '../validation';
 import {getNetworkByAlias} from '@aragon/osx-commons-configs';
 import {Networkish} from '@ethersproject/networks';
 import {JsonRpcProvider, Provider} from '@ethersproject/providers';
+import { ENS_REGEX, SUBDOMAIN_REGEX } from '../constants';
 
 /**
  * Resolves an ENS name to an address given a provider
@@ -35,3 +35,29 @@ export function resolveEnsName(
   }
   return provider.resolveName(ensName);
 }
+
+/**
+ * Checks if the given name is a valid ENS subdomain for Aragon OSx.
+ * See https://devs.aragon.org/docs/osx/how-it-works/framework/ens-names for more info
+ *
+ * @export
+ * @param {string} name
+ * @return {*}  {boolean}
+ */
+export function isSubdomain(name: string): boolean {
+  const regex = new RegExp(SUBDOMAIN_REGEX);
+  return regex.test(name);
+}
+
+/**
+ * Checks if the given name is a valid ENS domain for Aragon OSx.
+ *
+ * @export
+ * @param {string} name
+ * @return {*}  {boolean}
+ */
+export function isEnsName(name: string): boolean {
+  const regex = new RegExp(ENS_REGEX);
+  return regex.test(name);
+}
+
