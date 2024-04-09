@@ -6,7 +6,7 @@ on:
       - main
       - develop
 
-  pull-request:
+  pull_request:
     paths:
       - 'sdk/**'
       - '.github/workflows/sdk-*.yml'
