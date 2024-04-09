@@ -12,7 +12,7 @@ on:
       - 'contracts/**'
       - 'subgraph/**'
       - '.github/workflows/subgraph-*.yml'
-      
+
 jobs:
   formatting-linting:
     uses: ./.github/workflows/formatting-linting.yml
