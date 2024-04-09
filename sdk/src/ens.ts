@@ -1,9 +1,9 @@
 import {ethers} from 'ethers';
-import {InvalidEnsError, UnsupportedNetworkError} from '../errors';
+import {InvalidEnsError, UnsupportedNetworkError} from './errors';
 import {getNetworkByAlias} from '@aragon/osx-commons-configs';
 import {Networkish} from '@ethersproject/networks';
 import {JsonRpcProvider, Provider} from '@ethersproject/providers';
-import { ENS_REGEX, SUBDOMAIN_REGEX } from '../constants';
+import {ENS_REGEX, SUBDOMAIN_REGEX} from './constants';
 
 /**
  * Resolves an ENS name to an address given a provider
