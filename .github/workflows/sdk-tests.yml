@@ -1,9 +1,16 @@
 name: SDK Tests
 
 on:
+  push:
+    branches:
+      - main
+      - develop
   workflow_dispatch:
   workflow_call:
-  push:
+  pull-request:
+    paths:
+      - 'sdk/**'
+      - '.github/workflows/sdk-*.yml'
 
 jobs:
   formatting-linting:

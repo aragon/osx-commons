@@ -1,13 +1,19 @@
 name: Contracts Tests
 
 on:
+  push:
+    branches:
+      - main
+      - develop
+  pull-request:
+    paths:
+      - 'contracts/**'
+      - '.github/workflows/contracts-*.yml'
   workflow_dispatch:
   workflow_call:
     secrets:
       ALCHEMY_API_KEY:
         required: true
-  push:
-
 jobs:
   formatting-linting:
     uses: ./.github/workflows/formatting-linting.yml
