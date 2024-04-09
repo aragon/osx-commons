@@ -1,3 +1,4 @@
+import {isEnsName, isSubdomain} from './ens';
 import {
   InvalidAddressOrEnsError,
   InvalidCidError,
@@ -6,9 +7,9 @@ import {
   InvalidSubdomainError,
 } from './errors';
 import {ANY_ADDRESS} from './internal/constants';
-import {isEnsName, isIpfsUri, isSubdomain} from './validation';
 import {isAddress} from '@ethersproject/address';
 import {array, mixed, number, object, string} from 'yup';
+import {isIpfsUri} from './ipfs';
 
 export const BigintSchema = mixed().test(
   'isBigint',
