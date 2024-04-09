@@ -5,13 +5,13 @@ on:
     branches:
       - main
       - develop
-  workflow_dispatch:
-  workflow_call:
   pull-request:
     paths:
       - 'contracts/**'
       - 'subgraph/**'
       - '.github/workflows/subgraph-*.yml'
+  workflow_dispatch:
+  workflow_call:
 
 jobs:
   formatting-linting:
