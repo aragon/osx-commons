@@ -1,3 +1,4 @@
+import {ethers} from 'ethers';
 import {InvalidEnsError, UnsupportedNetworkError} from '../errors';
 import {getNetworkByAlias} from '@aragon/osx-commons-configs';
 import {Networkish} from '@ethersproject/networks';
@@ -61,3 +62,26 @@ export function isEnsName(name: string): boolean {
   return regex.test(name);
 }
 
+/**
+ * Returns the ENS labelhash of a given subdomain.
+ * See https://docs.ens.domains/resolution/names#labelhash for more info.
+ *
+ * @export
+ * @param {string} label
+ * @return {*}  {string}
+ */
+export function ensLabelHash(label: string): string {
+  return ethers.utils.id(label);
+}
+
+/**
+ * Returns the ENS namehash of a given domain.
+ * See https://docs.ens.domains/resolution/names#namehash for more info.
+ *
+ * @export
+ * @param {string} label
+ * @return {*}  {string}
+ */
+export function ensDomainHash(name: string): string {
+  return ethers.utils.namehash(name);
+}
