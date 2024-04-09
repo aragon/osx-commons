@@ -5,12 +5,13 @@ on:
     branches:
       - main
       - develop
-  workflow_dispatch:
-  workflow_call:
+
   pull-request:
     paths:
       - 'sdk/**'
       - '.github/workflows/sdk-*.yml'
+  workflow_dispatch:
+  workflow_call:
 
 jobs:
   formatting-linting:
