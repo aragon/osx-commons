@@ -1,9 +1,18 @@
 name: Subgraph Tests
 
 on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    paths:
+      - 'contracts/**'
+      - 'subgraph/**'
+      - '.github/workflows/subgraph-*.yml'
   workflow_dispatch:
   workflow_call:
-  push:
+
 jobs:
   formatting-linting:
     uses: ./.github/workflows/formatting-linting.yml
