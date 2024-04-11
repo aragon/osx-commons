@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add `resolveEnsName` functions
 
+### Removed
+
+- SDK 1.0 related code that is not going to be used.
+
 ## v0.0.1
 
 ### Changed
