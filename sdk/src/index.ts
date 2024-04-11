@@ -1,6 +1,5 @@
 export * from './constants';
 export * from './types';
-export * from './schemas';
 export * from './validation';
 export * from './multiuri';
 export * from './ipfs';
@@ -10,10 +9,6 @@ export * from './promises';
 export * from './errors';
 
 // SDK
-export * from './client-core';
-export * from './context-core';
-export * from './context';
-export * from './utils';
 
 // From OSX
 export * from './bitmap';
