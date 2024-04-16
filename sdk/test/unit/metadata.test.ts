@@ -1,4 +1,4 @@
-import {getNamedTypesFromMetadata} from '../../src/metadata';
+import {getNamedTypesFromMetadata} from '../../src';
 import {TEST_ABI} from '../constants';
 
 describe('Utils', () => {

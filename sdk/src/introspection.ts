@@ -1,5 +1,5 @@
 import {Interface} from '@ethersproject/abi';
-import {Zero} from '@ethersproject/constants';
+import {BigNumber} from '@ethersproject/bignumber';
 
 /**
  * Gets the interfaceId of a given interface
@@ -9,7 +9,7 @@ import {Zero} from '@ethersproject/constants';
  * @return {*}  {string}
  */
 export function getInterfaceId(iface: Interface): string {
-  let interfaceId = Zero;
+  let interfaceId = BigNumber.from(0);
   const functions: string[] = Object.keys(iface.functions);
   for (const func of functions) {
     interfaceId = interfaceId.xor(iface.getSighash(func));

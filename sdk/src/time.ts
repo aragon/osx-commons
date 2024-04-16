@@ -1,3 +1,4 @@
+// Time-related constants.
 export const TIME = {
   SECOND: 1,
   get MINUTE() {
@@ -14,24 +15,5 @@ export const TIME = {
   },
   get YEAR() {
     return 365 * this.DAY;
-  },
-
-  toMilliseconds(seconds: number) {
-    return seconds * 1000;
-  },
-  get SECOND_MS() {
-    return this.toMilliseconds(this.SECOND);
-  },
-  get HOUR_MS() {
-    return this.toMilliseconds(this.HOUR);
-  },
-  get DAY_MS() {
-    return this.toMilliseconds(this.DAY);
-  },
-  get WEEK_MS() {
-    return this.toMilliseconds(this.WEEK);
-  },
-  get YEAR_MS() {
-    return this.toMilliseconds(this.YEAR);
   },
 };

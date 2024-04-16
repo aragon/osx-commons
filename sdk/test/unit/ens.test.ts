@@ -1,5 +1,17 @@
-import {InvalidEnsError, resolveEnsName} from '../../src';
-import {ADDRESS_ONE, TEST_ENS_NAME, TEST_HTTP_URI} from '../constants';
+import {
+  InvalidEnsError,
+  isEnsName,
+  isSubdomain,
+  resolveEnsName,
+} from '../../src';
+import {
+  ADDRESS_ONE,
+  TEST_ENS_NAME,
+  TEST_HTTP_URI,
+  TEST_INVALID_ENS_NAME,
+  TEST_INVALID_SUBDOMAIN,
+  TEST_SUBDOMAIN,
+} from '../constants';
 import {JsonRpcProvider} from '@ethersproject/providers';
 
 describe('ens', () => {
@@ -61,5 +73,23 @@ describe('ens', () => {
         expect(resolvedAddress).toEqual(test.output);
       }
     });
+  });
+  describe('isSubdomain', () => {
+    const inputs = [
+      {in: TEST_SUBDOMAIN, out: true},
+      {in: TEST_INVALID_SUBDOMAIN, out: false},
+    ];
+    for (const input of inputs) {
+      expect(isSubdomain(input.in)).toBe(input.out);
+    }
+  });
+  describe('isEnsName', () => {
+    const inputs = [
+      {in: TEST_ENS_NAME, out: true},
+      {in: TEST_INVALID_ENS_NAME, out: false},
+    ];
+    for (const input of inputs) {
+      expect(isEnsName(input.in)).toBe(input.out);
+    }
   });
 });

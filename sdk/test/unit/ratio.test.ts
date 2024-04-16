@@ -3,9 +3,9 @@ import {
   ValueOutOfRangeError,
   decodeRatio,
   encodeRatio,
-} from '../../../src';
+} from '../../src';
 
-describe('plugin/utils', () => {
+describe('ratio', () => {
   describe('encodeRatio', () => {
     it('Should encode a bigint from a float and the number of digits', () => {
       const tests = [
@@ -30,7 +30,7 @@ describe('plugin/utils', () => {
           continue;
         }
         const result = encodeRatio(test.float, test.digits);
-        expect(result.toString()).toEqual(test.out.toString());
+        expect(result.toString()).toEqual(test.out?.toString());
       }
     });
   });
