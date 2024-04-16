@@ -4,6 +4,7 @@ import {
   InvalidBitPositionError,
 } from './errors';
 import {BigNumber} from 'ethers';
+
 // TODO:
 // - Revisit this in the future see if we can use flipBit
 // inside the boolArrayToBitmap function
