@@ -3,7 +3,7 @@ import {
   InvalidBitMapValueError,
   InvalidBitPositionError,
 } from './errors';
-import {BigNumber} from 'ethers';
+import {BigNumber} from '@ethersproject/bignumber';
 
 // TODO:
 // - Revisit this in the future see if we can use flipBit
