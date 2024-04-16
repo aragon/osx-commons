@@ -9,5 +9,4 @@ export * from './metadata';
 export * from './permission';
 export * from './proposal';
 export * from './ratio';
-export * from './regex';
 export * from './time';

@@ -1,8 +1,10 @@
 import {InvalidEnsError, UnsupportedNetworkError} from './errors';
-import {ENS_REGEX, SUBDOMAIN_REGEX} from './regex';
 import {getNetworkByAlias} from '@aragon/osx-commons-configs';
 import {Networkish} from '@ethersproject/networks';
 import {JsonRpcProvider, Provider} from '@ethersproject/providers';
+
+const ENS_REGEX = /^(?:[a-z0-9-]+\.)*[a-z0-9-]+\.eth$/;
+const SUBDOMAIN_REGEX = /^[a-z0-9-]+$/;
 
 /**
  * Resolves an ENS name to an address given a provider
