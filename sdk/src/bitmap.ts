@@ -5,10 +5,6 @@ import {
 } from './errors';
 import {BigNumber} from '@ethersproject/bignumber';
 
-// TODO:
-// - Revisit this in the future see if we can use flipBit
-// inside the boolArrayToBitmap function
-
 /**
  * Flips a specific bit in a `BigNumber` object and returns a new `BigNumber` object with the bit flipped.
  *

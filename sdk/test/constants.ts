@@ -1,7 +1,5 @@
 import {MetadataAbiInput} from '../src';
 
-export const ADDRESS_ONE = '0x0000000000000000000000000000000000000001';
-
 export const TEST_ABI: MetadataAbiInput[] = [
   {
     name: 'a',

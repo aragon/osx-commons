@@ -5,7 +5,6 @@ import {
   resolveEnsName,
 } from '../../src';
 import {
-  ADDRESS_ONE,
   TEST_ENS_NAME,
   TEST_HTTP_URI,
   TEST_INVALID_ENS_NAME,
@@ -21,7 +20,7 @@ describe('ens', () => {
         {
           input: TEST_ENS_NAME,
           network: 'mainnet',
-          output: ADDRESS_ONE,
+          output: `0x${'0'.repeat(39)}1`,
         },
         {
           input: TEST_HTTP_URI,
@@ -49,7 +48,7 @@ describe('ens', () => {
         {
           input: TEST_ENS_NAME,
           network: 'mainnet',
-          output: ADDRESS_ONE,
+          output: `0x${'0'.repeat(39)}1`,
         },
         {
           input: TEST_HTTP_URI,

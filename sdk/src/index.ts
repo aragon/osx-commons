@@ -1,5 +1,4 @@
 export * from './bitmap';
-export * from './constants';
 export * from './ens';
 export * from './errors';
 export * from './events';
