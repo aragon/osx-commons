@@ -15,5 +15,6 @@ Task ID: [OS-?](https://aragonassociation.atlassian.net/browse/OS-?)
 - [ ] I have made corresponding changes to the documentation.
 - [ ] My changes generate no new warnings.
 - [ ] Any dependent changes have been merged and published in downstream modules.
+- [ ] I created tasks to update dependent repositories (OSx, Plugins)
 - [ ] I ran all tests with success and extended them if necessary.
 - [ ] I have updated the `CHANGELOG.md` file in the root folder.
