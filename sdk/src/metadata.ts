@@ -1,4 +1,10 @@
-import {MetadataAbiInput} from './types';
+export type MetadataAbiInput = {
+  name: string;
+  type: string;
+  internalType: string;
+  description: string;
+  components?: MetadataAbiInput[];
+};
 
 /**
  * Gets the named types from a metadata abi input

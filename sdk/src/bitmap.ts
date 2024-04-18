@@ -3,7 +3,7 @@ import {
   InvalidBitMapValueError,
   InvalidBitPositionError,
 } from './errors';
-import {BigNumber} from 'ethers';
+import {BigNumber} from '@ethersproject/bignumber';
 
 /**
  * Flips a specific bit in a `BigNumber` object and returns a new `BigNumber` object with the bit flipped.

@@ -4,7 +4,7 @@ import {
   getBit,
   boolArrayToBitmap,
   InvalidBitPositionError,
-} from '../../src/bitmap';
+} from '../../src';
 import {getEmpty256Array} from '../utils';
 import {BigNumber} from '@ethersproject/bignumber';
 
