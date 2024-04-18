@@ -9,7 +9,7 @@ import {ProtocolVersion} from "../../utils/versioning/ProtocolVersion.sol";
 import {IPluginSetup} from "./IPluginSetup.sol";
 
 /// @title PluginUpgradeableSetup
-/// @author Aragon Association - 2022-2024
+/// @author Aragon X - 2022-2024
 /// @notice An abstract contract to inherit from to implement the plugin setup for upgradeable plugins, i.e, `PluginUUPSUpgradeable` being deployed via the UUPS pattern (see [ERC-1822](https://eips.ethereum.org/EIPS/eip-1822) and [ERC-1967](https://eips.ethereum.org/EIPS/eip-1967)).
 /// @custom:security-contact sirt@aragon.org
 abstract contract PluginUpgradeableSetup is ERC165, IPluginSetup, ProtocolVersion {
