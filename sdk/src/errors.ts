@@ -77,3 +77,9 @@ export class InvalidBitPositionError extends SdkError {
     );
   }
 }
+
+export class InvalidAddressError extends SdkError {
+  constructor(address: string, cause?: any) {
+    super(`Invalid address: ${address}`, cause);
+  }
+}

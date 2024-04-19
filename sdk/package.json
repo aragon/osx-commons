@@ -58,6 +58,7 @@
     "@ethersproject/contracts": "^5.7.0",
     "@ethersproject/hash": "^5.7.0",
     "@ethersproject/providers": "^5.7.0",
+    "@ethersproject/address": "^5.7.0",
     "ipfs-http-client": "^51.0.0"
   }
 }
