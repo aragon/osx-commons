@@ -3,7 +3,7 @@ export function mockContractProtocolVersion(
   throwException: boolean = false
 ) {
   jest
-    .spyOn(require('@ethersproject/contracts'), 'Contract')
+    .spyOn(jest.requireActual('@ethersproject/contracts'), 'Contract')
     .mockImplementation(() => {
       return {
         protocolVersion: () => {
@@ -21,7 +21,7 @@ export function mockJSONRPCProvider(
   blockNumber: number = 1
 ) {
   return jest
-    .spyOn(require('@ethersproject/providers'), 'JsonRpcProvider')
+    .spyOn(jest.requireActual('@ethersproject/providers'), 'JsonRpcProvider')
     .mockImplementation(() => {
       return {
         getNetwork: () => {
