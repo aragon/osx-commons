@@ -4,8 +4,6 @@ import {isAddress} from '@ethersproject/address';
 import {BigNumber} from '@ethersproject/bignumber';
 import {Contract} from '@ethersproject/contracts';
 import {JsonRpcProvider} from '@ethersproject/providers';
-import {isAddress} from '@ethersproject/address';
-import { InvalidAddressError } from './errors';
 
 /**
  * Gets the interfaceId of a given interface
@@ -35,7 +33,7 @@ export async function getProtocolVersion(
   rpc: string,
   contractAddress: string
 ): Promise<[number, number, number]> {
-  if(!isAddress(contractAddress)) {
+  if (!isAddress(contractAddress)) {
     throw new InvalidAddressError(contractAddress);
   }
   const provider = new JsonRpcProvider(rpc);
