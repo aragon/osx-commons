@@ -4,6 +4,8 @@ import {isAddress} from '@ethersproject/address';
 import {BigNumber} from '@ethersproject/bignumber';
 import {Contract} from '@ethersproject/contracts';
 import {JsonRpcProvider} from '@ethersproject/providers';
+import {isAddress} from '@ethersproject/address';
+import { InvalidAddressError } from './errors';
 
 /**
  * Gets the interfaceId of a given interface
@@ -20,7 +22,6 @@ export function getInterfaceId(iface: Interface): string {
   }
   return interfaceId.toHexString();
 }
-
 /**
  * Gets the protocol version of a contract, if the contract does not have a
  * protocolVersion function, it will return [1, 0, 0]
@@ -34,7 +35,7 @@ export async function getProtocolVersion(
   rpc: string,
   contractAddress: string
 ): Promise<[number, number, number]> {
-  if (!isAddress(contractAddress)) {
+  if(!isAddress(contractAddress)) {
     throw new InvalidAddressError(contractAddress);
   }
   const provider = new JsonRpcProvider(rpc);
@@ -46,10 +47,8 @@ export async function getProtocolVersion(
   try {
     version = await contract.protocolVersion();
   } catch (e) {
-    // version 1.0.0 of the contract does not have a protocolVersion function
-    // so if we receive an error we cannot differentiate between a call exception
-    // and a contract that does not have the function. So we assume that is
-    // a version 1.0.0 contract that does not have the function and return [1, 0, 0]
+    // ethers5 throws an call exception error which could mean a lot of things
+    // so this is not accurate
     version = [1, 0, 0];
   }
   return version;

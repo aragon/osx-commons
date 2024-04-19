@@ -19,7 +19,6 @@ describe('introspection', () => {
       expect(interfaceId).toEqual('0x9bb235aa');
     });
   });
-
   describe('getProtocolVersion', () => {
     it('should return the correct protocol version', async () => {
       const expectedVersion: [number, number, number] = [1, 3, 0];
@@ -36,9 +35,9 @@ describe('introspection', () => {
       mockJSONRPCProvider();
       // mock the call to the contract
       mockContractProtocolVersion(expectedVersion);
-      await expect(() =>
-        getProtocolVersion(TEST_HTTP_URI, '0x')
-      ).rejects.toThrow(new InvalidAddressError('0x'));
+      expect(() => getProtocolVersion(TEST_HTTP_URI, '0x')).rejects.toThrow(
+        new InvalidAddressError('0x')
+      );
     });
     it('should return [1,0,0] when the call throws an error', async () => {
       const expectedVersion: [number, number, number] = [1, 0, 0];
