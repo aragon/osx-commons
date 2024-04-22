@@ -46,8 +46,10 @@ export async function getProtocolVersion(
   try {
     version = await contract.protocolVersion();
   } catch (e) {
-    // ethers5 throws a call exception error which could mean a lot of things
-    // so this is not accurate
+    // version 1.0.0 of the contract does not have a protocolVersion function
+    // so if we receive an error we cannot differentiate between a call exception
+    // and a contract that does not have the function. So we assume that is
+    // a version 1.0.0 contract that does not have the function and return [1, 0, 0]
     version = [1, 0, 0];
   }
   return version;
