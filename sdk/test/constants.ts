@@ -93,7 +93,6 @@ export const TEST_ABI: MetadataAbiInput[] = [
   },
 ];
 
-
 export const TEST_ENS_NAME = 'subdomain.test.eth';
 export const TEST_INVALID_ENS_NAME = 'test.invalid';
 
