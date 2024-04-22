@@ -5,7 +5,6 @@ import {
   resolveEnsName,
 } from '../../src';
 import {
-  ADDRESS_ONE,
   TEST_ENS_NAME,
   TEST_HTTP_URI,
   TEST_INVALID_ENS_NAME,
@@ -14,6 +13,7 @@ import {
 } from '../constants';
 import {JsonRpcProvider} from '@ethersproject/providers';
 
+export const ADDRESS_ONE = `0x${'0'.repeat(39)}1`;
 describe('ens', () => {
   describe('resolveEnsName', () => {
     it('should receive a JsonRpcProvider and return the correct value', async () => {
