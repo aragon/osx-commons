@@ -20,6 +20,7 @@ export function getInterfaceId(iface: Interface): string {
   }
   return interfaceId.toHexString();
 }
+
 /**
  * Gets the protocol version of a contract, if the contract does not have a
  * protocolVersion function, it will return [1, 0, 0]
