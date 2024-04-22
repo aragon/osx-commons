@@ -7,7 +7,7 @@ import {TEST_HTTP_URI} from '../constants';
 import {mockContractProtocolVersion, mockJSONRPCProvider} from '../mocks';
 import {Interface} from '@ethersproject/abi';
 
-export const ADDRESS_ONE = `0x${'0'.repeat(39)}1`;
+const ADDRESS_ONE = `0x${'0'.repeat(39)}1`;
 describe('introspection', () => {
   describe('getInterfaceId', () => {
     it('should return the correct interfaceId', () => {
