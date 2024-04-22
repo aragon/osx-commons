@@ -93,7 +93,6 @@ export const TEST_ABI: MetadataAbiInput[] = [
   },
 ];
 
-export const ADDRESS_ONE = `0x${'0'.repeat(39)}1`;
 
 export const TEST_ENS_NAME = 'subdomain.test.eth';
 export const TEST_INVALID_ENS_NAME = 'test.invalid';
