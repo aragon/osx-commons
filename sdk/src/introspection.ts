@@ -1,9 +1,12 @@
-import {InvalidAddressError} from './errors';
 import {Interface} from '@ethersproject/abi';
-import {isAddress} from '@ethersproject/address';
 import {BigNumber} from '@ethersproject/bignumber';
 import {Contract} from '@ethersproject/contracts';
-import {JsonRpcProvider} from '@ethersproject/providers';
+import {ErrorCode} from '@ethersproject/logger';
+
+// The protocol version number of contracts not having a `getProtocolVersion()` function because they don't inherit from `ProtocolVersion.sol` yet.
+export const IMPLICIT_INITIAL_PROTOCOL_VERSION: [number, number, number] = [
+  1, 0, 0,
+];
 
 /**
  * Gets the interfaceId of a given interface
@@ -26,31 +29,34 @@ export function getInterfaceId(iface: Interface): string {
  * protocolVersion function, it will return [1, 0, 0]
  *
  * @export
- * @param {string} rpc
- * @param {string} contractAddress
+ * @param {Contract} contract
  * @return {*}  {Promise<[number, number, number]>}
  */
 export async function getProtocolVersion(
-  rpc: string,
-  contractAddress: string
+  contract: Contract
 ): Promise<[number, number, number]> {
-  if (!isAddress(contractAddress)) {
-    throw new InvalidAddressError(contractAddress);
-  }
-  const provider = new JsonRpcProvider(rpc);
-  const iface = new Interface([
-    'function protocolVersion() public pure returns (uint8[3] memory)',
-  ]);
-  const contract = new Contract(contractAddress, iface, provider);
-  let version: [number, number, number];
+  let protocolVersion: [number, number, number];
   try {
-    version = await contract.protocolVersion();
+    contract.interface.getFunction('protocolVersion');
+    protocolVersion = await contract.protocolVersion();
   } catch (e) {
-    // version 1.0.0 of the contract does not have a protocolVersion function
-    // so if we receive an error we cannot differentiate between a call exception
-    // and a contract that does not have the function. So we assume that is
-    // a version 1.0.0 contract that does not have the function and return [1, 0, 0]
-    version = [1, 0, 0];
+    if ((e as any).code === ErrorCode.INVALID_ARGUMENT) {
+      return IMPLICIT_INITIAL_PROTOCOL_VERSION;
+    }
+    throw e;
   }
-  return version;
+  return protocolVersion;
+}
+
+/**
+ * Enum for PluginType
+ * Reference: https://github.com/aragon/osx-commons/blob/ffa6b45fab9ec067d4bed3b81f5097f03861b876/contracts/src/plugin/IPlugin.sol
+ *
+ * @export
+ * @enum {number}
+ */
+export enum PluginType {
+  UUPS = 0,
+  Cloneable = 1,
+  Constructable = 2,
 }

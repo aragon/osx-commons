@@ -1,3 +1,6 @@
+import {FunctionFragment} from '@ethersproject/abi';
+import {ErrorCode, Logger} from '@ethersproject/logger';
+
 export function mockContractProtocolVersion(
   version: [number, number, number] = [1, 0, 0],
   throwException: boolean = false
@@ -8,9 +11,22 @@ export function mockContractProtocolVersion(
       return {
         protocolVersion: () => {
           if (throwException) {
-            throw new Error('Error');
+            const logger = new Logger('5.7.0');
+            logger.throwError(
+              'Protocol version not found',
+              ErrorCode.INVALID_ARGUMENT
+            );
           }
           return Promise.resolve(version);
+        },
+        interface: {
+          getFunction: (name: string): FunctionFragment => {
+            return FunctionFragment.from({
+              name: name,
+              type: 'function',
+              stateMutability: 'pure',
+            });
+          },
         },
       };
     });
