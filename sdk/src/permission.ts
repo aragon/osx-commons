@@ -2,7 +2,7 @@ import {id} from '@ethersproject/hash';
 
 /**
  * Enum for PermissionType
- * Reference:
+ * Reference: https://github.com/aragon/osx-commons/blob/ffa6b45fab9ec067d4bed3b81f5097f03861b876/contracts/src/permission/PermissionLib.sol
  *
  * @export
  * @enum {number}

@@ -47,3 +47,16 @@ export async function getProtocolVersion(
   }
   return protocolVersion;
 }
+
+/**
+ * Enum for PluginType
+ * Reference: https://github.com/aragon/osx-commons/blob/ffa6b45fab9ec067d4bed3b81f5097f03861b876/contracts/src/plugin/IPlugin.sol
+ *
+ * @export
+ * @enum {number}
+ */
+export enum PluginType {
+  UUPS = 0,
+  Cloneable = 1,
+  Constructable = 2,
+}
