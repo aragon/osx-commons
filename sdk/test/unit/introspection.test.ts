@@ -1,11 +1,13 @@
 import {
-  InvalidAddressError,
+  IMPLICIT_INITIAL_PROTOCOL_VERSION,
   getInterfaceId,
   getProtocolVersion,
 } from '../../src';
 import {ADDRESS_ONE, TEST_HTTP_URI} from '../constants';
-import {mockContractProtocolVersion, mockJSONRPCProvider} from '../mocks';
+import {mockJSONRPCProvider, mockContractProtocolVersion} from '../mocks';
 import {Interface} from '@ethersproject/abi';
+import {Contract} from '@ethersproject/contracts';
+import {JsonRpcProvider} from '@ethersproject/providers';
 
 describe('introspection', () => {
   describe('getInterfaceId', () => {
@@ -21,33 +23,40 @@ describe('introspection', () => {
   });
 
   describe('getProtocolVersion', () => {
-    it('should return the correct protocol version', async () => {
-      const expectedVersion: [number, number, number] = [1, 3, 0];
-      // mock call to the contract
+    let iface: Interface;
+    let contract: Contract;
+    let provider: JsonRpcProvider;
+    beforeAll(() => {
+      // mock JSONRPCProvider to return chainId 1 and blockNumber 1
       mockJSONRPCProvider();
-      // mock the call to the contract
-      mockContractProtocolVersion(expectedVersion);
-      const version = await getProtocolVersion(TEST_HTTP_URI, ADDRESS_ONE);
-      expect(version).toEqual(expectedVersion);
     });
-    it('should fail when an invalid address is passed', async () => {
+    it('should return the correct protocol version', async () => {
+      // Expected protocol version
       const expectedVersion: [number, number, number] = [1, 3, 0];
-      // mock call to the contract
-      mockJSONRPCProvider();
-      // mock the call to the contract
+      // mock Contract to return the expected protocol version
       mockContractProtocolVersion(expectedVersion);
-      await expect(() =>
-        getProtocolVersion(TEST_HTTP_URI, '0x')
-      ).rejects.toThrow(new InvalidAddressError('0x'));
+      // Initialize the contract
+      provider = new JsonRpcProvider(TEST_HTTP_URI);
+      iface = new Interface([
+        'function protocolVersion() public pure returns (uint8[3] memory)',
+      ]);
+      contract = new Contract(ADDRESS_ONE, iface, provider);
+      // Call getProtocolVersion
+      const version = await getProtocolVersion(contract);
+      expect(version).toEqual(expectedVersion);
     });
     it('should return [1,0,0] when the call throws an error', async () => {
-      const expectedVersion: [number, number, number] = [1, 0, 0];
-      // mock call to the contract
-      mockJSONRPCProvider();
-      // mock the call to the contract
-      mockContractProtocolVersion(expectedVersion, true);
-      const version = await getProtocolVersion(TEST_HTTP_URI, ADDRESS_ONE);
-      expect(version).toEqual(expectedVersion);
+      // mock Contract to throw an error
+      mockContractProtocolVersion(IMPLICIT_INITIAL_PROTOCOL_VERSION, true);
+      // Initialize the contract
+      const iface = new Interface([
+        'function protocolVersion() public pure returns (uint8[3] memory)',
+      ]);
+      const provider = new JsonRpcProvider(TEST_HTTP_URI);
+      const contract = new Contract(ADDRESS_ONE, iface, provider);
+      // Call getProtocolVersion
+      const version = await getProtocolVersion(contract);
+      expect(version).toEqual(IMPLICIT_INITIAL_PROTOCOL_VERSION);
     });
   });
 });
