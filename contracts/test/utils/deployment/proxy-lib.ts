@@ -7,15 +7,14 @@ import {
   ProxyFactory__factory,
 } from '../../../typechain';
 import {ProxyCreatedEvent} from '../../../typechain/src/utils/deployment/ProxyFactory';
-import {
-  ADDRESS,
-  findEvent,
-  PROXY_FACTORY_EVENTS,
-} from '@aragon/osx-commons-sdk';
+import {findEvent} from '@aragon/osx-commons-sdk';
 import {loadFixture} from '@nomicfoundation/hardhat-network-helpers';
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
+
+const ADDRESS_ZERO = `0x${'0'.repeat(40)}`;
+const ADDRESS_LAST = `0x${'f'.repeat(40)}`;
 
 describe('ProxyFactory', function () {
   describe('deployUUPSProxy', function () {
@@ -32,9 +31,9 @@ describe('ProxyFactory', function () {
       const tx = await proxyFactory.deployUUPSProxy(initCalldata);
 
       // Get the proxy address from the event
-      const event = await findEvent<ProxyCreatedEvent>(
-        tx,
-        PROXY_FACTORY_EVENTS.ProxyCreated
+      const event = findEvent<ProxyCreatedEvent>(
+        await tx.wait(),
+        'ProxyCreated'
       );
       const proxy = PluginUUPSUpgradeableMockBuild1__factory.connect(
         event.args.proxy,
@@ -61,8 +60,8 @@ describe('ProxyFactory', function () {
 
       // Get the proxy address from the event
       const event = await findEvent<ProxyCreatedEvent>(
-        tx,
-        PROXY_FACTORY_EVENTS.ProxyCreated
+        await tx.wait(),
+        'ProxyCreated'
       );
       const proxy = PluginUUPSUpgradeableMockBuild1__factory.connect(
         event.args.proxy,
@@ -75,7 +74,7 @@ describe('ProxyFactory', function () {
         .to.equal(implementation.address);
 
       // Check that the proxy is not initialized
-      expect(await proxy.dao()).to.equal(ADDRESS.ZERO);
+      expect(await proxy.dao()).to.equal(ADDRESS_ZERO);
       expect(await proxy.state1()).to.equal(0);
     });
   });
@@ -89,9 +88,9 @@ describe('ProxyFactory', function () {
       const tx = await proxyFactory.deployMinimalProxy(initCalldata);
 
       // Get the proxy address from the event
-      const event = await findEvent<ProxyCreatedEvent>(
-        tx,
-        PROXY_FACTORY_EVENTS.ProxyCreated
+      const event = findEvent<ProxyCreatedEvent>(
+        await tx.wait(),
+        'ProxyCreated'
       );
       const proxy = PluginCloneableMockBuild1__factory.connect(
         event.args.proxy,
@@ -111,8 +110,8 @@ describe('ProxyFactory', function () {
 
       // Get the proxy address from the event
       const event = await findEvent<ProxyCreatedEvent>(
-        tx,
-        PROXY_FACTORY_EVENTS.ProxyCreated
+        await tx.wait(),
+        'ProxyCreated'
       );
       const proxy = PluginCloneableMockBuild1__factory.connect(
         event.args.proxy,
@@ -120,7 +119,7 @@ describe('ProxyFactory', function () {
       );
 
       // Check that the proxy is not initialized
-      expect(await proxy.dao()).to.equal(ADDRESS.ZERO);
+      expect(await proxy.dao()).to.equal(ADDRESS_ZERO);
       expect(await proxy.state1()).to.equal(0);
     });
   });
@@ -146,7 +145,7 @@ async function uupsProxyFixture(): Promise<FixtureResult> {
   );
 
   // Create a mock address with a valid checksum
-  const daoMockAddr = ethers.utils.getAddress(ADDRESS.LAST);
+  const daoMockAddr = ethers.utils.getAddress(ADDRESS_LAST);
 
   const initCalldata = implementation.interface.encodeFunctionData(
     'initialize',
@@ -168,7 +167,7 @@ async function minimalProxyFixture(): Promise<FixtureResult> {
   );
 
   // Create a mock address with a valid checksum
-  const daoMockAddr = ethers.utils.getAddress(ADDRESS.LAST);
+  const daoMockAddr = ethers.utils.getAddress(ADDRESS_LAST);
 
   const initCalldata = implementation.interface.encodeFunctionData(
     'initialize',

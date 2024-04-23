@@ -14,12 +14,7 @@ import {
 } from '../../typechain/src/utils/deployment/ProxyFactory';
 import {erc165ComplianceTests, getOzInitializedSlotValue} from '../helpers';
 import {osxCommonsContractsVersion} from '../utils/versioning/protocol-version';
-import {
-  findEvent,
-  getInterfaceId,
-  PluginType,
-  PROXY_FACTORY_EVENTS,
-} from '@aragon/osx-commons-sdk';
+import {PluginType, findEvent, getInterfaceId} from '@aragon/osx-commons-sdk';
 import {loadFixture} from '@nomicfoundation/hardhat-network-helpers';
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
 import {expect} from 'chai';
@@ -32,9 +27,9 @@ describe('PluginCloneable', function () {
 
       // Deploy an uninitialized clone
       const tx = await proxyFactory.deployMinimalProxy([]);
-      const event = await findEvent<ProxyCreatedEvent>(
-        tx,
-        PROXY_FACTORY_EVENTS.ProxyCreated
+      const event = findEvent<ProxyCreatedEvent>(
+        await tx.wait(),
+        'ProxyCreated'
       );
       const clone = Build1Factory.attach(event.args.proxy);
 

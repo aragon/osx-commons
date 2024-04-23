@@ -11,7 +11,7 @@ import {
 import {IPluginSetup} from '../../../typechain/src/plugin/setup/PluginSetup';
 import {erc165ComplianceTests} from '../../helpers';
 import {osxCommonsContractsVersion} from '../../utils/versioning/protocol-version';
-import {ADDRESS, getInterfaceId} from '@aragon/osx-commons-sdk';
+import {getInterfaceId} from '@aragon/osx-commons-sdk';
 import {
   IPluginSetup__factory as IPluginSetup_V1_0_0__factory,
   Plugin__factory,
@@ -31,6 +31,10 @@ describe('IPluginSetup', function () {
   });
 });
 
+const ADDRESS_ZERO = `0x${'0'.repeat(40)}`;
+const ADDRESS_ONE = `0x${'0'.repeat(39)}1`;
+const ADDRESS_TWO = `0x${'0'.repeat(39)}2`;
+
 describe('PluginSetup', async () => {
   pluginSetupBaseTests(pluginSetupFixture);
 
@@ -38,8 +42,8 @@ describe('PluginSetup', async () => {
     it('reverts when called', async () => {
       const {pluginSetupMock} = await loadFixture(pluginSetupFixture);
 
-      const dummyDaoAddr = ADDRESS.ONE;
-      const dummyPluginAddr = ADDRESS.TWO;
+      const dummyDaoAddr = ADDRESS_ONE;
+      const dummyPluginAddr = ADDRESS_TWO;
       const dummyFromBuildNumber = 123;
       const setupPayload: IPluginSetup.SetupPayloadStruct = {
         plugin: dummyPluginAddr,
@@ -69,8 +73,8 @@ describe('PluginUpgradeableSetup', async () => {
         pluginUUPSUpgradeableSetupFixture
       );
 
-      const dummyDaoAddr = ADDRESS.ONE;
-      const dummyPluginAddr = ADDRESS.TWO;
+      const dummyDaoAddr = ADDRESS_ONE;
+      const dummyPluginAddr = ADDRESS_TWO;
       const setupPayload: IPluginSetup.SetupPayloadStruct = {
         plugin: dummyPluginAddr,
         currentHelpers: [],
@@ -97,8 +101,8 @@ describe('PluginUpgradeableSetup', async () => {
           deployer
         ).deploy();
 
-      const dummyDaoAddr = ADDRESS.ONE;
-      const dummyPluginAddr = ADDRESS.TWO;
+      const dummyDaoAddr = ADDRESS_ONE;
+      const dummyPluginAddr = ADDRESS_TWO;
       const dummyFromBuildNumber = 123;
       const setupPayload: IPluginSetup.SetupPayloadStruct = {
         plugin: dummyPluginAddr,
@@ -124,7 +128,7 @@ function pluginSetupBaseTests(fixture: () => Promise<FixtureResult>) {
     const implementation = await pluginSetupMock.implementation();
 
     // Check that an address is returned
-    expect(implementation).to.not.equal(ADDRESS.ZERO);
+    expect(implementation).to.not.equal(ADDRESS_ZERO);
 
     // Check that it supports the `IPlugin` interface
     const plugin = Plugin__factory.connect(implementation, deployer);
