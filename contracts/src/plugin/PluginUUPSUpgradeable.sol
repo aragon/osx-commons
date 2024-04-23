@@ -13,7 +13,7 @@ import {IDAO} from "../dao/IDAO.sol";
 import {IPlugin} from "./IPlugin.sol";
 
 /// @title PluginUUPSUpgradeable
-/// @author Aragon Association - 2022-2023
+/// @author Aragon X - 2022-2023
 /// @notice An abstract, upgradeable contract to inherit from when creating a plugin being deployed via the UUPS pattern (see [ERC-1822](https://eips.ethereum.org/EIPS/eip-1822)).
 /// @custom:security-contact sirt@aragon.org
 abstract contract PluginUUPSUpgradeable is
