@@ -11,12 +11,7 @@ import {
 } from '../../../typechain';
 import {ExecutedEvent} from '../../../typechain/src/dao/IDAO';
 import {erc165ComplianceTests} from '../../helpers';
-import {
-  IDAO_EVENTS,
-  IPROPOSAL_EVENTS,
-  findEventTopicLog,
-  getInterfaceId,
-} from '@aragon/osx-commons-sdk';
+import {findEventTopicLog, getInterfaceId} from '@aragon/osx-commons-sdk';
 import {IProposal__factory as IProposal_V1_0_0__factory} from '@aragon/osx-ethers-v1.0.0';
 import {loadFixture, time} from '@nomicfoundation/hardhat-network-helpers';
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
@@ -117,7 +112,7 @@ function proposalBaseTests(fixture: () => Promise<FixtureResult>) {
           exampleData.allowFailureMap
         )
     )
-      .to.emit(proposalMock, IPROPOSAL_EVENTS.ProposalCreated)
+      .to.emit(proposalMock, 'ProposalCreated')
       .withArgs(
         expectedProposalId,
         creator.address,
@@ -168,7 +163,7 @@ function proposalBaseTests(fixture: () => Promise<FixtureResult>) {
           exampleData.allowFailureMap
         )
     )
-      .to.emit(proposalMock, IPROPOSAL_EVENTS.ProposalExecuted)
+      .to.emit(proposalMock, 'ProposalExecuted')
       .withArgs(proposalId);
   });
 
@@ -195,10 +190,10 @@ function proposalBaseTests(fixture: () => Promise<FixtureResult>) {
         exampleData.actions,
         exampleData.allowFailureMap
       );
-    const event = await findEventTopicLog<ExecutedEvent>(
-      tx,
+    const event = findEventTopicLog<ExecutedEvent>(
+      await tx.wait(),
       IDAO__factory.createInterface(),
-      IDAO_EVENTS.Executed
+      'Executed'
     );
 
     expect(event.args.actor).to.equal(expectedActor);

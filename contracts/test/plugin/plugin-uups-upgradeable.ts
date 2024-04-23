@@ -21,7 +21,6 @@ import {
   getInterfaceId,
   PLUGIN_UUPS_UPGRADEABLE_PERMISSIONS,
   PluginType,
-  PROXY_FACTORY_EVENTS,
 } from '@aragon/osx-commons-sdk';
 import {loadFixture} from '@nomicfoundation/hardhat-network-helpers';
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
@@ -35,9 +34,9 @@ describe('PluginUUPSUpgradeable', function () {
 
       // Deploy an uninitialized proxy
       const tx = await proxyFactory.deployUUPSProxy([]);
-      const event = await findEvent<ProxyCreatedEvent>(
-        tx,
-        PROXY_FACTORY_EVENTS.ProxyCreated
+      const event = findEvent<ProxyCreatedEvent>(
+        await tx.wait(),
+        'ProxyCreated'
       );
       const proxy = Build1Factory.attach(event.args.proxy);
 
@@ -145,9 +144,9 @@ describe('PluginUUPSUpgradeable', function () {
 
       // Deploy an uninitialized build 1 proxy
       const tx = await proxyFactory.deployUUPSProxy([]);
-      const event = await findEvent<ProxyCreatedEvent>(
-        tx,
-        PROXY_FACTORY_EVENTS.ProxyCreated
+      const event = findEvent<ProxyCreatedEvent>(
+        await tx.wait(),
+        'ProxyCreated'
       );
       const proxy = Build1Factory.attach(event.args.proxy);
 
@@ -166,9 +165,9 @@ describe('PluginUUPSUpgradeable', function () {
 
       // Deploy an initialized build 1 proxy
       const tx = await proxyFactory.deployUUPSProxy(initCalldata);
-      const event = await findEvent<ProxyCreatedEvent>(
-        tx,
-        PROXY_FACTORY_EVENTS.ProxyCreated
+      const event = findEvent<ProxyCreatedEvent>(
+        await tx.wait(),
+        'ProxyCreated'
       );
       const proxy = Build1Factory.attach(event.args.proxy);
 
@@ -200,9 +199,9 @@ describe('PluginUUPSUpgradeable', function () {
 
       // Create an initialized build 1 proxy
       const tx = await proxyFactory.deployUUPSProxy(initCalldata);
-      const event = await findEvent<ProxyCreatedEvent>(
-        tx,
-        PROXY_FACTORY_EVENTS.ProxyCreated
+      const event = findEvent<ProxyCreatedEvent>(
+        await tx.wait(),
+        'ProxyCreated'
       );
       const proxy = Build1Factory.attach(event.args.proxy);
 
@@ -235,9 +234,9 @@ describe('PluginUUPSUpgradeable', function () {
 
       // Deploy an initialized build 1 proxy
       const tx = await proxyFactory.deployUUPSProxy(initCalldata);
-      const event = await findEvent<ProxyCreatedEvent>(
-        tx,
-        PROXY_FACTORY_EVENTS.ProxyCreated
+      const event = findEvent<ProxyCreatedEvent>(
+        await tx.wait(),
+        'ProxyCreated'
       );
       const proxy = Build1Factory.attach(event.args.proxy);
 
