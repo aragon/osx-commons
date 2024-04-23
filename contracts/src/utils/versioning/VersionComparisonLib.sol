@@ -3,7 +3,7 @@
 pragma solidity ^0.8.8;
 
 /// @title VersionComparisonLib
-/// @author Aragon Association - 2023
+/// @author Aragon X - 2023
 /// @notice A library containing methods for [semantic version number](https://semver.org/spec/v2.0.0.html) comparison.
 /// @custom:security-contact sirt@aragon.org
 library VersionComparisonLib {

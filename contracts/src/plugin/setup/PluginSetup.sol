@@ -9,7 +9,7 @@ import {ProtocolVersion} from "../../utils/versioning/ProtocolVersion.sol";
 import {IPluginSetup} from "./IPluginSetup.sol";
 
 /// @title PluginSetup
-/// @author Aragon Association - 2022-2024
+/// @author Aragon X - 2022-2024
 /// @notice An abstract contract to inherit from to implement the plugin setup for non-upgradeable plugins, i.e,
 /// - `Plugin` being deployed via the `new` keyword
 /// - `PluginCloneable` being deployed via the minimal proxy pattern (see [ERC-1167](https://eips.ethereum.org/EIPS/eip-1167)).
