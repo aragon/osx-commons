@@ -53,6 +53,8 @@ The `contracts` folder includes the following Solidity contracts and libraries:
         └── VersionComparisonLib.sol
 ```
 
+For **plugin development**, find the plugin base classes provided in the `plugin` folder and proxy deployment helpers in the `utils/deployment` folder.
+
 In `contracts`, first run
 
 ```sh
