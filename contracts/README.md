@@ -7,50 +7,50 @@ For audit information, refer to the ['Audits' section in the root level README.m
 
 The `contracts` folder includes the following Solidity contracts and libraries:
 
-```
+```markdown
 .
 ├── dao
-│   └── IDAO.sol
+│ └── IDAO.sol
 ├── permission
-│   ├── PermissionLib.sol
-│   ├── auth
-│   │   ├── DaoAuthorizable.sol
-│   │   ├── DaoAuthorizableUpgradeable.sol
-│   │   └── auth.sol
-│   └── condition
-│       ├── IPermissionCondition.sol
-│       ├── PermissionCondition.sol
-│       └── PermissionConditionUpgradeable.sol
+│ ├── PermissionLib.sol
+│ ├── auth
+│ │ ├── DaoAuthorizable.sol
+│ │ ├── DaoAuthorizableUpgradeable.sol
+│ │ └── auth.sol
+│ └── condition
+│ ├── IPermissionCondition.sol
+│ ├── PermissionCondition.sol
+│ └── PermissionConditionUpgradeable.sol
 ├── plugin
-│   ├── IPlugin.sol
-│   ├── Plugin.sol
-│   ├── PluginCloneable.sol
-│   ├── PluginUUPSUpgradeable.sol
-│   ├── extensions
-│   │   ├── governance
-│   │   │   └── Addresslist.sol
-│   │   ├── membership
-│   │   │   └── IMembership.sol
-│   │   └── proposal
-│   │       ├── IProposal.sol
-│   │       ├── Proposal.sol
-│   │       └── ProposalUpgradeable.sol
-│   └── setup
-│       ├── IPluginSetup.sol
-│       ├── PluginSetup.sol
-│       └── PluginUpgradeableSetup.sol
+│ ├── IPlugin.sol
+│ ├── Plugin.sol
+│ ├── PluginCloneable.sol
+│ ├── PluginUUPSUpgradeable.sol
+│ ├── extensions
+│ │ ├── governance
+│ │ │ └── Addresslist.sol
+│ │ ├── membership
+│ │ │ └── IMembership.sol
+│ │ └── proposal
+│ │ ├── IProposal.sol
+│ │ ├── Proposal.sol
+│ │ └── ProposalUpgradeable.sol
+│ └── setup
+│ ├── IPluginSetup.sol
+│ ├── PluginSetup.sol
+│ └── PluginUpgradeableSetup.sol
 └── utils
-    ├── deployment
-    │   ├── ProxyFactory.sol
-    │   └── ProxyLib.sol
-    ├── math
-    │   ├── BitMap.sol
-    │   ├── Ratio.sol
-    │   └── UncheckedMath.sol
-    └── versioning
-        ├── IProtocolVersion.sol
-        ├── ProtocolVersion.sol
-        └── VersionComparisonLib.sol
+├── deployment
+│ ├── ProxyFactory.sol
+│ └── ProxyLib.sol
+├── math
+│ ├── BitMap.sol
+│ ├── Ratio.sol
+│ └── UncheckedMath.sol
+└── versioning
+├── IProtocolVersion.sol
+├── ProtocolVersion.sol
+└── VersionComparisonLib.sol
 ```
 
 For **plugin development**, find the plugin base classes provided in the `plugin` folder and proxy deployment helpers in the `utils/deployment` folder.
