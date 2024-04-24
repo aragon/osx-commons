@@ -1,6 +1,6 @@
-# osx-commons
+# Aragon OSx Commons
 
-OSX-Commons: A collection of shared resources and utilities for the Aragon OSX DAO Framework, including contracts, subgraph, and SDK functionalities.
+A collection of shared resources and utilities for the Aragon OSx DAO Framework and plugin developers
 
 ## Project
 
