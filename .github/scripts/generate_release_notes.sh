@@ -20,5 +20,5 @@ echo $PULL_REQUESTS | jq -r '.[] | @base64' | while read pull_request ; do
     fi
 done
 
-
+echo "" >> $GITHUB_ENV
 echo "EOF" >> $GITHUB_ENV
