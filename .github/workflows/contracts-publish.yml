@@ -12,7 +12,6 @@ jobs:
     with:
       ref: ${{ github.ref }}
     run: echo "package=$PACKAGE"
-      echo "version=$VERSION"
 
   tests:
     needs: [check_tag]
