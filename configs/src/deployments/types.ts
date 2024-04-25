@@ -1,3 +1,5 @@
+import {SupportedNetworks} from '../networks/types';
+
 // the entries in this enum has to be in order from
 // oldest to newest so that getLatestNetworkVersion() works as expected
 export enum SupportedVersions {
@@ -64,3 +66,12 @@ export enum ContractNames {
   TOKEN_VOTING_REPO_IMPLEMENTATION = 'TokenVotingRepoImplementation',
   ENS_REGISTRY = 'ENSRegistry',
 }
+
+export type ENSNetworkDomain = {
+  daoEns: string;
+  pluginEns: string;
+};
+
+export type ENSNetworkDomainsMap = {
+  [network in SupportedNetworks]?: ENSNetworkDomain;
+};

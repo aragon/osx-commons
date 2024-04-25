@@ -4,8 +4,8 @@ import {
   getLatestNetworkDeployment,
   getNetworkDeploymentForVersion,
   getNetworkDeployments,
-} from '../../deployments';
-import {SupportedNetworks} from '../../networks';
+} from '../../../deployments';
+import {SupportedNetworks} from '../../../networks';
 
 describe('Deployments', () => {
   describe('getNetworkDeployments', () => {

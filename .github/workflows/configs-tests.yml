@@ -1,9 +1,16 @@
 name: Configs Tests
 
 on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    paths:
+      - 'configs/**'
+      - '.github/workflows/configs-*.yml'
   workflow_dispatch:
   workflow_call:
-  push:
 
 jobs:
   formatting-linting:

@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [UPCOMING]
 
+### Added
+
+- Add `PluginType` enum
+- Add `resolveEnsName` functions
+- Add `getProtocolVersion` function
+
+### Removed
+
+- SDK 1.0 related code that is not going to be used.
+
 ## v0.0.1
 
 ### Changed
@@ -16,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Added missing `ROOT_PERMISSION_ID` to the `PLUGIN_REPO_PERMISSIONS` constant.
 - Created `SingleTargetPermission` type.
 - Copied files from [aragon/sdk commit 76b4fc](https://github.com/aragon/sdk/tree/76b4fc815cfacce60b7c983ef0ce53110761f23a)
 
@@ -26,3 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Constants `GraphqlNetworks`, `SupportedNetworksToGraphqlNetworks`, `UNSUPPORTED_PROPOSAL_METADATA_LINK`, `EMPTY_PROPOSAL_METADATA_LINK`, `UNAVAILABLE_PROPOSAL_METADATA`, `GRAPHQL_NODES`, `IPFS_ENDPOINTS`, `IPFS_NODES`, `LIVE_CONTRACTS`, `ADDITIONAL_NETWORKS`, `Permissions`, `PermissionIds`, `IPFS_CID_REGEX`, `IPFS_URI_REGEX`, `OSX_PROPOSAL_ID_REGEX`, `HEX_STRING_REGEX`, `ENS_REGEX`, `SUBDOMAIN_REGEX`.
   - Schemas `BigintSchema`, `AddressOrEnsSchema`, `AddressOrEnsWithoutAnySchema`, `VersionTagSchema`, `ApplyInstallationSchema`, `AbiSchema`, `ApplyUninstallationSchema`, `Uint8ArraySchema`, `IpfsUriSchema`, `SubdomainSchema`, `PaginationSchema`, `PrepareUninstallationSchema`, `MultiTargetPermissionSchema`, `PrepareInstallationSchema`, `PluginInstallItemSchema`.
   - Types in `types.ts`.
+
+### Removed
+
+- Removed event names since they are available through `osx-ethers`.

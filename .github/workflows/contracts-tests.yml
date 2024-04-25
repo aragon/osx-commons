@@ -1,12 +1,19 @@
 name: Contracts Tests
 
 on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    paths:
+      - 'contracts/**'
+      - '.github/workflows/contracts-*.yml'
   workflow_dispatch:
   workflow_call:
     secrets:
-      INFURA_API_KEY:
+      ALCHEMY_API_KEY:
         required: true
-  push:
 
 jobs:
   formatting-linting:
@@ -32,14 +39,14 @@ jobs:
       - name: 'Build the contracts'
         run: 'yarn build'
         env:
-          INFURA_API_KEY: ${{ secrets.INFURA_API_KEY }}
+          ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
 
       - name: 'Build the typechain'
         run: 'yarn typechain'
         env:
-          INFURA_API_KEY: ${{ secrets.INFURA_API_KEY }}
+          ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
 
       - name: 'Test the contracts and generate the coverage report'
         run: 'yarn coverage >> $GITHUB_STEP_SUMMARY'
         env:
-          INFURA_API_KEY: ${{ secrets.INFURA_API_KEY }}
+          ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}

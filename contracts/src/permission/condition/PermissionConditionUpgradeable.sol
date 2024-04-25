@@ -9,7 +9,7 @@ import {ProtocolVersion} from "../../utils/versioning/ProtocolVersion.sol";
 import {IPermissionCondition} from "./IPermissionCondition.sol";
 
 /// @title PermissionConditionUpgradeable
-/// @author Aragon Association - 2023
+/// @author Aragon X - 2023
 /// @notice An abstract contract for upgradeable or cloneable contracts to inherit from and to support customary permissions depending on arbitrary on-chain state.
 /// @custom:security-contact sirt@aragon.org
 abstract contract PermissionConditionUpgradeable is
