@@ -11,6 +11,8 @@ jobs:
     uses: ./.github/workflows/reusable-check-tag.yml
     with:
       ref: ${{ github.ref }}
+    run: echo "package=$PACKAGE"
+      echo "version=$VERSION"
 
   tests:
     needs: [check_tag]
