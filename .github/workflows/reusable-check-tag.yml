@@ -33,5 +33,7 @@ jobs:
           TAG=${GITHUB_REF##*/}
           VERSION=$(echo "$TAG" | sed -E 's/-(sdk|subgraph|contracts|configs)//')
           PACKAGE=${TAG##*-} 
+          echo "package=$PACKAGE"
+          echo "version=$VERSION"
           echo "package=$PACKAGE" >> $GITHUB_OUTPUT
           echo "version=$VERSION" >> $GITHUB_OUTPUT
