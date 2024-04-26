@@ -22,7 +22,7 @@ The root folder of the repo includes four subfolders:
 - The `sdk` folder contains various JS/TS helper functions that can be used in the OSx repo and plugin repos for
   for testing and deployment.
 - The `subgraph` contains various JS/TS helper functions that can be used in the OSx repo and plugin repos for
-  for subgraph development.
+  subgraph development.
 
 The root-level `package.json` file contains global `dev-dependencies` for formatting and linting. After installing the dependencies with
 
