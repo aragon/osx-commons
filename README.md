@@ -1,6 +1,71 @@
-# osx-commons
+# Aragon OSx Commons
 
-OSX-Commons: A collection of shared resources and utilities for the Aragon OSX DAO Framework, including subgraph, contract, and SDK functionalities.
+A collection of shared resources and utilities for the Aragon OSx DAO Framework and plugin developers
+
+## Project
+
+The root folder of the repo includes four subfolders:
+
+```markdown
+.
+├── configs
+├── contracts
+├── sdk
+├── subgraph
+├── ...
+└── package.json
+```
+
+- The `configs` folder contains general configurations such as the contract addresses for each network that Aragon OSx
+  has been officially deployed to, which are importable in JS/TS code.
+- The `contracts` folder contains Solidity smart contracts being used by the OSx framework and for plugin development.
+- The `sdk` folder contains various JS/TS helper functions that can be used in the OSx repo and plugin repos for
+  for testing and deployment.
+- The `subgraph` contains various JS/TS helper functions that can be used in the OSx repo and plugin repos for
+  subgraph development.
+
+The root-level `package.json` file contains global `dev-dependencies` for formatting and linting. After installing the dependencies with
+
+```sh
+yarn install
+```
+
+you can run the associated [formatting](#formatting) and [linting](#linting) commands.
+
+### Formatting
+
+```sh
+yarn prettier:check
+```
+
+all `.sol`, `.js`, `.ts`, `.json`, and `.yml` files will be format-checked according to the specifications in `.prettierrc` file. With
+
+```sh
+yarn prettier:write
+```
+
+the formatting is applied.
+
+### Linting
+
+With
+
+```sh
+yarn lint
+```
+
+`.sol`, `.js`, and `.ts` files in the subfolders are analyzed with `solhint` and `eslint`, respectively.
+
+### Setting Environment Variables
+
+To be able to work on the contracts, make sure that you have created an `.env` file from the `.env.example` file and put in the API keys for
+
+- [Alchemy](https://www.alchemy.com) that we use as the web3 provider
+- [Alchemy Subgraphs](https://www.alchemy.com/subgraphs) that we use as the subgraph provider
+- the block explorer that you want to use depending on the networks that you want to deploy to
+
+You can also change the default hardhat private key (`PRIVATE_KEY="0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80"`).
+Note however, that the contracts in this repo are not meant to be deployed directly.
 
 ## Audits
 
