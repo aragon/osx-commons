@@ -1,0 +1,19 @@
+parser: '@typescript-eslint/parser'
+parserOptions:
+  project: './contracts/tsconfig.json'
+
+# Custom eslint settings for the contracts can be defined here
+ignorePatterns:
+  # directories
+  - .coverage_artifacts
+  - .coverage_cache
+  - .coverage_contracts
+  - artifacts
+  - build
+  - cache
+  - coverage
+  - dist
+  - docs
+  - typechain
+  # files
+  - coverage.json

@@ -1,0 +1,34 @@
+root: true
+
+extends:
+  - 'eslint:recommended'
+  - 'plugin:@typescript-eslint/eslint-recommended'
+  - 'plugin:@typescript-eslint/recommended'
+  - 'prettier'
+
+plugins:
+  - '@typescript-eslint'
+  - 'unused-imports'
+
+rules:
+  '@typescript-eslint/no-floating-promises':
+    - error
+    - ignoreIIFE: true
+      ignoreVoid: true
+  '@typescript-eslint/no-inferrable-types': 'off'
+  '@typescript-eslint/no-explicit-any': 'off'
+  '@typescript-eslint/no-unused-vars':
+    - error
+    - argsIgnorePattern: '_'
+      varsIgnorePattern: '_'
+
+  'unused-imports/no-unused-imports': 'error'
+
+ignorePatterns:
+  - '*.log'
+  - '*.env'
+  - '.env'
+  - '.DS_Store'
+  - .pnp.*
+  - 'node_modules'
+  - '*.config.js'

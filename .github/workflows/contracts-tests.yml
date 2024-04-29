@@ -1,0 +1,52 @@
+name: Contracts Tests
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    paths:
+      - 'contracts/**'
+      - '.github/workflows/contracts-*.yml'
+  workflow_dispatch:
+  workflow_call:
+    secrets:
+      ALCHEMY_API_KEY:
+        required: true
+
+jobs:
+  formatting-linting:
+    uses: ./.github/workflows/formatting-linting.yml
+  tests:
+    runs-on: 'ubuntu-latest'
+    defaults:
+      run:
+        working-directory: contracts
+    steps:
+      - name: 'Check out the repo'
+        uses: 'actions/checkout@v3'
+
+      - name: 'Install Node.js'
+        uses: 'actions/setup-node@v3'
+        with:
+          cache: 'yarn'
+          node-version: 18
+
+      - name: 'Install the dependencies'
+        run: 'yarn install --frozen-lockfile'
+
+      - name: 'Build the contracts'
+        run: 'yarn build'
+        env:
+          ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
+
+      - name: 'Build the typechain'
+        run: 'yarn typechain'
+        env:
+          ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
+
+      - name: 'Test the contracts and generate the coverage report'
+        run: 'yarn coverage >> $GITHUB_STEP_SUMMARY'
+        env:
+          ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}

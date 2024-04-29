@@ -1,0 +1,39 @@
+{
+  "name": "@aragon/osx-commons-subgraph",
+  "version": "0.0.5",
+  "description": "The Aragon OSx subgraph package containing common utilities",
+  "module": "index.ts",
+  "types": "index.ts",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aragon/osx-commons.git"
+  },
+  "author": "",
+  "license": "AGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/aragon/osx-commons/issues"
+  },
+  "files": [
+    "/src",
+    "tsconfig.json",
+    "index.ts"
+  ],
+  "homepage": "https://github.com/aragon/osx-commons#readme",
+  "scripts": {
+    "test:fast": "graph test",
+    "test": "graph test -r",
+    "coverage": "graph test -c",
+    "lint": "cd ../ && yarn run lint:subgraph:ts",
+    "clean": "rimraf deploy-output.txt ./build ./imported ./generated ./tests/.bin tests/.latest.json"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-ts": "0.31.0"
+  },
+  "devDependencies": {
+    "@graphprotocol/graph-cli": "0.56.0",
+    "@types/node": "^20.8.7",
+    "matchstick-as": "0.5.2",
+    "typescript": "5.2.2"
+  }
+}
