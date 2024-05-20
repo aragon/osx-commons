@@ -86,6 +86,12 @@ export const networks: NetworkConfigs = {
       alchemySubgraphs: 'arbitrum-sepolia',
     },
   },
+  [SupportedNetworks.ZKSYNC_SEPOLIA]: {
+    chainId: 300,
+    isTestnet: true,
+    name: SupportedNetworks.ZKSYNC_SEPOLIA,
+    aliases: {},
+  },
   [SupportedNetworks.LOCAL]: {
     isTestnet: true,
     chainId: 31337,
@@ -105,6 +111,7 @@ export const networksAlchemyRpcUrl: NetworkRpcUrl = {
   [SupportedNetworks.BASE_SEPOLIA]: 'https://base-sepolia.g.alchemy.com/v2/',
   [SupportedNetworks.ARBITRUM]: 'https://arb-mainnet.g.alchemy.com/v2/',
   [SupportedNetworks.ARBITRUM_SEPOLIA]: 'https://arb-sepolia.g.alchemy.com/v2/',
+  [SupportedNetworks.ZKSYNC_SEPOLIA]: 'https://sepolia.era.zksync.dev', // TODO: this is not from alchemy. find alchemy rpc.
   [SupportedNetworks.LOCAL]: 'http://localhost:8545',
 };
 
