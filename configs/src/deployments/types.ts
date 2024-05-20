@@ -69,10 +69,6 @@ export enum NoFrameworkContractsNames {
   ENS_REGISTRY = 'ENSRegistry',
 }
 
-// PlaceholderSetup is in the json but not here, so I guess is not used
-// PublicResolver is in the json but not here, so I guess is not used
-// 35
-
 export type ENSNetworkDomain = {
   daoEns: string;
   pluginEns: string;
