@@ -16,6 +16,7 @@ export enum SupportedNetworks {
   ARBITRUM = 'arbitrum',
   ARBITRUM_SEPOLIA = 'arbitrumSepolia',
   LOCAL = 'local',
+  ZKSYNC_SEPOLIA = 'zksyncSepolia',
 }
 
 export type NetworkConfig = {
