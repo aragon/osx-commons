@@ -111,7 +111,8 @@ export const networksAlchemyRpcUrl: NetworkRpcUrl = {
   [SupportedNetworks.BASE_SEPOLIA]: 'https://base-sepolia.g.alchemy.com/v2/',
   [SupportedNetworks.ARBITRUM]: 'https://arb-mainnet.g.alchemy.com/v2/',
   [SupportedNetworks.ARBITRUM_SEPOLIA]: 'https://arb-sepolia.g.alchemy.com/v2/',
-  [SupportedNetworks.ZKSYNC_SEPOLIA]: 'https://sepolia.era.zksync.dev', // TODO: this is not from alchemy. find alchemy rpc.
+  [SupportedNetworks.ZKSYNC_SEPOLIA]:
+    'https://zksync-sepolia.g.alchemy.com/v2/',
   [SupportedNetworks.LOCAL]: 'http://localhost:8545',
 };
 

@@ -15,11 +15,6 @@
       "blockNumber": 2441217,
       "deploymentTx": "0x7bbeb9435090c339777a1f4bc62f891d2a6faa0ec331dd7a90f0800625d04a37"
     },
-    "DAOFactoryBase": {
-      "address": "0x764A8DAEB6B3915a413f40d0C818108C5A858085",
-      "blockNumber": 2441217,
-      "deploymentTx": "0x7bbeb9435090c339777a1f4bc62f891d2a6faa0ec331dd7a90f0800625d04a37"
-    },
     "DAORegistryProxy": {
       "address": "0x9305Ecd8D3837F7AC4f425dA578a0D11352D317A",
       "blockNumber": 2441205,
