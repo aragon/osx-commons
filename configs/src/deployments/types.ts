@@ -18,7 +18,7 @@ export type NetworkDeployments = {
 export type NetworkDeployment = {
   [index in FrameworkContractsNames]: ContractDeployment;
 } & {
-  [index in NoFrameworkContractsNames]?: ContractDeployment;
+  [index in NonFrameworkContractsNames]?: ContractDeployment;
 };
 
 export type ContractDeployment = {
@@ -47,7 +47,7 @@ export enum FrameworkContractsNames {
 }
 
 // contracts that are optionally deployed
-export enum NoFrameworkContractsNames {
+export enum NonFrameworkContractsNames {
   ADDRESSLIST_VOTING_SETUP = 'AddresslistVotingSetup',
   ADDRESSLIST_VOTING_SETUP_IMPLEMENTATION = 'AddresslistVotingSetupImplementation',
   ADDRESSLIST_VOTING_REPO_PROXY = 'AddresslistVotingRepoProxy',
