@@ -41,7 +41,7 @@ export const contracts: {
   baseSepolia,
   arbitrum,
   arbitrumSepolia,
-  // zksyncSepolia, TODO: why does this fail ?
+  zksyncSepolia,
   local: {
     [SupportedVersions.V1_0_0]: {} as NetworkDeployment,
     [SupportedVersions.V1_3_0]: {} as NetworkDeployment,
