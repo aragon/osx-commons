@@ -9,9 +9,8 @@ import * as mainnet from './json/mainnet.json';
 import * as mumbai from './json/mumbai.json';
 import * as polygon from './json/polygon.json';
 import * as sepolia from './json/sepolia.json';
-import * as zksyncSepolia from './json/zksyncSepolia.json';
 import * as zksyncMainnet from './json/zksyncMainnet.json';
-
+import * as zksyncSepolia from './json/zksyncSepolia.json';
 import {NetworkDeployment, SupportedVersions} from './types';
 
 export {
@@ -26,7 +25,7 @@ export {
   arbitrum,
   arbitrumSepolia,
   zksyncSepolia,
-  zksyncMainnet
+  zksyncMainnet,
 };
 
 export const contracts: {
