@@ -150,6 +150,16 @@
       "blockNumber": 1842642,
       "deploymentTx": "0xded066d193598c0895e8951801e13ef6a9aab2e1aac141c559a9ecfa7d786e41"
     },
+    "GovernanceERC20": {
+      "address": "0xC24188a73dc09aA7C721f96Ad8857B469C01dC9f",
+      "blockNumber": 1842650,
+      "deploymentTx": "0x93e402d0e995341542cd2e7915492844b267330b4d63a814cc830d5f7656b99d"
+    },
+    "GovernanceWrappedERC20": {
+      "address": "0x7a62da7B56fB3bfCdF70E900787010Bc4c9Ca42e",
+      "blockNumber": 1842651,
+      "deploymentTx": "0x49672240bbe689cfe3fbfc4ba50cf393a7320a5f2c92ac88798759a186387f0f"
+    },
     "AdminRepoProxy": {
       "address": "0xC56B719Fc71D9056AbC559a0E3e6CE98Abc44a67",
       "blockNumber": 1842663,
