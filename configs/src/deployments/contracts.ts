@@ -5,6 +5,7 @@ import * as baseGoerli from './json/baseGoerli.json';
 import * as baseMainnet from './json/baseMainnet.json';
 import * as baseSepolia from './json/baseSepolia.json';
 import * as goerli from './json/goerli.json';
+import * as holesky from './json/holesky.json';
 import * as mainnet from './json/mainnet.json';
 import * as mumbai from './json/mumbai.json';
 import * as polygon from './json/polygon.json';
@@ -17,6 +18,7 @@ export {
   mainnet,
   goerli,
   sepolia,
+  holesky,
   polygon,
   mumbai,
   baseMainnet,
@@ -36,6 +38,7 @@ export const contracts: {
   mainnet,
   goerli,
   sepolia,
+  holesky,
   polygon,
   mumbai,
   baseMainnet,

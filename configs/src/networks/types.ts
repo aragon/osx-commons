@@ -8,6 +8,7 @@ export enum SupportedNetworks {
   MAINNET = 'mainnet',
   GOERLI = 'goerli',
   SEPOLIA = 'sepolia',
+  HOLESKY = 'holesky',
   POLYGON = 'polygon',
   MUMBAI = 'mumbai',
   BASE = 'baseMainnet',
