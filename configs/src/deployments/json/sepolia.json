@@ -45,11 +45,6 @@
       "blockNumber": 4421506,
       "deploymentTx": "0x6c86db31c10aff7c2bf68321fa4bbd85f96cf336cd70d8700a711497c58fea27"
     },
-    "ENSRegistry": {
-      "address": "0x005098056a837c2c4F99C7eCeE976F8D90bdFFF8",
-      "blockNumber": 4421506,
-      "deploymentTx": "0x6c86db31c10aff7c2bf68321fa4bbd85f96cf336cd70d8700a711497c58fea27"
-    },
     "GovernanceERC20": {
       "address": "0xA03C2182af8eC460D498108C92E8638a580b94d4",
       "blockNumber": 4421522,

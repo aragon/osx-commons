@@ -45,11 +45,6 @@
       "blockNumber": 1842632,
       "deploymentTx": "0x8c489dd5f838070daad7ba3691240b46b341270b17f5287d4b87028200b8a17f"
     },
-    "ENSRegistry": {
-      "address": "0x6d4FB6Ff01A172774f42789fcfcdd84E68c28494",
-      "blockNumber": 1842632,
-      "deploymentTx": "0x8c489dd5f838070daad7ba3691240b46b341270b17f5287d4b87028200b8a17f"
-    },
     "MultisigSetup": {
       "address": "0x96E54098317631641703404C06A5afAD89da7373",
       "blockNumber": 1842654,

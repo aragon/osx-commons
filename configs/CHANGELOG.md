@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add `holesky` network configuration.
 
+## Removed
+
+- Remove `ENSRegistry` address from `Sepolia` deploymnet.
+
 ## v0.6.0
 
 ## Added
