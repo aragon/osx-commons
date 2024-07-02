@@ -21,6 +21,12 @@ export const networks: NetworkConfigs = {
     name: SupportedNetworks.SEPOLIA,
     aliases: {},
   },
+  [SupportedNetworks.HOLESKY]: {
+    isTestnet: true,
+    chainId: 17000,
+    name: SupportedNetworks.HOLESKY,
+    aliases: {},
+  },
   [SupportedNetworks.POLYGON]: {
     isTestnet: false,
     chainId: 137,
@@ -110,6 +116,7 @@ export const networksAlchemyRpcUrl: NetworkRpcUrl = {
   [SupportedNetworks.MAINNET]: 'https://eth-mainnet.g.alchemy.com/v2/',
   [SupportedNetworks.GOERLI]: 'https://eth-goerli.g.alchemy.com/v2/',
   [SupportedNetworks.SEPOLIA]: 'https://eth-sepolia.g.alchemy.com/v2/',
+  [SupportedNetworks.HOLESKY]: 'https://eth-holesky.g.alchemy.com/v2/',
   [SupportedNetworks.POLYGON]: 'https://polygon-mainnet.g.alchemy.com/v2/',
   [SupportedNetworks.MUMBAI]: 'https://polygon-mumbai.g.alchemy.com/v2/',
   [SupportedNetworks.BASE]: 'https://base-mainnet.g.alchemy.com/v2/',
