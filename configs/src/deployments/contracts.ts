@@ -4,6 +4,7 @@ import * as arbitrumSepolia from './json/arbitrumSepolia.json';
 import * as baseGoerli from './json/baseGoerli.json';
 import * as baseMainnet from './json/baseMainnet.json';
 import * as baseSepolia from './json/baseSepolia.json';
+import * as devSepolia from './json/devSepolia.json';
 import * as goerli from './json/goerli.json';
 import * as holesky from './json/holesky.json';
 import * as mainnet from './json/mainnet.json';
@@ -28,6 +29,7 @@ export {
   arbitrumSepolia,
   zksyncSepolia,
   zksyncMainnet,
+  devSepolia,
 };
 
 export const contracts: {
@@ -48,6 +50,7 @@ export const contracts: {
   arbitrumSepolia,
   zksyncSepolia,
   zksyncMainnet,
+  devSepolia,
   local: {
     [SupportedVersions.V1_0_0]: {} as NetworkDeployment,
     [SupportedVersions.V1_3_0]: {} as NetworkDeployment,

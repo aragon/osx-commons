@@ -16,9 +16,13 @@ export function getNetwork(network: SupportedNetworks): NetworkConfig | null {
 }
 
 export function getNetworkByChainId(chainId: number): NetworkConfig | null {
-  return (
-    Object.values(networks).find(network => network.chainId === chainId) || null
-  );
+  return chainId === 0
+    ? networks[SupportedNetworks.DEV_SEPOLIA]
+    : Object.values(networks).find(
+        network =>
+          network.chainId === chainId &&
+          network.name !== SupportedNetworks.DEV_SEPOLIA
+      ) || null;
 }
 
 /**

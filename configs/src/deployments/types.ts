@@ -67,6 +67,10 @@ export enum NonFrameworkContractsNames {
   GOVERNANCE_ERC20 = 'GovernanceERC20',
   GOVERNANCE_WRAPPED_ERC20 = 'GovernanceWrappedERC20',
   ENS_REGISTRY = 'ENSRegistry',
+  STAGED_PROPOSAL_PROCESSOR_REPO_PROXY = 'StagedProposalProcessorRepoProxy',
+  STAGED_PROPOSAL_PROCESSOR_REPO_IMPLEMENTATION = 'StagedProposalProcessorRepoImplementation',
+  STAGED_PROPOSAL_PROCESSOR_SETUP = 'StagedProposalProcessorSetup',
+  STAGED_PROPOSAL_PROCESSOR_SETUP_IMPLEMENTATION = 'StagedProposalProcessorSetupImplementation',
 }
 
 export type ENSNetworkDomain = {
