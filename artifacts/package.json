@@ -1,0 +1,13 @@
+{
+  "name": "@aragon/osx-artifacts",
+  "author": "Aragon X",
+  "version": "1.4.0-rc0",
+  "license": "AGPL-3.0-or-later",
+  "description": "The Aragon OSx Solidity contracts ABIs",
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}
