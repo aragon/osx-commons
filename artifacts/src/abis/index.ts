@@ -1,8 +1,8 @@
-export * from './adminPluginAbis';
-export * from './multisigPluginAbis';
-export * from './tokenVotingPluginAbis';
-export * from './sppPluginAbis';
-export * from './osxAbis';
+export * from './admin-plugin-abis';
+export * from './multisig-plugin-abis';
+export * from './token-voting-plugin-abis';
+export * from './staged-proposal-processor-plugin-abis';
+export * from './osx-abis';
 
 
 
