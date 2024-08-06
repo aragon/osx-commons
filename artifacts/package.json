@@ -1,7 +1,7 @@
 {
-  "name": "@aragon/osx-artifacts",
+  "name": "@aragon/osx-commons-artifacts",
   "author": "Aragon X",
-  "version": "1.4.0-rc0",
+  "version": "0.1.0-alpha.1",
   "license": "AGPL-3.0-or-later",
   "description": "The Aragon OSx Solidity contracts ABIs",
   "typings": "dist/index.d.ts",
