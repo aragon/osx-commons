@@ -1,6 +1,8 @@
 #!/bin/bash
 
-export ALCHEMY_API_KEY=QB4I_ky2fb3xjimxqlW24kNYmZJA999S
+source .env
+export ALCHEMY_API_KEY=$ALCHEMY_API_KEY
+
 
 current_dir=$(pwd)
 CLONE_DIR="temp_dir"
