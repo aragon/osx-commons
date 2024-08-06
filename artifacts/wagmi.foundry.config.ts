@@ -7,7 +7,6 @@ export default defineConfig({
   plugins: [
     foundry({
       project: './',
-      // artifacts: 'REPLACE_ARTIFACTS_SOURCE',
       exclude: ['**/test/**', '**/mocks/**'],
     }),
   ],

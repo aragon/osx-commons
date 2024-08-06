@@ -44,8 +44,6 @@ while IFS=',' read -r line; do
         
     elif [ "$projectType" = "forge" ]; then
         cp $current_dir/wagmi.foundry.config.ts wagmi.config.ts
-        sed -i -e "s|REPLACE_ARTIFACTS_SOURCE|${artifactSource}|g" wagmi.config.ts
-
         forge remappings
         forge compile
 
