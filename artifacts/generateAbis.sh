@@ -1,7 +1,14 @@
 #!/bin/bash
 
 source .env
-export ALCHEMY_API_KEY=$ALCHEMY_API_KEY
+
+if [ -z "$ALCHEMY_API_KEY" ] 
+then
+    echo "ALCHEMY_API_KEY is not set on the .env file, exiting..."
+    exit -1
+else
+    export ALCHEMY_API_KEY=$ALCHEMY_API_KEY
+fi
 
 
 current_dir=$(pwd)
