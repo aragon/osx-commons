@@ -1,11 +1,11 @@
-# @aragon/osx-artifacts
+# @aragon/osx-dev-artifacts
 
 ## Installation
 
     ```bash
-    npm install @aragon/osx-artifacts
+    npm install @aragon/osx-dev-artifacts
     ## or
-    yarn add @aragon/osx-artifacts
+    yarn add @aragon/osx-dev-artifacts
     ```
 
 ## Usage
