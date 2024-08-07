@@ -3,7 +3,6 @@ import {
   getPluginEnsDomain,
   commonDomain,
   exceptionalDomains,
-  exceptional2Domains,
 } from '../../../deployments';
 import {SupportedNetworks} from '../../../networks';
 
@@ -27,10 +26,6 @@ describe('Domains', () => {
         if (exceptionalDomains[network]) {
           expect(getPluginEnsDomain(network)).toMatch(
             exceptionalDomains[network]?.pluginEns ?? ''
-          );
-        } else if (exceptional2Domains[network]) {
-          expect(getPluginEnsDomain(network)).toMatch(
-            exceptional2Domains[network]?.pluginEns ?? ''
           );
         } else {
           expect(getPluginEnsDomain(network)).toMatch(commonDomain.pluginEns);

@@ -1,6 +1,6 @@
 import {SupportedNetworks} from '../networks';
 import {contracts} from './contracts';
-import {exceptional2Domains, exceptionalDomains, commonDomain} from './ens';
+import {exceptionalDomains, commonDomain} from './ens';
 import {
   NetworkDeployment,
   NetworkDeployments,
@@ -57,8 +57,6 @@ export function getDaoEnsDomain(
 ): string | undefined {
   if (exceptionalDomains[networkName]) {
     return exceptionalDomains[networkName]?.daoEns;
-  } else if (exceptional2Domains[networkName]) {
-    return exceptional2Domains[networkName]?.daoEns;
   } else {
     return commonDomain.daoEns;
   }
@@ -69,8 +67,6 @@ export function getPluginEnsDomain(
 ): string | undefined {
   if (exceptionalDomains[networkName]) {
     return exceptionalDomains[networkName]?.pluginEns;
-  } else if (exceptional2Domains[networkName]) {
-    return exceptional2Domains[networkName]?.pluginEns;
   } else {
     return commonDomain.pluginEns;
   }
