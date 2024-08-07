@@ -230,7 +230,7 @@ export const adminAbi = [
     outputs: [{name: '', internalType: 'address', type: 'address'}],
     stateMutability: 'view',
   },
-] as const
+] as const;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // AdminSetup
@@ -391,4 +391,4 @@ export const adminSetupAbi = [
     outputs: [{name: '', internalType: 'bool', type: 'bool'}],
     stateMutability: 'view',
   },
-] as const
+] as const;

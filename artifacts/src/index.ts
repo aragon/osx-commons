@@ -1,1 +1,1 @@
-export * from "./abis";
+export * from './abis';
