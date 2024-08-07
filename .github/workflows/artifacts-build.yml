@@ -35,4 +35,3 @@ jobs:
 
       - name: 'Build the artifacts'
         run: 'yarn build'
-s
