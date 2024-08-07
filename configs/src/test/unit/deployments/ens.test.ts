@@ -25,7 +25,7 @@ describe('Domains', () => {
       for (const network of Object.values(SupportedNetworks)) {
         if (exceptionalDomains[network]) {
           expect(getPluginEnsDomain(network)).toMatch(
-            exceptionalDomains[network]?.daoEns ?? ''
+            exceptionalDomains[network]?.pluginEns ?? ''
           );
         } else {
           expect(getPluginEnsDomain(network)).toMatch(commonDomain.pluginEns);

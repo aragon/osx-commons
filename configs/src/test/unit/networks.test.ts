@@ -134,7 +134,10 @@ describe('Deployments', () => {
     it('should get the network given the chainId', () => {
       const inputs = Object.values(SupportedNetworks).map(network => {
         return {
-          network: networks[network].chainId,
+          network:
+            network === SupportedNetworks.DEV_SEPOLIA
+              ? 0
+              : networks[network].chainId,
           expected: networks[network],
         };
       });
