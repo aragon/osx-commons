@@ -31,7 +31,26 @@ interface IProposal {
     /// @param proposalId The ID of the proposal.
     event ProposalExecuted(uint256 indexed proposalId);
 
+    /// @notice Creates a new proposal.
+    /// @param data The metadata of the proposal.
+    /// @param actions The actions that will be executed after the proposal passes.
+    /// @param startDate The start date of the proposal.
+    /// @param endDate The end date of the proposal.
+    /// @return proposalId The id of the proposal.
+    function createProposal(
+        bytes memory data,
+        IDAO.Action[] memory actions,
+        uint64 startDate,
+        uint64 endDate
+    ) external returns (uint256 proposalId);
+
+    /// @notice Whether proposal can be executed or not.
+    /// @param proposalId The id of the proposal.
+    /// @return bool Returns if proposal can be executed or not.
+    function canExecute(uint256 proposalId) external returns (bool);
+
     /// @notice Returns the proposal count determining the next proposal ID.
+    /// @dev This function is deprecated TODO:
     /// @return The proposal count.
     function proposalCount() external view returns (uint256);
 }

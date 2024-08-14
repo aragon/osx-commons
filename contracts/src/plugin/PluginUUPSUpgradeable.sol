@@ -24,6 +24,10 @@ abstract contract PluginUUPSUpgradeable is
     ProtocolVersion
 {
     // NOTE: When adding new state variables to the contract, the size of `_gap` has to be adapted below as well.
+    address public target;
+
+    /// @dev Emitted each time the Target is set.
+    event TargetSet(address indexed previousTarget, address indexed newTarget);
 
     /// @notice Disables the initializers on the implementation contract to prevent it from being left uninitialized.
     /// @custom:oz-upgrades-unsafe-allow constructor
@@ -46,6 +50,14 @@ abstract contract PluginUUPSUpgradeable is
         __DaoAuthorizableUpgradeable_init(_dao);
     }
 
+    /// @dev Sets the target to a new target (`newTarget`).
+    /// @notice Can only be called by the current owner. TODO
+    function setTarget(address _target) public {
+        address previousTarget = target;
+        target = _target;
+        emit TargetSet(previousTarget, _target);
+    }
+
     /// @notice Checks if an interface is supported by this or its parent contract.
     /// @param _interfaceId The ID of the interface.
     /// @return Returns `true` if the interface is supported.
@@ -63,6 +75,36 @@ abstract contract PluginUUPSUpgradeable is
         return _getImplementation();
     }
 
+    /// @notice Forwards the actions to the currently set `target` for the execution.
+    /// @param _callId Identifier for this execution.
+    /// @param _actions actions that will be eventually called.
+    /// @param _allowFailureMap Bitmap-encoded number. TODO:
+    /// @return execResults address of the implementation contract.
+    /// @return failureMap address of the implementation contract.
+    function _execute(
+        bytes32 _callId,
+        IDAO.Action[] calldata _actions,
+        uint256 _allowFailureMap
+    ) internal virtual returns (bytes[] memory execResults, uint256 failureMap) {
+        (execResults, failureMap) = IDAO(target).execute(_callId, _actions, _allowFailureMap);
+    }
+
+    /// @notice Forwards the actions to the `target` for the execution.
+    /// @param _target Forwards the actions to the specific target.
+    /// @param _callId Identifier for this execution.
+    /// @param _actions actions that will be eventually called.
+    /// @param _allowFailureMap Bitmap-encoded number. TODO:
+    /// @return execResults address of the implementation contract.
+    /// @return failureMap address of the implementation contract.
+    function _execute(
+        address _target,
+        bytes32 _callId,
+        IDAO.Action[] calldata _actions,
+        uint256 _allowFailureMap
+    ) internal virtual returns (bytes[] memory execResults, uint256 failureMap) {
+        (execResults, failureMap) = IDAO(_target).execute(_callId, _actions, _allowFailureMap);
+    }
+
     /// @notice Internal method authorizing the upgrade of the contract via the [upgradeability mechanism for UUPS proxies](https://docs.openzeppelin.com/contracts/4.x/api/proxy#UUPSUpgradeable) (see [ERC-1822](https://eips.ethereum.org/EIPS/eip-1822)).
     /// @dev The caller must have the `UPGRADE_PLUGIN_PERMISSION_ID` permission.
     function _authorizeUpgrade(
@@ -78,5 +120,5 @@ abstract contract PluginUUPSUpgradeable is
     }
 
     /// @notice This empty reserved space is put in place to allow future versions to add new variables without shifting down storage in the inheritance chain (see [OpenZeppelin's guide about storage gaps](https://docs.openzeppelin.com/contracts/4.x/upgradeable#storage_gaps)).
-    uint256[50] private __gap;
+    uint256[49] private __gap;
 }

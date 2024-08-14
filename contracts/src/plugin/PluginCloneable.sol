@@ -20,6 +20,11 @@ abstract contract PluginCloneable is
     DaoAuthorizableUpgradeable,
     ProtocolVersion
 {
+    address public target;
+
+    /// @dev Emitted each time the Target is set.
+    event TargetSet(address indexed previousTarget, address indexed newTarget);
+
     /// @notice Disables the initializers on the implementation contract to prevent it from being left uninitialized.
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
@@ -31,6 +36,14 @@ abstract contract PluginCloneable is
     // solhint-disable-next-line func-name-mixedcase
     function __PluginCloneable_init(IDAO _dao) internal virtual onlyInitializing {
         __DaoAuthorizableUpgradeable_init(_dao);
+    }
+
+    /// @dev Sets the target to a new target (`newTarget`).
+    /// @notice Can only be called by the current owner. TODO
+    function setTarget(address _target) public {
+        address previousTarget = target;
+        target = _target;
+        emit TargetSet(previousTarget, _target);
     }
 
     /// @inheritdoc IPlugin
@@ -46,5 +59,35 @@ abstract contract PluginCloneable is
             _interfaceId == type(IPlugin).interfaceId ||
             _interfaceId == type(IProtocolVersion).interfaceId ||
             super.supportsInterface(_interfaceId);
+    }
+
+    /// @notice Forwards the actions to the currently set `target` for the execution.
+    /// @param _callId Identifier for this execution.
+    /// @param _actions actions that will be eventually called.
+    /// @param _allowFailureMap Bitmap-encoded number. TODO:
+    /// @return execResults address of the implementation contract.
+    /// @return failureMap address of the implementation contract.
+    function _execute(
+        bytes32 _callId,
+        IDAO.Action[] calldata _actions,
+        uint256 _allowFailureMap
+    ) internal virtual returns (bytes[] memory execResults, uint256 failureMap) {
+        (execResults, failureMap) = IDAO(target).execute(_callId, _actions, _allowFailureMap);
+    }
+
+    /// @notice Forwards the actions to the `target` for the execution.
+    /// @param _target Forwards the actions to the specific target.
+    /// @param _callId Identifier for this execution.
+    /// @param _actions actions that will be eventually called.
+    /// @param _allowFailureMap Bitmap-encoded number. TODO:
+    /// @return execResults address of the implementation contract.
+    /// @return failureMap address of the implementation contract.
+    function _execute(
+        address _target,
+        bytes32 _callId,
+        IDAO.Action[] calldata _actions,
+        uint256 _allowFailureMap
+    ) internal virtual returns (bytes[] memory execResults, uint256 failureMap) {
+        (execResults, failureMap) = IDAO(_target).execute(_callId, _actions, _allowFailureMap);
     }
 }

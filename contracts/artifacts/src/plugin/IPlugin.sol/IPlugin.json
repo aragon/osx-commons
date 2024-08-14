@@ -1,0 +1,24 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IPlugin",
+  "sourceName": "src/plugin/IPlugin.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "pluginType",
+      "outputs": [
+        {
+          "internalType": "enum IPlugin.PluginType",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
