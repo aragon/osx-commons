@@ -22,7 +22,7 @@ abstract contract Proposal is IProposal, ERC165 {
     // this will not return the correct value anyways anymore.
     /// @inheritdoc IProposal
     function proposalCount() public view override returns (uint256) {
-        return proposalCounter.current();
+        return 0;
     }
 
     /// @notice Checks if this or the parent contract supports an interface by its ID.

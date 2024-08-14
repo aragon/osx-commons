@@ -83,7 +83,7 @@ abstract contract PluginUUPSUpgradeable is
     /// @return failureMap address of the implementation contract.
     function _execute(
         bytes32 _callId,
-        IDAO.Action[] calldata _actions,
+        IDAO.Action[] memory _actions,
         uint256 _allowFailureMap
     ) internal virtual returns (bytes[] memory execResults, uint256 failureMap) {
         (execResults, failureMap) = IDAO(target).execute(_callId, _actions, _allowFailureMap);
@@ -99,7 +99,7 @@ abstract contract PluginUUPSUpgradeable is
     function _execute(
         address _target,
         bytes32 _callId,
-        IDAO.Action[] calldata _actions,
+        IDAO.Action[] memory _actions,
         uint256 _allowFailureMap
     ) internal virtual returns (bytes[] memory execResults, uint256 failureMap) {
         (execResults, failureMap) = IDAO(_target).execute(_callId, _actions, _allowFailureMap);
