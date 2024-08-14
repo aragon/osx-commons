@@ -15,10 +15,13 @@ import {IPlugin} from "./IPlugin.sol";
 /// @notice An abstract, non-upgradeable contract to inherit from when creating a plugin being deployed via the `new` keyword.
 /// @custom:security-contact sirt@aragon.org
 abstract contract Plugin is IPlugin, ERC165, DaoAuthorizable, ProtocolVersion {
-    address public target;
+    address private target;
 
     /// @dev Emitted each time the Target is set.
     event TargetSet(address indexed previousTarget, address indexed newTarget);
+
+    /// @notice The ID of the permission required to call the `setTarget` function.
+    bytes32 public constant SET_TARGET_PERMISSION_ID = keccak256("SET_TARGET_PERMISSION");
 
     /// @notice Constructs the plugin by storing the associated DAO.
     /// @param _dao The DAO contract.
@@ -30,11 +33,14 @@ abstract contract Plugin is IPlugin, ERC165, DaoAuthorizable, ProtocolVersion {
     }
 
     /// @dev Sets the target to a new target (`newTarget`).
-    /// @notice Can only be called by the current owner. TODO
-    function setTarget(address _target) public {
-        address previousTarget = target;
-        target = _target;
-        emit TargetSet(previousTarget, _target);
+    /// @param _target The target contract.
+    function setTarget(address _target) public auth(SET_TARGET_PERMISSION_ID) {
+        _setTarget(_target);
+    }
+
+    /// @notice Returns the currently set target contract.
+    function getTarget() public view returns (address) {
+        return target;
     }
 
     /// @notice Checks if this or the parent contract supports an interface by its ID.
@@ -44,7 +50,16 @@ abstract contract Plugin is IPlugin, ERC165, DaoAuthorizable, ProtocolVersion {
         return
             _interfaceId == type(IPlugin).interfaceId ||
             _interfaceId == type(IProtocolVersion).interfaceId ||
+            _interfaceId == this.setTarget.selector ^ this.getTarget.selector ||
             super.supportsInterface(_interfaceId);
+    }
+
+    /// @notice Sets the target to a new target (`newTarget`).
+    /// @param _target The target contract.
+    function _setTarget(address _target) internal virtual {
+        address previousTarget = target;
+        target = _target;
+        emit TargetSet(previousTarget, _target);
     }
 
     /// @notice Forwards the actions to the currently set `target` for the execution.

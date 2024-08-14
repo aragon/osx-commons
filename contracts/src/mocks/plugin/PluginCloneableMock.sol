@@ -16,6 +16,23 @@ contract PluginCloneableMockBuild1 is PluginCloneable {
         __PluginCloneable_init(_dao);
         state1 = 1;
     }
+
+    function execute(
+        uint256 _callId,
+        IDAO.Action[] memory _actions,
+        uint256 _allowFailureMap
+    ) external returns (bytes[] memory execResults, uint256 failureMap) {
+        (execResults, failureMap) = _execute(bytes32(_callId), _actions, _allowFailureMap);
+    }
+
+    function execute(
+        address _target,
+        uint256 _callId,
+        IDAO.Action[] memory _actions,
+        uint256 _allowFailureMap
+    ) external returns (bytes[] memory execResults, uint256 failureMap) {
+        (execResults, failureMap) = _execute(_target, bytes32(_callId), _actions, _allowFailureMap);
+    }
 }
 
 /// @notice A mock cloneable plugin to be deployed via the minimal proxy pattern.

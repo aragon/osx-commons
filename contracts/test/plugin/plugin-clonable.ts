@@ -112,6 +112,17 @@ describe('PluginCloneable', function () {
       expect(await implementation.supportsInterface(getInterfaceId(iface))).to
         .be.true;
     });
+
+    it('supports the `setTarget^getTarget` interface', async () => {
+      const {implementation} = await loadFixture(fixture);
+      const iface = PluginCloneableMockBuild1__factory.createInterface();
+
+      let interfaceId = ethers.BigNumber.from(iface.getSighash('setTarget'))
+        .xor(ethers.BigNumber.from(iface.getSighash('getTarget')))
+        .toHexString();
+
+      expect(await implementation.supportsInterface(interfaceId)).to.be.true;
+    });
   });
 
   describe('Protocol version', async () => {
@@ -122,12 +133,96 @@ describe('PluginCloneable', function () {
       );
     });
   });
+
+  describe('setTarget/getTarget', async () => {
+    it('reverts if caller does not have the permission', async () => {
+      const {deployer, proxy, daoMock} = await loadFixture(fixture);
+
+      let newTarget = proxy.address;
+
+      await expect(proxy.setTarget(newTarget))
+        .to.be.revertedWithCustomError(proxy, 'DaoUnauthorized')
+        .withArgs(
+          daoMock.address,
+          proxy.address,
+          deployer.address,
+          ethers.utils.id('SET_TARGET_PERMISSION')
+        );
+    });
+
+    it('updates the target and emits an appropriate event', async () => {
+      const {proxy, daoMock} = await loadFixture(fixture);
+
+      // Set the `hasPermission` mock function to return `true`.
+      await daoMock.setHasPermissionReturnValueMock(true); // answer true for all permission requests
+
+      let newTarget = proxy.address;
+
+      await expect(proxy.setTarget(newTarget))
+        .to.emit(proxy, 'TargetSet')
+        .withArgs(ethers.constants.AddressZero, newTarget);
+
+      expect(await proxy.getTarget()).to.equal(newTarget);
+    });
+  });
+
+  describe('Executions', async () => {
+    describe('execute with current target', async () => {
+      it('reverts with ambiguity if target is not set', async () => {
+        const {proxy, daoMock} = await loadFixture(fixture);
+
+        await expect(
+          proxy['execute(uint256,(address,uint256,bytes)[],uint256)'](1, [], 0)
+        ).to.be.reverted;
+      });
+
+      it('successfully forwards action to the currently set target', async () => {
+        const {proxy, daoMock} = await loadFixture(fixture);
+
+        await daoMock.setHasPermissionReturnValueMock(true);
+        await proxy.setTarget(daoMock.address);
+
+        await expect(
+          proxy['execute(uint256,(address,uint256,bytes)[],uint256)'](1, [], 0)
+        ).to.emit(daoMock, 'Executed');
+      });
+    });
+
+    describe('execute with the custom target', async () => {
+      it('reverts with ambiguity if target address(0) is passed', async () => {
+        const {proxy, daoMock} = await loadFixture(fixture);
+
+        await expect(
+          proxy['execute(address,uint256,(address,uint256,bytes)[],uint256)'](
+            ethers.constants.AddressZero,
+            1,
+            [],
+            0
+          )
+        ).to.be.reverted;
+      });
+
+      it('successfully forwards action to the currently set target', async () => {
+        const {proxy, daoMock} = await loadFixture(fixture);
+
+        await expect(
+          proxy['execute(address,uint256,(address,uint256,bytes)[],uint256)'](
+            daoMock.address,
+            1,
+            [],
+            0
+          )
+        ).to.emit(daoMock, 'Executed');
+      });
+    });
+  });
 });
 
 type FixtureResult = {
   deployer: SignerWithAddress;
   implementation: PluginCloneableMockBuild1;
   proxyFactory: ProxyFactory;
+  proxy: PluginCloneableMockBuild1;
   daoMock: DAOMock;
   initCalldata: string;
   Build1Factory: PluginCloneableMockBuild1__factory;
@@ -150,10 +245,15 @@ async function fixture(): Promise<FixtureResult> {
     [daoMock.address]
   );
 
+  const tx = await proxyFactory.deployUUPSProxy(initCalldata);
+  const event = findEvent<ProxyCreatedEvent>(await tx.wait(), 'ProxyCreated');
+  const proxy = Build1Factory.attach(event.args.proxy);
+
   return {
     deployer,
     implementation,
     proxyFactory,
+    proxy,
     daoMock,
     initCalldata,
     Build1Factory,

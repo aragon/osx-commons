@@ -55,6 +55,17 @@ describe('Plugin', function () {
       const iface = IProtocolVersion__factory.createInterface();
       expect(await plugin.supportsInterface(getInterfaceId(iface))).to.be.true;
     });
+
+    it('supports the `setTarget^getTarget` interface', async () => {
+      const {plugin} = await loadFixture(fixture);
+      const iface = PluginMockBuild1__factory.createInterface();
+
+      let interfaceId = ethers.BigNumber.from(iface.getSighash('setTarget'))
+        .xor(ethers.BigNumber.from(iface.getSighash('getTarget')))
+        .toHexString();
+
+      expect(await plugin.supportsInterface(interfaceId)).to.be.true;
+    });
   });
 
   describe('Protocol version', async () => {
@@ -63,6 +74,89 @@ describe('Plugin', function () {
       expect(await plugin.protocolVersion()).to.deep.equal(
         osxCommonsContractsVersion()
       );
+    });
+  });
+
+  describe('setTarget', async () => {
+    it('reverts if caller does not have the permission', async () => {
+      const {deployer, plugin, daoMock} = await loadFixture(fixture);
+
+      let newTarget = plugin.address;
+
+      await expect(plugin.setTarget(newTarget))
+        .to.be.revertedWithCustomError(plugin, 'DaoUnauthorized')
+        .withArgs(
+          daoMock.address,
+          plugin.address,
+          deployer.address,
+          ethers.utils.id('SET_TARGET_PERMISSION')
+        );
+    });
+
+    it('updates the target and emits an appropriate event', async () => {
+      const {plugin, daoMock} = await loadFixture(fixture);
+
+      let newTarget = plugin.address;
+
+      // Set the `hasPermission` mock function to return `true`.
+      await daoMock.setHasPermissionReturnValueMock(true); // answer true for all permission requests
+
+      await expect(plugin.setTarget(newTarget))
+        .to.emit(plugin, 'TargetSet')
+        .withArgs(ethers.constants.AddressZero, newTarget);
+
+      expect(await plugin.getTarget()).to.equal(newTarget);
+    });
+  });
+
+  describe('Executions', async () => {
+    describe('execute with current target', async () => {
+      it('reverts with ambiguity if target is not set', async () => {
+        const {plugin, daoMock} = await loadFixture(fixture);
+
+        await expect(
+          plugin['execute(uint256,(address,uint256,bytes)[],uint256)'](1, [], 0)
+        ).to.be.reverted;
+      });
+
+      it('successfully forwards action to the currently set target', async () => {
+        const {plugin, daoMock} = await loadFixture(fixture);
+
+        await daoMock.setHasPermissionReturnValueMock(true);
+        await plugin.setTarget(daoMock.address);
+
+        await expect(
+          plugin['execute(uint256,(address,uint256,bytes)[],uint256)'](1, [], 0)
+        ).to.emit(daoMock, 'Executed');
+      });
+    });
+
+    describe('execute with the custom target', async () => {
+      it('reverts with ambiguity if target address(0) is passed', async () => {
+        const {plugin, daoMock} = await loadFixture(fixture);
+
+        await expect(
+          plugin['execute(address,uint256,(address,uint256,bytes)[],uint256)'](
+            ethers.constants.AddressZero,
+            1,
+            [],
+            0
+          )
+        ).to.be.reverted;
+      });
+
+      it('successfully forwards action to the currently set target', async () => {
+        const {plugin, daoMock} = await loadFixture(fixture);
+
+        await expect(
+          plugin['execute(address,uint256,(address,uint256,bytes)[],uint256)'](
+            daoMock.address,
+            1,
+            [],
+            0
+          )
+        ).to.emit(daoMock, 'Executed');
+      });
     });
   });
 });

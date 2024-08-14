@@ -19,8 +19,8 @@ abstract contract ProposalUpgradeable is IProposal, ERC165Upgradeable {
     CountersUpgradeable.Counter private proposalCounter;
 
     /// @inheritdoc IProposal
-    function proposalCount() public view override returns (uint256) {
-        return proposalCounter.current();
+    function proposalCount() public pure override returns (uint256) {
+        return type(uint256).max;
     }
 
     /// @notice Checks if this or the parent contract supports an interface by its ID.

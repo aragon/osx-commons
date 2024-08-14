@@ -24,10 +24,16 @@ abstract contract PluginUUPSUpgradeable is
     ProtocolVersion
 {
     // NOTE: When adding new state variables to the contract, the size of `_gap` has to be adapted below as well.
-    address public target;
+    address private target;
 
     /// @dev Emitted each time the Target is set.
     event TargetSet(address indexed previousTarget, address indexed newTarget);
+
+    /// @notice The ID of the permission required to call the `setTarget` function.
+    bytes32 public constant SET_TARGET_PERMISSION_ID = keccak256("SET_TARGET_PERMISSION");
+
+    /// @notice The ID of the permission required to call the `_authorizeUpgrade` function.
+    bytes32 public constant UPGRADE_PLUGIN_PERMISSION_ID = keccak256("UPGRADE_PLUGIN_PERMISSION");
 
     /// @notice Disables the initializers on the implementation contract to prevent it from being left uninitialized.
     /// @custom:oz-upgrades-unsafe-allow constructor
@@ -40,8 +46,10 @@ abstract contract PluginUUPSUpgradeable is
         return PluginType.UUPS;
     }
 
-    /// @notice The ID of the permission required to call the `_authorizeUpgrade` function.
-    bytes32 public constant UPGRADE_PLUGIN_PERMISSION_ID = keccak256("UPGRADE_PLUGIN_PERMISSION");
+    /// @notice Returns the currently set target contract.
+    function getTarget() public view returns (address) {
+        return target;
+    }
 
     /// @notice Initializes the plugin by storing the associated DAO.
     /// @param _dao The DAO contract.
@@ -51,11 +59,9 @@ abstract contract PluginUUPSUpgradeable is
     }
 
     /// @dev Sets the target to a new target (`newTarget`).
-    /// @notice Can only be called by the current owner. TODO
-    function setTarget(address _target) public {
-        address previousTarget = target;
-        target = _target;
-        emit TargetSet(previousTarget, _target);
+    /// @param _target The target contract.
+    function setTarget(address _target) public auth(SET_TARGET_PERMISSION_ID) {
+        _setTarget(_target);
     }
 
     /// @notice Checks if an interface is supported by this or its parent contract.
@@ -66,6 +72,7 @@ abstract contract PluginUUPSUpgradeable is
             _interfaceId == type(IPlugin).interfaceId ||
             _interfaceId == type(IProtocolVersion).interfaceId ||
             _interfaceId == type(IERC1822ProxiableUpgradeable).interfaceId ||
+            _interfaceId == this.setTarget.selector ^ this.getTarget.selector ||
             super.supportsInterface(_interfaceId);
     }
 
@@ -73,6 +80,14 @@ abstract contract PluginUUPSUpgradeable is
     /// @return The address of the implementation contract.
     function implementation() public view returns (address) {
         return _getImplementation();
+    }
+
+    /// @notice Sets the target to a new target (`newTarget`).
+    /// @param _target The target contract.
+    function _setTarget(address _target) internal virtual {
+        address previousTarget = target;
+        target = _target;
+        emit TargetSet(previousTarget, _target);
     }
 
     /// @notice Forwards the actions to the currently set `target` for the execution.

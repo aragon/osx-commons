@@ -2,10 +2,8 @@
 
 pragma solidity ^0.8.8;
 
-import {Counters} from "@openzeppelin/contracts/utils/Counters.sol";
 import {ERC165} from "@openzeppelin/contracts/utils/introspection/ERC165.sol";
 
-import {IDAO} from "../../../dao/IDAO.sol";
 import {IProposal} from "./IProposal.sol";
 
 /// @title Proposal
@@ -13,16 +11,9 @@ import {IProposal} from "./IProposal.sol";
 /// @notice An abstract contract containing the traits and internal functionality to create and execute proposals that can be inherited by non-upgradeable DAO plugins.
 /// @custom:security-contact sirt@aragon.org
 abstract contract Proposal is IProposal, ERC165 {
-    using Counters for Counters.Counter;
-
-    /// @notice The incremental ID for proposals and executions.
-    Counters.Counter private proposalCounter;
-
-    /// Shall we remove this ? Does anyone use this ? if we keep having this,
-    // this will not return the correct value anyways anymore.
     /// @inheritdoc IProposal
-    function proposalCount() public view override returns (uint256) {
-        return 0;
+    function proposalCount() public pure override returns (uint256) {
+        return type(uint256).max;
     }
 
     /// @notice Checks if this or the parent contract supports an interface by its ID.

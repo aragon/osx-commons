@@ -50,7 +50,8 @@ interface IProposal {
     function canExecute(uint256 proposalId) external returns (bool);
 
     /// @notice Returns the proposal count determining the next proposal ID.
-    /// @dev This function is deprecated TODO:
+    /// @dev This function has been deprecated but due to backwards compatibility, it still stays in the interface
+    /// but returns maximum value of uint256 to let consumers know not to depend on it anymore.
     /// @return The proposal count.
     function proposalCount() external view returns (uint256);
 }
