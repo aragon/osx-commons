@@ -29,9 +29,16 @@ contract PluginCloneableMockBuild1 is PluginCloneable {
         address _target,
         uint256 _callId,
         IDAO.Action[] memory _actions,
-        uint256 _allowFailureMap
+        uint256 _allowFailureMap,
+        Operation _op
     ) external returns (bytes[] memory execResults, uint256 failureMap) {
-        (execResults, failureMap) = _execute(_target, bytes32(_callId), _actions, _allowFailureMap);
+        (execResults, failureMap) = _execute(
+            _target,
+            bytes32(_callId),
+            _actions,
+            _allowFailureMap,
+            _op
+        );
     }
 }
 

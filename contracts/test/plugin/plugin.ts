@@ -1,4 +1,6 @@
 import {
+  CustomExecutorMock,
+  CustomExecutorMock__factory,
   DAOMock,
   DAOMock__factory,
   IPlugin__factory,
@@ -20,6 +22,11 @@ type FixtureResult = {
   daoMock: DAOMock;
   Build1Factory: PluginMockBuild1__factory;
 };
+
+enum Operation {
+  call,
+  delegatecall,
+}
 
 describe('Plugin', function () {
   describe('PluginType', async () => {
@@ -60,8 +67,10 @@ describe('Plugin', function () {
       const {plugin} = await loadFixture(fixture);
       const iface = PluginMockBuild1__factory.createInterface();
 
-      let interfaceId = ethers.BigNumber.from(iface.getSighash('setTarget'))
-        .xor(ethers.BigNumber.from(iface.getSighash('getTarget')))
+      let interfaceId = ethers.BigNumber.from(
+        iface.getSighash('setTargetConfig')
+      )
+        .xor(ethers.BigNumber.from(iface.getSighash('getTargetConfig')))
         .toHexString();
 
       expect(await plugin.supportsInterface(interfaceId)).to.be.true;
@@ -83,7 +92,7 @@ describe('Plugin', function () {
 
       let newTarget = plugin.address;
 
-      await expect(plugin.setTarget(newTarget))
+      await expect(plugin.setTargetConfig({target: newTarget, operation: 0}))
         .to.be.revertedWithCustomError(plugin, 'DaoUnauthorized')
         .withArgs(
           daoMock.address,
@@ -101,61 +110,179 @@ describe('Plugin', function () {
       // Set the `hasPermission` mock function to return `true`.
       await daoMock.setHasPermissionReturnValueMock(true); // answer true for all permission requests
 
-      await expect(plugin.setTarget(newTarget))
+      let targetConfig = {target: newTarget, operation: 0};
+      let previousTargetConfig = {
+        target: ethers.constants.AddressZero,
+        operation: 0,
+      };
+      await expect(plugin.setTargetConfig(targetConfig))
         .to.emit(plugin, 'TargetSet')
-        .withArgs(ethers.constants.AddressZero, newTarget);
+        .withArgs(
+          (val1: any) =>
+            expect(val1).to.deep.equal([
+              previousTargetConfig.target,
+              previousTargetConfig.operation,
+            ]),
+          (val2: any) =>
+            expect(val2).to.deep.equal([
+              targetConfig.target,
+              targetConfig.operation,
+            ])
+        );
 
-      expect(await plugin.getTarget()).to.equal(newTarget);
+      expect(await plugin.getTargetConfig()).to.deep.equal([
+        targetConfig.target,
+        targetConfig.operation,
+      ]);
     });
   });
 
   describe('Executions', async () => {
+    let executor: CustomExecutorMock;
+    let plugin: PluginMockBuild1;
+    let daoMock: DAOMock;
+    let mergedABI: any;
+    before(async () => {
+      const [deployer] = await ethers.getSigners();
+
+      const executorFactory = new CustomExecutorMock__factory(deployer);
+      executor = await executorFactory.deploy();
+
+      var abiA = CustomExecutorMock__factory.abi;
+      var abiB = PluginMockBuild1__factory.abi;
+      // @ts-ignore
+      mergedABI = abiA.concat(abiB);
+    });
+
+    beforeEach(async () => {
+      let data = await fixture();
+      const [deployer] = await ethers.getSigners();
+
+      plugin = new ethers.Contract(
+        data.plugin.address,
+        mergedABI,
+        deployer
+      ) as PluginMockBuild1;
+      daoMock = data.daoMock;
+
+      await daoMock.setHasPermissionReturnValueMock(true);
+    });
+
     describe('execute with current target', async () => {
       it('reverts with ambiguity if target is not set', async () => {
-        const {plugin, daoMock} = await loadFixture(fixture);
-
         await expect(
           plugin['execute(uint256,(address,uint256,bytes)[],uint256)'](1, [], 0)
         ).to.be.reverted;
       });
 
-      it('successfully forwards action to the currently set target', async () => {
-        const {plugin, daoMock} = await loadFixture(fixture);
+      describe('Execute with operation = `call`', async () => {
+        it('successfully forwards action to the currently set target and reverts from target', async () => {
+          await plugin.setTargetConfig({
+            target: executor.address,
+            operation: Operation.call,
+          });
+          await expect(
+            plugin['execute(uint256,(address,uint256,bytes)[],uint256)'](
+              0,
+              [],
+              0
+            )
+          ).to.be.revertedWithCustomError(executor, 'Failed');
+        });
 
-        await daoMock.setHasPermissionReturnValueMock(true);
-        await plugin.setTarget(daoMock.address);
+        it('successfully forwards action to the currently set target and emits event from target', async () => {
+          await plugin.setTargetConfig({
+            target: executor.address,
+            operation: Operation.call,
+          });
+          await expect(
+            plugin['execute(uint256,(address,uint256,bytes)[],uint256)'](
+              1,
+              [],
+              0
+            )
+          ).to.emit(executor, 'Executed');
+        });
+      });
 
-        await expect(
-          plugin['execute(uint256,(address,uint256,bytes)[],uint256)'](1, [], 0)
-        ).to.emit(daoMock, 'Executed');
+      describe('Execute with operation = `delegatecall`', async () => {
+        it('bubbles up the revert message and reverts from the consumer', async () => {
+          await plugin.setTargetConfig({
+            target: executor.address,
+            operation: Operation.delegatecall,
+          });
+          await expect(
+            plugin['execute(uint256,(address,uint256,bytes)[],uint256)'](
+              0,
+              [],
+              0
+            )
+          ).to.be.revertedWithCustomError(plugin, 'Failed');
+        });
+
+        it('successfully does `delegatecall` and emits the event from the consumer', async () => {
+          await plugin.setTargetConfig({
+            target: executor.address,
+            operation: Operation.delegatecall,
+          });
+          // Must emit the event from the consumer, not from the executor because of delegatecall
+          await expect(
+            plugin['execute(uint256,(address,uint256,bytes)[],uint256)'](
+              1,
+              [],
+              0
+            )
+          ).to.emit(plugin, 'Executed');
+        });
       });
     });
 
     describe('execute with the custom target', async () => {
       it('reverts with ambiguity if target address(0) is passed', async () => {
-        const {plugin, daoMock} = await loadFixture(fixture);
-
         await expect(
-          plugin['execute(address,uint256,(address,uint256,bytes)[],uint256)'](
-            ethers.constants.AddressZero,
-            1,
-            [],
-            0
-          )
+          plugin[
+            'execute(address,uint256,(address,uint256,bytes)[],uint256,uint8)'
+          ](ethers.constants.AddressZero, 1, [], 0, 0)
         ).to.be.reverted;
       });
 
-      it('successfully forwards action to the currently set target', async () => {
-        const {plugin, daoMock} = await loadFixture(fixture);
+      describe('Execute with operation = `call`', async () => {
+        it('successfully forwards action to the currently set target and emits event from target', async () => {
+          await expect(
+            plugin[
+              'execute(address,uint256,(address,uint256,bytes)[],uint256,uint8)'
+            ](executor.address, 0, [], 0, 0)
+          ).to.be.revertedWithCustomError(executor, 'Failed');
+        });
 
-        await expect(
-          plugin['execute(address,uint256,(address,uint256,bytes)[],uint256)'](
-            daoMock.address,
-            1,
-            [],
-            0
-          )
-        ).to.emit(daoMock, 'Executed');
+        it('successfully forwards action to the currently set target and reverts from target', async () => {
+          await expect(
+            plugin[
+              'execute(address,uint256,(address,uint256,bytes)[],uint256,uint8)'
+            ](executor.address, 1, [], 0, 0)
+          ).to.emit(executor, 'Executed');
+        });
+      });
+
+      describe('Execute with operation = `delegatecall`', async () => {
+        it('bubbles up the revert message and reverts from the consumer', async () => {
+          await expect(
+            plugin[
+              'execute(address,uint256,(address,uint256,bytes)[],uint256,uint8)'
+            ](executor.address, 0, [], 0, Operation.delegatecall)
+          ).to.be.revertedWithCustomError(plugin, 'Failed');
+        });
+
+        it('successfully does `delegatecall` and emits the event from the consumer', async () => {
+          // Must emit the event from the consumer, not from the executor because of delegatecall
+          await expect(
+            plugin[
+              'execute(address,uint256,(address,uint256,bytes)[],uint256,uint8)'
+            ](executor.address, 1, [], 0, Operation.delegatecall)
+          ).to.emit(plugin, 'Executed');
+        });
+
+        // TODO: one more test that catches `ExecuteFailed` revert message.
       });
     });
   });
