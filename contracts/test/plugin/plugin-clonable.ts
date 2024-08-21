@@ -291,6 +291,20 @@ describe('PluginCloneable', function () {
             )
           ).to.emit(proxy, 'Executed');
         });
+
+        it('reverts with `ExecuteFailed`error', async () => {
+          await proxy.setTargetConfig({
+            target: executor.address,
+            operation: Operation.delegatecall,
+          });
+          await expect(
+            proxy['execute(uint256,(address,uint256,bytes)[],uint256)'](
+              123,
+              [],
+              0
+            )
+          ).to.be.revertedWithCustomError(proxy, 'ExecuteFailed');
+        });
       });
     });
 
@@ -339,7 +353,13 @@ describe('PluginCloneable', function () {
           ).to.emit(proxy, 'Executed');
         });
 
-        // TODO: one more test that catches `ExecuteFailed` revert message.
+        it('reverts with `ExecuteFailed`error', async () => {
+          await expect(
+            proxy[
+              'execute(address,uint256,(address,uint256,bytes)[],uint256,uint8)'
+            ](executor.address, 123, [], 0, Operation.delegatecall)
+          ).to.be.revertedWithCustomError(proxy, 'ExecuteFailed');
+        });
       });
     });
   });

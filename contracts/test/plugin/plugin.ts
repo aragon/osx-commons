@@ -234,6 +234,20 @@ describe('Plugin', function () {
             )
           ).to.emit(plugin, 'Executed');
         });
+
+        it('reverts with `ExecuteFailed`error', async () => {
+          await plugin.setTargetConfig({
+            target: executor.address,
+            operation: Operation.delegatecall,
+          });
+          await expect(
+            plugin['execute(uint256,(address,uint256,bytes)[],uint256)'](
+              123,
+              [],
+              0
+            )
+          ).to.be.revertedWithCustomError(plugin, 'ExecuteFailed');
+        });
       });
     });
 
@@ -282,7 +296,13 @@ describe('Plugin', function () {
           ).to.emit(plugin, 'Executed');
         });
 
-        // TODO: one more test that catches `ExecuteFailed` revert message.
+        it('reverts with `ExecuteFailed`error', async () => {
+          await expect(
+            plugin[
+              'execute(address,uint256,(address,uint256,bytes)[],uint256,uint8)'
+            ](executor.address, 123, [], 0, Operation.delegatecall)
+          ).to.be.revertedWithCustomError(plugin, 'ExecuteFailed');
+        });
       });
     });
   });
