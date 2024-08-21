@@ -137,7 +137,7 @@ describe('PluginUUPSUpgradeable', function () {
       const {implementation} = await loadFixture(fixture);
       const iface = PluginUUPSUpgradeableMockBuild1__factory.createInterface();
 
-      let interfaceId = ethers.BigNumber.from(
+      const interfaceId = ethers.BigNumber.from(
         iface.getSighash('setTargetConfig')
       )
         .xor(ethers.BigNumber.from(iface.getSighash('getTargetConfig')))
@@ -160,7 +160,7 @@ describe('PluginUUPSUpgradeable', function () {
     it('reverts if caller does not have the permission', async () => {
       const {deployer, proxy, daoMock} = await loadFixture(fixture);
 
-      let newTarget = proxy.address;
+      const newTarget = proxy.address;
 
       await expect(proxy.setTargetConfig({target: newTarget, operation: 0}))
         .to.be.revertedWithCustomError(proxy, 'DaoUnauthorized')
@@ -178,10 +178,10 @@ describe('PluginUUPSUpgradeable', function () {
       // Set the `hasPermission` mock function to return `true`.
       await daoMock.setHasPermissionReturnValueMock(true); // answer true for all permission requests
 
-      let newTarget = proxy.address;
+      const newTarget = proxy.address;
 
-      let targetConfig = {target: newTarget, operation: 0};
-      let previousTargetConfig = {
+      const targetConfig = {target: newTarget, operation: 0};
+      const previousTargetConfig = {
         target: ethers.constants.AddressZero,
         operation: 0,
       };
@@ -218,14 +218,15 @@ describe('PluginUUPSUpgradeable', function () {
       const executorFactory = new CustomExecutorMock__factory(deployer);
       executor = await executorFactory.deploy();
 
-      var abiA = CustomExecutorMock__factory.abi;
-      var abiB = PluginUUPSUpgradeableMockBuild1__factory.abi;
+      const abiA = CustomExecutorMock__factory.abi;
+      const abiB = PluginUUPSUpgradeableMockBuild1__factory.abi;
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       mergedABI = abiA.concat(abiB);
     });
 
     beforeEach(async () => {
-      let data = await fixture();
+      const data = await fixture();
       const [deployer] = await ethers.getSigners();
 
       proxy = new ethers.Contract(

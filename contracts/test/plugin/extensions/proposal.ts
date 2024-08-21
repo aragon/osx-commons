@@ -1,7 +1,6 @@
 import {
   DAOMock,
   DAOMock__factory,
-  IDAO,
   IProposal__factory,
   ProposalMock,
   ProposalUpgradeableMock,
@@ -13,7 +12,6 @@ import {getInterfaceId} from '@aragon/osx-commons-sdk';
 import {IProposal__factory as IProposal_V1_0_0__factory} from '@aragon/osx-ethers-v1.0.0';
 import {loadFixture} from '@nomicfoundation/hardhat-network-helpers';
 import {expect} from 'chai';
-import {BigNumberish, BytesLike} from 'ethers';
 import {ethers} from 'hardhat';
 
 describe('Proposal', async () => {
