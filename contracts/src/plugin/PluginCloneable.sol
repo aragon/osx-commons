@@ -149,12 +149,14 @@ abstract contract PluginCloneable is
             bool success;
             bytes memory data;
 
+            // solhint-disable-next-line avoid-low-level-calls
             (success, data) = _target.delegatecall(
                 abi.encodeCall(IDAO.execute, (_callId, _actions, _allowFailureMap))
             );
 
             if (!success) {
                 if (data.length > 0) {
+                    // solhint-disable-next-line no-inline-assembly
                     assembly {
                         let returndata_size := mload(data)
                         revert(add(32, data), returndata_size)

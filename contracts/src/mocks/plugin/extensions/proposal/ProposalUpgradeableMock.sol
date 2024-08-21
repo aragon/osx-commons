@@ -11,6 +11,7 @@ contract ProposalUpgradeableMock is ProposalUpgradeable {
     // We don't need to test these below functions as they will be tested in the actual plugins.
     // This mock contract is only used to test `supportsInterface` function.
 
+    // solhint-disable no-empty-blocks
     function createProposal(
         bytes memory data,
         IDAO.Action[] memory actions,

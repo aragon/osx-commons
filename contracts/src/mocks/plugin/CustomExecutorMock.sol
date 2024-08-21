@@ -26,6 +26,7 @@ contract CustomExecutorMock {
         if (callId == bytes32(0)) {
             revert Failed();
         } else if (callId == bytes32(uint256(123))) {
+            // solhint-disable-next-line reason-string, custom-errors
             revert();
         } else {
             emit Executed(msg.sender, callId, _actions, allowFailureMap, failureMap, execResults);
