@@ -137,7 +137,7 @@ describe('PluginUUPSUpgradeable', function () {
       const {implementation} = await loadFixture(fixture);
       const iface = PluginUUPSUpgradeableMockBuild1__factory.createInterface();
 
-      let interfaceId = ethers.BigNumber.from(
+      const interfaceId = ethers.BigNumber.from(
         iface.getSighash('setTargetConfig')
       )
         .xor(ethers.BigNumber.from(iface.getSighash('getTargetConfig')))
@@ -160,7 +160,7 @@ describe('PluginUUPSUpgradeable', function () {
     it('reverts if caller does not have the permission', async () => {
       const {deployer, proxy, daoMock} = await loadFixture(fixture);
 
-      let newTarget = proxy.address;
+      const newTarget = proxy.address;
 
       await expect(proxy.setTargetConfig({target: newTarget, operation: 0}))
         .to.be.revertedWithCustomError(proxy, 'DaoUnauthorized')
@@ -178,10 +178,10 @@ describe('PluginUUPSUpgradeable', function () {
       // Set the `hasPermission` mock function to return `true`.
       await daoMock.setHasPermissionReturnValueMock(true); // answer true for all permission requests
 
-      let newTarget = proxy.address;
+      const newTarget = proxy.address;
 
-      let targetConfig = {target: newTarget, operation: 0};
-      let previousTargetConfig = {
+      const targetConfig = {target: newTarget, operation: 0};
+      const previousTargetConfig = {
         target: ethers.constants.AddressZero,
         operation: 0,
       };
@@ -218,14 +218,15 @@ describe('PluginUUPSUpgradeable', function () {
       const executorFactory = new CustomExecutorMock__factory(deployer);
       executor = await executorFactory.deploy();
 
-      var abiA = CustomExecutorMock__factory.abi;
-      var abiB = PluginUUPSUpgradeableMockBuild1__factory.abi;
+      const abiA = CustomExecutorMock__factory.abi;
+      const abiB = PluginUUPSUpgradeableMockBuild1__factory.abi;
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       mergedABI = abiA.concat(abiB);
     });
 
     beforeEach(async () => {
-      let data = await fixture();
+      const data = await fixture();
       const [deployer] = await ethers.getSigners();
 
       proxy = new ethers.Contract(
@@ -276,11 +277,11 @@ describe('PluginUUPSUpgradeable', function () {
       });
 
       describe('Execute with operation = `delegatecall`', async () => {
-        await proxy.setTargetConfig({
-          target: executor.address,
-          operation: Operation.delegatecall,
-        });
         it('bubbles up the revert message and reverts from the consumer', async () => {
+          await proxy.setTargetConfig({
+            target: executor.address,
+            operation: Operation.delegatecall,
+          });
           await expect(
             proxy['execute(uint256,(address,uint256,bytes)[],uint256)'](
               0,
@@ -303,6 +304,20 @@ describe('PluginUUPSUpgradeable', function () {
               0
             )
           ).to.emit(proxy, 'Executed');
+        });
+
+        it('reverts with `ExecuteFailed`error', async () => {
+          await proxy.setTargetConfig({
+            target: executor.address,
+            operation: Operation.delegatecall,
+          });
+          await expect(
+            proxy['execute(uint256,(address,uint256,bytes)[],uint256)'](
+              123,
+              [],
+              0
+            )
+          ).to.be.revertedWithCustomError(proxy, 'ExecuteFailed');
         });
       });
     });
@@ -352,7 +367,13 @@ describe('PluginUUPSUpgradeable', function () {
           ).to.emit(proxy, 'Executed');
         });
 
-        // TODO: one more test that catches `ExecuteFailed` revert message.
+        it('reverts with `ExecuteFailed`error', async () => {
+          await expect(
+            proxy[
+              'execute(address,uint256,(address,uint256,bytes)[],uint256,uint8)'
+            ](executor.address, 123, [], 0, Operation.delegatecall)
+          ).to.be.revertedWithCustomError(proxy, 'ExecuteFailed');
+        });
       });
     });
   });

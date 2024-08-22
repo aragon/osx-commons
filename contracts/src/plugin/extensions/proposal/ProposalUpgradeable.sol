@@ -5,7 +5,6 @@ pragma solidity ^0.8.8;
 import {CountersUpgradeable} from "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
 import {ERC165Upgradeable} from "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol";
 
-import {IDAO} from "../../../dao/IDAO.sol";
 import {IProposal} from "./IProposal.sol";
 
 /// @title ProposalUpgradeable

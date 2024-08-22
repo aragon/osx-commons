@@ -136,35 +136,14 @@ abstract contract PluginUUPSUpgradeable is
         IDAO.Action[] memory _actions,
         uint256 _allowFailureMap
     ) internal virtual returns (bytes[] memory execResults, uint256 failureMap) {
-        Operation op = currentTargetConfig.operation;
-
-        if (op == Operation.DelegateCall) {
-            bool success;
-            bytes memory data;
-
-            (success, data) = currentTargetConfig.target.delegatecall(
-                abi.encodeCall(IDAO.execute, (_callId, _actions, _allowFailureMap))
-            );
-
-            if (!success) {
-                if (data.length > 0) {
-                    assembly {
-                        let returndata_size := mload(data)
-                        revert(add(32, data), returndata_size)
-                    }
-                } else {
-                    revert ExecuteFailed();
-                }
-            }
-
-            (execResults, failureMap) = abi.decode(data, (bytes[], uint256));
-        } else {
-            (execResults, failureMap) = IDAO(currentTargetConfig.target).execute(
+        return
+            _execute(
+                currentTargetConfig.target,
                 _callId,
                 _actions,
-                _allowFailureMap
+                _allowFailureMap,
+                currentTargetConfig.operation
             );
-        }
     }
 
     /// @notice Forwards the actions to the `target` for the execution.
@@ -185,12 +164,14 @@ abstract contract PluginUUPSUpgradeable is
             bool success;
             bytes memory data;
 
+            // solhint-disable-next-line avoid-low-level-calls
             (success, data) = _target.delegatecall(
                 abi.encodeCall(IDAO.execute, (_callId, _actions, _allowFailureMap))
             );
 
             if (!success) {
                 if (data.length > 0) {
+                    // solhint-disable-next-line no-inline-assembly
                     assembly {
                         let returndata_size := mload(data)
                         revert(add(32, data), returndata_size)
@@ -199,6 +180,7 @@ abstract contract PluginUUPSUpgradeable is
                     revert ExecuteFailed();
                 }
             }
+            (execResults, failureMap) = abi.decode(data, (bytes[], uint256));
         } else {
             (execResults, failureMap) = IDAO(_target).execute(_callId, _actions, _allowFailureMap);
         }

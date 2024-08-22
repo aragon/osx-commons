@@ -67,7 +67,7 @@ describe('Plugin', function () {
       const {plugin} = await loadFixture(fixture);
       const iface = PluginMockBuild1__factory.createInterface();
 
-      let interfaceId = ethers.BigNumber.from(
+      const interfaceId = ethers.BigNumber.from(
         iface.getSighash('setTargetConfig')
       )
         .xor(ethers.BigNumber.from(iface.getSighash('getTargetConfig')))
@@ -90,7 +90,7 @@ describe('Plugin', function () {
     it('reverts if caller does not have the permission', async () => {
       const {deployer, plugin, daoMock} = await loadFixture(fixture);
 
-      let newTarget = plugin.address;
+      const newTarget = plugin.address;
 
       await expect(plugin.setTargetConfig({target: newTarget, operation: 0}))
         .to.be.revertedWithCustomError(plugin, 'DaoUnauthorized')
@@ -105,13 +105,13 @@ describe('Plugin', function () {
     it('updates the target and emits an appropriate event', async () => {
       const {plugin, daoMock} = await loadFixture(fixture);
 
-      let newTarget = plugin.address;
+      const newTarget = plugin.address;
 
       // Set the `hasPermission` mock function to return `true`.
       await daoMock.setHasPermissionReturnValueMock(true); // answer true for all permission requests
 
-      let targetConfig = {target: newTarget, operation: 0};
-      let previousTargetConfig = {
+      const targetConfig = {target: newTarget, operation: 0};
+      const previousTargetConfig = {
         target: ethers.constants.AddressZero,
         operation: 0,
       };
@@ -148,14 +148,15 @@ describe('Plugin', function () {
       const executorFactory = new CustomExecutorMock__factory(deployer);
       executor = await executorFactory.deploy();
 
-      var abiA = CustomExecutorMock__factory.abi;
-      var abiB = PluginMockBuild1__factory.abi;
+      const abiA = CustomExecutorMock__factory.abi;
+      const abiB = PluginMockBuild1__factory.abi;
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       mergedABI = abiA.concat(abiB);
     });
 
     beforeEach(async () => {
-      let data = await fixture();
+      const data = await fixture();
       const [deployer] = await ethers.getSigners();
 
       plugin = new ethers.Contract(
@@ -234,6 +235,20 @@ describe('Plugin', function () {
             )
           ).to.emit(plugin, 'Executed');
         });
+
+        it('reverts with `ExecuteFailed`error', async () => {
+          await plugin.setTargetConfig({
+            target: executor.address,
+            operation: Operation.delegatecall,
+          });
+          await expect(
+            plugin['execute(uint256,(address,uint256,bytes)[],uint256)'](
+              123,
+              [],
+              0
+            )
+          ).to.be.revertedWithCustomError(plugin, 'ExecuteFailed');
+        });
       });
     });
 
@@ -282,7 +297,13 @@ describe('Plugin', function () {
           ).to.emit(plugin, 'Executed');
         });
 
-        // TODO: one more test that catches `ExecuteFailed` revert message.
+        it('reverts with `ExecuteFailed`error', async () => {
+          await expect(
+            plugin[
+              'execute(address,uint256,(address,uint256,bytes)[],uint256,uint8)'
+            ](executor.address, 123, [], 0, Operation.delegatecall)
+          ).to.be.revertedWithCustomError(plugin, 'ExecuteFailed');
+        });
       });
     });
   });
