@@ -111,23 +111,14 @@ describe('Plugin', function () {
       await daoMock.setHasPermissionReturnValueMock(true); // answer true for all permission requests
 
       const targetConfig = {target: newTarget, operation: 0};
-      const previousTargetConfig = {
-        target: ethers.constants.AddressZero,
-        operation: 0,
-      };
+
       await expect(plugin.setTargetConfig(targetConfig))
         .to.emit(plugin, 'TargetSet')
-        .withArgs(
-          (val1: any) =>
-            expect(val1).to.deep.equal([
-              previousTargetConfig.target,
-              previousTargetConfig.operation,
-            ]),
-          (val2: any) =>
-            expect(val2).to.deep.equal([
-              targetConfig.target,
-              targetConfig.operation,
-            ])
+        .withArgs((val: any) =>
+          expect(val).to.deep.equal([
+            targetConfig.target,
+            targetConfig.operation,
+          ])
         );
 
       expect(await plugin.getTargetConfig()).to.deep.equal([

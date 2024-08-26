@@ -48,7 +48,7 @@ abstract contract PluginUUPSUpgradeable is
     error ExecuteFailed();
 
     /// @dev Emitted each time the TargetConfig is set.
-    event TargetSet(TargetConfig previousTargetConfig, TargetConfig newTargetConfig);
+    event TargetSet(TargetConfig newTargetConfig);
 
     /// @notice The ID of the permission required to call the `setTargetConfig` function.
     bytes32 public constant SET_TARGET_CONFIG_PERMISSION_ID =
@@ -109,10 +109,6 @@ abstract contract PluginUUPSUpgradeable is
     /// @notice Sets the target to a new target (`newTarget`).
     /// @param _targetConfig The target Config containing the address and operation type.
     function _setTargetConfig(TargetConfig calldata _targetConfig) internal virtual {
-        TargetConfig memory previousTargetConfig = currentTargetConfig;
-
-        currentTargetConfig = _targetConfig;
-
         // safety check to avoid setting dao as `target` with `delegatecall` operation
         // as this would not work and cause the plugin to be bricked.
         if (
@@ -122,7 +118,9 @@ abstract contract PluginUUPSUpgradeable is
             revert InvalidTargetConfig(_targetConfig);
         }
 
-        emit TargetSet(previousTargetConfig, _targetConfig);
+        currentTargetConfig = _targetConfig;
+
+        emit TargetSet(_targetConfig);
     }
 
     /// @notice Forwards the actions to the currently set `target` for the execution.
