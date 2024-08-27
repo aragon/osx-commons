@@ -20,4 +20,9 @@ contract ProposalMock is Proposal {
     ) external returns (uint256 proposalId) {}
 
     function canExecute(uint256 proposalId) external returns (bool) {}
+
+    function createProposalId(
+        IDAO.Action[] memory actions,
+        bytes memory metadata
+    ) external returns (uint256) {}
 }

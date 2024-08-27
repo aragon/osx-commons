@@ -33,7 +33,7 @@ abstract contract ProposalUpgradeable is IProposal, ERC165Upgradeable {
             type(IProposal).interfaceId ^
                 IProposal.createProposal.selector ^
                 IProposal.canExecute.selector ^
-                IProposal.getProposalId.selector ||
+                IProposal.createProposalId.selector ||
             _interfaceId == type(IProposal).interfaceId ||
             super.supportsInterface(_interfaceId);
     }

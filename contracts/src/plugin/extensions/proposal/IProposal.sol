@@ -53,7 +53,7 @@ interface IProposal {
     /// @param actions The actions that will be executed after the proposal passes.
     /// @param metadata The custom metadata that is passed when creating a proposal.
     /// @return proposalId The id of the proposal.
-    function getProposalId(
+    function createProposalId(
         IDAO.Action[] memory actions,
         bytes memory metadata
     ) external returns (uint256);
