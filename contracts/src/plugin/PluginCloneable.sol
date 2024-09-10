@@ -93,7 +93,7 @@ abstract contract PluginCloneable is
 
     /// @notice Sets the target to a new target (`newTarget`).
     /// @param _targetConfig The target Config containing the address and operation type.
-    function _setTargetConfig(TargetConfig calldata _targetConfig) internal virtual {
+    function _setTargetConfig(TargetConfig memory _targetConfig) internal virtual {
         // safety check to avoid setting dao as `target` with `delegatecall` operation
         // as this would not work and cause the plugin to be bricked.
         if (
