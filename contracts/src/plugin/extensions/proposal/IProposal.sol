@@ -47,7 +47,7 @@ interface IProposal {
     /// @notice Whether proposal can be executed or not.
     /// @param proposalId The id of the proposal.
     /// @return bool Returns if proposal can be executed or not.
-    function canExecute(uint256 proposalId) external returns (bool);
+    function canExecute(uint256 proposalId) external view returns (bool);
 
     /// @notice Creates a proposal Id.
     /// @param actions The actions that will be executed after the proposal passes.

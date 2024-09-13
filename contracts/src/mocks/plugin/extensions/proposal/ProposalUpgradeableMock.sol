@@ -19,7 +19,7 @@ contract ProposalUpgradeableMock is ProposalUpgradeable {
         uint64 endDate
     ) external returns (uint256 proposalId) {}
 
-    function canExecute(uint256 proposalId) external returns (bool) {}
+    function canExecute(uint256 proposalId) external view returns (bool) {}
 
     function createProposalId(
         IDAO.Action[] memory actions,
