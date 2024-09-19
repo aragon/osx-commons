@@ -71,6 +71,7 @@ describe('Plugin', function () {
         iface.getSighash('setTargetConfig')
       )
         .xor(ethers.BigNumber.from(iface.getSighash('getTargetConfig')))
+        .xor(ethers.BigNumber.from(iface.getSighash('getCurrentTargetConfig')))
         .toHexString();
 
       expect(await plugin.supportsInterface(interfaceId)).to.be.true;
@@ -86,7 +87,7 @@ describe('Plugin', function () {
     });
   });
 
-  describe('setTarget', async () => {
+  describe('setTargetConfig/getTargetConfig/getCurrentTargetConfig', async () => {
     it('reverts if caller does not have the permission', async () => {
       const {deployer, plugin, daoMock} = await loadFixture(fixture);
 
@@ -110,6 +111,11 @@ describe('Plugin', function () {
       // Set the `hasPermission` mock function to return `true`.
       await daoMock.setHasPermissionReturnValueMock(true); // answer true for all permission requests
 
+      expect(await plugin.getCurrentTargetConfig()).to.deep.equal([
+        ethers.constants.AddressZero,
+        0,
+      ]);
+
       const targetConfig = {target: newTarget, operation: 0};
 
       await expect(plugin.setTargetConfig(targetConfig))
@@ -125,6 +131,53 @@ describe('Plugin', function () {
         targetConfig.target,
         targetConfig.operation,
       ]);
+
+      expect(await plugin.getCurrentTargetConfig()).to.deep.equal([
+        targetConfig.target,
+        targetConfig.operation,
+      ]);
+    });
+
+    it('returns default target config if no target config is set', async () => {
+      const {plugin, daoMock} = await loadFixture(fixture);
+
+      const dao = await plugin.dao();
+
+      // Current Config must return zeroes.
+      expect(await plugin.getCurrentTargetConfig()).to.deep.equal([
+        ethers.constants.AddressZero,
+        0,
+      ]);
+
+      // Since no target is set, it must return default - i.e dao target.
+      expect(await plugin.getTargetConfig()).to.deep.equal([dao, 0]);
+
+      // Set the `hasPermission` mock function to return `true`.
+      await daoMock.setHasPermissionReturnValueMock(true); // answer true for all permission requests
+
+      const newTargetConfig = {target: plugin.address, operation: 1};
+
+      await plugin.setTargetConfig(newTargetConfig);
+
+      // Current config must return the newly set one.
+      expect(await plugin.getCurrentTargetConfig()).to.deep.equal([
+        newTargetConfig.target,
+        newTargetConfig.operation,
+      ]);
+
+      // new config was set, so it must return the new one.
+      expect(await plugin.getTargetConfig()).to.deep.equal([
+        newTargetConfig.target,
+        newTargetConfig.operation,
+      ]);
+
+      // set the zero target which should then return default again - i.e dao.
+      await plugin.setTargetConfig({
+        target: ethers.constants.AddressZero,
+        operation: 0,
+      });
+
+      expect(await plugin.getTargetConfig()).to.deep.equal([dao, 0]);
     });
   });
 

@@ -47,7 +47,7 @@ interface IProposal {
     /// @notice Whether proposal can be executed or not.
     /// @param proposalId The id of the proposal.
     /// @return bool Returns if proposal can be executed or not.
-    function canExecute(uint256 proposalId) external returns (bool);
+    function canExecute(uint256 proposalId) external view returns (bool);
 
     /// @notice Creates a proposal Id.
     /// @param actions The actions that will be executed after the proposal passes.
@@ -56,7 +56,7 @@ interface IProposal {
     function createProposalId(
         IDAO.Action[] memory actions,
         bytes memory metadata
-    ) external returns (uint256);
+    ) external view returns (uint256);
 
     /// @notice Returns the proposal count determining the next proposal ID.
     /// @dev This function has been deprecated but due to backwards compatibility, it still stays in the interface

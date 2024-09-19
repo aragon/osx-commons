@@ -76,8 +76,21 @@ abstract contract PluginCloneable is
     }
 
     /// @notice Returns the currently set target contract.
-    function getTargetConfig() public view returns (TargetConfig memory) {
+    /// @return TargetConfig The currently set target.
+    function getCurrentTargetConfig() public view virtual returns (TargetConfig memory) {
         return currentTargetConfig;
+    }
+
+    /// @notice A convenient function to get current target config only if its target is not address(0), otherwise dao().
+    /// @return TargetConfig The current target config if its target is not address(0), otherwise returns dao()."
+    function getTargetConfig() public view virtual returns (TargetConfig memory) {
+        TargetConfig memory targetConfig = currentTargetConfig;
+
+        if (targetConfig.target == address(0)) {
+            targetConfig = TargetConfig({target: address(dao()), operation: Operation.Call});
+        }
+
+        return targetConfig;
     }
 
     /// @notice Checks if this or the parent contract supports an interface by its ID.
@@ -87,7 +100,10 @@ abstract contract PluginCloneable is
         return
             _interfaceId == type(IPlugin).interfaceId ||
             _interfaceId == type(IProtocolVersion).interfaceId ||
-            _interfaceId == this.setTargetConfig.selector ^ this.getTargetConfig.selector ||
+            _interfaceId ==
+            this.setTargetConfig.selector ^
+                this.getTargetConfig.selector ^
+                this.getCurrentTargetConfig.selector ||
             super.supportsInterface(_interfaceId);
     }
 
