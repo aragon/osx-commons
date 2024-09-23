@@ -27,7 +27,8 @@ abstract contract Proposal is IProposal, ERC165 {
             type(IProposal).interfaceId ^
                 IProposal.createProposal.selector ^
                 IProposal.canExecute.selector ^
-                IProposal.createProposalId.selector ||
+                IProposal.createProposalId.selector ^
+                IProposal.createProposalParamsABI.selector ||
             _interfaceId == type(IProposal).interfaceId ||
             super.supportsInterface(_interfaceId);
     }

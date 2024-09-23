@@ -16,7 +16,8 @@ contract ProposalUpgradeableMock is ProposalUpgradeable {
         bytes memory data,
         IDAO.Action[] memory actions,
         uint64 startDate,
-        uint64 endDate
+        uint64 endDate,
+        bytes memory
     ) external returns (uint256 proposalId) {}
 
     function canExecute(uint256 proposalId) external view returns (bool) {}
@@ -25,4 +26,6 @@ contract ProposalUpgradeableMock is ProposalUpgradeable {
         IDAO.Action[] memory actions,
         bytes memory metadata
     ) external view returns (uint256) {}
+
+    function createProposalParamsABI() external view returns (string memory) {}
 }
