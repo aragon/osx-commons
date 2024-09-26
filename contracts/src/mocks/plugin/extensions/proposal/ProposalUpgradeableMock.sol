@@ -3,7 +3,7 @@
 pragma solidity ^0.8.8;
 
 import {ProposalUpgradeable} from "../../../../plugin/extensions/proposal/ProposalUpgradeable.sol";
-import {IDAO} from "../../../../dao/IDAO.sol";
+import {IExecutor} from "../../../../executors/IExecutor.sol";
 
 /// @notice A mock contract.
 /// @dev DO NOT USE IN PRODUCTION!
@@ -14,7 +14,7 @@ contract ProposalUpgradeableMock is ProposalUpgradeable {
     // solhint-disable no-empty-blocks
     function createProposal(
         bytes memory data,
-        IDAO.Action[] memory actions,
+        IExecutor.Action[] memory actions,
         uint64 startDate,
         uint64 endDate,
         bytes memory
@@ -23,7 +23,7 @@ contract ProposalUpgradeableMock is ProposalUpgradeable {
     function canExecute(uint256 proposalId) external view returns (bool) {}
 
     function createProposalId(
-        IDAO.Action[] memory actions,
+        IExecutor.Action[] memory actions,
         bytes memory metadata
     ) external view returns (uint256) {}
 

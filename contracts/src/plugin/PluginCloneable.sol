@@ -10,6 +10,7 @@ import {ProtocolVersion} from "../utils/versioning/ProtocolVersion.sol";
 import {DaoAuthorizableUpgradeable} from "../permission/auth/DaoAuthorizableUpgradeable.sol";
 import {IDAO} from "../dao/IDAO.sol";
 import {IPlugin} from "./IPlugin.sol";
+import {IExecutor} from "../executors/IExecutor.sol";
 
 /// @title PluginCloneable
 /// @author Aragon X - 2022-2023
@@ -132,7 +133,7 @@ abstract contract PluginCloneable is
     /// @return failureMap address of the implementation contract.
     function _execute(
         bytes32 _callId,
-        IDAO.Action[] memory _actions,
+        IExecutor.Action[] memory _actions,
         uint256 _allowFailureMap
     ) internal virtual returns (bytes[] memory execResults, uint256 failureMap) {
         return
@@ -155,7 +156,7 @@ abstract contract PluginCloneable is
     function _execute(
         address _target,
         bytes32 _callId,
-        IDAO.Action[] memory _actions,
+        IExecutor.Action[] memory _actions,
         uint256 _allowFailureMap,
         Operation _op
     ) internal virtual returns (bytes[] memory execResults, uint256 failureMap) {
@@ -165,7 +166,7 @@ abstract contract PluginCloneable is
 
             // solhint-disable-next-line avoid-low-level-calls
             (success, data) = _target.delegatecall(
-                abi.encodeCall(IDAO.execute, (_callId, _actions, _allowFailureMap))
+                abi.encodeCall(IExecutor.execute, (_callId, _actions, _allowFailureMap))
             );
 
             if (!success) {
@@ -181,7 +182,11 @@ abstract contract PluginCloneable is
             }
             (execResults, failureMap) = abi.decode(data, (bytes[], uint256));
         } else {
-            (execResults, failureMap) = IDAO(_target).execute(_callId, _actions, _allowFailureMap);
+            (execResults, failureMap) = IExecutor(_target).execute(
+                _callId,
+                _actions,
+                _allowFailureMap
+            );
         }
     }
 }
