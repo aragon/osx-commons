@@ -6,10 +6,23 @@ import {IExecutor, Action} from "./IExecutor.sol";
 import {flipBit, hasBit} from "../utils/math/BitMap.sol";
 
 /// @notice Simple Executor that loops through the actions and executes them.
-/// @dev Reverts in case enough gas was not provided for the last action.
+/// @dev This doesn't use any type of permission for execution and can be called by anyone.
+/// Most useful use-case is to deploy as non-upgradeable and call from another contract via delegatecall.
+/// If used with delegatecall, DO NOT add state variables in sequential slots, otherwise this will overwrite
+/// the storage of the calling contract.
 contract Executor is IExecutor {
     /// @notice The internal constant storing the maximal action array length.
     uint256 internal constant MAX_ACTIONS = 256;
+
+    // keccak256("osx-commons.storage.Executor")
+    bytes32 private constant ReentrancyGuardStorageLocation =
+        0x4d6542319dfb3f7c8adbb488d7b4d7cf849381f14faf4b64de3ac05d08c0bdec;
+
+    /// @notice The first out of two values to which the `_reentrancyStatus` state variable (used by the `nonReentrant` modifier) can be set indicating that a function was not entered.
+    uint256 private constant _NOT_ENTERED = 1;
+
+    /// @notice The second out of two values to which the `_reentrancyStatus` state variable (used by the `nonReentrant` modifier) can be set indicating that a function was entered.
+    uint256 private constant _ENTERED = 2;
 
     /// @notice Thrown if the action array length is larger than `MAX_ACTIONS`.
     error TooManyActions();
@@ -21,12 +34,37 @@ contract Executor is IExecutor {
     /// @param index The index of the action in the action array that failed.
     error ActionFailed(uint256 index);
 
+    /// @notice Thrown if a call is reentrant.
+    error ReentrantCall();
+
+    constructor() {
+        _storeReentrancyStatus(_NOT_ENTERED);
+    }
+
+    modifier nonReentrant() {
+        if (_getReentrancyStatus() == _ENTERED) {
+            revert ReentrantCall();
+        }
+
+        _storeReentrancyStatus(_ENTERED);
+
+        _;
+
+        _storeReentrancyStatus(_NOT_ENTERED);
+    }
+
     /// @inheritdoc IExecutor
     function execute(
         bytes32 _callId,
         Action[] memory _actions,
         uint256 _allowFailureMap
-    ) public virtual override returns (bytes[] memory execResults, uint256 failureMap) {
+    )
+        public
+        virtual
+        override
+        nonReentrant
+        returns (bytes[] memory execResults, uint256 failureMap)
+    {
         // Check that the action array length is within bounds.
         if (_actions.length > MAX_ACTIONS) {
             revert TooManyActions();
@@ -82,5 +120,20 @@ contract Executor is IExecutor {
             failureMap: failureMap,
             execResults: execResults
         });
+    }
+
+    /// @notice Gets the current reentrancy status.
+    /// @return status This returns the current reentrancy status.
+    function _getReentrancyStatus() private view returns (uint256 status) {
+        assembly {
+            status := sload(ReentrancyGuardStorageLocation)
+        }
+    }
+
+    /// @notice Stores the reentrancy status on a specific slot.
+    function _storeReentrancyStatus(uint256 _status) private {
+        assembly {
+            sstore(ReentrancyGuardStorageLocation, _status)
+        }
     }
 }
