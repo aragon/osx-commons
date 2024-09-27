@@ -3,7 +3,7 @@
 pragma solidity ^0.8.8;
 
 import {IDAO} from "../../dao/IDAO.sol";
-import {IExecutor} from "../../executors/IExecutor.sol";
+import {IExecutor, Action} from "../../executors/IExecutor.sol";
 
 /// @notice A mock DAO that anyone can set permissions in.
 /// @dev DO NOT USE IN PRODUCTION!

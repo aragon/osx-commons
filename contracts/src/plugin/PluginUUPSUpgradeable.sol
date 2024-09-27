@@ -12,7 +12,7 @@ import {ProtocolVersion} from "../utils/versioning/ProtocolVersion.sol";
 import {DaoAuthorizableUpgradeable} from "../permission/auth/DaoAuthorizableUpgradeable.sol";
 import {IPlugin} from "./IPlugin.sol";
 import {IDAO} from "../dao/IDAO.sol";
-import {IExecutor} from "../executors/IExecutor.sol";
+import {IExecutor, Action} from "../executors/IExecutor.sol";
 
 /// @title PluginUUPSUpgradeable
 /// @author Aragon X - 2022-2023
@@ -148,7 +148,7 @@ abstract contract PluginUUPSUpgradeable is
     /// @return failureMap address of the implementation contract.
     function _execute(
         bytes32 _callId,
-        IExecutor.Action[] memory _actions,
+        Action[] memory _actions,
         uint256 _allowFailureMap
     ) internal virtual returns (bytes[] memory execResults, uint256 failureMap) {
         return
@@ -171,7 +171,7 @@ abstract contract PluginUUPSUpgradeable is
     function _execute(
         address _target,
         bytes32 _callId,
-        IExecutor.Action[] memory _actions,
+        Action[] memory _actions,
         uint256 _allowFailureMap,
         Operation _op
     ) internal virtual returns (bytes[] memory execResults, uint256 failureMap) {

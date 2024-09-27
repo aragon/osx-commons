@@ -2,12 +2,12 @@
 
 pragma solidity ^0.8.8;
 
-import {IExecutor} from "./IExecutor.sol";
+import {IExecutor, Action} from "./IExecutor.sol";
 import {flipBit, hasBit} from "../utils/math/BitMap.sol";
 
-/// @notice Simple Executor that loops through actions and executes them.
+/// @notice Simple Executor that loops through the actions and executes them.
 /// @dev Reverts in case enough gas was not provided for the last action.
-contract SimpleExecutor is IExecutor {
+contract Executor is IExecutor {
     /// @notice The internal constant storing the maximal action array length.
     uint256 internal constant MAX_ACTIONS = 256;
 

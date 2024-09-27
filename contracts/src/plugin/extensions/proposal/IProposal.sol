@@ -3,7 +3,7 @@
 pragma solidity ^0.8.8;
 
 import {IDAO} from "../../../dao/IDAO.sol";
-import {IExecutor} from "../../../executors/IExecutor.sol";
+import {IExecutor, Action} from "../../../executors/IExecutor.sol";
 
 /// @title IProposal
 /// @author Aragon X - 2022-2023
@@ -24,7 +24,7 @@ interface IProposal {
         uint64 startDate,
         uint64 endDate,
         bytes metadata,
-        IExecutor.Action[] actions,
+        Action[] actions,
         uint256 allowFailureMap
     );
 
@@ -41,7 +41,7 @@ interface IProposal {
     /// @return proposalId The id of the proposal.
     function createProposal(
         bytes memory metadata,
-        IExecutor.Action[] memory actions,
+        Action[] memory actions,
         uint64 startDate,
         uint64 endDate,
         bytes memory data
@@ -57,7 +57,7 @@ interface IProposal {
     /// @param metadata The custom metadata that is passed when creating a proposal.
     /// @return proposalId The id of the proposal.
     function createProposalId(
-        IExecutor.Action[] memory actions,
+        Action[] memory actions,
         bytes memory metadata
     ) external view returns (uint256);
 

@@ -4,21 +4,21 @@ pragma solidity ^0.8.8;
 
 import {IDAO} from "../dao/IDAO.sol";
 
+/// @notice The action struct to be consumed by the DAO's `execute` function resulting in an external call.
+/// @param to The address to call.
+/// @param value The native token value to be sent with the call.
+/// @param data The bytes-encoded function selector and calldata for the call.
+struct Action {
+    address to;
+    uint256 value;
+    bytes data;
+}
+
 /// @title IDAO
 /// @author Aragon X - 2022-2023
 /// @notice The interface required for Executors within the Aragon App DAO framework.
 /// @custom:security-contact sirt@aragon.org
 interface IExecutor {
-    /// @notice The action struct to be consumed by the DAO's `execute` function resulting in an external call.
-    /// @param to The address to call.
-    /// @param value The native token value to be sent with the call.
-    /// @param data The bytes-encoded function selector and calldata for the call.
-    struct Action {
-        address to;
-        uint256 value;
-        bytes data;
-    }
-
     /// @notice Emitted when a proposal is executed.
     /// @param actor The address of the caller.
     /// @param callId The ID of the call.

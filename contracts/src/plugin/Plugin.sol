@@ -10,7 +10,7 @@ import {ProtocolVersion} from "../utils/versioning/ProtocolVersion.sol";
 import {DaoAuthorizable} from "../permission/auth/DaoAuthorizable.sol";
 import {IDAO} from "../dao/IDAO.sol";
 import {IPlugin} from "./IPlugin.sol";
-import {IExecutor} from "../executors/IExecutor.sol";
+import {IExecutor, Action} from "../executors/IExecutor.sol";
 
 /// @title Plugin
 /// @author Aragon X - 2022-2023
@@ -118,7 +118,7 @@ abstract contract Plugin is IPlugin, ERC165, DaoAuthorizable, ProtocolVersion {
     /// @return failureMap address of the implementation contract.
     function _execute(
         bytes32 _callId,
-        IExecutor.Action[] memory _actions,
+        Action[] memory _actions,
         uint256 _allowFailureMap
     ) internal virtual returns (bytes[] memory execResults, uint256 failureMap) {
         return
@@ -141,7 +141,7 @@ abstract contract Plugin is IPlugin, ERC165, DaoAuthorizable, ProtocolVersion {
     function _execute(
         address _target,
         bytes32 _callId,
-        IExecutor.Action[] memory _actions,
+        Action[] memory _actions,
         uint256 _allowFailureMap,
         Operation _op
     ) internal virtual returns (bytes[] memory execResults, uint256 failureMap) {
