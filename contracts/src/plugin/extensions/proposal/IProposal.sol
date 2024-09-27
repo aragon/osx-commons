@@ -3,6 +3,7 @@
 pragma solidity ^0.8.8;
 
 import {IDAO} from "../../../dao/IDAO.sol";
+import {IExecutor, Action} from "../../../executors/IExecutor.sol";
 
 /// @title IProposal
 /// @author Aragon X - 2022-2023
@@ -23,7 +24,7 @@ interface IProposal {
         uint64 startDate,
         uint64 endDate,
         bytes metadata,
-        IDAO.Action[] actions,
+        Action[] actions,
         uint256 allowFailureMap
     );
 
@@ -32,16 +33,18 @@ interface IProposal {
     event ProposalExecuted(uint256 indexed proposalId);
 
     /// @notice Creates a new proposal.
-    /// @param data The metadata of the proposal.
+    /// @param metadata The metadata of the proposal.
     /// @param actions The actions that will be executed after the proposal passes.
     /// @param startDate The start date of the proposal.
     /// @param endDate The end date of the proposal.
+    /// @param data The additional abi-encoded data to include more necessary fields.
     /// @return proposalId The id of the proposal.
     function createProposal(
-        bytes memory data,
-        IDAO.Action[] memory actions,
+        bytes memory metadata,
+        Action[] memory actions,
         uint64 startDate,
-        uint64 endDate
+        uint64 endDate,
+        bytes memory data
     ) external returns (uint256 proposalId);
 
     /// @notice Whether proposal can be executed or not.
@@ -54,9 +57,14 @@ interface IProposal {
     /// @param metadata The custom metadata that is passed when creating a proposal.
     /// @return proposalId The id of the proposal.
     function createProposalId(
-        IDAO.Action[] memory actions,
+        Action[] memory actions,
         bytes memory metadata
     ) external view returns (uint256);
+
+    /// @notice The human-readable abi format for extra params included in `data` of `createProposal`.
+    /// @dev Used for UI to easily detect what extra params the contract expects.
+    /// @return abi ABI of params in `data` of `createProposal`.
+    function createProposalParamsABI() external view returns (string memory abi);
 
     /// @notice Returns the proposal count determining the next proposal ID.
     /// @dev This function has been deprecated but due to backwards compatibility, it still stays in the interface

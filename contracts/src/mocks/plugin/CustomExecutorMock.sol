@@ -3,26 +3,18 @@
 pragma solidity ^0.8.8;
 
 import {IDAO} from "../../dao/IDAO.sol";
+import {IExecutor, Action} from "../../executors/IExecutor.sol";
 
 /// @notice A mock DAO that anyone can set permissions in.
 /// @dev DO NOT USE IN PRODUCTION!
-contract CustomExecutorMock {
+contract CustomExecutorMock is IExecutor {
     error Failed();
-
-    event Executed(
-        address indexed actor,
-        bytes32 callId,
-        IDAO.Action[] actions,
-        uint256 allowFailureMap,
-        uint256 failureMap,
-        bytes[] execResults
-    );
 
     function execute(
         bytes32 callId,
-        IDAO.Action[] memory _actions,
+        Action[] memory _actions,
         uint256 allowFailureMap
-    ) external returns (bytes[] memory execResults, uint256 failureMap) {
+    ) external override returns (bytes[] memory execResults, uint256 failureMap) {
         if (callId == bytes32(0)) {
             revert Failed();
         } else if (callId == bytes32(uint256(123))) {
