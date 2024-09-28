@@ -48,7 +48,7 @@ export async function getActions() {
   };
 }
 
-describe.only('Executor', async () => {
+describe('Executor', async () => {
   let data: any;
   let executor: Executor;
   let ownerAddress: string;

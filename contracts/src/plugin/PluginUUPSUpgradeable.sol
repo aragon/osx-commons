@@ -48,6 +48,9 @@ abstract contract PluginUUPSUpgradeable is
     /// @notice Thrown when `delegatecall` fails.
     error ExecuteFailed();
 
+    /// @notice Thrown when initialize is called after it has already been executed.
+    error AlreadyInitialized();
+
     /// @dev Emitted each time the TargetConfig is set.
     event TargetSet(TargetConfig newTargetConfig);
 
@@ -62,6 +65,15 @@ abstract contract PluginUUPSUpgradeable is
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
         _disableInitializers();
+    }
+
+    /// @notice This ensures that the initialize function cannot be called during the upgrade process.
+    modifier onlyCallAtInitialization() {
+        if (_getInitializedVersion() != 0) {
+            revert AlreadyInitialized();
+        }
+
+        _;
     }
 
     /// @inheritdoc IPlugin
