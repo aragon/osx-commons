@@ -20,8 +20,9 @@ abstract contract Proposal is IProposal, ERC165 {
     /// @param _interfaceId The ID of the interface.
     /// @return Returns `true` if the interface is supported.
     function supportsInterface(bytes4 _interfaceId) public view virtual override returns (bool) {
-        // In addition to the current interfaceId, also support previous version of the interfaceId that did not
-        // include the createProposal() function as standard
+        // In addition to the current interfaceId, also support previous version of the interfaceId
+        // that did not include the following functions:
+        // `createProposal, canExecute, createProposalId, createProposalParamsABI`.
         return
             _interfaceId ==
             type(IProposal).interfaceId ^
