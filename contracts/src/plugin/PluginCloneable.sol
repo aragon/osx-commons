@@ -126,9 +126,10 @@ abstract contract PluginCloneable is
     }
 
     /// @notice Forwards the actions to the currently set `target` for the execution.
+    /// @dev If target is not set, passes actions to the dao.
     /// @param _callId Identifier for this execution.
     /// @param _actions actions that will be eventually called.
-    /// @param _allowFailureMap Bitmap-encoded number. TODO:
+    /// @param _allowFailureMap Bitmap-encoded number.
     /// @return execResults address of the implementation contract.
     /// @return failureMap address of the implementation contract.
     function _execute(
@@ -136,13 +137,15 @@ abstract contract PluginCloneable is
         Action[] memory _actions,
         uint256 _allowFailureMap
     ) internal virtual returns (bytes[] memory execResults, uint256 failureMap) {
+        TargetConfig memory targetConfig = getTargetConfig();
+
         return
             _execute(
-                currentTargetConfig.target,
+                targetConfig.target,
                 _callId,
                 _actions,
                 _allowFailureMap,
-                currentTargetConfig.operation
+                targetConfig.operation
             );
     }
 
