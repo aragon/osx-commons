@@ -271,10 +271,10 @@ describe('PluginCloneable', function () {
     });
 
     describe('execute with current target', async () => {
-      it('reverts with ambiguity if target is not set', async () => {
+      it('executes on the dao if target is not set', async () => {
         await expect(
           proxy['execute(uint256,(address,uint256,bytes)[],uint256)'](1, [], 0)
-        ).to.be.reverted;
+        ).to.emit(daoMock, 'Executed');
       });
 
       describe('Execute with operation = `call`', async () => {
