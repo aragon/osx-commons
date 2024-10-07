@@ -2,22 +2,16 @@
 
 pragma solidity ^0.8.8;
 
-import {ERC165Upgradeable} from "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol";
+import {ERC165} from "@openzeppelin/contracts/utils/introspection/ERC165.sol";
 
-import {DaoAuthorizableUpgradeable} from "../../../permission/auth/DaoAuthorizableUpgradeable.sol";
+import {DaoAuthorizable} from "../../permission/auth/DaoAuthorizable.sol";
 
-/// @title MetadataContract
-/// @dev Due to the requirements that already existing upgradeable plugins need to start inheritting from this,
-///  we're required to use hardcoded/specific slots for storage instead of sequential slots with gaps.
+/// @title MetadataExtension
 /// @author Aragon X - 2024
 /// @custom:security-contact sirt@aragon.org
-abstract contract MetadataContractUpgradeable is ERC165Upgradeable, DaoAuthorizableUpgradeable {
+abstract contract MetadataExtension is ERC165, DaoAuthorizable {
     /// @notice The ID of the permission required to call the `updateMetadata` function.
     bytes32 public constant UPDATE_METADATA_PERMISSION_ID = keccak256("UPDATE_METADATA_PERMISSION");
-
-    // keccak256("osx-commons.storage.MetadataContractUpgradeable")
-    bytes32 private constant MetadataStorageLocation =
-        0x99da6c69991bd6a0d70d0c3817ab9bd9d4d7e3090d51c182be2cf851bfab8d70;
 
     /// @notice Emitted when metadata is updated.
     event MetadataUpdated(bytes metadata);
@@ -47,7 +41,7 @@ abstract contract MetadataContractUpgradeable is ERC165Upgradeable, DaoAuthoriza
     /// @notice Returns the metadata currently applied.
     /// @return The The utf8 bytes of a content addressing cid.
     function getMetadata() public view returns (bytes memory) {
-        return _getMetadata();
+        return metadata;
     }
 
     /// @notice Internal function to update metadata.
@@ -57,22 +51,7 @@ abstract contract MetadataContractUpgradeable is ERC165Upgradeable, DaoAuthoriza
             revert EmptyMetadata();
         }
 
-        _storeMetadata(_metadata);
+        metadata = _metadata;
         emit MetadataUpdated(_metadata);
-    }
-
-    /// @notice Gets the currently set metadata.
-    /// @return _metadata The current metadata.
-    function _getMetadata() private view returns (bytes memory _metadata) {
-        assembly {
-            _metadata := sload(MetadataStorageLocation)
-        }
-    }
-
-    /// @notice Stores the metadata on a specific slot.
-    function _storeMetadata(bytes memory _metadata) private {
-        assembly {
-            sstore(MetadataStorageLocation, _metadata)
-        }
     }
 }

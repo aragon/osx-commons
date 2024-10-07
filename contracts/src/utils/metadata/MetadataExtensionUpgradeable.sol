@@ -2,16 +2,22 @@
 
 pragma solidity ^0.8.8;
 
-import {ERC165} from "@openzeppelin/contracts/utils/introspection/ERC165.sol";
+import {ERC165Upgradeable} from "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol";
 
-import {DaoAuthorizable} from "../../../permission/auth/DaoAuthorizable.sol";
+import {DaoAuthorizableUpgradeable} from "../../permission/auth/DaoAuthorizableUpgradeable.sol";
 
-/// @title MetadataContract
+/// @title MetadataExtensionUpgradeable
+/// @dev Due to the requirements that already existing upgradeable plugins need to start inheritting from this,
+///  we're required to use hardcoded/specific slots for storage instead of sequential slots with gaps.
 /// @author Aragon X - 2024
 /// @custom:security-contact sirt@aragon.org
-abstract contract MetadataContract is ERC165, DaoAuthorizable {
+abstract contract MetadataExtensionUpgradeable is ERC165Upgradeable, DaoAuthorizableUpgradeable {
     /// @notice The ID of the permission required to call the `updateMetadata` function.
     bytes32 public constant UPDATE_METADATA_PERMISSION_ID = keccak256("UPDATE_METADATA_PERMISSION");
+
+    // keccak256(abi.encode(uint256(keccak256("osx-commons.storage.MetadataExtension")) - 1)) & ~bytes32(uint256(0xff))
+    bytes32 private constant MetadataExtensionStorageLocation =
+        0x47ff9796f72d439c6e5c30a24b9fad985a00c85a9f2258074c400a94f8746b00;
 
     /// @notice Emitted when metadata is updated.
     event MetadataUpdated(bytes metadata);
@@ -19,7 +25,19 @@ abstract contract MetadataContract is ERC165, DaoAuthorizable {
     /// @notice Thrown if metadata is set empty.
     error EmptyMetadata();
 
-    bytes private metadata;
+    struct MetadataExtensionStorage {
+        bytes metadata;
+    }
+
+    function _getMetadataExtensionStorage()
+        private
+        pure
+        returns (MetadataExtensionStorage storage $)
+    {
+        assembly {
+            $.slot := MetadataExtensionStorageLocation
+        }
+    }
 
     /// @notice Checks if this or the parent contract supports an interface by its ID.
     /// @param _interfaceId The ID of the interface.
@@ -41,7 +59,8 @@ abstract contract MetadataContract is ERC165, DaoAuthorizable {
     /// @notice Returns the metadata currently applied.
     /// @return The The utf8 bytes of a content addressing cid.
     function getMetadata() public view returns (bytes memory) {
-        return metadata;
+        MetadataExtensionStorage storage $ = _getMetadataExtensionStorage();
+        return $.metadata;
     }
 
     /// @notice Internal function to update metadata.
@@ -51,7 +70,9 @@ abstract contract MetadataContract is ERC165, DaoAuthorizable {
             revert EmptyMetadata();
         }
 
-        metadata = _metadata;
+        MetadataExtensionStorage storage $ = _getMetadataExtensionStorage();
+        $.metadata = _metadata;
+
         emit MetadataUpdated(_metadata);
     }
 }
