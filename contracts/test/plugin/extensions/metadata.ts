@@ -1,34 +1,26 @@
 import {
   DAOMock,
   DAOMock__factory,
-  IProposal__factory,
-  ProposalMock,
-  ProposalUpgradeableMock,
-  ProposalMock__factory,
-  ProposalUpgradeableMock__factory,
   MetadataContractMock__factory,
   MetadataContractUpgradeableMock__factory,
   MetadataContractMock,
   MetadataContractUpgradeableMock,
 } from '../../../typechain';
-import {MetadataContractUpgradeableInterface} from '../../../typechain/src/plugin/extensions/metadata/MetadataContractUpgradeable';
 import {erc165ComplianceTests} from '../../helpers';
-import {getInterfaceId} from '@aragon/osx-commons-sdk';
-import {IProposal__factory as IProposal_V1_0_0__factory} from '@aragon/osx-ethers-v1.0.0';
 import {loadFixture} from '@nomicfoundation/hardhat-network-helpers';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
 
-describe.only('MetadataContract', async () => {
-  proposalBaseTests(metadataFixture);
+describe('MetadataContract', async () => {
+  metadataContractBaseTests(metadataFixture);
 });
 
 describe('MetadataContractUpgradeable', async () => {
-  proposalBaseTests(metadataUpgradeableFixture);
+  metadataContractBaseTests(metadataUpgradeableFixture);
 });
 
-// Contains tests for functionality common for `metadataMock` and `ProposalUpgradeableMock` to avoid duplication.
-function proposalBaseTests(fixture: () => Promise<FixtureResult>) {
+// Contains tests for functionality common for `MetadataContractMock` and `MetadataContractMockUpgradeable` to avoid duplication.
+function metadataContractBaseTests(fixture: () => Promise<FixtureResult>) {
   describe('ERC-165', async () => {
     it('supports the `ERC-165` standard', async () => {
       const {metadataMock} = await loadFixture(fixture);
