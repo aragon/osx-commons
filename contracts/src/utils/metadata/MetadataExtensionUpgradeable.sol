@@ -22,9 +22,6 @@ abstract contract MetadataExtensionUpgradeable is ERC165Upgradeable, DaoAuthoriz
     /// @notice Emitted when metadata is updated.
     event MetadataUpdated(bytes metadata);
 
-    /// @notice Thrown if metadata is set empty.
-    error EmptyMetadata();
-
     struct MetadataExtensionStorage {
         bytes metadata;
     }
@@ -66,10 +63,6 @@ abstract contract MetadataExtensionUpgradeable is ERC165Upgradeable, DaoAuthoriz
     /// @notice Internal function to update metadata.
     /// @param _metadata The utf8 bytes of a content addressing cid that stores contract's information.
     function _updateMetadata(bytes memory _metadata) internal virtual {
-        if (_metadata.length == 0) {
-            revert EmptyMetadata();
-        }
-
         MetadataExtensionStorage storage $ = _getMetadataExtensionStorage();
         $.metadata = _metadata;
 

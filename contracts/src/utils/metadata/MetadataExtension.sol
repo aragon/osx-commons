@@ -16,9 +16,6 @@ abstract contract MetadataExtension is ERC165, DaoAuthorizable {
     /// @notice Emitted when metadata is updated.
     event MetadataUpdated(bytes metadata);
 
-    /// @notice Thrown if metadata is set empty.
-    error EmptyMetadata();
-
     bytes private metadata;
 
     /// @notice Checks if this or the parent contract supports an interface by its ID.
@@ -47,10 +44,6 @@ abstract contract MetadataExtension is ERC165, DaoAuthorizable {
     /// @notice Internal function to update metadata.
     /// @param _metadata The utf8 bytes of a content addressing cid that stores contract's information.
     function _updateMetadata(bytes memory _metadata) internal virtual {
-        if (_metadata.length == 0) {
-            revert EmptyMetadata();
-        }
-
         metadata = _metadata;
         emit MetadataUpdated(_metadata);
     }

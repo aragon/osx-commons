@@ -58,14 +58,6 @@ function MetadataExtensionBaseTests(fixture: () => Promise<FixtureResult>) {
       ).to.be.revertedWithCustomError(metadataMock, 'DaoUnauthorized');
     });
 
-    it('reverts if empty metadata is being set', async () => {
-      const {metadataMock} = data;
-
-      await expect(
-        metadataMock.updateMetadata('0x')
-      ).to.be.revertedWithCustomError(metadataMock, 'EmptyMetadata');
-    });
-
     it('sets the metadata and emits the event', async () => {
       const {metadataMock} = data;
       const metadata = '0x11';
@@ -82,9 +74,9 @@ function MetadataExtensionBaseTests(fixture: () => Promise<FixtureResult>) {
 
       // Check that it correctly retrieves the metadata if the length is > 32
       // This ensures that our `sstore/sload` operations behave correctly.
-      // metadata = '0x' + '11'.repeat(50);
-      // await metadataMock.updateMetadata(metadata);
-      // expect(await metadataMock.getMetadata()).to.equal(metadata);
+      metadata = '0x' + '11'.repeat(50);
+      await metadataMock.updateMetadata(metadata);
+      expect(await metadataMock.getMetadata()).to.equal(metadata);
     });
   });
 }
