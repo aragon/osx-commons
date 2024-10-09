@@ -29,16 +29,6 @@ abstract contract PluginUUPSUpgradeable is
 
     // NOTE: When adding new state variables to the contract, the size of `_gap` has to be adapted below as well.
 
-    enum Operation {
-        Call,
-        DelegateCall
-    }
-
-    struct TargetConfig {
-        address target;
-        Operation operation;
-    }
-
     TargetConfig private currentTargetConfig;
 
     /// @notice Thrown when target is of type 'IDAO', but operation is `delegateCall`.
@@ -46,7 +36,7 @@ abstract contract PluginUUPSUpgradeable is
     error InvalidTargetConfig(TargetConfig targetConfig);
 
     /// @notice Thrown when `delegatecall` fails.
-    error ExecuteFailed();
+    error DelegateCallFailed();
 
     /// @notice Thrown when initialize is called after it has already been executed.
     error AlreadyInitialized();
@@ -207,7 +197,7 @@ abstract contract PluginUUPSUpgradeable is
                         revert(add(32, data), returndata_size)
                     }
                 } else {
-                    revert ExecuteFailed();
+                    revert DelegateCallFailed();
                 }
             }
             (execResults, failureMap) = abi.decode(data, (bytes[], uint256));

@@ -280,7 +280,7 @@ describe('Plugin', function () {
           ).to.emit(plugin, 'Executed');
         });
 
-        it('reverts with `ExecuteFailed`error', async () => {
+        it('reverts with `DelegateCallFailed` error', async () => {
           await plugin.setTargetConfig({
             target: executor.address,
             operation: Operation.delegatecall,
@@ -291,7 +291,7 @@ describe('Plugin', function () {
               [],
               0
             )
-          ).to.be.revertedWithCustomError(plugin, 'ExecuteFailed');
+          ).to.be.revertedWithCustomError(plugin, 'DelegateCallFailed');
         });
       });
     });
@@ -341,12 +341,12 @@ describe('Plugin', function () {
           ).to.emit(plugin, 'Executed');
         });
 
-        it('reverts with `ExecuteFailed`error', async () => {
+        it('reverts with `DelegateCallFailed` error', async () => {
           await expect(
             plugin[
               'execute(address,uint256,(address,uint256,bytes)[],uint256,uint8)'
             ](executor.address, 123, [], 0, Operation.delegatecall)
-          ).to.be.revertedWithCustomError(plugin, 'ExecuteFailed');
+          ).to.be.revertedWithCustomError(plugin, 'DelegateCallFailed');
         });
       });
     });

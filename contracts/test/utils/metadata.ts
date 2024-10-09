@@ -28,12 +28,10 @@ function MetadataExtensionBaseTests(fixture: () => Promise<FixtureResult>) {
       await erc165ComplianceTests(metadataMock, signers[0]);
     });
 
-    it('supports the `updateMetadata/getMetadata` selector interface', async () => {
+    it('supports the `setMetadata/getMetadata` selector interface', async () => {
       const {metadataMock} = await loadFixture(fixture);
       const iface = MetadataExtensionMock__factory.createInterface();
-      const interfaceId = ethers.BigNumber.from(
-        iface.getSighash('updateMetadata')
-      )
+      const interfaceId = ethers.BigNumber.from(iface.getSighash('setMetadata'))
         .xor(ethers.BigNumber.from(iface.getSighash('getMetadata')))
         .toHexString();
 
@@ -41,11 +39,11 @@ function MetadataExtensionBaseTests(fixture: () => Promise<FixtureResult>) {
     });
   });
 
-  describe('updateMetadata/getMetadata', async () => {
+  describe('setMetadata/getMetadata', async () => {
     let data: FixtureResult;
     beforeEach(async () => {
       data = await loadFixture(fixture);
-      const {metadataMock, daoMock} = data;
+      const {daoMock} = data;
       await daoMock.setHasPermissionReturnValueMock(true);
     });
 
@@ -54,28 +52,28 @@ function MetadataExtensionBaseTests(fixture: () => Promise<FixtureResult>) {
       await daoMock.setHasPermissionReturnValueMock(false);
 
       await expect(
-        metadataMock.updateMetadata('0x11')
+        metadataMock.setMetadata('0x11')
       ).to.be.revertedWithCustomError(metadataMock, 'DaoUnauthorized');
     });
 
     it('sets the metadata and emits the event', async () => {
       const {metadataMock} = data;
       const metadata = '0x11';
-      await expect(metadataMock.updateMetadata(metadata))
-        .to.emit(metadataMock, 'MetadataUpdated')
+      await expect(metadataMock.setMetadata(metadata))
+        .to.emit(metadataMock, 'MetadataSet')
         .withArgs(metadata);
     });
 
     it('retrieves the metadata', async () => {
       const {metadataMock} = data;
       let metadata = '0x11';
-      await metadataMock.updateMetadata(metadata);
+      await metadataMock.setMetadata(metadata);
       expect(await metadataMock.getMetadata()).to.equal(metadata);
 
       // Check that it correctly retrieves the metadata if the length is > 32
       // This ensures that our `sstore/sload` operations behave correctly.
       metadata = '0x' + '11'.repeat(50);
-      await metadataMock.updateMetadata(metadata);
+      await metadataMock.setMetadata(metadata);
       expect(await metadataMock.getMetadata()).to.equal(metadata);
     });
   });

@@ -13,6 +13,16 @@ interface IPlugin {
         Constructable
     }
 
+    enum Operation {
+        Call,
+        DelegateCall
+    }
+
+    struct TargetConfig {
+        address target;
+        Operation operation;
+    }
+
     /// @notice Returns the plugin's type
     function pluginType() external view returns (PluginType);
 }

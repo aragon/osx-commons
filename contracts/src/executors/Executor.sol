@@ -85,24 +85,19 @@ contract Executor is IExecutor {
             gasAfter = gasleft();
 
             // Check if failure is allowed
-            if (!hasBit(_allowFailureMap, uint8(i))) {
-                // Check if the call failed.
-                if (!success) {
+            if (!success) {
+                if (!hasBit(_allowFailureMap, uint8(i))) {
                     revert ActionFailed(i);
                 }
-            } else {
-                // Check if the call failed.
-                if (!success) {
-                    // Make sure that the action call did not fail because 63/64 of `gasleft()` was insufficient to execute the external call `.to.call` (see [ERC-150](https://eips.ethereum.org/EIPS/eip-150)).
-                    // In specific scenarios, i.e. proposal execution where the last action in the action array is allowed to fail, the account calling `execute` could force-fail this action by setting a gas limit
-                    // where 63/64 is insufficient causing the `.to.call` to fail, but where the remaining 1/64 gas are sufficient to successfully finish the `execute` call.
-                    if (gasAfter < gasBefore / 64) {
-                        revert InsufficientGas();
-                    }
 
-                    // Store that this action failed.
-                    failureMap = flipBit(failureMap, uint8(i));
+                // Make sure that the action call did not fail because 63/64 of `gasleft()` was insufficient to execute the external call `.to.call` (see [ERC-150](https://eips.ethereum.org/EIPS/eip-150)).
+                // In specific scenarios, i.e. proposal execution where the last action in the action array is allowed to fail, the account calling `execute` could force-fail this action by setting a gas limit
+                // where 63/64 is insufficient causing the `.to.call` to fail, but where the remaining 1/64 gas are sufficient to successfully finish the `execute` call.
+                if (gasAfter < gasBefore / 64) {
+                    revert InsufficientGas();
                 }
+                // Store that this action failed.
+                failureMap = flipBit(failureMap, uint8(i));
             }
 
             execResults[i] = data;

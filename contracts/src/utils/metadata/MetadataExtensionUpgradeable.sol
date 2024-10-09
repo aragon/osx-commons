@@ -12,15 +12,15 @@ import {DaoAuthorizableUpgradeable} from "../../permission/auth/DaoAuthorizableU
 /// @author Aragon X - 2024
 /// @custom:security-contact sirt@aragon.org
 abstract contract MetadataExtensionUpgradeable is ERC165Upgradeable, DaoAuthorizableUpgradeable {
-    /// @notice The ID of the permission required to call the `updateMetadata` function.
-    bytes32 public constant UPDATE_METADATA_PERMISSION_ID = keccak256("UPDATE_METADATA_PERMISSION");
+    /// @notice The ID of the permission required to call the `setMetadata` function.
+    bytes32 public constant SET_METADATA_PERMISSION_ID = keccak256("SET_METADATA_PERMISSION");
 
     // keccak256(abi.encode(uint256(keccak256("osx-commons.storage.MetadataExtension")) - 1)) & ~bytes32(uint256(0xff))
     bytes32 private constant MetadataExtensionStorageLocation =
         0x47ff9796f72d439c6e5c30a24b9fad985a00c85a9f2258074c400a94f8746b00;
 
     /// @notice Emitted when metadata is updated.
-    event MetadataUpdated(bytes metadata);
+    event MetadataSet(bytes metadata);
 
     struct MetadataExtensionStorage {
         bytes metadata;
@@ -41,16 +41,14 @@ abstract contract MetadataExtensionUpgradeable is ERC165Upgradeable, DaoAuthoriz
     /// @return Returns `true` if the interface is supported.
     function supportsInterface(bytes4 _interfaceId) public view virtual override returns (bool) {
         return
-            _interfaceId == this.updateMetadata.selector ^ this.getMetadata.selector ||
+            _interfaceId == this.setMetadata.selector ^ this.getMetadata.selector ||
             super.supportsInterface(_interfaceId);
     }
 
     /// @notice Allows to update only the metadata.
     /// @param _metadata The utf8 bytes of a content addressing cid that stores plugin's information.
-    function updateMetadata(
-        bytes memory _metadata
-    ) public virtual auth(UPDATE_METADATA_PERMISSION_ID) {
-        _updateMetadata(_metadata);
+    function setMetadata(bytes memory _metadata) public virtual auth(SET_METADATA_PERMISSION_ID) {
+        _setMetadata(_metadata);
     }
 
     /// @notice Returns the metadata currently applied.
@@ -62,10 +60,10 @@ abstract contract MetadataExtensionUpgradeable is ERC165Upgradeable, DaoAuthoriz
 
     /// @notice Internal function to update metadata.
     /// @param _metadata The utf8 bytes of a content addressing cid that stores contract's information.
-    function _updateMetadata(bytes memory _metadata) internal virtual {
+    function _setMetadata(bytes memory _metadata) internal virtual {
         MetadataExtensionStorage storage $ = _getMetadataExtensionStorage();
         $.metadata = _metadata;
 
-        emit MetadataUpdated(_metadata);
+        emit MetadataSet(_metadata);
     }
 }

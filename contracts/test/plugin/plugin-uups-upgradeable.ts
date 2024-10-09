@@ -350,7 +350,7 @@ describe('PluginUUPSUpgradeable', function () {
           ).to.emit(proxy, 'Executed');
         });
 
-        it('reverts with `ExecuteFailed`error', async () => {
+        it('reverts with `DelegateCallFailed` error', async () => {
           await proxy.setTargetConfig({
             target: executor.address,
             operation: Operation.delegatecall,
@@ -361,7 +361,7 @@ describe('PluginUUPSUpgradeable', function () {
               [],
               0
             )
-          ).to.be.revertedWithCustomError(proxy, 'ExecuteFailed');
+          ).to.be.revertedWithCustomError(proxy, 'DelegateCallFailed');
         });
       });
     });
@@ -411,12 +411,12 @@ describe('PluginUUPSUpgradeable', function () {
           ).to.emit(proxy, 'Executed');
         });
 
-        it('reverts with `ExecuteFailed`error', async () => {
+        it('reverts with `DelegateCallFailed` error', async () => {
           await expect(
             proxy[
               'execute(address,uint256,(address,uint256,bytes)[],uint256,uint8)'
             ](executor.address, 123, [], 0, Operation.delegatecall)
-          ).to.be.revertedWithCustomError(proxy, 'ExecuteFailed');
+          ).to.be.revertedWithCustomError(proxy, 'DelegateCallFailed');
         });
       });
     });

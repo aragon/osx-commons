@@ -24,16 +24,6 @@ abstract contract PluginCloneable is
 {
     using ERC165CheckerUpgradeable for address;
 
-    enum Operation {
-        Call,
-        DelegateCall
-    }
-
-    struct TargetConfig {
-        address target;
-        Operation operation;
-    }
-
     TargetConfig private currentTargetConfig;
 
     /// @notice Thrown when target is of type 'IDAO', but operation is `delegateCall`.
@@ -41,7 +31,7 @@ abstract contract PluginCloneable is
     error InvalidTargetConfig(TargetConfig targetConfig);
 
     /// @notice Thrown when `delegatecall` fails.
-    error ExecuteFailed();
+    error DelegateCallFailed();
 
     /// @dev Emitted each time the TargetConfig is set.
     event TargetSet(TargetConfig newTargetConfig);
@@ -180,7 +170,7 @@ abstract contract PluginCloneable is
                         revert(add(32, data), returndata_size)
                     }
                 } else {
-                    revert ExecuteFailed();
+                    revert DelegateCallFailed();
                 }
             }
             (execResults, failureMap) = abi.decode(data, (bytes[], uint256));

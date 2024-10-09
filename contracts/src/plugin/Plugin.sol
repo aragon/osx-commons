@@ -19,16 +19,6 @@ import {IExecutor, Action} from "../executors/IExecutor.sol";
 abstract contract Plugin is IPlugin, ERC165, DaoAuthorizable, ProtocolVersion {
     using ERC165Checker for address;
 
-    enum Operation {
-        Call,
-        DelegateCall
-    }
-
-    struct TargetConfig {
-        address target;
-        Operation operation;
-    }
-
     TargetConfig private currentTargetConfig;
 
     /// @notice Thrown when target is of type 'IDAO', but operation is `delegateCall`.
@@ -39,7 +29,7 @@ abstract contract Plugin is IPlugin, ERC165, DaoAuthorizable, ProtocolVersion {
     event TargetSet(TargetConfig newTargetConfig);
 
     /// @notice Thrown when `delegatecall` fails.
-    error ExecuteFailed();
+    error DelegateCallFailed();
 
     /// @notice The ID of the permission required to call the `setTarget` function.
     bytes32 public constant SET_TARGET_PERMISSION_ID = keccak256("SET_TARGET_PERMISSION");
@@ -165,7 +155,7 @@ abstract contract Plugin is IPlugin, ERC165, DaoAuthorizable, ProtocolVersion {
                         revert(add(32, data), returndata_size)
                     }
                 } else {
-                    revert ExecuteFailed();
+                    revert DelegateCallFailed();
                 }
             }
             (execResults, failureMap) = abi.decode(data, (bytes[], uint256));
