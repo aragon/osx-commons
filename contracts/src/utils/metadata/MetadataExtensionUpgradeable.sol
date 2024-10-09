@@ -47,7 +47,7 @@ abstract contract MetadataExtensionUpgradeable is ERC165Upgradeable, DaoAuthoriz
 
     /// @notice Allows to update only the metadata.
     /// @param _metadata The utf8 bytes of a content addressing cid that stores plugin's information.
-    function setMetadata(bytes memory _metadata) public virtual auth(SET_METADATA_PERMISSION_ID) {
+    function setMetadata(bytes calldata _metadata) public virtual auth(SET_METADATA_PERMISSION_ID) {
         _setMetadata(_metadata);
     }
 

@@ -29,7 +29,7 @@ abstract contract MetadataExtension is ERC165, DaoAuthorizable {
 
     /// @notice Allows to set the metadata.
     /// @param _metadata The plugin specific information encoded in bytes.
-    function setMetadata(bytes memory _metadata) public virtual auth(SET_METADATA_PERMISSION_ID) {
+    function setMetadata(bytes calldata _metadata) public virtual auth(SET_METADATA_PERMISSION_ID) {
         _setMetadata(_metadata);
     }
 
