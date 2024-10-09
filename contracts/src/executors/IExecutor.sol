@@ -2,8 +2,6 @@
 
 pragma solidity ^0.8.8;
 
-import {IDAO} from "../dao/IDAO.sol";
-
 /// @notice The action struct to be consumed by the DAO's `execute` function resulting in an external call.
 /// @param to The address to call.
 /// @param value The native token value to be sent with the call.
