@@ -2,8 +2,7 @@
 
 pragma solidity ^0.8.8;
 
-import {IDAO} from "../../../dao/IDAO.sol";
-import {IExecutor, Action} from "../../../executors/IExecutor.sol";
+import {Action} from "../../../executors/IExecutor.sol";
 
 /// @title IProposal
 /// @author Aragon X - 2022-2023
