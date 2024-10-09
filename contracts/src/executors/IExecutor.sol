@@ -14,8 +14,8 @@ struct Action {
     bytes data;
 }
 
-/// @title IDAO
-/// @author Aragon X - 2022-2023
+/// @title IExecutor
+/// @author Aragon X - 2022-2024
 /// @notice The interface required for Executors within the Aragon App DAO framework.
 /// @custom:security-contact sirt@aragon.org
 interface IExecutor {
