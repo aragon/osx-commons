@@ -51,15 +51,6 @@ interface IProposal {
     /// @return bool Returns if proposal can be executed or not.
     function canExecute(uint256 proposalId) external view returns (bool);
 
-    /// @notice Creates a proposal Id.
-    /// @param actions The actions that will be executed after the proposal passes.
-    /// @param metadata The custom metadata that is passed when creating a proposal.
-    /// @return proposalId The id of the proposal.
-    function createProposalId(
-        Action[] memory actions,
-        bytes memory metadata
-    ) external view returns (uint256);
-
     /// @notice The human-readable abi format for extra params included in `data` of `createProposal`.
     /// @dev Used for UI to easily detect what extra params the contract expects.
     /// @return abi ABI of params in `data` of `createProposal`.
