@@ -27,9 +27,7 @@ function proposalBaseTests(fixture: () => Promise<FixtureResult>) {
   it('returns max value of integer for backwards-compatibility', async () => {
     const {proposalMock} = await loadFixture(fixture);
 
-    expect(await proposalMock.proposalCount()).to.equal(
-      ethers.constants.MaxUint256
-    );
+    await expect(proposalMock.proposalCount()).to.be.reverted;
   });
 
   describe('ERC-165', async () => {

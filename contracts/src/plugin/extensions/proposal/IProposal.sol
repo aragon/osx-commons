@@ -54,11 +54,11 @@ interface IProposal {
     /// @notice The human-readable abi format for extra params included in `data` of `createProposal`.
     /// @dev Used for UI to easily detect what extra params the contract expects.
     /// @return abi ABI of params in `data` of `createProposal`.
-    function createProposalParamsABI() external view returns (string memory abi);
+    function customProposalParamsABI() external view returns (string memory abi);
 
     /// @notice Returns the proposal count determining the next proposal ID.
-    /// @dev This function has been deprecated but due to backwards compatibility, it still stays in the interface
-    /// but returns maximum value of uint256 to let consumers know not to depend on it anymore.
+    /// @dev This function has been deprecated but due to backwards compatibility, it still exists
+    /// in the interface but reverts to avoid ambiguity.
     /// @return The proposal count.
     function proposalCount() external view returns (uint256);
 }
