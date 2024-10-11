@@ -51,23 +51,14 @@ interface IProposal {
     /// @return bool Returns if proposal can be executed or not.
     function canExecute(uint256 proposalId) external view returns (bool);
 
-    /// @notice Creates a proposal Id.
-    /// @param actions The actions that will be executed after the proposal passes.
-    /// @param metadata The custom metadata that is passed when creating a proposal.
-    /// @return proposalId The id of the proposal.
-    function createProposalId(
-        Action[] memory actions,
-        bytes memory metadata
-    ) external view returns (uint256);
-
     /// @notice The human-readable abi format for extra params included in `data` of `createProposal`.
     /// @dev Used for UI to easily detect what extra params the contract expects.
     /// @return abi ABI of params in `data` of `createProposal`.
-    function createProposalParamsABI() external view returns (string memory abi);
+    function customProposalParamsABI() external view returns (string memory abi);
 
     /// @notice Returns the proposal count determining the next proposal ID.
-    /// @dev This function has been deprecated but due to backwards compatibility, it still stays in the interface
-    /// but returns maximum value of uint256 to let consumers know not to depend on it anymore.
+    /// @dev This function has been deprecated but due to backwards compatibility, it still exists
+    /// in the interface but reverts to avoid ambiguity.
     /// @return The proposal count.
     function proposalCount() external view returns (uint256);
 }

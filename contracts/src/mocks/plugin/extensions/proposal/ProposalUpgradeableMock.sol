@@ -27,5 +27,5 @@ contract ProposalUpgradeableMock is ProposalUpgradeable {
         bytes memory metadata
     ) external view returns (uint256) {}
 
-    function createProposalParamsABI() external view returns (string memory) {}
+    function customProposalParamsABI() external view returns (string memory) {}
 }
