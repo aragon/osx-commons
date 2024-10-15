@@ -71,6 +71,7 @@ export enum NonFrameworkContractsNames {
   STAGED_PROPOSAL_PROCESSOR_REPO_IMPLEMENTATION = 'StagedProposalProcessorRepoImplementation',
   STAGED_PROPOSAL_PROCESSOR_SETUP = 'StagedProposalProcessorSetup',
   STAGED_PROPOSAL_PROCESSOR_SETUP_IMPLEMENTATION = 'StagedProposalProcessorSetupImplementation',
+  EXECUTOR = 'Executor',
 }
 
 export type ENSNetworkDomain = {

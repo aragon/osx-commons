@@ -165,6 +165,11 @@
       "address": "0x65023205fB06Aded92874DB1547d34d85F8def9E",
       "blockNumber": 6873266,
       "deploymentTx": "0xdff46a04993ebb47af4913bf116965737789894af1c703256ba838985a41b5ec"
+    },
+    "Executor": {
+      "address": "0x619c4C957370CD288D64b46D4cF3a560229b593b",
+      "blockNumber": 6879195,
+      "deploymentTx": "0xaee7e85761c86ca9c3cf8fb3a02e0b9b3d45aa7914a10dbfc16ecd86555ed33e"
     }
   }
 }
