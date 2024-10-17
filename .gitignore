@@ -19,6 +19,10 @@ dist-ssr
 .cache
 typechain
 
+contracts/artifacts
+contracts/cache 
+
+
 # misc
 .DS_Store
 *.pem
