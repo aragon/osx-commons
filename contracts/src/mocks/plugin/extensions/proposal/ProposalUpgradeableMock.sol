@@ -22,10 +22,5 @@ contract ProposalUpgradeableMock is ProposalUpgradeable {
 
     function canExecute(uint256 proposalId) external view returns (bool) {}
 
-    function createProposalId(
-        Action[] memory actions,
-        bytes memory metadata
-    ) external view returns (uint256) {}
-
     function customProposalParamsABI() external view returns (string memory) {}
 }
