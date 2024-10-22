@@ -156,14 +156,14 @@
       "deploymentTx": "0xd16d911f1b49d959bb37d1b5356805c22a22481922ca798e43381b4e954e90e2"
     },
     "StagedProposalProcessorSetup": {
-      "address": "0x989AD51ea9D757f3D2580A12335cE0c14814d952",
-      "blockNumber": 6873266,
-      "deploymentTx": "0xdff46a04993ebb47af4913bf116965737789894af1c703256ba838985a41b5ec"
+      "address": "0xc325750d32dc0bBfc890D10B8D49BA55648eEF72",
+      "blockNumber": 6921914,
+      "deploymentTx": "0x966ea3d5d87c41a6da36c819f893459893e1dc331708904d72093d2c02cf0bc5"
     },
     "StagedProposalProcessorSetupImplementation": {
-      "address": "0x65023205fB06Aded92874DB1547d34d85F8def9E",
-      "blockNumber": 6873266,
-      "deploymentTx": "0xdff46a04993ebb47af4913bf116965737789894af1c703256ba838985a41b5ec"
+      "address": "0xBCA19979925222812eDC11A31ac3e4e4cB837daB",
+      "blockNumber": 6921914,
+      "deploymentTx": "0x966ea3d5d87c41a6da36c819f893459893e1dc331708904d72093d2c02cf0bc5"
     },
     "Executor": {
       "address": "0x619c4C957370CD288D64b46D4cF3a560229b593b",
