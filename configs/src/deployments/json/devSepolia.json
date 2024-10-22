@@ -75,11 +75,10 @@
       "blockNumber": 6415412,
       "deploymentTx": "0xb327327c3502732f58ff0748924869841f9ac925bb04143302cdcb22068e3c37"
     },
-
     "AdminRepoProxy": {
-      "address": "0x39700752597F591a0d986699E6d5409659efEcc5",
-      "blockNumber": 6873594,
-      "deploymentTx": "0xead381d4ab44108712b193f39bdd52f4a17bfa3764f0a8217161e9e47b89ce88"
+      "address": "0xEdA3074437375DC71007AFC9D421644656d72287",
+      "blockNumber": 6422609,
+      "deploymentTx": "0x515700b942334ab9d0d7a8eecc7d92b1deb3cc1826026ce818182cfa8205e8f5"
     },
     "AdminRepoImplementation": {
       "address": "0x2475F9918b366735D07cc1275fA638485B58C07c",
@@ -97,9 +96,9 @@
       "deploymentTx": "0x9a530203b208746b61f9b0c77289ec5711b49f07a540f9d6f926524d3f0002e4"
     },
     "MultisigRepoProxy": {
-      "address": "0x48e9a543727423A08005B0d2FE6561B3C214b045",
-      "blockNumber": 6873442,
-      "deploymentTx": "0xc04914c103a19704e31d6e933c7ea474a23b1d579e2261d9640708ea599b2c3a"
+      "address": "0xA0901B5BC6e04F14a9D0d094653E047644586DdE",
+      "blockNumber": 6416894,
+      "deploymentTx": "0xdd388d8f9c36f6333b6cee60e84060866003c5ce31d78c7c0ca491ab2d63c535"
     },
     "MultisigRepoImplementation": {
       "address": "0x9C61D4266815bdd32f4D2885B6CF5763F449050B",
@@ -117,9 +116,9 @@
       "deploymentTx": "0x1a58eee9dcaebecd0313a0747e2389a18866ccc49725f13db8770c406765aa8c"
     },
     "TokenVotingRepoProxy": {
-      "address": "0xB46bD755Cd9E4D4550e1F3e0eF6164E898a969b8",
-      "blockNumber": 6873506,
-      "deploymentTx": "0xc81670b3234015822caac2380c1488bfaa8bb62c113c84a2ea98a1ad5280d72a"
+      "address": "0x6241ad0D3f162028d2e0000f1A878DBc4F5c4aD0",
+      "blockNumber": 6418853,
+      "deploymentTx": "0xa70ed21d5440e3109b2a36f356b53995b58469ce9506eeca118f324bc6f4efc5"
     },
     "TokenVotingRepoImplementation": {
       "address": "0x9C61D4266815bdd32f4D2885B6CF5763F449050B",
@@ -147,9 +146,9 @@
       "deploymentTx": "0xcd03b888489be7cf0de8a80d70c0b1942bb81fab9860a028a0bfcb95af056086"
     },
     "StagedProposalProcessorRepoProxy": {
-      "address": "0x012660C5093CbF871D59d4fFdCf4B5E450Fc5602",
-      "blockNumber": 6873266,
-      "deploymentTx": "0x89d63e05c0d21ab1ae991c9bb9e5c642bbd25aed55058a72a5f509e9fa445b3c"
+      "address": "0xE67b8E026d190876704292442A38163Ce6945d6b",
+      "blockNumber": 6421862,
+      "deploymentTx": "0xc9eec74e6c05b9ae7ec4b30322d11e3328056d494fc98fd8ee0b32d29e15ad96"
     },
     "StagedProposalProcessorRepoImplementation": {
       "address": "0x9C61D4266815bdd32f4D2885B6CF5763F449050B",
