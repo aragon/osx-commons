@@ -4,7 +4,7 @@ pragma solidity ^0.8.8;
 
 import {IPermissionCondition} from "./IPermissionCondition.sol";
 
-abstract contract AbstractPowerfulCondition is IPermissionCondition {
+abstract contract PowerfulCondition is IPermissionCondition {
     uint8 internal constant BLOCK_NUMBER_RULE_ID = 200;
     uint8 internal constant TIMESTAMP_RULE_ID = 201;
     uint8 internal constant CONDITION_RULE_ID = 202;
