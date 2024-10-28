@@ -23,4 +23,3 @@ export enum Op {
 }
 
 export const DUMMY_PERMISSION_ID = ethers.utils.id('DUMMY_PERMISSION');
-

@@ -164,23 +164,17 @@ describe('PowerfulCondition', async () => {
   });
 
   it('it should be able to eval rule that checks blockNumber', async () => {
-    const {
-      deployer,
-      daoMock,
-      conditionMock,
-    } = await loadFixture(fixture);
+    const {deployer, daoMock, conditionMock} = await loadFixture(fixture);
 
     // checks the block number is bigger or equal than 1
-    await conditionMock.updateRules(
-      [
-        {
-          id: BLOCK_NUMBER_RULE_ID,
-          op: Op.GTE,
-          value: 1,
-          permissionId: DUMMY_PERMISSION_ID,
-        },
-      ]
-    );
+    await conditionMock.updateRules([
+      {
+        id: BLOCK_NUMBER_RULE_ID,
+        op: Op.GTE,
+        value: 1,
+        permissionId: DUMMY_PERMISSION_ID,
+      },
+    ]);
     expect(
       await conditionMock.isGranted(
         daoMock.address,
@@ -191,16 +185,14 @@ describe('PowerfulCondition', async () => {
     ).to.be.true;
 
     // checks the block number is lower than 1
-    await conditionMock.updateRules(
-      [
-        {
-          id: BLOCK_NUMBER_RULE_ID,
-          op: Op.LT,
-          value: 1,
-          permissionId: DUMMY_PERMISSION_ID,
-        },
-      ]
-    );
+    await conditionMock.updateRules([
+      {
+        id: BLOCK_NUMBER_RULE_ID,
+        op: Op.LT,
+        value: 1,
+        permissionId: DUMMY_PERMISSION_ID,
+      },
+    ]);
     expect(
       await conditionMock.isGranted(
         daoMock.address,
@@ -209,27 +201,20 @@ describe('PowerfulCondition', async () => {
         '0x'
       )
     ).to.be.false;
-
   });
 
   it('it should be able to eval rule that checks timestamp', async () => {
-    const {
-      deployer,
-      daoMock,
-      conditionMock,
-    } = await loadFixture(fixture);
+    const {deployer, daoMock, conditionMock} = await loadFixture(fixture);
 
     // checks the timestamp is bigger or equal than 1
-    await conditionMock.updateRules(
-      [
-        {
-          id: TIMESTAMP_RULE_ID,
-          op: Op.GTE,
-          value: 1,
-          permissionId: DUMMY_PERMISSION_ID,
-        },
-      ]
-    );
+    await conditionMock.updateRules([
+      {
+        id: TIMESTAMP_RULE_ID,
+        op: Op.GTE,
+        value: 1,
+        permissionId: DUMMY_PERMISSION_ID,
+      },
+    ]);
     expect(
       await conditionMock.isGranted(
         daoMock.address,
@@ -240,16 +225,14 @@ describe('PowerfulCondition', async () => {
     ).to.be.true;
 
     // checks the timestamp is lower than 1
-    await conditionMock.updateRules(
-      [
-        {
-          id: TIMESTAMP_RULE_ID,
-          op: Op.LT,
-          value: 1,
-          permissionId: DUMMY_PERMISSION_ID,
-        },
-      ]
-    );
+    await conditionMock.updateRules([
+      {
+        id: TIMESTAMP_RULE_ID,
+        op: Op.LT,
+        value: 1,
+        permissionId: DUMMY_PERMISSION_ID,
+      },
+    ]);
     expect(
       await conditionMock.isGranted(
         daoMock.address,
@@ -258,7 +241,6 @@ describe('PowerfulCondition', async () => {
         '0x'
       )
     ).to.be.false;
-
   });
 });
 
