@@ -7,7 +7,6 @@ import {IExecutor, Action} from "../../executors/Executor.sol";
 /// @notice A dummy contract to test if Executor can successfully execute an action.
 contract ActionExecute {
     uint256 internal _num = 10;
-    error ActionExecuteRevert();
 
     function setTest(uint256 newNum) public returns (uint256) {
         _num = newNum;
@@ -15,7 +14,8 @@ contract ActionExecute {
     }
 
     function fail() public pure {
-        revert ActionExecuteRevert();
+        // solhint-disable-next-line reason-string, custom-errors
+        revert("ActionExecute:Revert");
     }
 
     // Used to test custom reentrancy guard
