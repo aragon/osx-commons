@@ -71,10 +71,10 @@ abstract contract PowerfulCondition is IPermissionCondition {
         if (rule.id == CONDITION_RULE_ID) {
             bytes32 permissionId = rule.permissionId;
 
-            bool conditionRes = checkCondition(
+            bool conditionRes = _checkCondition(
                 IPermissionCondition(address(uint160(rule.value))),
-                _who,
                 _where,
+                _who,
                 permissionId == bytes32(0) ? _permissionId : permissionId,
                 _compareList
             );
@@ -97,7 +97,7 @@ abstract contract PowerfulCondition is IPermissionCondition {
             return uint256(value) > 0;
         }
 
-        return compare(value, Op(rule.op), comparedTo);
+        return _compare(value, Op(rule.op), comparedTo);
     }
 
     function _evalLogic(
@@ -111,13 +111,13 @@ abstract contract PowerfulCondition is IPermissionCondition {
             (
                 uint32 currentRuleIndex,
                 uint32 ruleIndexOnSuccess,
-                uint32 ruleindexOnFailure
+                uint32 ruleIndexOnFailure
             ) = decodeRuleValue(uint256(_rule.value));
             bool result = _evalRule(currentRuleIndex, _who, _where, _permissionId, _compareList);
 
             return
                 _evalRule(
-                    result ? ruleIndexOnSuccess : ruleindexOnFailure,
+                    result ? ruleIndexOnSuccess : ruleIndexOnFailure,
                     _where,
                     _who,
                     _permissionId,
@@ -159,7 +159,7 @@ abstract contract PowerfulCondition is IPermissionCondition {
     // Also, tokenvoting's condition separately might be focusing on the `msg.data` that is passed correctly when it's called correctly on tokenvoting's createProposal.
     // but when it's called on SPP and SPP's condition calls tokenvoting's condition, it will be passing the msg.data of `SPP's createProposal` and not tokenvoting's createProposal data
     // the signatures are different. This and above todo could all work if sub-condition doesn't do any logic depending on permissionId or data.
-    function checkCondition(
+    function _checkCondition(
         IPermissionCondition _condition,
         address _where,
         address _who,
@@ -216,7 +216,7 @@ abstract contract PowerfulCondition is IPermissionCondition {
         return result;
     }
 
-    function compare(uint256 _a, Op _op, uint256 _b) internal pure returns (bool) {
+    function _compare(uint256 _a, Op _op, uint256 _b) internal pure returns (bool) {
         if (_op == Op.EQ) return _a == _b;
         if (_op == Op.NEQ) return _a != _b;
         if (_op == Op.GT) return _a > _b;
