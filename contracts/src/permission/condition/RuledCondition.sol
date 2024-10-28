@@ -2,8 +2,6 @@
 
 pragma solidity ^0.8.8;
 
-import {ERC165Upgradeable} from "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol";
-
 import {IPermissionCondition} from "./IPermissionCondition.sol";
 import {PermissionConditionUpgradeable} from "./PermissionConditionUpgradeable.sol";
 
