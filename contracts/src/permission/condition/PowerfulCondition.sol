@@ -176,6 +176,7 @@ abstract contract PowerfulCondition is IPermissionCondition {
         );
 
         bool ok;
+        // solhint-disable-next-line no-inline-assembly
         assembly {
             // send all available gas; if the oracle eats up all the gas, we will eventually revert
             // note that we are currently guaranteed to still have some gas after the call from
@@ -195,6 +196,7 @@ abstract contract PowerfulCondition is IPermissionCondition {
         }
 
         uint256 size;
+        // solhint-disable-next-line no-inline-assembly
         assembly {
             size := returndatasize()
         }
@@ -203,6 +205,7 @@ abstract contract PowerfulCondition is IPermissionCondition {
         }
 
         bool result;
+        // solhint-disable-next-line no-inline-assembly
         assembly {
             let ptr := mload(0x40) // get next free memory ptr
             returndatacopy(ptr, 0, size) // copy return from above `staticcall`

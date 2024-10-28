@@ -16,6 +16,7 @@ abstract contract MetadataExtensionUpgradeable is ERC165Upgradeable, DaoAuthoriz
     bytes32 public constant SET_METADATA_PERMISSION_ID = keccak256("SET_METADATA_PERMISSION");
 
     // keccak256(abi.encode(uint256(keccak256("osx-commons.storage.MetadataExtension")) - 1)) & ~bytes32(uint256(0xff))
+    // solhint-disable-next-line  const-name-snakecase
     bytes32 private constant MetadataExtensionStorageLocation =
         0x47ff9796f72d439c6e5c30a24b9fad985a00c85a9f2258074c400a94f8746b00;
 
@@ -31,6 +32,7 @@ abstract contract MetadataExtensionUpgradeable is ERC165Upgradeable, DaoAuthoriz
         pure
         returns (MetadataExtensionStorage storage $)
     {
+        // solhint-disable-next-line no-inline-assembly
         assembly {
             $.slot := MetadataExtensionStorageLocation
         }
