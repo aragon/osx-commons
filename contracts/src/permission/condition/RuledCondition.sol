@@ -2,9 +2,12 @@
 
 pragma solidity ^0.8.8;
 
-import {IPermissionCondition} from "./IPermissionCondition.sol";
+import {ERC165Upgradeable} from "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol";
 
-abstract contract PowerfulCondition is IPermissionCondition {
+import {IPermissionCondition} from "./IPermissionCondition.sol";
+import {PermissionConditionUpgradeable} from "./PermissionConditionUpgradeable.sol";
+
+abstract contract RuledCondition is PermissionConditionUpgradeable {
     uint8 internal constant BLOCK_NUMBER_RULE_ID = 200;
     uint8 internal constant TIMESTAMP_RULE_ID = 201;
     uint8 internal constant CONDITION_RULE_ID = 202;
@@ -35,6 +38,15 @@ abstract contract PowerfulCondition is IPermissionCondition {
     } // op types
 
     Rule[] private rules;
+
+    /// @notice Checks if an interface is supported by this or its parent contract.
+    /// @param _interfaceId The ID of the interface.
+    /// @return Returns `true` if the interface is supported.
+    function supportsInterface(bytes4 _interfaceId) public view virtual override returns (bool) {
+        return
+            _interfaceId == type(RuledCondition).interfaceId ||
+            super.supportsInterface(_interfaceId);
+    }
 
     function getRules() public view virtual returns (Rule[] memory) {
         return rules;
@@ -152,13 +164,6 @@ abstract contract PowerfulCondition is IPermissionCondition {
         return r2; // both or and and depend on result of r2 after checks
     }
 
-    // TODO: when this condition will call other sub-conditions, passing `permissionId` is of no importance and sub-condition might be needing the correct permissionId
-    // especially when it also works good with standalone another contract (such as tokenvoting's condition working on tokenvoting's createProposal), and if SPP's condition
-    // calls this tokenvoting's condition, then ? maybe storing the `permissionId` as well in `Rule` as well seems good ? increases the storage but still.
-
-    // Also, tokenvoting's condition separately might be focusing on the `msg.data` that is passed correctly when it's called correctly on tokenvoting's createProposal.
-    // but when it's called on SPP and SPP's condition calls tokenvoting's condition, it will be passing the msg.data of `SPP's createProposal` and not tokenvoting's createProposal data
-    // the signatures are different. This and above todo could all work if sub-condition doesn't do any logic depending on permissionId or data.
     function checkCondition(
         IPermissionCondition _condition,
         address _where,
@@ -236,4 +241,6 @@ abstract contract PowerfulCondition is IPermissionCondition {
     ) public pure returns (uint240) {
         return uint240(condition + (successRuleIndex << 32) + (failureRuleIndex << 64));
     }
+
+    uint256[49] private __gap;
 }
