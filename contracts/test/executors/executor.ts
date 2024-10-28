@@ -219,7 +219,7 @@ describe('Executor', async () => {
     // Provide too little gas so that the last `to.call` fails, but the remaining gas is enough to finish the subsequent operations.
     await expect(
       executor.execute(ZERO_BYTES32, [gasConsumingAction], allowFailureMap, {
-        gasLimit: expectedGas.sub(3200),
+        gasLimit: expectedGas.sub(32000),
       })
     ).to.be.revertedWithCustomError(executor, 'InsufficientGas');
 
@@ -238,7 +238,7 @@ describe('Executor', async () => {
     // Prepare an action array calling `consumeGas` one times.
     const gasConsumingAction = {
       to: gasConsumer.address,
-      data: GasConsumer.interface.encodeFunctionData('consumeGas', [2]),
+      data: GasConsumer.interface.encodeFunctionData('consumeGas', [3]),
       value: 0,
     };
 
@@ -254,7 +254,7 @@ describe('Executor', async () => {
     // Provide too little gas so that the last `to.call` fails, but the remaining gas is enough to finish the subsequent operations.
     await expect(
       executor.execute(ZERO_BYTES32, [gasConsumingAction], allowFailureMap, {
-        gasLimit: expectedGas.sub(10000),
+        gasLimit: expectedGas.sub(10200),
       })
     ).to.be.revertedWithCustomError(executor, 'InsufficientGas');
 
