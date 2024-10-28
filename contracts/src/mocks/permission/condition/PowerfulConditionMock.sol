@@ -2,7 +2,6 @@
 
 pragma solidity ^0.8.8;
 
-import {IDAO} from "../../../dao/IDAO.sol";
 import {PowerfulCondition} from "../../../permission/condition/PowerfulCondition.sol";
 import {DaoAuthorizableUpgradeable} from "../../../permission/auth/DaoAuthorizableUpgradeable.sol";
 
