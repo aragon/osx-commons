@@ -708,7 +708,7 @@ describe('RuledCondition', async () => {
   it(`should return false if operation is NONE`, async () => {
     const {deployer, daoMock, conditionMock} = await loadFixture(fixture);
 
-    let list = [1, 2, 3];
+    const list = [1, 2, 3];
     await conditionMock.updateRules([
       {
         // compare list
@@ -780,7 +780,7 @@ describe('RuledCondition', async () => {
   it(`should return false if id bigger than compare list length`, async () => {
     const {deployer, daoMock, conditionMock} = await loadFixture(fixture);
 
-    let list = [1, 2, 3];
+    const list = [1, 2, 3];
     await conditionMock.updateRules([
       {
         // compare list
