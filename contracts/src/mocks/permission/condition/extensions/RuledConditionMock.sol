@@ -1,13 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 pragma solidity ^0.8.8;
-
-import {PowerfulCondition} from "../../../permission/condition/PowerfulCondition.sol";
-import {DaoAuthorizableUpgradeable} from "../../../permission/auth/DaoAuthorizableUpgradeable.sol";
+import {RuledCondition} from "../../../../permission/condition/extensions/RuledCondition.sol";
+import {DaoAuthorizableUpgradeable} from "../../../../permission/auth/DaoAuthorizableUpgradeable.sol";
 
 /// @notice A mock powerful condition to expose internal functions
 /// @dev DO NOT USE IN PRODUCTION!
-contract PowerfulConditionMock is DaoAuthorizableUpgradeable, PowerfulCondition {
+contract RuledConditionMock is DaoAuthorizableUpgradeable, RuledCondition {
     function updateRules(Rule[] memory _rules) public virtual {
         _updateRules(_rules);
     }

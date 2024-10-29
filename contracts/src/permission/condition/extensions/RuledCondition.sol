@@ -2,8 +2,8 @@
 
 pragma solidity ^0.8.8;
 
-import {IPermissionCondition} from "./IPermissionCondition.sol";
-import {PermissionConditionUpgradeable} from "./PermissionConditionUpgradeable.sol";
+import {IPermissionCondition} from "../IPermissionCondition.sol";
+import {PermissionConditionUpgradeable} from "../PermissionConditionUpgradeable.sol";
 
 /// @title RuledCondition
 /// @author Aragon X - 2024
@@ -218,7 +218,7 @@ abstract contract RuledCondition is PermissionConditionUpgradeable {
     /// @param _permissionId The permission identifier.
     /// @param _compareList A list of values used for comparison in evaluation.
     /// @return Returns `true` if the external condition is granted.
-    function checkCondition(
+    function _checkCondition(
         IPermissionCondition _condition,
         address _where,
         address _who,

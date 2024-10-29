@@ -1,11 +1,11 @@
 import {
-  PowerfulConditionMock,
-  PowerfulConditionMock__factory,
+  RuledConditionMock,
+  RuledConditionMock__factory,
   PermissionConditionMock,
   PermissionConditionMock__factory,
   DAOMock,
   DAOMock__factory,
-} from '../../../typechain';
+} from '../../../../typechain';
 import {
   BLOCK_NUMBER_RULE_ID,
   TIMESTAMP_RULE_ID,
@@ -13,13 +13,13 @@ import {
   LOGIC_OP_RULE_ID,
   DUMMY_PERMISSION_ID,
   Op,
-} from '../../utils/condition/condition';
+} from '../../../utils/condition/condition';
 import {loadFixture} from '@nomicfoundation/hardhat-network-helpers';
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
 
-describe('PowerfulCondition', async () => {
+describe('RuledCondition', async () => {
   it('it should be able to update the condition rules', async () => {
     const {conditionMock} = await loadFixture(fixture);
 
@@ -246,14 +246,14 @@ describe('PowerfulCondition', async () => {
 type FixtureResult = {
   deployer: SignerWithAddress;
   daoMock: DAOMock;
-  conditionMock: PowerfulConditionMock;
+  conditionMock: RuledConditionMock;
   subConditionA: PermissionConditionMock;
   subConditionB: PermissionConditionMock;
   subConditionC: PermissionConditionMock;
 };
 
 function C_or_B_and_A_Rule(
-  conditionMock: PowerfulConditionMock,
+  conditionMock: RuledConditionMock,
   subConditionA: PermissionConditionMock,
   subConditionB: PermissionConditionMock,
   subConditionC: PermissionConditionMock
@@ -297,7 +297,7 @@ async function fixture(): Promise<FixtureResult> {
 
   const daoMock = await new DAOMock__factory(deployer).deploy();
 
-  const conditionMock = await new PowerfulConditionMock__factory(
+  const conditionMock = await new RuledConditionMock__factory(
     deployer
   ).deploy();
 
