@@ -3,14 +3,32 @@
 pragma solidity ^0.8.8;
 
 import {IPermissionCondition} from "./IPermissionCondition.sol";
+import {PermissionConditionUpgradeable} from "./PermissionConditionUpgradeable.sol";
 
-abstract contract PowerfulCondition is IPermissionCondition {
+/// @title RuledCondition
+/// @author Aragon X - 2024
+/// @notice An abstract contract to create conditional permissions using rules.
+abstract contract RuledCondition is PermissionConditionUpgradeable {
+    /// @notice Identifier for a rule based on the current block number.
     uint8 internal constant BLOCK_NUMBER_RULE_ID = 200;
-    uint8 internal constant TIMESTAMP_RULE_ID = 201;
-    uint8 internal constant CONDITION_RULE_ID = 202;
-    uint8 internal constant LOGIC_OP_RULE_ID = 203;
-    uint8 internal constant RULE_VALUE_RULE_ID = 204;
 
+    /// @notice Identifier for a rule based on the current timestamp.
+    uint8 internal constant TIMESTAMP_RULE_ID = 201;
+
+    /// @notice Identifier for a rule that evaluates a condition based on another condition contract.
+    uint8 internal constant CONDITION_RULE_ID = 202;
+
+    /// @notice Identifier for a rule that is based on logical operations (e.g., AND, OR).
+    uint8 internal constant LOGIC_OP_RULE_ID = 203;
+
+    /// @notice Identifier for a rule that involves direct value comparison.
+    uint8 internal constant VALUE_RULE_ID = 204;
+
+    /// @notice Represents a rule used in the condition contract.
+    /// @param id The ID representing the identifier of the rule.
+    /// @param op The operation to apply, as defined in the `Op` enum.
+    /// @param value The value associated with this rule, which could be an address, timestamp, etc.
+    /// @param permissionId The specific permission ID to use for evaluating this rule. If set to `0x`, the passed permission ID will be used.
     struct Rule {
         uint8 id;
         uint8 op;
@@ -18,6 +36,20 @@ abstract contract PowerfulCondition is IPermissionCondition {
         bytes32 permissionId;
     }
 
+    /// @notice Represents various operations that can be performed in a rule.
+    /// @param NONE No operation.
+    /// @param EQ Equal to operation.
+    /// @param NEQ Not equal to operation.
+    /// @param GT Greater than operation.
+    /// @param LT Less than operation.
+    /// @param GTE Greater than or equal to operation.
+    /// @param LTE Less than or equal to operation.
+    /// @param RET Return the evaluation result.
+    /// @param NOT Logical NOT operation.
+    /// @param AND Logical AND operation.
+    /// @param OR Logical OR operation.
+    /// @param XOR Logical XOR operation.
+    /// @param IF_ELSE Conditional evaluation with IF-ELSE logic.
     enum Op {
         NONE,
         EQ,
@@ -32,14 +64,27 @@ abstract contract PowerfulCondition is IPermissionCondition {
         OR,
         XOR,
         IF_ELSE
-    } // op types
+    }
 
+    /// @notice A set of rules that will be used in the evaluation process.
     Rule[] private rules;
 
+    /// @inheritdoc PermissionConditionUpgradeable
+    function supportsInterface(bytes4 _interfaceId) public view virtual override returns (bool) {
+        return
+            _interfaceId == type(RuledCondition).interfaceId ||
+            super.supportsInterface(_interfaceId);
+    }
+
+    /// @notice Retrieves all the rules stored in this contract.
+    /// @return An array of `Rule` structs representing the defined rules.
     function getRules() public view virtual returns (Rule[] memory) {
         return rules;
     }
 
+    /// @notice Updates the set of rules stored in the contract.
+    /// @dev This function deletes the current set of rules and replaces it with a new one.
+    /// @param _rules An new array of `Rule` structs to replace the current set of rules.
     function _updateRules(Rule[] memory _rules) internal virtual {
         delete rules;
 
@@ -51,6 +96,13 @@ abstract contract PowerfulCondition is IPermissionCondition {
         }
     }
 
+    /// @notice Evaluates a rule by its index.
+    /// @param _ruleIndex The index of the rule to evaluate.
+    /// @param _where The address of the target contract.
+    /// @param _who The address (EOA or contract) for which the permissions are checked.
+    /// @param _permissionId The permission identifier.
+    /// @param _compareList A list of values used for comparison.
+    /// @return Returns `true` if the rule passes.
     function _evalRule(
         uint32 _ruleIndex,
         address _where,
@@ -84,7 +136,7 @@ abstract contract PowerfulCondition is IPermissionCondition {
             value = block.number;
         } else if (rule.id == TIMESTAMP_RULE_ID) {
             value = block.timestamp;
-        } else if (rule.id == RULE_VALUE_RULE_ID) {
+        } else if (rule.id == VALUE_RULE_ID) {
             value = uint256(rule.value);
         } else {
             if (rule.id >= _compareList.length) {
@@ -100,6 +152,13 @@ abstract contract PowerfulCondition is IPermissionCondition {
         return compare(value, Op(rule.op), comparedTo);
     }
 
+    /// @notice Evaluates logical operations.
+    /// @param _rule The rule containing the logical operation.
+    /// @param _where The address of the target contract.
+    /// @param _who The address (EOA or contract) for which the permissions are checked.
+    /// @param _permissionId The permission identifier.
+    /// @param _compareList A list of values used for comparison in evaluation.
+    /// @return Returns `true` if the logic evaluates to true.
     function _evalLogic(
         Rule memory _rule,
         address _where,
@@ -152,13 +211,13 @@ abstract contract PowerfulCondition is IPermissionCondition {
         return r2; // both or and and depend on result of r2 after checks
     }
 
-    // TODO: when this condition will call other sub-conditions, passing `permissionId` is of no importance and sub-condition might be needing the correct permissionId
-    // especially when it also works good with standalone another contract (such as tokenvoting's condition working on tokenvoting's createProposal), and if SPP's condition
-    // calls this tokenvoting's condition, then ? maybe storing the `permissionId` as well in `Rule` as well seems good ? increases the storage but still.
-
-    // Also, tokenvoting's condition separately might be focusing on the `msg.data` that is passed correctly when it's called correctly on tokenvoting's createProposal.
-    // but when it's called on SPP and SPP's condition calls tokenvoting's condition, it will be passing the msg.data of `SPP's createProposal` and not tokenvoting's createProposal data
-    // the signatures are different. This and above todo could all work if sub-condition doesn't do any logic depending on permissionId or data.
+    /// @notice Checks an external condition.
+    /// @param _condition The address of the external condition.
+    /// @param _where The address of the target contract.
+    /// @param _who The address (EOA or contract) for which the permissions are checked.
+    /// @param _permissionId The permission identifier.
+    /// @param _compareList A list of values used for comparison in evaluation.
+    /// @return Returns `true` if the external condition is granted.
     function checkCondition(
         IPermissionCondition _condition,
         address _where,
@@ -213,6 +272,11 @@ abstract contract PowerfulCondition is IPermissionCondition {
         return result;
     }
 
+    /// @notice Compares two values based on the specified operation.
+    /// @param _a The first value to compare.
+    /// @param _op The operation to use for comparison.
+    /// @param _b The second value to compare.
+    /// @return Returns `true` if the comparison holds true.
     function compare(uint256 _a, Op _op, uint256 _b) internal pure returns (bool) {
         if (_op == Op.EQ) return _a == _b;
         if (_op == Op.NEQ) return _a != _b;
@@ -223,17 +287,30 @@ abstract contract PowerfulCondition is IPermissionCondition {
         return false;
     }
 
+    /// @notice Encodes rule indices into a uint240 value.
+    /// @param startingRuleIndex The index of the starting rule to evaluate.
+    /// @param successRuleIndex The index of the rule to evaluate if the condition is true.
+    /// @param failureRuleIndex The index of the rule to evaluate if the condition is false.
+    /// @return The encoded value combining all three inputs.
+    function encodeRuleValue(
+        uint256 startingRuleIndex,
+        uint256 successRuleIndex,
+        uint256 failureRuleIndex
+    ) public pure returns (uint240) {
+        return uint240(startingRuleIndex + (successRuleIndex << 32) + (failureRuleIndex << 64));
+    }
+
+    /// @notice Decodes rule indices  into three uint32.
+    /// @param _x The value to decode.
+    /// @return a The first 32-bit segment.
+    /// @return b The second 32-bit segment.
+    /// @return c The third 32-bit segment.
     function decodeRuleValue(uint256 _x) public pure returns (uint32 a, uint32 b, uint32 c) {
         a = uint32(_x);
         b = uint32(_x >> (8 * 4));
         c = uint32(_x >> (8 * 8));
     }
 
-    function encodeRuleValue(
-        uint256 condition,
-        uint256 successRuleIndex,
-        uint256 failureRuleIndex
-    ) public pure returns (uint240) {
-        return uint240(condition + (successRuleIndex << 32) + (failureRuleIndex << 64));
-    }
+    /// @notice This empty reserved space is put in place to allow future versions to add new variables without shifting down storage in the inheritance chain (see [OpenZeppelin's guide about storage gaps](https://docs.openzeppelin.com/contracts/4.x/upgradeable#storage_gaps)).
+    uint256[49] private __gap;
 }
