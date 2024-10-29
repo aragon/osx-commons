@@ -3,7 +3,6 @@
 pragma solidity ^0.8.8;
 
 import {IExecutor, Action} from "../../executors/Executor.sol";
-import "hardhat/console.sol";
 
 /// @notice A dummy contract to test if Executor can successfully execute an action.
 contract ActionExecute {
