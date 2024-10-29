@@ -15,8 +15,11 @@ contract RuledConditionMock is DaoAuthorizableUpgradeable, RuledCondition {
         address _where,
         address _who,
         bytes32 _permissionId,
-        bytes calldata
+        bytes calldata data
     ) external view override returns (bool isPermitted) {
-        return _evalRule(0, _where, _who, _permissionId, new uint256[](0));
+        uint256[] memory _compareList = data.length == 0
+            ? new uint256[](0)
+            : abi.decode(data, (uint256[]));
+        return _evalRule(0, _where, _who, _permissionId, _compareList);
     }
 }
