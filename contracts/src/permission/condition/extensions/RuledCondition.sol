@@ -76,13 +76,13 @@ abstract contract RuledCondition is PermissionConditionUpgradeable {
             super.supportsInterface(_interfaceId);
     }
 
-    /// @notice Retrieves all the rules stored in this contract.
-    /// @return An array of `Rule` structs representing the defined rules.
+    /// @notice Retrieves the current rules stored in this contract.
+    /// @return An array of `Rule` structs representing the currently defined rules.
     function getRules() public view virtual returns (Rule[] memory) {
         return rules;
     }
 
-    /// @notice Updates the set of rules stored in the contract.
+    /// @notice Updates the set of rules.
     /// @dev This function deletes the current set of rules and replaces it with a new one.
     /// @param _rules An new array of `Rule` structs to replace the current set of rules.
     function _updateRules(Rule[] memory _rules) internal virtual {
@@ -149,7 +149,7 @@ abstract contract RuledCondition is PermissionConditionUpgradeable {
             return uint256(value) > 0;
         }
 
-        return _compare(value, Op(rule.op), comparedTo);
+        return _compare(value, comparedTo, Op(rule.op));
     }
 
     /// @notice Evaluates logical operations.
@@ -275,7 +275,12 @@ abstract contract RuledCondition is PermissionConditionUpgradeable {
         return result;
     }
 
-    function _compare(uint256 _a, Op _op, uint256 _b) internal pure returns (bool) {
+    /// @notice Compares two values based on the specified operation.
+    /// @param _a The first value to compare.
+    /// @param _b The second value to compare.
+    /// @param _op The operation to use for comparison.
+    /// @return Returns `true` if the comparison holds true.
+    function _compare(uint256 _a, uint256 _b, Op _op) internal pure returns (bool) {
         if (_op == Op.EQ) return _a == _b;
         if (_op == Op.NEQ) return _a != _b;
         if (_op == Op.GT) return _a > _b;
@@ -287,10 +292,10 @@ abstract contract RuledCondition is PermissionConditionUpgradeable {
 
     /// @notice Encodes rule indices into a uint240 value.
     /// @param startingRuleIndex The index of the starting rule to evaluate.
-    /// @param successRuleIndex The index of the rule to evaluate if the condition is true.
-    /// @param failureRuleIndex The index of the rule to evaluate if the condition is false.
+    /// @param successRuleIndex The index of the rule to evaluate if the evaluation of `startingRuleIndex` was true.
+    /// @param failureRuleIndex The index of the rule to evaluate if the evaluation of `startingRuleIndex` was false.
     /// @return The encoded value combining all three inputs.
-    function encodeRuleValue(
+    function encodeIfElse(
         uint256 startingRuleIndex,
         uint256 successRuleIndex,
         uint256 failureRuleIndex
@@ -298,7 +303,17 @@ abstract contract RuledCondition is PermissionConditionUpgradeable {
         return uint240(startingRuleIndex + (successRuleIndex << 32) + (failureRuleIndex << 64));
     }
 
-    /// @notice Decodes rule indices  into three uint32.
+    /// @notice Encodes two rule indexes into a uint240 value. Useful for logical operators such as `AND/OR/XOR` and others.
+    /// @param ruleIndex1 The first index to evaluate.
+    /// @param ruleIndex2 The second index to evaluate.
+    function encodeLogicalOperator(
+        uint256 ruleIndex1,
+        uint256 ruleIndex2
+    ) public pure returns (uint240) {
+        return uint240(ruleIndex1 + (ruleIndex2 << 32));
+    }
+
+    /// @notice Decodes rule indices into three uint32.
     /// @param _x The value to decode.
     /// @return a The first 32-bit segment.
     /// @return b The second 32-bit segment.

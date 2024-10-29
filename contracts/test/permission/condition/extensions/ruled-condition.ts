@@ -13,6 +13,7 @@ import {
   LOGIC_OP_RULE_ID,
   DUMMY_PERMISSION_ID,
   Op,
+  RULE_VALUE_RULE_ID,
 } from '../../../utils/condition/condition';
 import {loadFixture} from '@nomicfoundation/hardhat-network-helpers';
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
@@ -20,7 +21,7 @@ import {expect} from 'chai';
 import {ethers} from 'hardhat';
 
 describe('RuledCondition', async () => {
-  it('it should be able to update the condition rules', async () => {
+  it('should be able to update the condition rules', async () => {
     const {conditionMock} = await loadFixture(fixture);
 
     await conditionMock.updateRules([
@@ -40,10 +41,19 @@ describe('RuledCondition', async () => {
     expect(rules[0].permissionId).to.equal(DUMMY_PERMISSION_ID);
   });
 
-  it('it should be able to eval simple rule (evaluation is true)', async () => {
+  it('should be able to eval simple rule (evaluation is true)', async () => {
     const {deployer, daoMock, conditionMock, subConditionA} = await loadFixture(
       fixture
     );
+
+    await expect(
+      conditionMock.isGranted(
+        daoMock.address,
+        deployer.address,
+        DUMMY_PERMISSION_ID,
+        '0x'
+      )
+    ).to.be.reverted;
 
     // configure a simple rule in the condition
     await conditionMock.updateRules([
@@ -68,7 +78,7 @@ describe('RuledCondition', async () => {
     ).to.be.true;
   });
 
-  it('it should be able to eval simple rule (evaluation is false)', async () => {
+  it('should be able to eval simple rule (evaluation is false)', async () => {
     const {deployer, daoMock, conditionMock, subConditionA} = await loadFixture(
       fixture
     );
@@ -93,7 +103,7 @@ describe('RuledCondition', async () => {
     ).to.be.false;
   });
 
-  it('it should be able to eval complex rule (evaluation is true)', async () => {
+  it('should be able to eval complex rule (evaluation is true)', async () => {
     const {
       deployer,
       daoMock,
@@ -128,7 +138,7 @@ describe('RuledCondition', async () => {
     ).to.be.true;
   });
 
-  it('it should be able to eval complex rule (evaluation is false)', async () => {
+  it('should be able to eval complex rule (evaluation is false)', async () => {
     const {
       deployer,
       daoMock,
@@ -162,7 +172,50 @@ describe('RuledCondition', async () => {
     ).to.be.false;
   });
 
-  it('it should be able to eval rule that checks blockNumber', async () => {
+  it(`evaluates 'if/else' on sub-conditions and only returns true if at least one of them returns true`, async () => {
+    const {deployer, daoMock, subConditionA, subConditionB, conditionMock} =
+      await loadFixture(fixture);
+
+    // checks the block number is bigger or equal than 1
+    await conditionMock.updateRules(
+      ifAelseB(conditionMock, subConditionA, subConditionB)
+    );
+
+    // since both sub-conditions return false, our condition also returns false.
+    expect(
+      await conditionMock.isGranted(
+        daoMock.address,
+        deployer.address,
+        DUMMY_PERMISSION_ID,
+        '0x'
+      )
+    ).to.be.false;
+
+    // This now must return true because `if` condition is true.
+    await subConditionA.setAnswer(true);
+    expect(
+      await conditionMock.isGranted(
+        daoMock.address,
+        deployer.address,
+        DUMMY_PERMISSION_ID,
+        '0x'
+      )
+    ).to.be.true;
+
+    // This now must return true because `else` condition is true.
+    await subConditionA.setAnswer(false);
+    await subConditionB.setAnswer(true);
+    expect(
+      await conditionMock.isGranted(
+        daoMock.address,
+        deployer.address,
+        DUMMY_PERMISSION_ID,
+        '0x'
+      )
+    ).to.be.true;
+  });
+
+  it('should be able to eval rule that checks blockNumber', async () => {
     const {deployer, daoMock, conditionMock} = await loadFixture(fixture);
 
     // checks the block number is bigger or equal than 1
@@ -202,7 +255,7 @@ describe('RuledCondition', async () => {
     ).to.be.false;
   });
 
-  it('it should be able to eval rule that checks timestamp', async () => {
+  it('should be able to eval rule that checks timestamp', async () => {
     const {deployer, daoMock, conditionMock} = await loadFixture(fixture);
 
     // checks the timestamp is bigger or equal than 1
@@ -252,6 +305,39 @@ type FixtureResult = {
   subConditionC: PermissionConditionMock;
 };
 
+function ifAelseB(
+  conditionMock: RuledConditionMock,
+  subConditionA: PermissionConditionMock,
+  subConditionB: PermissionConditionMock
+) {
+  return [
+    {
+      id: LOGIC_OP_RULE_ID,
+      op: Op.IF_ELSE,
+      value: conditionMock.encodeIfElse(1, 2, 3),
+      permissionId: DUMMY_PERMISSION_ID,
+    },
+    {
+      id: CONDITION_RULE_ID,
+      op: Op.EQ,
+      value: subConditionA.address,
+      permissionId: DUMMY_PERMISSION_ID,
+    },
+    {
+      id: RULE_VALUE_RULE_ID,
+      op: Op.RET,
+      value: 1,
+      permissionId: DUMMY_PERMISSION_ID,
+    },
+    {
+      id: CONDITION_RULE_ID,
+      op: Op.EQ,
+      value: subConditionB.address,
+      permissionId: DUMMY_PERMISSION_ID,
+    },
+  ];
+}
+
 function C_or_B_and_A_Rule(
   conditionMock: RuledConditionMock,
   subConditionA: PermissionConditionMock,
@@ -262,7 +348,7 @@ function C_or_B_and_A_Rule(
     {
       id: LOGIC_OP_RULE_ID,
       op: Op.OR,
-      value: conditionMock.encodeRuleValue(1, 2, 3), // indx 1 and idx 2 encoded
+      value: conditionMock.encodeLogicalOperator(1, 2), // indx 1 and indx 2 encoded
       permissionId: DUMMY_PERMISSION_ID,
     },
     {
@@ -274,7 +360,7 @@ function C_or_B_and_A_Rule(
     {
       id: LOGIC_OP_RULE_ID,
       op: Op.AND,
-      value: conditionMock.encodeRuleValue(3, 4, 5), // indx 3 and idx 4 encoded
+      value: conditionMock.encodeLogicalOperator(3, 4), // indx 3 and indx 4 encoded
       permissionId: DUMMY_PERMISSION_ID,
     },
     {
