@@ -6,6 +6,7 @@ import {
   DAOMock,
   DAOMock__factory,
 } from '../../../../typechain';
+import {RulesUpdatedEvent} from '../../../../typechain/src/permission/condition/extensions/RuledCondition';
 import {
   BLOCK_NUMBER_RULE_ID,
   TIMESTAMP_RULE_ID,
@@ -15,22 +16,33 @@ import {
   Op,
   RULE_VALUE_RULE_ID,
 } from '../../../utils/condition/condition';
+import {findEvent} from '@aragon/osx-commons-sdk';
 import {loadFixture} from '@nomicfoundation/hardhat-network-helpers';
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
 
 describe('RuledCondition', async () => {
-  it('should be able to update the condition rules', async () => {
+  it('updates the rules and emits the event', async () => {
     const {conditionMock} = await loadFixture(fixture);
 
-    await conditionMock.updateRules([
+    const newRules = [
       {
         id: CONDITION_RULE_ID,
         op: Op.EQ,
         value: 777,
         permissionId: DUMMY_PERMISSION_ID,
       },
+    ];
+    const tx = await conditionMock.updateRules(newRules);
+    const event = findEvent<RulesUpdatedEvent>(await tx.wait(), 'RulesUpdated');
+    expect(event.args.rules).to.deep.equal([
+      [
+        newRules[0].id,
+        newRules[0].op,
+        newRules[0].value,
+        newRules[0].permissionId,
+      ],
     ]);
 
     const rules = await conditionMock.getRules();

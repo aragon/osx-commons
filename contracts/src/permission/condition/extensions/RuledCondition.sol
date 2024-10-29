@@ -24,6 +24,10 @@ abstract contract RuledCondition is PermissionConditionUpgradeable {
     /// @notice Identifier for a rule that involves direct value comparison.
     uint8 internal constant VALUE_RULE_ID = 204;
 
+    /// @notice Emitted when the rules are updated.
+    /// @param rules The new rules that replaces old rules.
+    event RulesUpdated(Rule[] rules);
+
     /// @notice Represents a rule used in the condition contract.
     /// @param id The ID representing the identifier of the rule.
     /// @param op The operation to apply, as defined in the `Op` enum.
@@ -94,6 +98,8 @@ abstract contract RuledCondition is PermissionConditionUpgradeable {
                 ++i;
             }
         }
+
+        emit RulesUpdated(_rules);
     }
 
     /// @notice Evaluates a rule by its index.
