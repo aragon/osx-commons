@@ -15,6 +15,7 @@ contract Executor is IExecutor {
     uint256 internal constant MAX_ACTIONS = 256;
 
     // keccak256("osx-commons.storage.Executor")
+    // solhint-disable-next-line const-name-snakecase
     bytes32 private constant ReentrancyGuardStorageLocation =
         0x4d6542319dfb3f7c8adbb488d7b4d7cf849381f14faf4b64de3ac05d08c0bdec;
 
@@ -120,6 +121,7 @@ contract Executor is IExecutor {
     /// @notice Gets the current reentrancy status.
     /// @return status This returns the current reentrancy status.
     function _getReentrancyStatus() private view returns (uint256 status) {
+        // solhint-disable-next-line no-inline-assembly
         assembly {
             status := sload(ReentrancyGuardStorageLocation)
         }
@@ -127,6 +129,7 @@ contract Executor is IExecutor {
 
     /// @notice Stores the reentrancy status on a specific slot.
     function _storeReentrancyStatus(uint256 _status) private {
+        // solhint-disable-next-line no-inline-assembly
         assembly {
             sstore(ReentrancyGuardStorageLocation, _status)
         }

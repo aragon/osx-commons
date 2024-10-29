@@ -4,7 +4,7 @@ pragma solidity ^0.8.8;
 
 import {Plugin} from "../../plugin/Plugin.sol";
 import {IDAO} from "../../dao/IDAO.sol";
-import {IExecutor, Action} from "../../executors/IExecutor.sol";
+import {Action} from "../../executors/IExecutor.sol";
 
 /// @notice A mock plugin to be deployed via the `new` keyword.
 /// v1.1 (Release 1, Build 1)

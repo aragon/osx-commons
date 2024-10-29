@@ -6,14 +6,15 @@ import {IExecutor, Action} from "../../executors/Executor.sol";
 
 /// @notice A dummy contract to test if Executor can successfully execute an action.
 contract ActionExecute {
-    uint num = 10;
+    uint256 internal _num = 10;
 
-    function setTest(uint newNum) public returns (uint) {
-        num = newNum;
-        return num;
+    function setTest(uint256 newNum) public returns (uint256) {
+        _num = newNum;
+        return _num;
     }
 
     function fail() public pure {
+        // solhint-disable-next-line reason-string, custom-errors
         revert("ActionExecute:Revert");
     }
 

@@ -5,7 +5,7 @@ pragma solidity ^0.8.8;
 
 import {PluginUUPSUpgradeable} from "../../plugin/PluginUUPSUpgradeable.sol";
 import {IDAO} from "../../dao/IDAO.sol";
-import {IExecutor, Action} from "../../executors/IExecutor.sol";
+import {Action} from "../../executors/IExecutor.sol";
 
 /// @notice A mock upgradeable plugin to be deployed via the UUPS proxy pattern.
 /// v1.1 (Release 1, Build 1)
