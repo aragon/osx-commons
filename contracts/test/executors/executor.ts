@@ -3,9 +3,11 @@ import {
   Executor,
   Executor__factory,
   GasConsumer__factory,
+  IExecutor__factory,
 } from '../../typechain';
 import {ExecutedEvent} from '../../typechain/src/executors/Executor';
-import {findEvent, flipBit} from '@aragon/osx-commons-sdk';
+import {erc165ComplianceTests} from '../helpers';
+import {findEvent, flipBit, getInterfaceId} from '@aragon/osx-commons-sdk';
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
@@ -21,7 +23,7 @@ const EventExecuted = 'Executed';
 export async function getActions() {
   const signers = await ethers.getSigners();
   const ActionExecuteFactory = new ActionExecute__factory(signers[0]);
-  let ActionExecute = await ActionExecuteFactory.deploy();
+  const ActionExecute = await ActionExecuteFactory.deploy();
   const iface = new ethers.utils.Interface(ActionExecute__factory.abi);
 
   const num = 20;
@@ -62,8 +64,22 @@ describe('Executor', async () => {
     executor = await new Executor__factory(signers[0]).deploy();
   });
 
+  describe('ERC-165', async () => {
+    it('supports the `ERC-165` standard', async () => {
+      await erc165ComplianceTests(executor, signers[0]);
+    });
+
+    it('supports the `IExecutor` interface', async () => {
+      expect(
+        await executor.supportsInterface(
+          getInterfaceId(IExecutor__factory.createInterface())
+        )
+      ).to.be.true;
+    });
+  });
+
   it('reverts if array of actions is too big', async () => {
-    let actions = [];
+    const actions = [];
     for (let i = 0; i < MAX_ACTIONS; i++) {
       actions[i] = data.succeedAction;
     }
@@ -88,9 +104,9 @@ describe('Executor', async () => {
     // Allow the call to fail so we can get the error message
     // in the `execResults`, otherwise with allowFailureMap = 0,
     // it fails with `ActionFailed` even though reentrancy worked correctly.
-    let allowFailureMap = flipBit(0, ethers.BigNumber.from(0));
+    const allowFailureMap = flipBit(0, ethers.BigNumber.from(0));
 
-    let tx = await executor.execute(
+    const tx = await executor.execute(
       ZERO_BYTES32,
       [data.reentrancyAction],
       allowFailureMap
@@ -129,7 +145,7 @@ describe('Executor', async () => {
 
   it('succeeds and correctly constructs failureMap results ', async () => {
     let allowFailureMap = ethers.BigNumber.from(0);
-    let actions = [];
+    const actions = [];
 
     // First 3 actions will fail
     actions[0] = data.failAction;
@@ -148,8 +164,8 @@ describe('Executor', async () => {
     }
 
     // If the below call not fails, means allowFailureMap is correct.
-    let tx = await executor.execute(ZERO_BYTES32, actions, allowFailureMap);
-    let event = findEvent<ExecutedEvent>(await tx.wait(), EventExecuted);
+    const tx = await executor.execute(ZERO_BYTES32, actions, allowFailureMap);
+    const event = findEvent<ExecutedEvent>(await tx.wait(), EventExecuted);
 
     expect(event.args.actor).to.equal(ownerAddress);
     expect(event.args.callId).to.equal(ZERO_BYTES32);
@@ -219,7 +235,7 @@ describe('Executor', async () => {
     // Provide too little gas so that the last `to.call` fails, but the remaining gas is enough to finish the subsequent operations.
     await expect(
       executor.execute(ZERO_BYTES32, [gasConsumingAction], allowFailureMap, {
-        gasLimit: expectedGas.sub(3200),
+        gasLimit: expectedGas.sub(32000),
       })
     ).to.be.revertedWithCustomError(executor, 'InsufficientGas');
 
@@ -238,7 +254,7 @@ describe('Executor', async () => {
     // Prepare an action array calling `consumeGas` one times.
     const gasConsumingAction = {
       to: gasConsumer.address,
-      data: GasConsumer.interface.encodeFunctionData('consumeGas', [2]),
+      data: GasConsumer.interface.encodeFunctionData('consumeGas', [3]),
       value: 0,
     };
 
@@ -254,7 +270,7 @@ describe('Executor', async () => {
     // Provide too little gas so that the last `to.call` fails, but the remaining gas is enough to finish the subsequent operations.
     await expect(
       executor.execute(ZERO_BYTES32, [gasConsumingAction], allowFailureMap, {
-        gasLimit: expectedGas.sub(10000),
+        gasLimit: expectedGas.sub(10200),
       })
     ).to.be.revertedWithCustomError(executor, 'InsufficientGas');
 

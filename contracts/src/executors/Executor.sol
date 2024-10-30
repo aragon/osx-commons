@@ -2,6 +2,8 @@
 
 pragma solidity ^0.8.8;
 
+import {ERC165} from "@openzeppelin/contracts/utils/introspection/ERC165.sol";
+
 import {IExecutor, Action} from "./IExecutor.sol";
 import {flipBit, hasBit} from "../utils/math/BitMap.sol";
 
@@ -10,12 +12,12 @@ import {flipBit, hasBit} from "../utils/math/BitMap.sol";
 /// Most useful use-case is to deploy as non-upgradeable and call from another contract via delegatecall.
 /// If used with delegatecall, DO NOT add state variables in sequential slots, otherwise this will overwrite
 /// the storage of the calling contract.
-contract Executor is IExecutor {
+contract Executor is IExecutor, ERC165 {
     /// @notice The internal constant storing the maximal action array length.
     uint256 internal constant MAX_ACTIONS = 256;
 
     // keccak256("osx-commons.storage.Executor")
-    bytes32 private constant ReentrancyGuardStorageLocation =
+    bytes32 private constant REENTRANCY_GUARD_STORAGE_LOCATION =
         0x4d6542319dfb3f7c8adbb488d7b4d7cf849381f14faf4b64de3ac05d08c0bdec;
 
     /// @notice The first out of two values to which the `_reentrancyStatus` state variable (used by the `nonReentrant` modifier) can be set indicating that a function was not entered.
@@ -51,6 +53,13 @@ contract Executor is IExecutor {
         _;
 
         _storeReentrancyStatus(_NOT_ENTERED);
+    }
+
+    /// @notice Checks if this or the parent contract supports an interface by its ID.
+    /// @param _interfaceId The ID of the interface.
+    /// @return Returns `true` if the interface is supported.
+    function supportsInterface(bytes4 _interfaceId) public view virtual override returns (bool) {
+        return _interfaceId == type(IExecutor).interfaceId || super.supportsInterface(_interfaceId);
     }
 
     /// @inheritdoc IExecutor
@@ -120,15 +129,17 @@ contract Executor is IExecutor {
     /// @notice Gets the current reentrancy status.
     /// @return status This returns the current reentrancy status.
     function _getReentrancyStatus() private view returns (uint256 status) {
+        // solhint-disable-next-line no-inline-assembly
         assembly {
-            status := sload(ReentrancyGuardStorageLocation)
+            status := sload(REENTRANCY_GUARD_STORAGE_LOCATION)
         }
     }
 
     /// @notice Stores the reentrancy status on a specific slot.
     function _storeReentrancyStatus(uint256 _status) private {
+        // solhint-disable-next-line no-inline-assembly
         assembly {
-            sstore(ReentrancyGuardStorageLocation, _status)
+            sstore(REENTRANCY_GUARD_STORAGE_LOCATION, _status)
         }
     }
 }
