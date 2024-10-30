@@ -2,9 +2,10 @@
 
 pragma solidity ^0.8.8;
 
+import {ERC165} from "@openzeppelin/contracts/utils/introspection/ERC165.sol";
+
 import {IExecutor, Action} from "./IExecutor.sol";
 import {flipBit, hasBit} from "../utils/math/BitMap.sol";
-import {ERC165} from "@openzeppelin/contracts/utils/introspection/ERC165.sol";
 
 /// @notice Simple Executor that loops through the actions and executes them.
 /// @dev This doesn't use any type of permission for execution and can be called by anyone.
@@ -16,8 +17,7 @@ contract Executor is IExecutor, ERC165 {
     uint256 internal constant MAX_ACTIONS = 256;
 
     // keccak256("osx-commons.storage.Executor")
-    // solhint-disable-next-line const-name-snakecase
-    bytes32 private constant ReentrancyGuardStorageLocation =
+    bytes32 private constant REENTRANCY_GUARD_STORAGE_LOCATION =
         0x4d6542319dfb3f7c8adbb488d7b4d7cf849381f14faf4b64de3ac05d08c0bdec;
 
     /// @notice The first out of two values to which the `_reentrancyStatus` state variable (used by the `nonReentrant` modifier) can be set indicating that a function was not entered.
@@ -131,7 +131,7 @@ contract Executor is IExecutor, ERC165 {
     function _getReentrancyStatus() private view returns (uint256 status) {
         // solhint-disable-next-line no-inline-assembly
         assembly {
-            status := sload(ReentrancyGuardStorageLocation)
+            status := sload(REENTRANCY_GUARD_STORAGE_LOCATION)
         }
     }
 
@@ -139,7 +139,7 @@ contract Executor is IExecutor, ERC165 {
     function _storeReentrancyStatus(uint256 _status) private {
         // solhint-disable-next-line no-inline-assembly
         assembly {
-            sstore(ReentrancyGuardStorageLocation, _status)
+            sstore(REENTRANCY_GUARD_STORAGE_LOCATION, _status)
         }
     }
 }
