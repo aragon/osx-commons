@@ -3,9 +3,11 @@ import {
   Executor,
   Executor__factory,
   GasConsumer__factory,
+  IExecutor__factory,
 } from '../../typechain';
 import {ExecutedEvent} from '../../typechain/src/executors/Executor';
-import {findEvent, flipBit} from '@aragon/osx-commons-sdk';
+import {erc165ComplianceTests} from '../helpers';
+import {findEvent, flipBit, getInterfaceId} from '@aragon/osx-commons-sdk';
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers';
 import {expect} from 'chai';
 import {ethers} from 'hardhat';
@@ -60,6 +62,20 @@ describe('Executor', async () => {
     ownerAddress = await signers[0].getAddress();
 
     executor = await new Executor__factory(signers[0]).deploy();
+  });
+
+  describe('ERC-165', async () => {
+    it('supports the `ERC-165` standard', async () => {
+      await erc165ComplianceTests(executor, signers[0]);
+    });
+
+    it('supports the `IExecutor` interface', async () => {
+      expect(
+        await executor.supportsInterface(
+          getInterfaceId(IExecutor__factory.createInterface())
+        )
+      ).to.be.true;
+    });
   });
 
   it('reverts if array of actions is too big', async () => {

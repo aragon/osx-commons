@@ -4,13 +4,14 @@ pragma solidity ^0.8.8;
 
 import {IExecutor, Action} from "./IExecutor.sol";
 import {flipBit, hasBit} from "../utils/math/BitMap.sol";
+import {ERC165} from "@openzeppelin/contracts/utils/introspection/ERC165.sol";
 
 /// @notice Simple Executor that loops through the actions and executes them.
 /// @dev This doesn't use any type of permission for execution and can be called by anyone.
 /// Most useful use-case is to deploy as non-upgradeable and call from another contract via delegatecall.
 /// If used with delegatecall, DO NOT add state variables in sequential slots, otherwise this will overwrite
 /// the storage of the calling contract.
-contract Executor is IExecutor {
+contract Executor is IExecutor, ERC165 {
     /// @notice The internal constant storing the maximal action array length.
     uint256 internal constant MAX_ACTIONS = 256;
 
@@ -52,6 +53,13 @@ contract Executor is IExecutor {
         _;
 
         _storeReentrancyStatus(_NOT_ENTERED);
+    }
+
+    /// @notice Checks if this or the parent contract supports an interface by its ID.
+    /// @param _interfaceId The ID of the interface.
+    /// @return Returns `true` if the interface is supported.
+    function supportsInterface(bytes4 _interfaceId) public view virtual override returns (bool) {
+        return _interfaceId == type(IExecutor).interfaceId || super.supportsInterface(_interfaceId);
     }
 
     /// @inheritdoc IExecutor
