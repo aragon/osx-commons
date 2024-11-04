@@ -20,7 +20,7 @@ contract ProposalMock is Proposal {
         bytes memory
     ) external returns (uint256 proposalId) {}
 
-    function canExecute(uint256 proposalId) external view returns (bool) {}
+    function hasSucceeded(uint256 proposalId) external view returns (bool) {}
 
     function customProposalParamsABI() external view returns (string memory) {}
 }

@@ -46,10 +46,11 @@ interface IProposal {
         bytes memory data
     ) external returns (uint256 proposalId);
 
-    /// @notice Whether proposal can be executed or not.
+    /// @notice Whether proposal succeeded or not.
+    /// @dev Note that this must not include time window checks and only make a decision based on the thresholds.
     /// @param proposalId The id of the proposal.
-    /// @return bool Returns if proposal can be executed or not.
-    function canExecute(uint256 proposalId) external view returns (bool);
+    /// @return bool Returns if proposal has been succeeded or not without including time window checks.
+    function hasSucceeded(uint256 proposalId) external view returns (bool);
 
     /// @notice The human-readable abi format for extra params included in `data` of `createProposal`.
     /// @dev Used for UI to easily detect what extra params the contract expects.
