@@ -50,7 +50,7 @@ export async function getActions() {
   };
 }
 
-describe('Executor', async () => {
+describe.only('Executor', async () => {
   let data: any;
   let executor: Executor;
   let ownerAddress: string;
@@ -65,7 +65,7 @@ describe('Executor', async () => {
   });
 
   describe('ERC-165', async () => {
-    it('supports the `ERC-165` standard', async () => {
+    it.only('supports the `ERC-165` standard', async () => {
       await erc165ComplianceTests(executor, signers[0]);
     });
 

@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Use [OpenZepplin v4.9.6](https://github.com/OpenZeppelin/openzeppelin-contracts/releases/tag/v4.9.6).
-- Updated hardhat configuration to use the `commons- config` networks.
+- Updated hardhat configuration to use the `commons-config` networks.
 
 ## v1.4.0
 
