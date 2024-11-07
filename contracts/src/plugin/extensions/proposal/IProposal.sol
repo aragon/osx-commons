@@ -54,7 +54,7 @@ interface IProposal {
 
     /// @notice Executes a proposal.
     /// @param proposalId The ID of the proposal to be executed.
-    function execute(uint256 proposalId) external view;
+    function execute(uint256 proposalId) external;
 
     /// @notice The human-readable abi format for extra params included in `data` of `createProposal`.
     /// @dev Used for UI to easily detect what extra params the contract expects.
