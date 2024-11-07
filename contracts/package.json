@@ -2,7 +2,7 @@
   "name": "@aragon/osx-commons-contracts",
   "license": "AGPL-3.0-or-later",
   "description": "The Aragon OSx contracts package containing common utilities",
-  "version": "1.4.0-alpha.5",
+  "version": "v1.4.0-alpha.6",
   "author": {
     "name": "aragon",
     "url": "https://github.com/aragon"

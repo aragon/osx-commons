@@ -7,12 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [UPCOMING]
 
+## v1.4.0-alpha.6
+
 ### Added
+- `Executor` contract, simple executor that loops through the actions and executes them.
+- `RuledCondition`  abstract contract that allows to create conditional permissions using rules.
+- `currentTargetConfig` configuration to the `Plugin` it allows the plugins to execute through the Dao or the configured target.
+- Included in the `IProposal` interface the functions `createProposal` `hasSucceeded` and `customProposalParamsABI`.
+- `MetadataExtension` and `MetadataExtensionUpgradeable` abstract contracts that allows metadata set up at plugin level.
 
 ### Changed
-
 - Use [OpenZepplin v4.9.6](https://github.com/OpenZeppelin/openzeppelin-contracts/releases/tag/v4.9.6).
 - Updated hardhat configuration to use the `commons-config` networks.
+- Proposals ids are no longer incremental with `proposalCount`, it will now be the resulting hash of proposal information and other important data. 
+
+### Deprecated 
+- `proposalCount` is deprecated, use instead`_createProposalId` function to get the proposal id.
 
 ## v1.4.0
 
