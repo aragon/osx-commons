@@ -52,6 +52,15 @@ interface IProposal {
     /// @return bool Returns if proposal has been succeeded or not without including time window checks.
     function hasSucceeded(uint256 proposalId) external view returns (bool);
 
+    /// @notice Executes a proposal.
+    /// @param proposalId The ID of the proposal to be executed.
+    function execute(uint256 proposalId) external;
+
+    /// @notice Checks if a proposal can be executed.
+    /// @param _proposalId The ID of the proposal to be checked.
+    /// @return True if the proposal can be executed, false otherwise.
+    function canExecute(uint256 _proposalId) external view returns (bool);
+
     /// @notice The human-readable abi format for extra params included in `data` of `createProposal`.
     /// @dev Used for UI to easily detect what extra params the contract expects.
     /// @return abi ABI of params in `data` of `createProposal`.

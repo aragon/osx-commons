@@ -32,12 +32,14 @@ abstract contract Proposal is IProposal, ERC165 {
     function supportsInterface(bytes4 _interfaceId) public view virtual override returns (bool) {
         // In addition to the current interfaceId, also support previous version of the interfaceId
         // that did not include the following functions:
-        // `createProposal`, `hasSucceeded`, `customProposalParamsABI`.
+        // `createProposal`, `hasSucceeded`, `execute`, `canExecute`, `customProposalParamsABI`.
         return
             _interfaceId ==
             type(IProposal).interfaceId ^
                 IProposal.createProposal.selector ^
                 IProposal.hasSucceeded.selector ^
+                IProposal.execute.selector ^
+                IProposal.canExecute.selector ^
                 IProposal.customProposalParamsABI.selector ||
             _interfaceId == type(IProposal).interfaceId ||
             super.supportsInterface(_interfaceId);
