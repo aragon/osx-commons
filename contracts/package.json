@@ -2,7 +2,7 @@
   "name": "@aragon/osx-commons-contracts",
   "license": "AGPL-3.0-or-later",
   "description": "The Aragon OSx contracts package containing common utilities",
-  "version": "1.4.0-alpha.5",
+  "version": "v1.4.0-alpha.6",
   "author": {
     "name": "aragon",
     "url": "https://github.com/aragon"
@@ -33,7 +33,7 @@
     "cross-env": "^7.0.3",
     "dotenv": "^16.3.1",
     "ethers": "5.7.2",
-    "hardhat": "^2.13.1",
+    "hardhat": "^2.22.15",
     "hardhat-deploy": "^0.11.26",
     "hardhat-gas-reporter": "^1.0.9",
     "mocha": "^10.1.0",
