@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `RuledCondition` abstract contract that allows to create conditional permissions using rules.
 - `currentTargetConfig` configuration to the `Plugin` it allows the plugins to execute through the Dao or the configured target.
 - Included in the `IProposal` interface the functions `createProposal` `hasSucceeded` and `customProposalParamsABI`.
-- `MetadataExtension` and `MetadataExtensionUpgradeable` abstract contracts that allows metadata set up at plugin level.
+- `MetadataExtension` and `MetadataExtensionUpgradeable` abstract contracts that allows metadata setup at plugin level.
 
 ### Changed
 
