@@ -13,7 +13,7 @@ struct Action {
 }
 
 /// @title IExecutor
-/// @author Aragon X - 2022-2024
+/// @author Aragon X - 2024
 /// @notice The interface required for Executors within the Aragon App DAO framework.
 /// @custom:security-contact sirt@aragon.org
 interface IExecutor {
@@ -24,7 +24,8 @@ interface IExecutor {
     /// @param allowFailureMap The allow failure map encoding which actions are allowed to fail.
     /// @param failureMap The failure map encoding which actions have failed.
     /// @param execResults The array with the results of the executed actions.
-    /// @dev The value of `callId` is defined by the component/contract calling the execute function. A `Plugin` implementation can use it, for example, as a nonce.
+    /// @dev The value of `callId` is defined by the component/contract calling the execute function.
+    ///     A `Plugin` implementation can use it, for example, as a nonce.
     event Executed(
         address indexed actor,
         bytes32 callId,

@@ -13,7 +13,7 @@ import {IPlugin} from "./IPlugin.sol";
 import {IExecutor, Action} from "../executors/IExecutor.sol";
 
 /// @title PluginCloneable
-/// @author Aragon X - 2022-2023
+/// @author Aragon X - 2022-2024
 /// @notice An abstract, non-upgradeable contract to inherit from when creating a plugin being deployed via the minimal clones pattern (see [ERC-1167](https://eips.ethereum.org/EIPS/eip-1167)).
 /// @custom:security-contact sirt@aragon.org
 abstract contract PluginCloneable is
@@ -24,6 +24,7 @@ abstract contract PluginCloneable is
 {
     using ERC165CheckerUpgradeable for address;
 
+    /// @notice Stores the current target configuration, defining the target contract and operation type for a plugin.
     TargetConfig private currentTargetConfig;
 
     /// @notice Thrown when target is of type 'IDAO', but operation is `delegateCall`.
@@ -54,6 +55,7 @@ abstract contract PluginCloneable is
     }
 
     /// @dev Sets the target to a new target (`newTarget`).
+    /// @dev Requires the `SET_TARGET_CONFIG_PERMISSION_ID` permission.
     /// @param _targetConfig The target Config containing the address and operation type.
     function setTargetConfig(
         TargetConfig calldata _targetConfig

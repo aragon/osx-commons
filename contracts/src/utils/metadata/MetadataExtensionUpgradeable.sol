@@ -7,9 +7,10 @@ import {ERC165Upgradeable} from "@openzeppelin/contracts-upgradeable/utils/intro
 import {DaoAuthorizableUpgradeable} from "../../permission/auth/DaoAuthorizableUpgradeable.sol";
 
 /// @title MetadataExtensionUpgradeable
-/// @dev Due to the requirements that already existing upgradeable plugins need to start inheritting from this,
-///  we're required to use hardcoded/specific slots for storage instead of sequential slots with gaps.
 /// @author Aragon X - 2024
+/// @notice An abstract, upgradeable contract for managing and retrieving metadata associated with a plugin.
+/// @dev Due to the requirements that already existing upgradeable plugins need to start inheritting from this,
+///     we're required to use hardcoded/specific slots for storage instead of sequential slots with gaps.
 /// @custom:security-contact sirt@aragon.org
 abstract contract MetadataExtensionUpgradeable is ERC165Upgradeable, DaoAuthorizableUpgradeable {
     /// @notice The ID of the permission required to call the `setMetadata` function.

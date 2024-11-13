@@ -4,6 +4,11 @@ pragma solidity ^0.8.8;
 
 import {IDAO} from "../../dao/IDAO.sol";
 
+/// @title DAO Authorization Utilities
+/// @author Aragon X - 2022-2024
+/// @notice Provides utility functions for verifying if a caller has specific permissions in an associated DAO.
+/// @custom:security-contact sirt@aragon.org
+
 /// @notice Thrown if a call is unauthorized in the associated DAO.
 /// @param dao The associated DAO.
 /// @param where The context in which the authorization reverted.
@@ -16,7 +21,6 @@ error DaoUnauthorized(address dao, address where, address who, bytes32 permissio
 /// @param _who The address (EOA or contract) owning the permission.
 /// @param _permissionId The permission identifier.
 /// @param _data The optional data passed to the `PermissionCondition` registered.
-/// @custom:security-contact sirt@aragon.org
 function _auth(
     IDAO _dao,
     address _where,

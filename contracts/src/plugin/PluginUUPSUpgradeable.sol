@@ -15,7 +15,7 @@ import {IDAO} from "../dao/IDAO.sol";
 import {IExecutor, Action} from "../executors/IExecutor.sol";
 
 /// @title PluginUUPSUpgradeable
-/// @author Aragon X - 2022-2023
+/// @author Aragon X - 2022-2024
 /// @notice An abstract, upgradeable contract to inherit from when creating a plugin being deployed via the UUPS pattern (see [ERC-1822](https://eips.ethereum.org/EIPS/eip-1822)).
 /// @custom:security-contact sirt@aragon.org
 abstract contract PluginUUPSUpgradeable is
@@ -29,6 +29,7 @@ abstract contract PluginUUPSUpgradeable is
 
     // NOTE: When adding new state variables to the contract, the size of `_gap` has to be adapted below as well.
 
+    /// @notice Stores the current target configuration, defining the target contract and operation type for a plugin.
     TargetConfig private currentTargetConfig;
 
     /// @notice Thrown when target is of type 'IDAO', but operation is `delegateCall`.
@@ -97,6 +98,7 @@ abstract contract PluginUUPSUpgradeable is
     }
 
     /// @dev Sets the target to a new target (`newTarget`).
+    /// @dev Requires the `SET_TARGET_CONFIG_PERMISSION_ID` permission.
     /// @param _targetConfig The target Config containing the address and operation type.
     function setTargetConfig(
         TargetConfig calldata _targetConfig
