@@ -63,7 +63,7 @@ abstract contract Plugin is IPlugin, ERC165, DaoAuthorizable, ProtocolVersion {
     }
 
     /// @dev Sets the target to a new target (`newTarget`).
-    /// @dev Requires the `SET_TARGET_PERMISSION_ID` permission.
+    /// The caller must have the `SET_TARGET_PERMISSION_ID` permission.
     /// @param _targetConfig The target Config containing the address and operation type.
     function setTargetConfig(
         TargetConfig calldata _targetConfig
@@ -127,10 +127,13 @@ abstract contract Plugin is IPlugin, ERC165, DaoAuthorizable, ProtocolVersion {
     }
 
     /// @notice Forwards the actions to the `target` for the execution.
-    /// @param _target Forwards the actions to the specific target.
+    /// @param _target The address of the target contract.
     /// @param _callId Identifier for this execution.
     /// @param _actions actions that will be eventually called.
-    /// @param _allowFailureMap Bitmap-encoded number. TODO:
+    /// @param _allowFailureMap A bitmap allowing the execution to succeed, even if individual actions might revert.
+    ///     If the bit at index `i` is 1, the execution succeeds even if the `i`th action reverts.
+    ///     A failure map value of 0 requires every action to not revert.
+    /// @param _op The type of operation (`Call` or `DelegateCall`) to be used for the execution.
     /// @return execResults address of the implementation contract.
     /// @return failureMap address of the implementation contract.
     function _execute(
