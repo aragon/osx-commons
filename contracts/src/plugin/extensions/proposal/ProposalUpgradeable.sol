@@ -10,7 +10,7 @@ import {IProposal} from "./IProposal.sol";
 /// @title ProposalUpgradeable
 /// @author Aragon X - 2022-2024
 /// @notice An abstract contract containing the traits and internal functionality to create and execute proposals
-///     that can be inherited by upgradeable DAO plugins.
+///         that can be inherited by upgradeable DAO plugins.
 /// @custom:security-contact sirt@aragon.org
 abstract contract ProposalUpgradeable is IProposal, ERC165Upgradeable {
     using CountersUpgradeable for CountersUpgradeable.Counter;
@@ -34,11 +34,11 @@ abstract contract ProposalUpgradeable is IProposal, ERC165Upgradeable {
     }
 
     /// @notice Checks if this or the parent contract supports an interface by its ID.
+    /// @dev In addition to the current interfaceId, also support previous version of the interfaceId
+    ///      that did not include the following functions:
+    ///      `createProposal`, `hasSucceeded`, `execute`, `canExecute`, `customProposalParamsABI`.
     /// @param _interfaceId The ID of the interface.
     /// @return Returns `true` if the interface is supported.
-    /// @dev In addition to the current interfaceId, also support previous version of the interfaceId
-    ///     that did not include the following functions:
-    ///     `createProposal`, `hasSucceeded`, `execute`, `canExecute`, `customProposalParamsABI`.
     function supportsInterface(bytes4 _interfaceId) public view virtual override returns (bool) {
         return
             _interfaceId ==
@@ -53,7 +53,7 @@ abstract contract ProposalUpgradeable is IProposal, ERC165Upgradeable {
     }
 
     /// @notice This empty reserved space is put in place to allow future versions to add new variables
-    ///     without shifting down storage in the inheritance chain
-    ///     (see [OpenZeppelin's guide about storage gaps](https://docs.openzeppelin.com/contracts/4.x/upgradeable#storage_gaps)).
+    ///         without shifting down storage in the inheritance chain
+    ///         (see [OpenZeppelin's guide about storage gaps](https://docs.openzeppelin.com/contracts/4.x/upgradeable#storage_gaps)).
     uint256[49] private __gap;
 }

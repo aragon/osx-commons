@@ -11,9 +11,9 @@ import {flipBit, hasBit} from "../utils/math/BitMap.sol";
 /// @author Aragon X - 2024
 /// @notice Simple Executor that loops through the actions and executes them.
 /// @dev This doesn't use any type of permission for execution and can be called by anyone.
-///     Most useful use-case is to deploy as non-upgradeable and call from another contract via delegatecall.
-///     If used with delegatecall, DO NOT add state variables in sequential slots, otherwise this will overwrite
-///     the storage of the calling contract.
+///      Most useful use-case is to deploy as non-upgradeable and call from another contract via delegatecall.
+///      If used with delegatecall, DO NOT add state variables in sequential slots, otherwise this will overwrite
+///      the storage of the calling contract.
 /// @custom:security-contact sirt@aragon.org
 contract Executor is IExecutor, ERC165 {
     /// @notice The internal constant storing the maximal action array length.

@@ -26,7 +26,7 @@ abstract contract Plugin is IPlugin, ERC165, DaoAuthorizable, ProtocolVersion {
     /// @param targetConfig The target config to update it to.
     error InvalidTargetConfig(TargetConfig targetConfig);
 
-    /// @dev Emitted each time the TargetConfig is set.
+    /// @notice Emitted each time the TargetConfig is set.
     event TargetSet(TargetConfig newTargetConfig);
 
     /// @notice Thrown when `delegatecall` fails.

@@ -34,7 +34,7 @@ abstract contract PluginCloneable is
     /// @notice Thrown when `delegatecall` fails.
     error DelegateCallFailed();
 
-    /// @dev Emitted each time the TargetConfig is set.
+    /// @notice Emitted each time the TargetConfig is set.
     event TargetSet(TargetConfig newTargetConfig);
 
     /// @notice The ID of the permission required to call the `setTargetConfig` function.
@@ -55,7 +55,7 @@ abstract contract PluginCloneable is
     }
 
     /// @dev Sets the target to a new target (`newTarget`).
-    /// The caller must have the `SET_TARGET_CONFIG_PERMISSION_ID` permission.
+    ///      The caller must have the `SET_TARGET_CONFIG_PERMISSION_ID` permission.
     /// @param _targetConfig The target Config containing the address and operation type.
     function setTargetConfig(
         TargetConfig calldata _targetConfig

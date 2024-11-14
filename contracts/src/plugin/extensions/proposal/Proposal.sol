@@ -9,7 +9,7 @@ import {IProposal} from "./IProposal.sol";
 /// @title Proposal
 /// @author Aragon X - 2022-2024
 /// @notice An abstract contract containing the traits and internal functionality to create and execute proposals
-///     that can be inherited by non-upgradeable DAO plugins.
+///         that can be inherited by non-upgradeable DAO plugins.
 /// @custom:security-contact sirt@aragon.org
 abstract contract Proposal is IProposal, ERC165 {
     error FunctionDeprecated();
@@ -28,15 +28,12 @@ abstract contract Proposal is IProposal, ERC165 {
     }
 
     /// @notice Checks if this or the parent contract supports an interface by its ID.
+    /// @dev In addition to the current interfaceId, also support previous version of the interfaceId
+    ///      that did not include the following functions:
+    ///      `createProposal`, `hasSucceeded`, `execute`, `canExecute`, `customProposalParamsABI`.
     /// @param _interfaceId The ID of the interface.
     /// @return Returns `true` if the interface is supported.
-    /// @dev In addition to the current interfaceId, also support previous version of the interfaceId
-    ///     that did not include the following functions:
-    ///     `createProposal`, `hasSucceeded`, `execute`, `canExecute`, `customProposalParamsABI`.
     function supportsInterface(bytes4 _interfaceId) public view virtual override returns (bool) {
-        // In addition to the current interfaceId, also support previous version of the interfaceId
-        // that did not include the following functions:
-        // `createProposal`, `hasSucceeded`, `execute`, `canExecute`, `customProposalParamsABI`.
         return
             _interfaceId ==
             type(IProposal).interfaceId ^
