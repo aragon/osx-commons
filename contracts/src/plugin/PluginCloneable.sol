@@ -13,7 +13,7 @@ import {IPlugin} from "./IPlugin.sol";
 import {IExecutor, Action} from "../executors/IExecutor.sol";
 
 /// @title PluginCloneable
-/// @author Aragon X - 2022-2023
+/// @author Aragon X - 2022-2024
 /// @notice An abstract, non-upgradeable contract to inherit from when creating a plugin being deployed via the minimal clones pattern (see [ERC-1167](https://eips.ethereum.org/EIPS/eip-1167)).
 /// @custom:security-contact sirt@aragon.org
 abstract contract PluginCloneable is
@@ -24,6 +24,7 @@ abstract contract PluginCloneable is
 {
     using ERC165CheckerUpgradeable for address;
 
+    /// @notice Stores the current target configuration, defining the target contract and operation type for a plugin.
     TargetConfig private currentTargetConfig;
 
     /// @notice Thrown when target is of type 'IDAO', but operation is `delegateCall`.
@@ -33,7 +34,7 @@ abstract contract PluginCloneable is
     /// @notice Thrown when `delegatecall` fails.
     error DelegateCallFailed();
 
-    /// @dev Emitted each time the TargetConfig is set.
+    /// @notice Emitted each time the TargetConfig is set.
     event TargetSet(TargetConfig newTargetConfig);
 
     /// @notice The ID of the permission required to call the `setTargetConfig` function.
@@ -54,6 +55,7 @@ abstract contract PluginCloneable is
     }
 
     /// @dev Sets the target to a new target (`newTarget`).
+    ///      The caller must have the `SET_TARGET_CONFIG_PERMISSION_ID` permission.
     /// @param _targetConfig The target Config containing the address and operation type.
     function setTargetConfig(
         TargetConfig calldata _targetConfig
@@ -140,10 +142,13 @@ abstract contract PluginCloneable is
     }
 
     /// @notice Forwards the actions to the `target` for the execution.
-    /// @param _target Forwards the actions to the specific target.
+    /// @param _target The address of the target contract.
     /// @param _callId Identifier for this execution.
     /// @param _actions actions that will be eventually called.
-    /// @param _allowFailureMap Bitmap-encoded number. TODO:
+    /// @param _allowFailureMap A bitmap allowing the execution to succeed, even if individual actions might revert.
+    ///     If the bit at index `i` is 1, the execution succeeds even if the `i`th action reverts.
+    ///     A failure map value of 0 requires every action to not revert.
+    /// @param _op The type of operation (`Call` or `DelegateCall`) to be used for the execution.
     /// @return execResults address of the implementation contract.
     /// @return failureMap address of the implementation contract.
     function _execute(

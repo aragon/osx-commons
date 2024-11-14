@@ -8,8 +8,9 @@ import {ERC165Upgradeable} from "@openzeppelin/contracts-upgradeable/utils/intro
 import {IProposal} from "./IProposal.sol";
 
 /// @title ProposalUpgradeable
-/// @author Aragon X - 2022-2023
-/// @notice An abstract contract containing the traits and internal functionality to create and execute proposals that can be inherited by upgradeable DAO plugins.
+/// @author Aragon X - 2022-2024
+/// @notice An abstract contract containing the traits and internal functionality to create and execute proposals
+///         that can be inherited by upgradeable DAO plugins.
 /// @custom:security-contact sirt@aragon.org
 abstract contract ProposalUpgradeable is IProposal, ERC165Upgradeable {
     using CountersUpgradeable for CountersUpgradeable.Counter;
@@ -33,12 +34,12 @@ abstract contract ProposalUpgradeable is IProposal, ERC165Upgradeable {
     }
 
     /// @notice Checks if this or the parent contract supports an interface by its ID.
+    /// @dev In addition to the current interfaceId, also support previous version of the interfaceId
+    ///      that did not include the following functions:
+    ///      `createProposal`, `hasSucceeded`, `execute`, `canExecute`, `customProposalParamsABI`.
     /// @param _interfaceId The ID of the interface.
     /// @return Returns `true` if the interface is supported.
     function supportsInterface(bytes4 _interfaceId) public view virtual override returns (bool) {
-        // In addition to the current interfaceId, also support previous version of the interfaceId
-        // that did not include the following functions:
-        // `createProposal`, `hasSucceeded`, `execute`, `canExecute`, `customProposalParamsABI`.
         return
             _interfaceId ==
             type(IProposal).interfaceId ^
@@ -51,6 +52,8 @@ abstract contract ProposalUpgradeable is IProposal, ERC165Upgradeable {
             super.supportsInterface(_interfaceId);
     }
 
-    /// @notice This empty reserved space is put in place to allow future versions to add new variables without shifting down storage in the inheritance chain (see [OpenZeppelin's guide about storage gaps](https://docs.openzeppelin.com/contracts/4.x/upgradeable#storage_gaps)).
+    /// @notice This empty reserved space is put in place to allow future versions to add new variables
+    ///         without shifting down storage in the inheritance chain
+    ///         (see [OpenZeppelin's guide about storage gaps](https://docs.openzeppelin.com/contracts/4.x/upgradeable#storage_gaps)).
     uint256[49] private __gap;
 }

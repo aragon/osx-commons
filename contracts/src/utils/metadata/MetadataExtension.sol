@@ -8,6 +8,7 @@ import {DaoAuthorizable} from "../../permission/auth/DaoAuthorizable.sol";
 
 /// @title MetadataExtension
 /// @author Aragon X - 2024
+/// @notice An abstract, non upgradeable contract for managing and retrieving metadata associated with a plugin.
 /// @custom:security-contact sirt@aragon.org
 abstract contract MetadataExtension is ERC165, DaoAuthorizable {
     /// @notice The ID of the permission required to call the `setMetadata` function.
@@ -16,6 +17,7 @@ abstract contract MetadataExtension is ERC165, DaoAuthorizable {
     /// @notice Emitted when metadata is set.
     event MetadataSet(bytes metadata);
 
+    /// @dev Stores the current plugin-specific metadata.
     bytes private metadata;
 
     /// @notice Checks if this or the parent contract supports an interface by its ID.

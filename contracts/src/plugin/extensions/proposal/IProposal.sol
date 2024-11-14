@@ -5,7 +5,7 @@ pragma solidity ^0.8.8;
 import {Action} from "../../../executors/IExecutor.sol";
 
 /// @title IProposal
-/// @author Aragon X - 2022-2023
+/// @author Aragon X - 2022-2024
 /// @notice An interface to be implemented by DAO plugins that create and execute proposals.
 /// @custom:security-contact sirt@aragon.org
 interface IProposal {
@@ -16,7 +16,9 @@ interface IProposal {
     /// @param endDate The end date of the proposal in seconds.
     /// @param metadata The metadata of the proposal.
     /// @param actions The actions that will be executed if the proposal passes.
-    /// @param allowFailureMap A bitmap allowing the proposal to succeed, even if individual actions might revert. If the bit at index `i` is 1, the proposal succeeds even if the `i`th action reverts. A failure map value of 0 requires every action to not revert.
+    /// @param allowFailureMap A bitmap allowing the proposal to succeed, even if individual actions might revert.
+    ///     If the bit at index `i` is 1, the proposal succeeds even if the `i`th action reverts.
+    ///     A failure map value of 0 requires every action to not revert.
     event ProposalCreated(
         uint256 indexed proposalId,
         address indexed creator,
@@ -66,9 +68,9 @@ interface IProposal {
     /// @return abi ABI of params in `data` of `createProposal`.
     function customProposalParamsABI() external view returns (string memory abi);
 
-    /// @notice Returns the proposal count determining the next proposal ID.
-    /// @dev This function has been deprecated but due to backwards compatibility, it still exists
-    /// in the interface but reverts to avoid ambiguity.
+    /// @notice Returns the proposal count which determines the next proposal ID.
+    /// @dev This function is deprecated but remains in the interface for backward compatibility.
+    ///      It now reverts to prevent ambiguity.
     /// @return The proposal count.
     function proposalCount() external view returns (uint256);
 }

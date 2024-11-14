@@ -7,11 +7,14 @@ import {ERC165} from "@openzeppelin/contracts/utils/introspection/ERC165.sol";
 import {IExecutor, Action} from "./IExecutor.sol";
 import {flipBit, hasBit} from "../utils/math/BitMap.sol";
 
+/// @title IDAO
+/// @author Aragon X - 2024
 /// @notice Simple Executor that loops through the actions and executes them.
 /// @dev This doesn't use any type of permission for execution and can be called by anyone.
-/// Most useful use-case is to deploy as non-upgradeable and call from another contract via delegatecall.
-/// If used with delegatecall, DO NOT add state variables in sequential slots, otherwise this will overwrite
-/// the storage of the calling contract.
+///      Most useful use-case is to deploy it as non-upgradeable and call from another contract via delegatecall.
+///      If used with delegatecall, DO NOT add state variables in sequential slots, otherwise this will overwrite
+///      the storage of the calling contract.
+/// @custom:security-contact sirt@aragon.org
 contract Executor is IExecutor, ERC165 {
     /// @notice The internal constant storing the maximal action array length.
     uint256 internal constant MAX_ACTIONS = 256;
@@ -39,10 +42,15 @@ contract Executor is IExecutor, ERC165 {
     /// @notice Thrown if a call is reentrant.
     error ReentrantCall();
 
+    /// @notice Initializes the contract with a non-entered reentrancy status.
+    /// @dev Sets the reentrancy guard status to `_NOT_ENTERED` to prevent reentrant calls from the start.
     constructor() {
         _storeReentrancyStatus(_NOT_ENTERED);
     }
 
+    /// @notice Prevents reentrant calls to a function.
+    /// @dev This modifier checks the reentrancy status before function execution. If already entered, it reverts with
+    ///      `ReentrantCall()`. Sets the status to `_ENTERED` during execution and resets it to `_NOT_ENTERED` afterward.
     modifier nonReentrant() {
         if (_getReentrancyStatus() == _ENTERED) {
             revert ReentrantCall();
@@ -135,7 +143,10 @@ contract Executor is IExecutor, ERC165 {
         }
     }
 
-    /// @notice Stores the reentrancy status on a specific slot.
+    /// @notice Stores the reentrancy status at a specific storage slot.
+    /// @param _status The reentrancy status to be stored, typically `_ENTERED` or `_NOT_ENTERED`.
+    /// @dev Uses inline assembly to store the `_status` value at `REENTRANCY_GUARD_STORAGE_LOCATION` to manage
+    ///      reentrancy status efficiently.
     function _storeReentrancyStatus(uint256 _status) private {
         // solhint-disable-next-line no-inline-assembly
         assembly {
