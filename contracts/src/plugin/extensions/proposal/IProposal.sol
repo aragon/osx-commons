@@ -68,7 +68,7 @@ interface IProposal {
     /// @return abi ABI of params in `data` of `createProposal`.
     function customProposalParamsABI() external view returns (string memory abi);
 
-    /// @notice Returns the proposal count, which determines the next proposal ID.
+    /// @notice Returns the proposal count which determines the next proposal ID.
     /// @dev This function is deprecated but remains in the interface for backward compatibility.
     ///      It now reverts to prevent ambiguity.
     /// @return The proposal count.
