@@ -32,8 +32,9 @@ abstract contract Plugin is IPlugin, ERC165, DaoAuthorizable, ProtocolVersion {
     /// @notice Thrown when `delegatecall` fails.
     error DelegateCallFailed();
 
-    /// @notice The ID of the permission required to call the `setTarget` function.
-    bytes32 public constant SET_TARGET_PERMISSION_ID = keccak256("SET_TARGET_PERMISSION");
+    /// @notice The ID of the permission required to call the `setTargetConfig` function.
+    bytes32 public constant SET_TARGET_CONFIG_PERMISSION_ID =
+        keccak256("SET_TARGET_CONFIG_PERMISSION");
 
     /// @notice Constructs the plugin by storing the associated DAO.
     /// @param _dao The DAO contract.
@@ -63,11 +64,11 @@ abstract contract Plugin is IPlugin, ERC165, DaoAuthorizable, ProtocolVersion {
     }
 
     /// @dev Sets the target to a new target (`newTarget`).
-    /// The caller must have the `SET_TARGET_PERMISSION_ID` permission.
+    /// The caller must have the `SET_TARGET_CONFIG_PERMISSION_ID` permission.
     /// @param _targetConfig The target Config containing the address and operation type.
     function setTargetConfig(
         TargetConfig calldata _targetConfig
-    ) public auth(SET_TARGET_PERMISSION_ID) {
+    ) public auth(SET_TARGET_CONFIG_PERMISSION_ID) {
         _setTargetConfig(_targetConfig);
     }
 
