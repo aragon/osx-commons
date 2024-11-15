@@ -34,29 +34,29 @@ interface IProposal {
     event ProposalExecuted(uint256 indexed proposalId);
 
     /// @notice Creates a new proposal.
-    /// @param metadata The metadata of the proposal.
-    /// @param actions The actions that will be executed after the proposal passes.
-    /// @param startDate The start date of the proposal.
-    /// @param endDate The end date of the proposal.
-    /// @param data The additional abi-encoded data to include more necessary fields.
+    /// @param _metadata The metadata of the proposal.
+    /// @param _actions The actions that will be executed after the proposal passes.
+    /// @param _startDate The start date of the proposal.
+    /// @param _endDate The end date of the proposal.
+    /// @param _data The additional abi-encoded data to include more necessary fields.
     /// @return proposalId The id of the proposal.
     function createProposal(
-        bytes memory metadata,
-        Action[] memory actions,
-        uint64 startDate,
-        uint64 endDate,
-        bytes memory data
+        bytes memory _metadata,
+        Action[] memory _actions,
+        uint64 _startDate,
+        uint64 _endDate,
+        bytes memory _data
     ) external returns (uint256 proposalId);
 
     /// @notice Whether proposal succeeded or not.
     /// @dev Note that this must not include time window checks and only make a decision based on the thresholds.
-    /// @param proposalId The id of the proposal.
-    /// @return bool Returns if proposal has been succeeded or not without including time window checks.
-    function hasSucceeded(uint256 proposalId) external view returns (bool);
+    /// @param _proposalId The id of the proposal.
+    /// @return Returns if proposal has been succeeded or not without including time window checks.
+    function hasSucceeded(uint256 _proposalId) external view returns (bool);
 
     /// @notice Executes a proposal.
-    /// @param proposalId The ID of the proposal to be executed.
-    function execute(uint256 proposalId) external;
+    /// @param _proposalId The ID of the proposal to be executed.
+    function execute(uint256 _proposalId) external;
 
     /// @notice Checks if a proposal can be executed.
     /// @param _proposalId The ID of the proposal to be checked.
@@ -65,8 +65,8 @@ interface IProposal {
 
     /// @notice The human-readable abi format for extra params included in `data` of `createProposal`.
     /// @dev Used for UI to easily detect what extra params the contract expects.
-    /// @return abi ABI of params in `data` of `createProposal`.
-    function customProposalParamsABI() external view returns (string memory abi);
+    /// @return ABI of params in `data` of `createProposal`.
+    function customProposalParamsABI() external view returns (string memory);
 
     /// @notice Returns the proposal count which determines the next proposal ID.
     /// @dev This function is deprecated but remains in the interface for backward compatibility.

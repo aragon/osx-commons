@@ -27,10 +27,10 @@ abstract contract ProposalUpgradeable is IProposal, ERC165Upgradeable {
 
     /// @notice Creates a proposal Id.
     /// @dev Uses block number and chain id to ensure more probability of uniqueness.
-    /// @param salt The extra salt to help with uniqueness.
+    /// @param _salt The extra salt to help with uniqueness.
     /// @return The id of the proposal.
-    function _createProposalId(bytes32 salt) internal view virtual returns (uint256) {
-        return uint256(keccak256(abi.encode(block.chainid, block.number, address(this), salt)));
+    function _createProposalId(bytes32 _salt) internal view virtual returns (uint256) {
+        return uint256(keccak256(abi.encode(block.chainid, block.number, address(this), _salt)));
     }
 
     /// @notice Checks if this or the parent contract supports an interface by its ID.

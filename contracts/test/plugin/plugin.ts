@@ -99,7 +99,7 @@ describe('Plugin', function () {
           daoMock.address,
           plugin.address,
           deployer.address,
-          ethers.utils.id('SET_TARGET_PERMISSION')
+          ethers.utils.id('SET_TARGET_CONFIG_PERMISSION')
         );
     });
 
