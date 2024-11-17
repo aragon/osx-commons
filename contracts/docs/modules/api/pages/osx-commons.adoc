@@ -12,6 +12,7 @@
 :xref-IDAO-Deposited-address-address-uint256-string-: xref:osx-commons.adoc#IDAO-Deposited-address-address-uint256-string-
 :xref-IDAO-NativeTokenDeposited-address-uint256-: xref:osx-commons.adoc#IDAO-NativeTokenDeposited-address-uint256-
 :xref-IDAO-TrustedForwarderSet-address-: xref:osx-commons.adoc#IDAO-TrustedForwarderSet-address-
+:xref-Executor-nonReentrant--: xref:osx-commons.adoc#Executor-nonReentrant--
 :xref-Executor-constructor--: xref:osx-commons.adoc#Executor-constructor--
 :xref-Executor-supportsInterface-bytes4-: xref:osx-commons.adoc#Executor-supportsInterface-bytes4-
 :xref-Executor-execute-bytes32-struct-Action---uint256-: xref:osx-commons.adoc#Executor-execute-bytes32-struct-Action---uint256-
@@ -45,6 +46,7 @@
 :xref-DaoAuthorizableUpgradeable-__DaoAuthorizableUpgradeable_init-contract-IDAO-: xref:osx-commons.adoc#DaoAuthorizableUpgradeable-__DaoAuthorizableUpgradeable_init-contract-IDAO-
 :xref-DaoAuthorizableUpgradeable-dao--: xref:osx-commons.adoc#DaoAuthorizableUpgradeable-dao--
 :xref-PluginCloneable-TargetSet-struct-IPlugin-TargetConfig-: xref:osx-commons.adoc#PluginCloneable-TargetSet-struct-IPlugin-TargetConfig-
+:xref-PluginUUPSUpgradeable-onlyCallAtInitialization--: xref:osx-commons.adoc#PluginUUPSUpgradeable-onlyCallAtInitialization--
 :xref-PluginUUPSUpgradeable-constructor--: xref:osx-commons.adoc#PluginUUPSUpgradeable-constructor--
 :xref-PluginUUPSUpgradeable-pluginType--: xref:osx-commons.adoc#PluginUUPSUpgradeable-pluginType--
 :xref-PluginUUPSUpgradeable-getCurrentTargetConfig--: xref:osx-commons.adoc#PluginUUPSUpgradeable-getCurrentTargetConfig--
@@ -291,6 +293,13 @@ This doesn't use any type of permission for execution and can be called by anyon
      Most useful use-case is to deploy it as non-upgradeable and call from another contract via delegatecall.
      If used with delegatecall, DO NOT add state variables in sequential slots, otherwise this will overwrite
      the storage of the calling contract.
+
+[.contract-index]
+.Modifiers
+--
+* {xref-Executor-nonReentrant--}[`++nonReentrant()++`]
+
+--
 
 [.contract-index]
 .Functions
@@ -857,6 +866,13 @@ Thrown when &#x60;delegatecall&#x60; fails.
 [.contract]
 [[PluginUUPSUpgradeable]]
 === `++PluginUUPSUpgradeable++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/plugin/PluginUUPSUpgradeable.sol[{github-icon},role=heading-link]
+
+[.contract-index]
+.Modifiers
+--
+* {xref-PluginUUPSUpgradeable-onlyCallAtInitialization--}[`++onlyCallAtInitialization()++`]
+
+--
 
 [.contract-index]
 .Functions

@@ -16,6 +16,10 @@ generated
 !configs/src/deployments/
 !configs/src/test/unit/deployments/
 
+contracts/docs/templates/contract.hbs
+contracts/docs/templates/page.hbs
+
+
 # files
 *.env
 *.log
