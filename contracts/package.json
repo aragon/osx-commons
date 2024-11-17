@@ -43,7 +43,8 @@
     "tmp-promise": "^3.0.3",
     "ts-node": "^10.9.1",
     "typechain": "^8.3.2",
-    "typescript": "5.2.2"
+    "typescript": "5.2.2",
+    "lodash.startcase": "^4.4.0"
   },
   "dependencies": {
     "@openzeppelin/contracts": "4.9.6",
@@ -76,6 +77,7 @@
     "test": "hardhat test",
     "typechain": "cross-env TS_NODE_TRANSPILE_ONLY=true hardhat typechain",
     "clean": "rimraf ./artifacts ./cache ./coverage ./typechain ./types ./coverage.json && yarn typechain",
-    "docgen": "hardhat docgen"
+    "docgen": "hardhat docgen",
+    "docs": "scripts/prepare-docs.sh"
   }
 }

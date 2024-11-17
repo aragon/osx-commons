@@ -1,0 +1,3 @@
+= OSX Commons.
+
+link:https://github.com/aragon/osx-commons[OSX commons] package is used to help with Aragon's project to avoid code duplication. 

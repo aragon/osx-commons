@@ -150,14 +150,7 @@ const config: HardhatUserConfig = {
     outDir: 'typechain',
     target: 'ethers-v5',
   },
-  docgen: {
-    outputDir: 'docs/developer-portal/reference-guide',
-    theme: 'markdown',
-    pages: 'files',
-    templates: 'docs/templates',
-    collapseNewlines: true,
-    exclude: ['test'],
-  },
+  docgen: require('./docs/config.js'),
 };
 
 export default config;

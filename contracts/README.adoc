@@ -1,0 +1,65 @@
+= OSX Commons
+
+This is the reference guide for the link:https://github.com/aragon/osx-commons[osx-commons-contracts] package.
+
+== Core
+
+{{IDAO}}
+
+{{Executor}}
+
+{{PermissionLib}}
+
+{{DAOAuthorizable}}
+
+{{DAOAuthorizableUpgradeable}}
+
+== Plugins
+
+{{Plugin}}
+
+{{PluginCloneable}}
+
+{{PluginUUPSUpgradeable}}
+
+{{PluginSetup}}
+
+{{PluginSetupUpgradeable}}
+
+== Plugins Extensions
+
+{{Proposal}}
+
+{{ProposalUpgradeable}}
+
+{{IMembership}}
+
+{{Addresslist}}
+
+== Utils
+
+{{MetadataExtension}}
+
+{{MetadataExtensionUpgradeable}}
+
+{{ProtocolVersion}}
+
+{{BitMap}}
+
+{{Ratio}}
+
+{{ProxyFactory}}
+
+{{ProxyLib}}
+
+== Conditions
+
+{{PermissionCondition}}
+
+{{PermissionConditionUpgradeable}}
+
+{{RuledCondition}}
+
+{{PermissionManager}}
+
+{{CallbackHandler}}
