@@ -1,0 +1,2222 @@
+:github-icon: pass:[<svg class="icon"><use href="#github-icon"/></svg>]
+:xref-IDAO-hasPermission-address-address-bytes32-bytes-: xref:osx-commons.adoc#IDAO-hasPermission-address-address-bytes32-bytes-
+:xref-IDAO-setMetadata-bytes-: xref:osx-commons.adoc#IDAO-setMetadata-bytes-
+:xref-IDAO-deposit-address-uint256-string-: xref:osx-commons.adoc#IDAO-deposit-address-uint256-string-
+:xref-IDAO-setTrustedForwarder-address-: xref:osx-commons.adoc#IDAO-setTrustedForwarder-address-
+:xref-IDAO-getTrustedForwarder--: xref:osx-commons.adoc#IDAO-getTrustedForwarder--
+:xref-IDAO-isValidSignature-bytes32-bytes-: xref:osx-commons.adoc#IDAO-isValidSignature-bytes32-bytes-
+:xref-IDAO-registerStandardCallback-bytes4-bytes4-bytes4-: xref:osx-commons.adoc#IDAO-registerStandardCallback-bytes4-bytes4-bytes4-
+:xref-IDAO-setSignatureValidator-address-: xref:osx-commons.adoc#IDAO-setSignatureValidator-address-
+:xref-IDAO-MetadataSet-bytes-: xref:osx-commons.adoc#IDAO-MetadataSet-bytes-
+:xref-IDAO-StandardCallbackRegistered-bytes4-bytes4-bytes4-: xref:osx-commons.adoc#IDAO-StandardCallbackRegistered-bytes4-bytes4-bytes4-
+:xref-IDAO-Deposited-address-address-uint256-string-: xref:osx-commons.adoc#IDAO-Deposited-address-address-uint256-string-
+:xref-IDAO-NativeTokenDeposited-address-uint256-: xref:osx-commons.adoc#IDAO-NativeTokenDeposited-address-uint256-
+:xref-IDAO-TrustedForwarderSet-address-: xref:osx-commons.adoc#IDAO-TrustedForwarderSet-address-
+:xref-Executor-nonReentrant--: xref:osx-commons.adoc#Executor-nonReentrant--
+:xref-Executor-constructor--: xref:osx-commons.adoc#Executor-constructor--
+:xref-Executor-supportsInterface-bytes4-: xref:osx-commons.adoc#Executor-supportsInterface-bytes4-
+:xref-Executor-execute-bytes32-struct-Action---uint256-: xref:osx-commons.adoc#Executor-execute-bytes32-struct-Action---uint256-
+:xref-IExecutor-Executed-address-bytes32-struct-Action---uint256-uint256-bytes---: xref:osx-commons.adoc#IExecutor-Executed-address-bytes32-struct-Action---uint256-uint256-bytes---
+:xref-PermissionLib-NO_CONDITION-address: xref:osx-commons.adoc#PermissionLib-NO_CONDITION-address
+:xref-Plugin-constructor-contract-IDAO-: xref:osx-commons.adoc#Plugin-constructor-contract-IDAO-
+:xref-Plugin-pluginType--: xref:osx-commons.adoc#Plugin-pluginType--
+:xref-Plugin-getCurrentTargetConfig--: xref:osx-commons.adoc#Plugin-getCurrentTargetConfig--
+:xref-Plugin-getTargetConfig--: xref:osx-commons.adoc#Plugin-getTargetConfig--
+:xref-Plugin-setTargetConfig-struct-IPlugin-TargetConfig-: xref:osx-commons.adoc#Plugin-setTargetConfig-struct-IPlugin-TargetConfig-
+:xref-Plugin-supportsInterface-bytes4-: xref:osx-commons.adoc#Plugin-supportsInterface-bytes4-
+:xref-Plugin-_setTargetConfig-struct-IPlugin-TargetConfig-: xref:osx-commons.adoc#Plugin-_setTargetConfig-struct-IPlugin-TargetConfig-
+:xref-Plugin-_execute-bytes32-struct-Action---uint256-: xref:osx-commons.adoc#Plugin-_execute-bytes32-struct-Action---uint256-
+:xref-Plugin-_execute-address-bytes32-struct-Action---uint256-enum-IPlugin-Operation-: xref:osx-commons.adoc#Plugin-_execute-address-bytes32-struct-Action---uint256-enum-IPlugin-Operation-
+:xref-Plugin-SET_TARGET_CONFIG_PERMISSION_ID-bytes32: xref:osx-commons.adoc#Plugin-SET_TARGET_CONFIG_PERMISSION_ID-bytes32
+:xref-ProtocolVersion-protocolVersion--: xref:osx-commons.adoc#ProtocolVersion-protocolVersion--
+:xref-DaoAuthorizable-dao--: xref:osx-commons.adoc#DaoAuthorizable-dao--
+:xref-Plugin-TargetSet-struct-IPlugin-TargetConfig-: xref:osx-commons.adoc#Plugin-TargetSet-struct-IPlugin-TargetConfig-
+:xref-PluginCloneable-constructor--: xref:osx-commons.adoc#PluginCloneable-constructor--
+:xref-PluginCloneable-__PluginCloneable_init-contract-IDAO-: xref:osx-commons.adoc#PluginCloneable-__PluginCloneable_init-contract-IDAO-
+:xref-PluginCloneable-setTargetConfig-struct-IPlugin-TargetConfig-: xref:osx-commons.adoc#PluginCloneable-setTargetConfig-struct-IPlugin-TargetConfig-
+:xref-PluginCloneable-pluginType--: xref:osx-commons.adoc#PluginCloneable-pluginType--
+:xref-PluginCloneable-getCurrentTargetConfig--: xref:osx-commons.adoc#PluginCloneable-getCurrentTargetConfig--
+:xref-PluginCloneable-getTargetConfig--: xref:osx-commons.adoc#PluginCloneable-getTargetConfig--
+:xref-PluginCloneable-supportsInterface-bytes4-: xref:osx-commons.adoc#PluginCloneable-supportsInterface-bytes4-
+:xref-PluginCloneable-_setTargetConfig-struct-IPlugin-TargetConfig-: xref:osx-commons.adoc#PluginCloneable-_setTargetConfig-struct-IPlugin-TargetConfig-
+:xref-PluginCloneable-_execute-bytes32-struct-Action---uint256-: xref:osx-commons.adoc#PluginCloneable-_execute-bytes32-struct-Action---uint256-
+:xref-PluginCloneable-_execute-address-bytes32-struct-Action---uint256-enum-IPlugin-Operation-: xref:osx-commons.adoc#PluginCloneable-_execute-address-bytes32-struct-Action---uint256-enum-IPlugin-Operation-
+:xref-PluginCloneable-SET_TARGET_CONFIG_PERMISSION_ID-bytes32: xref:osx-commons.adoc#PluginCloneable-SET_TARGET_CONFIG_PERMISSION_ID-bytes32
+:xref-ProtocolVersion-protocolVersion--: xref:osx-commons.adoc#ProtocolVersion-protocolVersion--
+:xref-DaoAuthorizableUpgradeable-__DaoAuthorizableUpgradeable_init-contract-IDAO-: xref:osx-commons.adoc#DaoAuthorizableUpgradeable-__DaoAuthorizableUpgradeable_init-contract-IDAO-
+:xref-DaoAuthorizableUpgradeable-dao--: xref:osx-commons.adoc#DaoAuthorizableUpgradeable-dao--
+:xref-PluginCloneable-TargetSet-struct-IPlugin-TargetConfig-: xref:osx-commons.adoc#PluginCloneable-TargetSet-struct-IPlugin-TargetConfig-
+:xref-PluginUUPSUpgradeable-onlyCallAtInitialization--: xref:osx-commons.adoc#PluginUUPSUpgradeable-onlyCallAtInitialization--
+:xref-PluginUUPSUpgradeable-constructor--: xref:osx-commons.adoc#PluginUUPSUpgradeable-constructor--
+:xref-PluginUUPSUpgradeable-pluginType--: xref:osx-commons.adoc#PluginUUPSUpgradeable-pluginType--
+:xref-PluginUUPSUpgradeable-getCurrentTargetConfig--: xref:osx-commons.adoc#PluginUUPSUpgradeable-getCurrentTargetConfig--
+:xref-PluginUUPSUpgradeable-getTargetConfig--: xref:osx-commons.adoc#PluginUUPSUpgradeable-getTargetConfig--
+:xref-PluginUUPSUpgradeable-__PluginUUPSUpgradeable_init-contract-IDAO-: xref:osx-commons.adoc#PluginUUPSUpgradeable-__PluginUUPSUpgradeable_init-contract-IDAO-
+:xref-PluginUUPSUpgradeable-setTargetConfig-struct-IPlugin-TargetConfig-: xref:osx-commons.adoc#PluginUUPSUpgradeable-setTargetConfig-struct-IPlugin-TargetConfig-
+:xref-PluginUUPSUpgradeable-supportsInterface-bytes4-: xref:osx-commons.adoc#PluginUUPSUpgradeable-supportsInterface-bytes4-
+:xref-PluginUUPSUpgradeable-implementation--: xref:osx-commons.adoc#PluginUUPSUpgradeable-implementation--
+:xref-PluginUUPSUpgradeable-_setTargetConfig-struct-IPlugin-TargetConfig-: xref:osx-commons.adoc#PluginUUPSUpgradeable-_setTargetConfig-struct-IPlugin-TargetConfig-
+:xref-PluginUUPSUpgradeable-_execute-bytes32-struct-Action---uint256-: xref:osx-commons.adoc#PluginUUPSUpgradeable-_execute-bytes32-struct-Action---uint256-
+:xref-PluginUUPSUpgradeable-_execute-address-bytes32-struct-Action---uint256-enum-IPlugin-Operation-: xref:osx-commons.adoc#PluginUUPSUpgradeable-_execute-address-bytes32-struct-Action---uint256-enum-IPlugin-Operation-
+:xref-PluginUUPSUpgradeable-_authorizeUpgrade-address-: xref:osx-commons.adoc#PluginUUPSUpgradeable-_authorizeUpgrade-address-
+:xref-PluginUUPSUpgradeable-SET_TARGET_CONFIG_PERMISSION_ID-bytes32: xref:osx-commons.adoc#PluginUUPSUpgradeable-SET_TARGET_CONFIG_PERMISSION_ID-bytes32
+:xref-PluginUUPSUpgradeable-UPGRADE_PLUGIN_PERMISSION_ID-bytes32: xref:osx-commons.adoc#PluginUUPSUpgradeable-UPGRADE_PLUGIN_PERMISSION_ID-bytes32
+:xref-ProtocolVersion-protocolVersion--: xref:osx-commons.adoc#ProtocolVersion-protocolVersion--
+:xref-DaoAuthorizableUpgradeable-__DaoAuthorizableUpgradeable_init-contract-IDAO-: xref:osx-commons.adoc#DaoAuthorizableUpgradeable-__DaoAuthorizableUpgradeable_init-contract-IDAO-
+:xref-DaoAuthorizableUpgradeable-dao--: xref:osx-commons.adoc#DaoAuthorizableUpgradeable-dao--
+:xref-PluginUUPSUpgradeable-TargetSet-struct-IPlugin-TargetConfig-: xref:osx-commons.adoc#PluginUUPSUpgradeable-TargetSet-struct-IPlugin-TargetConfig-
+:xref-PluginSetup-constructor-address-: xref:osx-commons.adoc#PluginSetup-constructor-address-
+:xref-PluginSetup-prepareUpdate-address-uint16-struct-IPluginSetup-SetupPayload-: xref:osx-commons.adoc#PluginSetup-prepareUpdate-address-uint16-struct-IPluginSetup-SetupPayload-
+:xref-PluginSetup-supportsInterface-bytes4-: xref:osx-commons.adoc#PluginSetup-supportsInterface-bytes4-
+:xref-PluginSetup-implementation--: xref:osx-commons.adoc#PluginSetup-implementation--
+:xref-ProtocolVersion-protocolVersion--: xref:osx-commons.adoc#ProtocolVersion-protocolVersion--
+:xref-IPluginSetup-prepareInstallation-address-bytes-: xref:osx-commons.adoc#IPluginSetup-prepareInstallation-address-bytes-
+:xref-IPluginSetup-prepareUninstallation-address-struct-IPluginSetup-SetupPayload-: xref:osx-commons.adoc#IPluginSetup-prepareUninstallation-address-struct-IPluginSetup-SetupPayload-
+:xref-Proposal-proposalCount--: xref:osx-commons.adoc#Proposal-proposalCount--
+:xref-Proposal-_createProposalId-bytes32-: xref:osx-commons.adoc#Proposal-_createProposalId-bytes32-
+:xref-Proposal-supportsInterface-bytes4-: xref:osx-commons.adoc#Proposal-supportsInterface-bytes4-
+:xref-IProposal-createProposal-bytes-struct-Action---uint64-uint64-bytes-: xref:osx-commons.adoc#IProposal-createProposal-bytes-struct-Action---uint64-uint64-bytes-
+:xref-IProposal-hasSucceeded-uint256-: xref:osx-commons.adoc#IProposal-hasSucceeded-uint256-
+:xref-IProposal-execute-uint256-: xref:osx-commons.adoc#IProposal-execute-uint256-
+:xref-IProposal-canExecute-uint256-: xref:osx-commons.adoc#IProposal-canExecute-uint256-
+:xref-IProposal-customProposalParamsABI--: xref:osx-commons.adoc#IProposal-customProposalParamsABI--
+:xref-IProposal-ProposalCreated-uint256-address-uint64-uint64-bytes-struct-Action---uint256-: xref:osx-commons.adoc#IProposal-ProposalCreated-uint256-address-uint64-uint64-bytes-struct-Action---uint256-
+:xref-IProposal-ProposalExecuted-uint256-: xref:osx-commons.adoc#IProposal-ProposalExecuted-uint256-
+:xref-ProposalUpgradeable-proposalCount--: xref:osx-commons.adoc#ProposalUpgradeable-proposalCount--
+:xref-ProposalUpgradeable-_createProposalId-bytes32-: xref:osx-commons.adoc#ProposalUpgradeable-_createProposalId-bytes32-
+:xref-ProposalUpgradeable-supportsInterface-bytes4-: xref:osx-commons.adoc#ProposalUpgradeable-supportsInterface-bytes4-
+:xref-IProposal-createProposal-bytes-struct-Action---uint64-uint64-bytes-: xref:osx-commons.adoc#IProposal-createProposal-bytes-struct-Action---uint64-uint64-bytes-
+:xref-IProposal-hasSucceeded-uint256-: xref:osx-commons.adoc#IProposal-hasSucceeded-uint256-
+:xref-IProposal-execute-uint256-: xref:osx-commons.adoc#IProposal-execute-uint256-
+:xref-IProposal-canExecute-uint256-: xref:osx-commons.adoc#IProposal-canExecute-uint256-
+:xref-IProposal-customProposalParamsABI--: xref:osx-commons.adoc#IProposal-customProposalParamsABI--
+:xref-IProposal-ProposalCreated-uint256-address-uint64-uint64-bytes-struct-Action---uint256-: xref:osx-commons.adoc#IProposal-ProposalCreated-uint256-address-uint64-uint64-bytes-struct-Action---uint256-
+:xref-IProposal-ProposalExecuted-uint256-: xref:osx-commons.adoc#IProposal-ProposalExecuted-uint256-
+:xref-IMembership-isMember-address-: xref:osx-commons.adoc#IMembership-isMember-address-
+:xref-IMembership-MembersAdded-address---: xref:osx-commons.adoc#IMembership-MembersAdded-address---
+:xref-IMembership-MembersRemoved-address---: xref:osx-commons.adoc#IMembership-MembersRemoved-address---
+:xref-IMembership-MembershipContractAnnounced-address-: xref:osx-commons.adoc#IMembership-MembershipContractAnnounced-address-
+:xref-Addresslist-isListedAtBlock-address-uint256-: xref:osx-commons.adoc#Addresslist-isListedAtBlock-address-uint256-
+:xref-Addresslist-isListed-address-: xref:osx-commons.adoc#Addresslist-isListed-address-
+:xref-Addresslist-addresslistLengthAtBlock-uint256-: xref:osx-commons.adoc#Addresslist-addresslistLengthAtBlock-uint256-
+:xref-Addresslist-addresslistLength--: xref:osx-commons.adoc#Addresslist-addresslistLength--
+:xref-Addresslist-_addAddresses-address---: xref:osx-commons.adoc#Addresslist-_addAddresses-address---
+:xref-Addresslist-_removeAddresses-address---: xref:osx-commons.adoc#Addresslist-_removeAddresses-address---
+:xref-MetadataExtension-supportsInterface-bytes4-: xref:osx-commons.adoc#MetadataExtension-supportsInterface-bytes4-
+:xref-MetadataExtension-setMetadata-bytes-: xref:osx-commons.adoc#MetadataExtension-setMetadata-bytes-
+:xref-MetadataExtension-getMetadata--: xref:osx-commons.adoc#MetadataExtension-getMetadata--
+:xref-MetadataExtension-_setMetadata-bytes-: xref:osx-commons.adoc#MetadataExtension-_setMetadata-bytes-
+:xref-MetadataExtension-SET_METADATA_PERMISSION_ID-bytes32: xref:osx-commons.adoc#MetadataExtension-SET_METADATA_PERMISSION_ID-bytes32
+:xref-DaoAuthorizable-dao--: xref:osx-commons.adoc#DaoAuthorizable-dao--
+:xref-MetadataExtension-MetadataSet-bytes-: xref:osx-commons.adoc#MetadataExtension-MetadataSet-bytes-
+:xref-MetadataExtensionUpgradeable-supportsInterface-bytes4-: xref:osx-commons.adoc#MetadataExtensionUpgradeable-supportsInterface-bytes4-
+:xref-MetadataExtensionUpgradeable-setMetadata-bytes-: xref:osx-commons.adoc#MetadataExtensionUpgradeable-setMetadata-bytes-
+:xref-MetadataExtensionUpgradeable-getMetadata--: xref:osx-commons.adoc#MetadataExtensionUpgradeable-getMetadata--
+:xref-MetadataExtensionUpgradeable-_setMetadata-bytes-: xref:osx-commons.adoc#MetadataExtensionUpgradeable-_setMetadata-bytes-
+:xref-MetadataExtensionUpgradeable-SET_METADATA_PERMISSION_ID-bytes32: xref:osx-commons.adoc#MetadataExtensionUpgradeable-SET_METADATA_PERMISSION_ID-bytes32
+:xref-DaoAuthorizableUpgradeable-__DaoAuthorizableUpgradeable_init-contract-IDAO-: xref:osx-commons.adoc#DaoAuthorizableUpgradeable-__DaoAuthorizableUpgradeable_init-contract-IDAO-
+:xref-DaoAuthorizableUpgradeable-dao--: xref:osx-commons.adoc#DaoAuthorizableUpgradeable-dao--
+:xref-MetadataExtensionUpgradeable-MetadataSet-bytes-: xref:osx-commons.adoc#MetadataExtensionUpgradeable-MetadataSet-bytes-
+:xref-ProtocolVersion-protocolVersion--: xref:osx-commons.adoc#ProtocolVersion-protocolVersion--
+:xref-ProxyFactory-constructor-address-: xref:osx-commons.adoc#ProxyFactory-constructor-address-
+:xref-ProxyFactory-deployUUPSProxy-bytes-: xref:osx-commons.adoc#ProxyFactory-deployUUPSProxy-bytes-
+:xref-ProxyFactory-deployMinimalProxy-bytes-: xref:osx-commons.adoc#ProxyFactory-deployMinimalProxy-bytes-
+:xref-ProxyFactory-implementation--: xref:osx-commons.adoc#ProxyFactory-implementation--
+:xref-ProxyFactory-ProxyCreated-address-: xref:osx-commons.adoc#ProxyFactory-ProxyCreated-address-
+:xref-ProxyLib-deployUUPSProxy-address-bytes-: xref:osx-commons.adoc#ProxyLib-deployUUPSProxy-address-bytes-
+:xref-ProxyLib-deployMinimalProxy-address-bytes-: xref:osx-commons.adoc#ProxyLib-deployMinimalProxy-address-bytes-
+:xref-PermissionCondition-supportsInterface-bytes4-: xref:osx-commons.adoc#PermissionCondition-supportsInterface-bytes4-
+:xref-ProtocolVersion-protocolVersion--: xref:osx-commons.adoc#ProtocolVersion-protocolVersion--
+:xref-IPermissionCondition-isGranted-address-address-bytes32-bytes-: xref:osx-commons.adoc#IPermissionCondition-isGranted-address-address-bytes32-bytes-
+:xref-PermissionConditionUpgradeable-supportsInterface-bytes4-: xref:osx-commons.adoc#PermissionConditionUpgradeable-supportsInterface-bytes4-
+:xref-ProtocolVersion-protocolVersion--: xref:osx-commons.adoc#ProtocolVersion-protocolVersion--
+:xref-IPermissionCondition-isGranted-address-address-bytes32-bytes-: xref:osx-commons.adoc#IPermissionCondition-isGranted-address-address-bytes32-bytes-
+:xref-RuledCondition-supportsInterface-bytes4-: xref:osx-commons.adoc#RuledCondition-supportsInterface-bytes4-
+:xref-RuledCondition-getRules--: xref:osx-commons.adoc#RuledCondition-getRules--
+:xref-RuledCondition-_updateRules-struct-RuledCondition-Rule---: xref:osx-commons.adoc#RuledCondition-_updateRules-struct-RuledCondition-Rule---
+:xref-RuledCondition-_evalRule-uint32-address-address-bytes32-uint256---: xref:osx-commons.adoc#RuledCondition-_evalRule-uint32-address-address-bytes32-uint256---
+:xref-RuledCondition-_evalLogic-struct-RuledCondition-Rule-address-address-bytes32-uint256---: xref:osx-commons.adoc#RuledCondition-_evalLogic-struct-RuledCondition-Rule-address-address-bytes32-uint256---
+:xref-RuledCondition-_checkCondition-contract-IPermissionCondition-address-address-bytes32-uint256---: xref:osx-commons.adoc#RuledCondition-_checkCondition-contract-IPermissionCondition-address-address-bytes32-uint256---
+:xref-RuledCondition-_compare-uint256-uint256-enum-RuledCondition-Op-: xref:osx-commons.adoc#RuledCondition-_compare-uint256-uint256-enum-RuledCondition-Op-
+:xref-RuledCondition-encodeIfElse-uint256-uint256-uint256-: xref:osx-commons.adoc#RuledCondition-encodeIfElse-uint256-uint256-uint256-
+:xref-RuledCondition-encodeLogicalOperator-uint256-uint256-: xref:osx-commons.adoc#RuledCondition-encodeLogicalOperator-uint256-uint256-
+:xref-RuledCondition-decodeRuleValue-uint256-: xref:osx-commons.adoc#RuledCondition-decodeRuleValue-uint256-
+:xref-ProtocolVersion-protocolVersion--: xref:osx-commons.adoc#ProtocolVersion-protocolVersion--
+:xref-IPermissionCondition-isGranted-address-address-bytes32-bytes-: xref:osx-commons.adoc#IPermissionCondition-isGranted-address-address-bytes32-bytes-
+:xref-RuledCondition-RulesUpdated-struct-RuledCondition-Rule---: xref:osx-commons.adoc#RuledCondition-RulesUpdated-struct-RuledCondition-Rule---
+= OSX Commons
+
+This is the reference guide for the link:https://github.com/aragon/osx-commons[osx-commons-contracts] package.
+
+== Core
+
+:hasPermission: pass:normal[xref:#IDAO-hasPermission-address-address-bytes32-bytes-[`++hasPermission++`]]
+:setMetadata: pass:normal[xref:#IDAO-setMetadata-bytes-[`++setMetadata++`]]
+:MetadataSet: pass:normal[xref:#IDAO-MetadataSet-bytes-[`++MetadataSet++`]]
+:StandardCallbackRegistered: pass:normal[xref:#IDAO-StandardCallbackRegistered-bytes4-bytes4-bytes4-[`++StandardCallbackRegistered++`]]
+:deposit: pass:normal[xref:#IDAO-deposit-address-uint256-string-[`++deposit++`]]
+:Deposited: pass:normal[xref:#IDAO-Deposited-address-address-uint256-string-[`++Deposited++`]]
+:NativeTokenDeposited: pass:normal[xref:#IDAO-NativeTokenDeposited-address-uint256-[`++NativeTokenDeposited++`]]
+:setTrustedForwarder: pass:normal[xref:#IDAO-setTrustedForwarder-address-[`++setTrustedForwarder++`]]
+:getTrustedForwarder: pass:normal[xref:#IDAO-getTrustedForwarder--[`++getTrustedForwarder++`]]
+:TrustedForwarderSet: pass:normal[xref:#IDAO-TrustedForwarderSet-address-[`++TrustedForwarderSet++`]]
+:isValidSignature: pass:normal[xref:#IDAO-isValidSignature-bytes32-bytes-[`++isValidSignature++`]]
+:registerStandardCallback: pass:normal[xref:#IDAO-registerStandardCallback-bytes4-bytes4-bytes4-[`++registerStandardCallback++`]]
+:setSignatureValidator: pass:normal[xref:#IDAO-setSignatureValidator-address-[`++setSignatureValidator++`]]
+
+[.contract]
+[[IDAO]]
+=== `++IDAO++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/dao/IDAO.sol[{github-icon},role=heading-link]
+
+[.contract-index]
+.Functions
+--
+* {xref-IDAO-hasPermission-address-address-bytes32-bytes-}[`++hasPermission(_where, _who, _permissionId, _data)++`]
+* {xref-IDAO-setMetadata-bytes-}[`++setMetadata(_metadata)++`]
+* {xref-IDAO-deposit-address-uint256-string-}[`++deposit(_token, _amount, _reference)++`]
+* {xref-IDAO-setTrustedForwarder-address-}[`++setTrustedForwarder(_trustedForwarder)++`]
+* {xref-IDAO-getTrustedForwarder--}[`++getTrustedForwarder()++`]
+* {xref-IDAO-isValidSignature-bytes32-bytes-}[`++isValidSignature(_hash, _signature)++`]
+* {xref-IDAO-registerStandardCallback-bytes4-bytes4-bytes4-}[`++registerStandardCallback(_interfaceId, _callbackSelector, _magicNumber)++`]
+* {xref-IDAO-setSignatureValidator-address-}[`++setSignatureValidator()++`]
+
+--
+
+[.contract-index]
+.Events
+--
+* {xref-IDAO-MetadataSet-bytes-}[`++MetadataSet(metadata)++`]
+* {xref-IDAO-StandardCallbackRegistered-bytes4-bytes4-bytes4-}[`++StandardCallbackRegistered(interfaceId, callbackSelector, magicNumber)++`]
+* {xref-IDAO-Deposited-address-address-uint256-string-}[`++Deposited(sender, token, amount, _reference)++`]
+* {xref-IDAO-NativeTokenDeposited-address-uint256-}[`++NativeTokenDeposited(sender, amount)++`]
+* {xref-IDAO-TrustedForwarderSet-address-}[`++TrustedForwarderSet(forwarder)++`]
+
+--
+
+[.contract-item]
+[[IDAO-hasPermission-address-address-bytes32-bytes-]]
+==== `[.contract-item-name]#++hasPermission++#++(address _where, address _who, bytes32 _permissionId, bytes _data) → bool++` [.item-kind]#external#
+
+Checks if an address has permission on a contract via a permission identifier and considers if &#x60;ANY_ADDRESS&#x60; was used in the granting process.
+
+[.contract-item]
+[[IDAO-setMetadata-bytes-]]
+==== `[.contract-item-name]#++setMetadata++#++(bytes _metadata)++` [.item-kind]#external#
+
+Updates the DAO metadata (e.g., an IPFS hash).
+
+[.contract-item]
+[[IDAO-deposit-address-uint256-string-]]
+==== `[.contract-item-name]#++deposit++#++(address _token, uint256 _amount, string _reference)++` [.item-kind]#external#
+
+Deposits (native) tokens to the DAO contract with a reference string.
+
+[.contract-item]
+[[IDAO-setTrustedForwarder-address-]]
+==== `[.contract-item-name]#++setTrustedForwarder++#++(address _trustedForwarder)++` [.item-kind]#external#
+
+Setter for the trusted forwarder verifying the meta transaction.
+
+[.contract-item]
+[[IDAO-getTrustedForwarder--]]
+==== `[.contract-item-name]#++getTrustedForwarder++#++() → address++` [.item-kind]#external#
+
+Getter for the trusted forwarder verifying the meta transaction.
+
+[.contract-item]
+[[IDAO-isValidSignature-bytes32-bytes-]]
+==== `[.contract-item-name]#++isValidSignature++#++(bytes32 _hash, bytes _signature) → bytes4++` [.item-kind]#external#
+
+Checks whether a signature is valid for a provided hash according to [ERC-1271](https://eips.ethereum.org/EIPS/eip-1271).
+
+[.contract-item]
+[[IDAO-registerStandardCallback-bytes4-bytes4-bytes4-]]
+==== `[.contract-item-name]#++registerStandardCallback++#++(bytes4 _interfaceId, bytes4 _callbackSelector, bytes4 _magicNumber)++` [.item-kind]#external#
+
+Registers an ERC standard having a callback by registering its [ERC-165](https://eips.ethereum.org/EIPS/eip-165) interface ID and callback function signature.
+
+[.contract-item]
+[[IDAO-setSignatureValidator-address-]]
+==== `[.contract-item-name]#++setSignatureValidator++#++(address)++` [.item-kind]#external#
+
+Removed function being left here to not corrupt the IDAO interface ID. Any call will revert.
+
+Introduced in v1.0.0. Removed in v1.4.0.
+
+[.contract-item]
+[[IDAO-MetadataSet-bytes-]]
+==== `[.contract-item-name]#++MetadataSet++#++(bytes metadata)++` [.item-kind]#event#
+
+Emitted when the DAO metadata is updated.
+
+[.contract-item]
+[[IDAO-StandardCallbackRegistered-bytes4-bytes4-bytes4-]]
+==== `[.contract-item-name]#++StandardCallbackRegistered++#++(bytes4 interfaceId, bytes4 callbackSelector, bytes4 magicNumber)++` [.item-kind]#event#
+
+Emitted when a standard callback is registered.
+
+[.contract-item]
+[[IDAO-Deposited-address-address-uint256-string-]]
+==== `[.contract-item-name]#++Deposited++#++(address indexed sender, address indexed token, uint256 amount, string _reference)++` [.item-kind]#event#
+
+Emitted when a token deposit has been made to the DAO.
+
+[.contract-item]
+[[IDAO-NativeTokenDeposited-address-uint256-]]
+==== `[.contract-item-name]#++NativeTokenDeposited++#++(address sender, uint256 amount)++` [.item-kind]#event#
+
+Emitted when a native token deposit has been made to the DAO.
+
+This event is intended to be emitted in the &#x60;receive&#x60; function and is therefore bound by the gas limitations for &#x60;send&#x60;/&#x60;transfer&#x60; calls introduced by [ERC-2929](https://eips.ethereum.org/EIPS/eip-2929).
+
+[.contract-item]
+[[IDAO-TrustedForwarderSet-address-]]
+==== `[.contract-item-name]#++TrustedForwarderSet++#++(address forwarder)++` [.item-kind]#event#
+
+Emitted when a new TrustedForwarder is set on the DAO.
+
+:MAX_ACTIONS: pass:normal[xref:#Executor-MAX_ACTIONS-uint256[`++MAX_ACTIONS++`]]
+:TooManyActions: pass:normal[xref:#Executor-TooManyActions--[`++TooManyActions++`]]
+:InsufficientGas: pass:normal[xref:#Executor-InsufficientGas--[`++InsufficientGas++`]]
+:ActionFailed: pass:normal[xref:#Executor-ActionFailed-uint256-[`++ActionFailed++`]]
+:ReentrantCall: pass:normal[xref:#Executor-ReentrantCall--[`++ReentrantCall++`]]
+:constructor: pass:normal[xref:#Executor-constructor--[`++constructor++`]]
+:nonReentrant: pass:normal[xref:#Executor-nonReentrant--[`++nonReentrant++`]]
+:supportsInterface: pass:normal[xref:#Executor-supportsInterface-bytes4-[`++supportsInterface++`]]
+:execute: pass:normal[xref:#Executor-execute-bytes32-struct-Action---uint256-[`++execute++`]]
+
+[.contract]
+[[Executor]]
+=== `++Executor++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/executors/Executor.sol[{github-icon},role=heading-link]
+
+This doesn't use any type of permission for execution and can be called by anyone.
+     Most useful use-case is to deploy it as non-upgradeable and call from another contract via delegatecall.
+     If used with delegatecall, DO NOT add state variables in sequential slots, otherwise this will overwrite
+     the storage of the calling contract.
+
+[.contract-index]
+.Modifiers
+--
+* {xref-Executor-nonReentrant--}[`++nonReentrant()++`]
+
+--
+
+[.contract-index]
+.Functions
+--
+* {xref-Executor-constructor--}[`++constructor()++`]
+* {xref-Executor-supportsInterface-bytes4-}[`++supportsInterface(_interfaceId)++`]
+* {xref-Executor-execute-bytes32-struct-Action---uint256-}[`++execute(_callId, _actions, _allowFailureMap)++`]
+
+[.contract-subindex-inherited]
+.ERC165
+
+[.contract-subindex-inherited]
+.IERC165
+
+[.contract-subindex-inherited]
+.IExecutor
+
+--
+
+[.contract-index]
+.Events
+--
+
+[.contract-subindex-inherited]
+.ERC165
+
+[.contract-subindex-inherited]
+.IERC165
+
+[.contract-subindex-inherited]
+.IExecutor
+* {xref-IExecutor-Executed-address-bytes32-struct-Action---uint256-uint256-bytes---}[`++Executed(actor, callId, actions, allowFailureMap, failureMap, execResults)++`]
+
+--
+
+[.contract-index]
+.Errors
+--
+
+[.contract-subindex-inherited]
+.ERC165
+
+[.contract-subindex-inherited]
+.IERC165
+
+[.contract-subindex-inherited]
+.IExecutor
+
+--
+
+[.contract-index]
+.Internal Variables
+--
+
+[.contract-subindex-inherited]
+.ERC165
+
+[.contract-subindex-inherited]
+.IERC165
+
+[.contract-subindex-inherited]
+.IExecutor
+
+--
+
+[.contract-item]
+[[Executor-nonReentrant--]]
+==== `[.contract-item-name]#++nonReentrant++#++()++` [.item-kind]#modifier#
+
+Prevents reentrant calls to a function.
+
+This modifier checks the reentrancy status before function execution. If already entered, it reverts with
+     &#x60;ReentrantCall()&#x60;. Sets the status to &#x60;_ENTERED&#x60; during execution and resets it to &#x60;_NOT_ENTERED&#x60; afterward.
+
+[.contract-item]
+[[Executor-constructor--]]
+==== `[.contract-item-name]#++constructor++#++()++` [.item-kind]#public#
+
+Initializes the contract with a non-entered reentrancy status.
+
+Sets the reentrancy guard status to &#x60;_NOT_ENTERED&#x60; to prevent reentrant calls from the start.
+
+[.contract-item]
+[[Executor-supportsInterface-bytes4-]]
+==== `[.contract-item-name]#++supportsInterface++#++(bytes4 _interfaceId) → bool++` [.item-kind]#public#
+
+Checks if this or the parent contract supports an interface by its ID.
+
+[.contract-item]
+[[Executor-execute-bytes32-struct-Action---uint256-]]
+==== `[.contract-item-name]#++execute++#++(bytes32 _callId, struct Action[] _actions, uint256 _allowFailureMap) → bytes[] execResults, uint256 failureMap++` [.item-kind]#public#
+
+Executes a list of actions. If a zero allow-failure map is provided, a failing action reverts the entire execution. If a non-zero allow-failure map is provided, allowed actions can fail without the entire call being reverted.
+
+[.contract-item]
+[[Executor-TooManyActions--]]
+==== `[.contract-item-name]#++TooManyActions++#++()++` [.item-kind]#error#
+
+Thrown if the action array length is larger than &#x60;MAX_ACTIONS&#x60;.
+
+[.contract-item]
+[[Executor-InsufficientGas--]]
+==== `[.contract-item-name]#++InsufficientGas++#++()++` [.item-kind]#error#
+
+Thrown if an action has insufficient gas left.
+
+[.contract-item]
+[[Executor-ActionFailed-uint256-]]
+==== `[.contract-item-name]#++ActionFailed++#++(uint256 index)++` [.item-kind]#error#
+
+Thrown if action execution has failed.
+
+[.contract-item]
+[[Executor-ReentrantCall--]]
+==== `[.contract-item-name]#++ReentrantCall++#++()++` [.item-kind]#error#
+
+Thrown if a call is reentrant.
+
+[.contract-item]
+[[Executor-MAX_ACTIONS-uint256]]
+==== `uint256 [.contract-item-name]#++MAX_ACTIONS++#` [.item-kind]#internal constant#
+
+The internal constant storing the maximal action array length.
+
+:NO_CONDITION: pass:normal[xref:#PermissionLib-NO_CONDITION-address[`++NO_CONDITION++`]]
+:Operation: pass:normal[xref:#PermissionLib-Operation[`++Operation++`]]
+:SingleTargetPermission: pass:normal[xref:#PermissionLib-SingleTargetPermission[`++SingleTargetPermission++`]]
+:MultiTargetPermission: pass:normal[xref:#PermissionLib-MultiTargetPermission[`++MultiTargetPermission++`]]
+
+[.contract]
+[[PermissionLib]]
+=== `++PermissionLib++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/permission/PermissionLib.sol[{github-icon},role=heading-link]
+
+[.contract-index]
+.Functions
+--
+* {xref-PermissionLib-NO_CONDITION-address}[`++NO_CONDITION()++`]
+
+--
+
+[.contract-item]
+[[PermissionLib-NO_CONDITION-address]]
+==== `[.contract-item-name]#++NO_CONDITION++#++() → address++` [.item-kind]#public#
+
+A constant expressing that no condition is applied to a permission.
+
+== Plugins
+
+:InvalidTargetConfig: pass:normal[xref:#Plugin-InvalidTargetConfig-struct-IPlugin-TargetConfig-[`++InvalidTargetConfig++`]]
+:TargetSet: pass:normal[xref:#Plugin-TargetSet-struct-IPlugin-TargetConfig-[`++TargetSet++`]]
+:DelegateCallFailed: pass:normal[xref:#Plugin-DelegateCallFailed--[`++DelegateCallFailed++`]]
+:SET_TARGET_CONFIG_PERMISSION_ID: pass:normal[xref:#Plugin-SET_TARGET_CONFIG_PERMISSION_ID-bytes32[`++SET_TARGET_CONFIG_PERMISSION_ID++`]]
+:constructor: pass:normal[xref:#Plugin-constructor-contract-IDAO-[`++constructor++`]]
+:pluginType: pass:normal[xref:#Plugin-pluginType--[`++pluginType++`]]
+:getCurrentTargetConfig: pass:normal[xref:#Plugin-getCurrentTargetConfig--[`++getCurrentTargetConfig++`]]
+:getTargetConfig: pass:normal[xref:#Plugin-getTargetConfig--[`++getTargetConfig++`]]
+:setTargetConfig: pass:normal[xref:#Plugin-setTargetConfig-struct-IPlugin-TargetConfig-[`++setTargetConfig++`]]
+:supportsInterface: pass:normal[xref:#Plugin-supportsInterface-bytes4-[`++supportsInterface++`]]
+:_setTargetConfig: pass:normal[xref:#Plugin-_setTargetConfig-struct-IPlugin-TargetConfig-[`++_setTargetConfig++`]]
+:_execute: pass:normal[xref:#Plugin-_execute-bytes32-struct-Action---uint256-[`++_execute++`]]
+:_execute: pass:normal[xref:#Plugin-_execute-address-bytes32-struct-Action---uint256-enum-IPlugin-Operation-[`++_execute++`]]
+
+[.contract]
+[[Plugin]]
+=== `++Plugin++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/plugin/Plugin.sol[{github-icon},role=heading-link]
+
+[.contract-index]
+.Functions
+--
+* {xref-Plugin-constructor-contract-IDAO-}[`++constructor(_dao)++`]
+* {xref-Plugin-pluginType--}[`++pluginType()++`]
+* {xref-Plugin-getCurrentTargetConfig--}[`++getCurrentTargetConfig()++`]
+* {xref-Plugin-getTargetConfig--}[`++getTargetConfig()++`]
+* {xref-Plugin-setTargetConfig-struct-IPlugin-TargetConfig-}[`++setTargetConfig(_targetConfig)++`]
+* {xref-Plugin-supportsInterface-bytes4-}[`++supportsInterface(_interfaceId)++`]
+* {xref-Plugin-_setTargetConfig-struct-IPlugin-TargetConfig-}[`++_setTargetConfig(_targetConfig)++`]
+* {xref-Plugin-_execute-bytes32-struct-Action---uint256-}[`++_execute(_callId, _actions, _allowFailureMap)++`]
+* {xref-Plugin-_execute-address-bytes32-struct-Action---uint256-enum-IPlugin-Operation-}[`++_execute(_target, _callId, _actions, _allowFailureMap, _op)++`]
+* {xref-Plugin-SET_TARGET_CONFIG_PERMISSION_ID-bytes32}[`++SET_TARGET_CONFIG_PERMISSION_ID()++`]
+
+[.contract-subindex-inherited]
+.ProtocolVersion
+* {xref-ProtocolVersion-protocolVersion--}[`++protocolVersion()++`]
+
+[.contract-subindex-inherited]
+.IProtocolVersion
+
+[.contract-subindex-inherited]
+.DaoAuthorizable
+* {xref-DaoAuthorizable-dao--}[`++dao()++`]
+
+[.contract-subindex-inherited]
+.ERC165
+
+[.contract-subindex-inherited]
+.IERC165
+
+[.contract-subindex-inherited]
+.IPlugin
+
+--
+
+[.contract-index]
+.Events
+--
+* {xref-Plugin-TargetSet-struct-IPlugin-TargetConfig-}[`++TargetSet(newTargetConfig)++`]
+
+[.contract-subindex-inherited]
+.ProtocolVersion
+
+[.contract-subindex-inherited]
+.IProtocolVersion
+
+[.contract-subindex-inherited]
+.DaoAuthorizable
+
+[.contract-subindex-inherited]
+.ERC165
+
+[.contract-subindex-inherited]
+.IERC165
+
+[.contract-subindex-inherited]
+.IPlugin
+
+--
+
+[.contract-index]
+.Errors
+--
+
+[.contract-subindex-inherited]
+.ProtocolVersion
+
+[.contract-subindex-inherited]
+.IProtocolVersion
+
+[.contract-subindex-inherited]
+.DaoAuthorizable
+
+[.contract-subindex-inherited]
+.ERC165
+
+[.contract-subindex-inherited]
+.IERC165
+
+[.contract-subindex-inherited]
+.IPlugin
+
+--
+
+[.contract-item]
+[[Plugin-constructor-contract-IDAO-]]
+==== `[.contract-item-name]#++constructor++#++(contract IDAO _dao)++` [.item-kind]#internal#
+
+Constructs the plugin by storing the associated DAO.
+
+[.contract-item]
+[[Plugin-pluginType--]]
+==== `[.contract-item-name]#++pluginType++#++() → enum IPlugin.PluginType++` [.item-kind]#public#
+
+Returns the plugin&#x27;s type
+
+[.contract-item]
+[[Plugin-getCurrentTargetConfig--]]
+==== `[.contract-item-name]#++getCurrentTargetConfig++#++() → struct IPlugin.TargetConfig++` [.item-kind]#public#
+
+Returns the currently set target contract.
+
+[.contract-item]
+[[Plugin-getTargetConfig--]]
+==== `[.contract-item-name]#++getTargetConfig++#++() → struct IPlugin.TargetConfig++` [.item-kind]#public#
+
+A convenient function to get current target config only if its target is not address(0), otherwise dao().
+
+[.contract-item]
+[[Plugin-setTargetConfig-struct-IPlugin-TargetConfig-]]
+==== `[.contract-item-name]#++setTargetConfig++#++(struct IPlugin.TargetConfig _targetConfig)++` [.item-kind]#public#
+
+Sets the target to a new target (&#x60;newTarget&#x60;).
+The caller must have the &#x60;SET_TARGET_CONFIG_PERMISSION_ID&#x60; permission.
+
+[.contract-item]
+[[Plugin-supportsInterface-bytes4-]]
+==== `[.contract-item-name]#++supportsInterface++#++(bytes4 _interfaceId) → bool++` [.item-kind]#public#
+
+Checks if an interface is supported by this or its parent contract.
+
+[.contract-item]
+[[Plugin-_setTargetConfig-struct-IPlugin-TargetConfig-]]
+==== `[.contract-item-name]#++_setTargetConfig++#++(struct IPlugin.TargetConfig _targetConfig)++` [.item-kind]#internal#
+
+Sets the target to a new target (&#x60;newTarget&#x60;).
+
+[.contract-item]
+[[Plugin-_execute-bytes32-struct-Action---uint256-]]
+==== `[.contract-item-name]#++_execute++#++(bytes32 _callId, struct Action[] _actions, uint256 _allowFailureMap) → bytes[] execResults, uint256 failureMap++` [.item-kind]#internal#
+
+Forwards the actions to the currently set &#x60;target&#x60; for the execution.
+
+If target is not set, passes actions to the dao.
+
+[.contract-item]
+[[Plugin-_execute-address-bytes32-struct-Action---uint256-enum-IPlugin-Operation-]]
+==== `[.contract-item-name]#++_execute++#++(address _target, bytes32 _callId, struct Action[] _actions, uint256 _allowFailureMap, enum IPlugin.Operation _op) → bytes[] execResults, uint256 failureMap++` [.item-kind]#internal#
+
+Forwards the actions to the &#x60;target&#x60; for the execution.
+
+[.contract-item]
+[[Plugin-SET_TARGET_CONFIG_PERMISSION_ID-bytes32]]
+==== `[.contract-item-name]#++SET_TARGET_CONFIG_PERMISSION_ID++#++() → bytes32++` [.item-kind]#public#
+
+The ID of the permission required to call the &#x60;setTargetConfig&#x60; function.
+
+[.contract-item]
+[[Plugin-TargetSet-struct-IPlugin-TargetConfig-]]
+==== `[.contract-item-name]#++TargetSet++#++(struct IPlugin.TargetConfig newTargetConfig)++` [.item-kind]#event#
+
+Emitted each time the TargetConfig is set.
+
+[.contract-item]
+[[Plugin-InvalidTargetConfig-struct-IPlugin-TargetConfig-]]
+==== `[.contract-item-name]#++InvalidTargetConfig++#++(struct IPlugin.TargetConfig targetConfig)++` [.item-kind]#error#
+
+Thrown when target is of type &#x27;IDAO&#x27;, but operation is &#x60;delegateCall&#x60;.
+
+[.contract-item]
+[[Plugin-DelegateCallFailed--]]
+==== `[.contract-item-name]#++DelegateCallFailed++#++()++` [.item-kind]#error#
+
+Thrown when &#x60;delegatecall&#x60; fails.
+
+:InvalidTargetConfig: pass:normal[xref:#PluginCloneable-InvalidTargetConfig-struct-IPlugin-TargetConfig-[`++InvalidTargetConfig++`]]
+:DelegateCallFailed: pass:normal[xref:#PluginCloneable-DelegateCallFailed--[`++DelegateCallFailed++`]]
+:TargetSet: pass:normal[xref:#PluginCloneable-TargetSet-struct-IPlugin-TargetConfig-[`++TargetSet++`]]
+:SET_TARGET_CONFIG_PERMISSION_ID: pass:normal[xref:#PluginCloneable-SET_TARGET_CONFIG_PERMISSION_ID-bytes32[`++SET_TARGET_CONFIG_PERMISSION_ID++`]]
+:constructor: pass:normal[xref:#PluginCloneable-constructor--[`++constructor++`]]
+:__PluginCloneable_init: pass:normal[xref:#PluginCloneable-__PluginCloneable_init-contract-IDAO-[`++__PluginCloneable_init++`]]
+:setTargetConfig: pass:normal[xref:#PluginCloneable-setTargetConfig-struct-IPlugin-TargetConfig-[`++setTargetConfig++`]]
+:pluginType: pass:normal[xref:#PluginCloneable-pluginType--[`++pluginType++`]]
+:getCurrentTargetConfig: pass:normal[xref:#PluginCloneable-getCurrentTargetConfig--[`++getCurrentTargetConfig++`]]
+:getTargetConfig: pass:normal[xref:#PluginCloneable-getTargetConfig--[`++getTargetConfig++`]]
+:supportsInterface: pass:normal[xref:#PluginCloneable-supportsInterface-bytes4-[`++supportsInterface++`]]
+:_setTargetConfig: pass:normal[xref:#PluginCloneable-_setTargetConfig-struct-IPlugin-TargetConfig-[`++_setTargetConfig++`]]
+:_execute: pass:normal[xref:#PluginCloneable-_execute-bytes32-struct-Action---uint256-[`++_execute++`]]
+:_execute: pass:normal[xref:#PluginCloneable-_execute-address-bytes32-struct-Action---uint256-enum-IPlugin-Operation-[`++_execute++`]]
+
+[.contract]
+[[PluginCloneable]]
+=== `++PluginCloneable++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/plugin/PluginCloneable.sol[{github-icon},role=heading-link]
+
+[.contract-index]
+.Functions
+--
+* {xref-PluginCloneable-constructor--}[`++constructor()++`]
+* {xref-PluginCloneable-__PluginCloneable_init-contract-IDAO-}[`++__PluginCloneable_init(_dao)++`]
+* {xref-PluginCloneable-setTargetConfig-struct-IPlugin-TargetConfig-}[`++setTargetConfig(_targetConfig)++`]
+* {xref-PluginCloneable-pluginType--}[`++pluginType()++`]
+* {xref-PluginCloneable-getCurrentTargetConfig--}[`++getCurrentTargetConfig()++`]
+* {xref-PluginCloneable-getTargetConfig--}[`++getTargetConfig()++`]
+* {xref-PluginCloneable-supportsInterface-bytes4-}[`++supportsInterface(_interfaceId)++`]
+* {xref-PluginCloneable-_setTargetConfig-struct-IPlugin-TargetConfig-}[`++_setTargetConfig(_targetConfig)++`]
+* {xref-PluginCloneable-_execute-bytes32-struct-Action---uint256-}[`++_execute(_callId, _actions, _allowFailureMap)++`]
+* {xref-PluginCloneable-_execute-address-bytes32-struct-Action---uint256-enum-IPlugin-Operation-}[`++_execute(_target, _callId, _actions, _allowFailureMap, _op)++`]
+* {xref-PluginCloneable-SET_TARGET_CONFIG_PERMISSION_ID-bytes32}[`++SET_TARGET_CONFIG_PERMISSION_ID()++`]
+
+[.contract-subindex-inherited]
+.ProtocolVersion
+* {xref-ProtocolVersion-protocolVersion--}[`++protocolVersion()++`]
+
+[.contract-subindex-inherited]
+.IProtocolVersion
+
+[.contract-subindex-inherited]
+.DaoAuthorizableUpgradeable
+* {xref-DaoAuthorizableUpgradeable-__DaoAuthorizableUpgradeable_init-contract-IDAO-}[`++__DaoAuthorizableUpgradeable_init(_dao)++`]
+* {xref-DaoAuthorizableUpgradeable-dao--}[`++dao()++`]
+
+[.contract-subindex-inherited]
+.ContextUpgradeable
+
+[.contract-subindex-inherited]
+.ERC165Upgradeable
+
+[.contract-subindex-inherited]
+.IERC165Upgradeable
+
+[.contract-subindex-inherited]
+.Initializable
+
+[.contract-subindex-inherited]
+.IPlugin
+
+--
+
+[.contract-index]
+.Events
+--
+* {xref-PluginCloneable-TargetSet-struct-IPlugin-TargetConfig-}[`++TargetSet(newTargetConfig)++`]
+
+[.contract-subindex-inherited]
+.ProtocolVersion
+
+[.contract-subindex-inherited]
+.IProtocolVersion
+
+[.contract-subindex-inherited]
+.DaoAuthorizableUpgradeable
+
+[.contract-subindex-inherited]
+.ContextUpgradeable
+
+[.contract-subindex-inherited]
+.ERC165Upgradeable
+
+[.contract-subindex-inherited]
+.IERC165Upgradeable
+
+[.contract-subindex-inherited]
+.Initializable
+
+[.contract-subindex-inherited]
+.IPlugin
+
+--
+
+[.contract-index]
+.Errors
+--
+
+[.contract-subindex-inherited]
+.ProtocolVersion
+
+[.contract-subindex-inherited]
+.IProtocolVersion
+
+[.contract-subindex-inherited]
+.DaoAuthorizableUpgradeable
+
+[.contract-subindex-inherited]
+.ContextUpgradeable
+
+[.contract-subindex-inherited]
+.ERC165Upgradeable
+
+[.contract-subindex-inherited]
+.IERC165Upgradeable
+
+[.contract-subindex-inherited]
+.Initializable
+
+[.contract-subindex-inherited]
+.IPlugin
+
+--
+
+[.contract-item]
+[[PluginCloneable-constructor--]]
+==== `[.contract-item-name]#++constructor++#++()++` [.item-kind]#internal#
+
+Disables the initializers on the implementation contract to prevent it from being left uninitialized.
+
+[.contract-item]
+[[PluginCloneable-__PluginCloneable_init-contract-IDAO-]]
+==== `[.contract-item-name]#++__PluginCloneable_init++#++(contract IDAO _dao)++` [.item-kind]#internal#
+
+Initializes the plugin by storing the associated DAO.
+
+[.contract-item]
+[[PluginCloneable-setTargetConfig-struct-IPlugin-TargetConfig-]]
+==== `[.contract-item-name]#++setTargetConfig++#++(struct IPlugin.TargetConfig _targetConfig)++` [.item-kind]#public#
+
+Sets the target to a new target (&#x60;newTarget&#x60;).
+     The caller must have the &#x60;SET_TARGET_CONFIG_PERMISSION_ID&#x60; permission.
+
+[.contract-item]
+[[PluginCloneable-pluginType--]]
+==== `[.contract-item-name]#++pluginType++#++() → enum IPlugin.PluginType++` [.item-kind]#public#
+
+Returns the plugin&#x27;s type
+
+[.contract-item]
+[[PluginCloneable-getCurrentTargetConfig--]]
+==== `[.contract-item-name]#++getCurrentTargetConfig++#++() → struct IPlugin.TargetConfig++` [.item-kind]#public#
+
+Returns the currently set target contract.
+
+[.contract-item]
+[[PluginCloneable-getTargetConfig--]]
+==== `[.contract-item-name]#++getTargetConfig++#++() → struct IPlugin.TargetConfig++` [.item-kind]#public#
+
+A convenient function to get current target config only if its target is not address(0), otherwise dao().
+
+[.contract-item]
+[[PluginCloneable-supportsInterface-bytes4-]]
+==== `[.contract-item-name]#++supportsInterface++#++(bytes4 _interfaceId) → bool++` [.item-kind]#public#
+
+Checks if this or the parent contract supports an interface by its ID.
+
+[.contract-item]
+[[PluginCloneable-_setTargetConfig-struct-IPlugin-TargetConfig-]]
+==== `[.contract-item-name]#++_setTargetConfig++#++(struct IPlugin.TargetConfig _targetConfig)++` [.item-kind]#internal#
+
+Sets the target to a new target (&#x60;newTarget&#x60;).
+
+[.contract-item]
+[[PluginCloneable-_execute-bytes32-struct-Action---uint256-]]
+==== `[.contract-item-name]#++_execute++#++(bytes32 _callId, struct Action[] _actions, uint256 _allowFailureMap) → bytes[] execResults, uint256 failureMap++` [.item-kind]#internal#
+
+Forwards the actions to the currently set &#x60;target&#x60; for the execution.
+
+If target is not set, passes actions to the dao.
+
+[.contract-item]
+[[PluginCloneable-_execute-address-bytes32-struct-Action---uint256-enum-IPlugin-Operation-]]
+==== `[.contract-item-name]#++_execute++#++(address _target, bytes32 _callId, struct Action[] _actions, uint256 _allowFailureMap, enum IPlugin.Operation _op) → bytes[] execResults, uint256 failureMap++` [.item-kind]#internal#
+
+Forwards the actions to the &#x60;target&#x60; for the execution.
+
+[.contract-item]
+[[PluginCloneable-SET_TARGET_CONFIG_PERMISSION_ID-bytes32]]
+==== `[.contract-item-name]#++SET_TARGET_CONFIG_PERMISSION_ID++#++() → bytes32++` [.item-kind]#public#
+
+The ID of the permission required to call the &#x60;setTargetConfig&#x60; function.
+
+[.contract-item]
+[[PluginCloneable-TargetSet-struct-IPlugin-TargetConfig-]]
+==== `[.contract-item-name]#++TargetSet++#++(struct IPlugin.TargetConfig newTargetConfig)++` [.item-kind]#event#
+
+Emitted each time the TargetConfig is set.
+
+[.contract-item]
+[[PluginCloneable-InvalidTargetConfig-struct-IPlugin-TargetConfig-]]
+==== `[.contract-item-name]#++InvalidTargetConfig++#++(struct IPlugin.TargetConfig targetConfig)++` [.item-kind]#error#
+
+Thrown when target is of type &#x27;IDAO&#x27;, but operation is &#x60;delegateCall&#x60;.
+
+[.contract-item]
+[[PluginCloneable-DelegateCallFailed--]]
+==== `[.contract-item-name]#++DelegateCallFailed++#++()++` [.item-kind]#error#
+
+Thrown when &#x60;delegatecall&#x60; fails.
+
+:InvalidTargetConfig: pass:normal[xref:#PluginUUPSUpgradeable-InvalidTargetConfig-struct-IPlugin-TargetConfig-[`++InvalidTargetConfig++`]]
+:DelegateCallFailed: pass:normal[xref:#PluginUUPSUpgradeable-DelegateCallFailed--[`++DelegateCallFailed++`]]
+:AlreadyInitialized: pass:normal[xref:#PluginUUPSUpgradeable-AlreadyInitialized--[`++AlreadyInitialized++`]]
+:TargetSet: pass:normal[xref:#PluginUUPSUpgradeable-TargetSet-struct-IPlugin-TargetConfig-[`++TargetSet++`]]
+:SET_TARGET_CONFIG_PERMISSION_ID: pass:normal[xref:#PluginUUPSUpgradeable-SET_TARGET_CONFIG_PERMISSION_ID-bytes32[`++SET_TARGET_CONFIG_PERMISSION_ID++`]]
+:UPGRADE_PLUGIN_PERMISSION_ID: pass:normal[xref:#PluginUUPSUpgradeable-UPGRADE_PLUGIN_PERMISSION_ID-bytes32[`++UPGRADE_PLUGIN_PERMISSION_ID++`]]
+:constructor: pass:normal[xref:#PluginUUPSUpgradeable-constructor--[`++constructor++`]]
+:onlyCallAtInitialization: pass:normal[xref:#PluginUUPSUpgradeable-onlyCallAtInitialization--[`++onlyCallAtInitialization++`]]
+:pluginType: pass:normal[xref:#PluginUUPSUpgradeable-pluginType--[`++pluginType++`]]
+:getCurrentTargetConfig: pass:normal[xref:#PluginUUPSUpgradeable-getCurrentTargetConfig--[`++getCurrentTargetConfig++`]]
+:getTargetConfig: pass:normal[xref:#PluginUUPSUpgradeable-getTargetConfig--[`++getTargetConfig++`]]
+:__PluginUUPSUpgradeable_init: pass:normal[xref:#PluginUUPSUpgradeable-__PluginUUPSUpgradeable_init-contract-IDAO-[`++__PluginUUPSUpgradeable_init++`]]
+:setTargetConfig: pass:normal[xref:#PluginUUPSUpgradeable-setTargetConfig-struct-IPlugin-TargetConfig-[`++setTargetConfig++`]]
+:supportsInterface: pass:normal[xref:#PluginUUPSUpgradeable-supportsInterface-bytes4-[`++supportsInterface++`]]
+:implementation: pass:normal[xref:#PluginUUPSUpgradeable-implementation--[`++implementation++`]]
+:_setTargetConfig: pass:normal[xref:#PluginUUPSUpgradeable-_setTargetConfig-struct-IPlugin-TargetConfig-[`++_setTargetConfig++`]]
+:_execute: pass:normal[xref:#PluginUUPSUpgradeable-_execute-bytes32-struct-Action---uint256-[`++_execute++`]]
+:_execute: pass:normal[xref:#PluginUUPSUpgradeable-_execute-address-bytes32-struct-Action---uint256-enum-IPlugin-Operation-[`++_execute++`]]
+:_authorizeUpgrade: pass:normal[xref:#PluginUUPSUpgradeable-_authorizeUpgrade-address-[`++_authorizeUpgrade++`]]
+
+[.contract]
+[[PluginUUPSUpgradeable]]
+=== `++PluginUUPSUpgradeable++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/plugin/PluginUUPSUpgradeable.sol[{github-icon},role=heading-link]
+
+[.contract-index]
+.Modifiers
+--
+* {xref-PluginUUPSUpgradeable-onlyCallAtInitialization--}[`++onlyCallAtInitialization()++`]
+
+--
+
+[.contract-index]
+.Functions
+--
+* {xref-PluginUUPSUpgradeable-constructor--}[`++constructor()++`]
+* {xref-PluginUUPSUpgradeable-pluginType--}[`++pluginType()++`]
+* {xref-PluginUUPSUpgradeable-getCurrentTargetConfig--}[`++getCurrentTargetConfig()++`]
+* {xref-PluginUUPSUpgradeable-getTargetConfig--}[`++getTargetConfig()++`]
+* {xref-PluginUUPSUpgradeable-__PluginUUPSUpgradeable_init-contract-IDAO-}[`++__PluginUUPSUpgradeable_init(_dao)++`]
+* {xref-PluginUUPSUpgradeable-setTargetConfig-struct-IPlugin-TargetConfig-}[`++setTargetConfig(_targetConfig)++`]
+* {xref-PluginUUPSUpgradeable-supportsInterface-bytes4-}[`++supportsInterface(_interfaceId)++`]
+* {xref-PluginUUPSUpgradeable-implementation--}[`++implementation()++`]
+* {xref-PluginUUPSUpgradeable-_setTargetConfig-struct-IPlugin-TargetConfig-}[`++_setTargetConfig(_targetConfig)++`]
+* {xref-PluginUUPSUpgradeable-_execute-bytes32-struct-Action---uint256-}[`++_execute(_callId, _actions, _allowFailureMap)++`]
+* {xref-PluginUUPSUpgradeable-_execute-address-bytes32-struct-Action---uint256-enum-IPlugin-Operation-}[`++_execute(_target, _callId, _actions, _allowFailureMap, _op)++`]
+* {xref-PluginUUPSUpgradeable-_authorizeUpgrade-address-}[`++_authorizeUpgrade()++`]
+* {xref-PluginUUPSUpgradeable-SET_TARGET_CONFIG_PERMISSION_ID-bytes32}[`++SET_TARGET_CONFIG_PERMISSION_ID()++`]
+* {xref-PluginUUPSUpgradeable-UPGRADE_PLUGIN_PERMISSION_ID-bytes32}[`++UPGRADE_PLUGIN_PERMISSION_ID()++`]
+
+[.contract-subindex-inherited]
+.ProtocolVersion
+* {xref-ProtocolVersion-protocolVersion--}[`++protocolVersion()++`]
+
+[.contract-subindex-inherited]
+.IProtocolVersion
+
+[.contract-subindex-inherited]
+.DaoAuthorizableUpgradeable
+* {xref-DaoAuthorizableUpgradeable-__DaoAuthorizableUpgradeable_init-contract-IDAO-}[`++__DaoAuthorizableUpgradeable_init(_dao)++`]
+* {xref-DaoAuthorizableUpgradeable-dao--}[`++dao()++`]
+
+[.contract-subindex-inherited]
+.ContextUpgradeable
+
+[.contract-subindex-inherited]
+.UUPSUpgradeable
+
+[.contract-subindex-inherited]
+.ERC1967UpgradeUpgradeable
+
+[.contract-subindex-inherited]
+.IERC1967Upgradeable
+
+[.contract-subindex-inherited]
+.IERC1822ProxiableUpgradeable
+
+[.contract-subindex-inherited]
+.ERC165Upgradeable
+
+[.contract-subindex-inherited]
+.IERC165Upgradeable
+
+[.contract-subindex-inherited]
+.Initializable
+
+[.contract-subindex-inherited]
+.IPlugin
+
+--
+
+[.contract-index]
+.Events
+--
+* {xref-PluginUUPSUpgradeable-TargetSet-struct-IPlugin-TargetConfig-}[`++TargetSet(newTargetConfig)++`]
+
+[.contract-subindex-inherited]
+.ProtocolVersion
+
+[.contract-subindex-inherited]
+.IProtocolVersion
+
+[.contract-subindex-inherited]
+.DaoAuthorizableUpgradeable
+
+[.contract-subindex-inherited]
+.ContextUpgradeable
+
+[.contract-subindex-inherited]
+.UUPSUpgradeable
+
+[.contract-subindex-inherited]
+.ERC1967UpgradeUpgradeable
+
+[.contract-subindex-inherited]
+.IERC1967Upgradeable
+
+[.contract-subindex-inherited]
+.IERC1822ProxiableUpgradeable
+
+[.contract-subindex-inherited]
+.ERC165Upgradeable
+
+[.contract-subindex-inherited]
+.IERC165Upgradeable
+
+[.contract-subindex-inherited]
+.Initializable
+
+[.contract-subindex-inherited]
+.IPlugin
+
+--
+
+[.contract-index]
+.Errors
+--
+
+[.contract-subindex-inherited]
+.ProtocolVersion
+
+[.contract-subindex-inherited]
+.IProtocolVersion
+
+[.contract-subindex-inherited]
+.DaoAuthorizableUpgradeable
+
+[.contract-subindex-inherited]
+.ContextUpgradeable
+
+[.contract-subindex-inherited]
+.UUPSUpgradeable
+
+[.contract-subindex-inherited]
+.ERC1967UpgradeUpgradeable
+
+[.contract-subindex-inherited]
+.IERC1967Upgradeable
+
+[.contract-subindex-inherited]
+.IERC1822ProxiableUpgradeable
+
+[.contract-subindex-inherited]
+.ERC165Upgradeable
+
+[.contract-subindex-inherited]
+.IERC165Upgradeable
+
+[.contract-subindex-inherited]
+.Initializable
+
+[.contract-subindex-inherited]
+.IPlugin
+
+--
+
+[.contract-item]
+[[PluginUUPSUpgradeable-onlyCallAtInitialization--]]
+==== `[.contract-item-name]#++onlyCallAtInitialization++#++()++` [.item-kind]#modifier#
+
+This ensures that the initialize function cannot be called during the upgrade process.
+
+[.contract-item]
+[[PluginUUPSUpgradeable-constructor--]]
+==== `[.contract-item-name]#++constructor++#++()++` [.item-kind]#internal#
+
+Disables the initializers on the implementation contract to prevent it from being left uninitialized.
+
+[.contract-item]
+[[PluginUUPSUpgradeable-pluginType--]]
+==== `[.contract-item-name]#++pluginType++#++() → enum IPlugin.PluginType++` [.item-kind]#public#
+
+Returns the plugin&#x27;s type
+
+[.contract-item]
+[[PluginUUPSUpgradeable-getCurrentTargetConfig--]]
+==== `[.contract-item-name]#++getCurrentTargetConfig++#++() → struct IPlugin.TargetConfig++` [.item-kind]#public#
+
+Returns the currently set target contract.
+
+[.contract-item]
+[[PluginUUPSUpgradeable-getTargetConfig--]]
+==== `[.contract-item-name]#++getTargetConfig++#++() → struct IPlugin.TargetConfig++` [.item-kind]#public#
+
+A convenient function to get current target config only if its target is not address(0), otherwise dao().
+
+[.contract-item]
+[[PluginUUPSUpgradeable-__PluginUUPSUpgradeable_init-contract-IDAO-]]
+==== `[.contract-item-name]#++__PluginUUPSUpgradeable_init++#++(contract IDAO _dao)++` [.item-kind]#internal#
+
+Initializes the plugin by storing the associated DAO.
+
+[.contract-item]
+[[PluginUUPSUpgradeable-setTargetConfig-struct-IPlugin-TargetConfig-]]
+==== `[.contract-item-name]#++setTargetConfig++#++(struct IPlugin.TargetConfig _targetConfig)++` [.item-kind]#public#
+
+Sets the target to a new target (&#x60;newTarget&#x60;).
+     The caller must have the &#x60;SET_TARGET_CONFIG_PERMISSION_ID&#x60; permission.
+
+[.contract-item]
+[[PluginUUPSUpgradeable-supportsInterface-bytes4-]]
+==== `[.contract-item-name]#++supportsInterface++#++(bytes4 _interfaceId) → bool++` [.item-kind]#public#
+
+Checks if an interface is supported by this or its parent contract.
+
+[.contract-item]
+[[PluginUUPSUpgradeable-implementation--]]
+==== `[.contract-item-name]#++implementation++#++() → address++` [.item-kind]#public#
+
+Returns the address of the implementation contract in the [proxy storage slot](https://eips.ethereum.org/EIPS/eip-1967) slot the [UUPS proxy](https://eips.ethereum.org/EIPS/eip-1822) is pointing to.
+
+[.contract-item]
+[[PluginUUPSUpgradeable-_setTargetConfig-struct-IPlugin-TargetConfig-]]
+==== `[.contract-item-name]#++_setTargetConfig++#++(struct IPlugin.TargetConfig _targetConfig)++` [.item-kind]#internal#
+
+Sets the target to a new target (&#x60;newTarget&#x60;).
+
+[.contract-item]
+[[PluginUUPSUpgradeable-_execute-bytes32-struct-Action---uint256-]]
+==== `[.contract-item-name]#++_execute++#++(bytes32 _callId, struct Action[] _actions, uint256 _allowFailureMap) → bytes[] execResults, uint256 failureMap++` [.item-kind]#internal#
+
+Forwards the actions to the currently set &#x60;target&#x60; for the execution.
+
+If target is not set, passes actions to the dao.
+
+[.contract-item]
+[[PluginUUPSUpgradeable-_execute-address-bytes32-struct-Action---uint256-enum-IPlugin-Operation-]]
+==== `[.contract-item-name]#++_execute++#++(address _target, bytes32 _callId, struct Action[] _actions, uint256 _allowFailureMap, enum IPlugin.Operation _op) → bytes[] execResults, uint256 failureMap++` [.item-kind]#internal#
+
+Forwards the actions to the &#x60;target&#x60; for the execution.
+
+[.contract-item]
+[[PluginUUPSUpgradeable-_authorizeUpgrade-address-]]
+==== `[.contract-item-name]#++_authorizeUpgrade++#++(address)++` [.item-kind]#internal#
+
+Internal method authorizing the upgrade of the contract via the [upgradeability mechanism for UUPS proxies](https://docs.openzeppelin.com/contracts/4.x/api/proxy#UUPSUpgradeable) (see [ERC-1822](https://eips.ethereum.org/EIPS/eip-1822)).
+
+The caller must have the &#x60;UPGRADE_PLUGIN_PERMISSION_ID&#x60; permission.
+
+[.contract-item]
+[[PluginUUPSUpgradeable-SET_TARGET_CONFIG_PERMISSION_ID-bytes32]]
+==== `[.contract-item-name]#++SET_TARGET_CONFIG_PERMISSION_ID++#++() → bytes32++` [.item-kind]#public#
+
+The ID of the permission required to call the &#x60;setTargetConfig&#x60; function.
+
+[.contract-item]
+[[PluginUUPSUpgradeable-UPGRADE_PLUGIN_PERMISSION_ID-bytes32]]
+==== `[.contract-item-name]#++UPGRADE_PLUGIN_PERMISSION_ID++#++() → bytes32++` [.item-kind]#public#
+
+The ID of the permission required to call the &#x60;_authorizeUpgrade&#x60; function.
+
+[.contract-item]
+[[PluginUUPSUpgradeable-TargetSet-struct-IPlugin-TargetConfig-]]
+==== `[.contract-item-name]#++TargetSet++#++(struct IPlugin.TargetConfig newTargetConfig)++` [.item-kind]#event#
+
+Emitted each time the TargetConfig is set.
+
+[.contract-item]
+[[PluginUUPSUpgradeable-InvalidTargetConfig-struct-IPlugin-TargetConfig-]]
+==== `[.contract-item-name]#++InvalidTargetConfig++#++(struct IPlugin.TargetConfig targetConfig)++` [.item-kind]#error#
+
+Thrown when target is of type &#x27;IDAO&#x27;, but operation is &#x60;delegateCall&#x60;.
+
+[.contract-item]
+[[PluginUUPSUpgradeable-DelegateCallFailed--]]
+==== `[.contract-item-name]#++DelegateCallFailed++#++()++` [.item-kind]#error#
+
+Thrown when &#x60;delegatecall&#x60; fails.
+
+[.contract-item]
+[[PluginUUPSUpgradeable-AlreadyInitialized--]]
+==== `[.contract-item-name]#++AlreadyInitialized++#++()++` [.item-kind]#error#
+
+Thrown when initialize is called after it has already been executed.
+
+:IMPLEMENTATION: pass:normal[xref:#PluginSetup-IMPLEMENTATION-address[`++IMPLEMENTATION++`]]
+:NonUpgradeablePlugin: pass:normal[xref:#PluginSetup-NonUpgradeablePlugin--[`++NonUpgradeablePlugin++`]]
+:constructor: pass:normal[xref:#PluginSetup-constructor-address-[`++constructor++`]]
+:prepareUpdate: pass:normal[xref:#PluginSetup-prepareUpdate-address-uint16-struct-IPluginSetup-SetupPayload-[`++prepareUpdate++`]]
+:supportsInterface: pass:normal[xref:#PluginSetup-supportsInterface-bytes4-[`++supportsInterface++`]]
+:implementation: pass:normal[xref:#PluginSetup-implementation--[`++implementation++`]]
+
+[.contract]
+[[PluginSetup]]
+=== `++PluginSetup++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/plugin/setup/PluginSetup.sol[{github-icon},role=heading-link]
+
+[.contract-index]
+.Functions
+--
+* {xref-PluginSetup-constructor-address-}[`++constructor(_implementation)++`]
+* {xref-PluginSetup-prepareUpdate-address-uint16-struct-IPluginSetup-SetupPayload-}[`++prepareUpdate(_dao, _fromBuild, _payload)++`]
+* {xref-PluginSetup-supportsInterface-bytes4-}[`++supportsInterface(_interfaceId)++`]
+* {xref-PluginSetup-implementation--}[`++implementation()++`]
+
+[.contract-subindex-inherited]
+.ProtocolVersion
+* {xref-ProtocolVersion-protocolVersion--}[`++protocolVersion()++`]
+
+[.contract-subindex-inherited]
+.IProtocolVersion
+
+[.contract-subindex-inherited]
+.IPluginSetup
+* {xref-IPluginSetup-prepareInstallation-address-bytes-}[`++prepareInstallation(_dao, _data)++`]
+* {xref-IPluginSetup-prepareUninstallation-address-struct-IPluginSetup-SetupPayload-}[`++prepareUninstallation(_dao, _payload)++`]
+
+[.contract-subindex-inherited]
+.ERC165
+
+[.contract-subindex-inherited]
+.IERC165
+
+--
+
+[.contract-index]
+.Errors
+--
+
+[.contract-subindex-inherited]
+.ProtocolVersion
+
+[.contract-subindex-inherited]
+.IProtocolVersion
+
+[.contract-subindex-inherited]
+.IPluginSetup
+
+[.contract-subindex-inherited]
+.ERC165
+
+[.contract-subindex-inherited]
+.IERC165
+
+--
+
+[.contract-index]
+.Internal Variables
+--
+
+[.contract-subindex-inherited]
+.ProtocolVersion
+
+[.contract-subindex-inherited]
+.IProtocolVersion
+
+[.contract-subindex-inherited]
+.IPluginSetup
+
+[.contract-subindex-inherited]
+.ERC165
+
+[.contract-subindex-inherited]
+.IERC165
+
+--
+
+[.contract-item]
+[[PluginSetup-constructor-address-]]
+==== `[.contract-item-name]#++constructor++#++(address _implementation)++` [.item-kind]#internal#
+
+The contract constructor, that setting the plugin implementation contract.
+
+[.contract-item]
+[[PluginSetup-prepareUpdate-address-uint16-struct-IPluginSetup-SetupPayload-]]
+==== `[.contract-item-name]#++prepareUpdate++#++(address _dao, uint16 _fromBuild, struct IPluginSetup.SetupPayload _payload) → bytes, struct IPluginSetup.PreparedSetupData++` [.item-kind]#external#
+
+Prepares the update of a plugin.
+
+Since the underlying plugin is non-upgradeable, this non-virtual function must always revert.
+
+[.contract-item]
+[[PluginSetup-supportsInterface-bytes4-]]
+==== `[.contract-item-name]#++supportsInterface++#++(bytes4 _interfaceId) → bool++` [.item-kind]#public#
+
+Checks if this or the parent contract supports an interface by its ID.
+
+[.contract-item]
+[[PluginSetup-implementation--]]
+==== `[.contract-item-name]#++implementation++#++() → address++` [.item-kind]#public#
+
+Returns the plugin implementation address.
+
+The implementation can be instantiated via the &#x60;new&#x60; keyword, cloned via the minimal proxy pattern (see [ERC-1167](https://eips.ethereum.org/EIPS/eip-1167)), or proxied via the UUPS proxy pattern (see [ERC-1822](https://eips.ethereum.org/EIPS/eip-1822)).
+
+[.contract-item]
+[[PluginSetup-NonUpgradeablePlugin--]]
+==== `[.contract-item-name]#++NonUpgradeablePlugin++#++()++` [.item-kind]#error#
+
+Thrown when attempting to prepare an update on a non-upgradeable plugin.
+
+[.contract-item]
+[[PluginSetup-IMPLEMENTATION-address]]
+==== `address [.contract-item-name]#++IMPLEMENTATION++#` [.item-kind]#internal#
+
+The address of the plugin implementation contract for initial block explorer verification and, in the case of &#x60;PluginClonable&#x60; implementations, to create [ERC-1167](https://eips.ethereum.org/EIPS/eip-1167) clones from.
+
+== Plugins Extensions
+
+:FunctionDeprecated: pass:normal[xref:#Proposal-FunctionDeprecated--[`++FunctionDeprecated++`]]
+:proposalCount: pass:normal[xref:#Proposal-proposalCount--[`++proposalCount++`]]
+:_createProposalId: pass:normal[xref:#Proposal-_createProposalId-bytes32-[`++_createProposalId++`]]
+:supportsInterface: pass:normal[xref:#Proposal-supportsInterface-bytes4-[`++supportsInterface++`]]
+
+[.contract]
+[[Proposal]]
+=== `++Proposal++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/plugin/extensions/proposal/Proposal.sol[{github-icon},role=heading-link]
+
+[.contract-index]
+.Functions
+--
+* {xref-Proposal-proposalCount--}[`++proposalCount()++`]
+* {xref-Proposal-_createProposalId-bytes32-}[`++_createProposalId(_salt)++`]
+* {xref-Proposal-supportsInterface-bytes4-}[`++supportsInterface(_interfaceId)++`]
+
+[.contract-subindex-inherited]
+.ERC165
+
+[.contract-subindex-inherited]
+.IERC165
+
+[.contract-subindex-inherited]
+.IProposal
+* {xref-IProposal-createProposal-bytes-struct-Action---uint64-uint64-bytes-}[`++createProposal(_metadata, _actions, _startDate, _endDate, _data)++`]
+* {xref-IProposal-hasSucceeded-uint256-}[`++hasSucceeded(_proposalId)++`]
+* {xref-IProposal-execute-uint256-}[`++execute(_proposalId)++`]
+* {xref-IProposal-canExecute-uint256-}[`++canExecute(_proposalId)++`]
+* {xref-IProposal-customProposalParamsABI--}[`++customProposalParamsABI()++`]
+
+--
+
+[.contract-index]
+.Events
+--
+
+[.contract-subindex-inherited]
+.ERC165
+
+[.contract-subindex-inherited]
+.IERC165
+
+[.contract-subindex-inherited]
+.IProposal
+* {xref-IProposal-ProposalCreated-uint256-address-uint64-uint64-bytes-struct-Action---uint256-}[`++ProposalCreated(proposalId, creator, startDate, endDate, metadata, actions, allowFailureMap)++`]
+* {xref-IProposal-ProposalExecuted-uint256-}[`++ProposalExecuted(proposalId)++`]
+
+--
+
+[.contract-index]
+.Errors
+--
+
+[.contract-subindex-inherited]
+.ERC165
+
+[.contract-subindex-inherited]
+.IERC165
+
+[.contract-subindex-inherited]
+.IProposal
+
+--
+
+[.contract-item]
+[[Proposal-proposalCount--]]
+==== `[.contract-item-name]#++proposalCount++#++() → uint256++` [.item-kind]#public#
+
+Returns the proposal count which determines the next proposal ID.
+
+This function is deprecated but remains in the interface for backward compatibility.
+     It now reverts to prevent ambiguity.
+
+[.contract-item]
+[[Proposal-_createProposalId-bytes32-]]
+==== `[.contract-item-name]#++_createProposalId++#++(bytes32 _salt) → uint256++` [.item-kind]#internal#
+
+Creates a proposal Id.
+
+Uses block number and chain id to ensure more probability of uniqueness.
+
+[.contract-item]
+[[Proposal-supportsInterface-bytes4-]]
+==== `[.contract-item-name]#++supportsInterface++#++(bytes4 _interfaceId) → bool++` [.item-kind]#public#
+
+Checks if this or the parent contract supports an interface by its ID.
+
+In addition to the current interfaceId, also support previous version of the interfaceId
+     that did not include the following functions:
+     &#x60;createProposal&#x60;, &#x60;hasSucceeded&#x60;, &#x60;execute&#x60;, &#x60;canExecute&#x60;, &#x60;customProposalParamsABI&#x60;.
+
+[.contract-item]
+[[Proposal-FunctionDeprecated--]]
+==== `[.contract-item-name]#++FunctionDeprecated++#++()++` [.item-kind]#error#
+
+:FunctionDeprecated: pass:normal[xref:#ProposalUpgradeable-FunctionDeprecated--[`++FunctionDeprecated++`]]
+:proposalCount: pass:normal[xref:#ProposalUpgradeable-proposalCount--[`++proposalCount++`]]
+:_createProposalId: pass:normal[xref:#ProposalUpgradeable-_createProposalId-bytes32-[`++_createProposalId++`]]
+:supportsInterface: pass:normal[xref:#ProposalUpgradeable-supportsInterface-bytes4-[`++supportsInterface++`]]
+
+[.contract]
+[[ProposalUpgradeable]]
+=== `++ProposalUpgradeable++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/plugin/extensions/proposal/ProposalUpgradeable.sol[{github-icon},role=heading-link]
+
+[.contract-index]
+.Functions
+--
+* {xref-ProposalUpgradeable-proposalCount--}[`++proposalCount()++`]
+* {xref-ProposalUpgradeable-_createProposalId-bytes32-}[`++_createProposalId(_salt)++`]
+* {xref-ProposalUpgradeable-supportsInterface-bytes4-}[`++supportsInterface(_interfaceId)++`]
+
+[.contract-subindex-inherited]
+.ERC165Upgradeable
+
+[.contract-subindex-inherited]
+.IERC165Upgradeable
+
+[.contract-subindex-inherited]
+.Initializable
+
+[.contract-subindex-inherited]
+.IProposal
+* {xref-IProposal-createProposal-bytes-struct-Action---uint64-uint64-bytes-}[`++createProposal(_metadata, _actions, _startDate, _endDate, _data)++`]
+* {xref-IProposal-hasSucceeded-uint256-}[`++hasSucceeded(_proposalId)++`]
+* {xref-IProposal-execute-uint256-}[`++execute(_proposalId)++`]
+* {xref-IProposal-canExecute-uint256-}[`++canExecute(_proposalId)++`]
+* {xref-IProposal-customProposalParamsABI--}[`++customProposalParamsABI()++`]
+
+--
+
+[.contract-index]
+.Events
+--
+
+[.contract-subindex-inherited]
+.ERC165Upgradeable
+
+[.contract-subindex-inherited]
+.IERC165Upgradeable
+
+[.contract-subindex-inherited]
+.Initializable
+
+[.contract-subindex-inherited]
+.IProposal
+* {xref-IProposal-ProposalCreated-uint256-address-uint64-uint64-bytes-struct-Action---uint256-}[`++ProposalCreated(proposalId, creator, startDate, endDate, metadata, actions, allowFailureMap)++`]
+* {xref-IProposal-ProposalExecuted-uint256-}[`++ProposalExecuted(proposalId)++`]
+
+--
+
+[.contract-index]
+.Errors
+--
+
+[.contract-subindex-inherited]
+.ERC165Upgradeable
+
+[.contract-subindex-inherited]
+.IERC165Upgradeable
+
+[.contract-subindex-inherited]
+.Initializable
+
+[.contract-subindex-inherited]
+.IProposal
+
+--
+
+[.contract-item]
+[[ProposalUpgradeable-proposalCount--]]
+==== `[.contract-item-name]#++proposalCount++#++() → uint256++` [.item-kind]#public#
+
+Returns the proposal count which determines the next proposal ID.
+
+This function is deprecated but remains in the interface for backward compatibility.
+     It now reverts to prevent ambiguity.
+
+[.contract-item]
+[[ProposalUpgradeable-_createProposalId-bytes32-]]
+==== `[.contract-item-name]#++_createProposalId++#++(bytes32 _salt) → uint256++` [.item-kind]#internal#
+
+Creates a proposal Id.
+
+Uses block number and chain id to ensure more probability of uniqueness.
+
+[.contract-item]
+[[ProposalUpgradeable-supportsInterface-bytes4-]]
+==== `[.contract-item-name]#++supportsInterface++#++(bytes4 _interfaceId) → bool++` [.item-kind]#public#
+
+Checks if this or the parent contract supports an interface by its ID.
+
+In addition to the current interfaceId, also support previous version of the interfaceId
+     that did not include the following functions:
+     &#x60;createProposal&#x60;, &#x60;hasSucceeded&#x60;, &#x60;execute&#x60;, &#x60;canExecute&#x60;, &#x60;customProposalParamsABI&#x60;.
+
+[.contract-item]
+[[ProposalUpgradeable-FunctionDeprecated--]]
+==== `[.contract-item-name]#++FunctionDeprecated++#++()++` [.item-kind]#error#
+
+:MembersAdded: pass:normal[xref:#IMembership-MembersAdded-address---[`++MembersAdded++`]]
+:MembersRemoved: pass:normal[xref:#IMembership-MembersRemoved-address---[`++MembersRemoved++`]]
+:MembershipContractAnnounced: pass:normal[xref:#IMembership-MembershipContractAnnounced-address-[`++MembershipContractAnnounced++`]]
+:isMember: pass:normal[xref:#IMembership-isMember-address-[`++isMember++`]]
+
+[.contract]
+[[IMembership]]
+=== `++IMembership++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/plugin/extensions/membership/IMembership.sol[{github-icon},role=heading-link]
+
+[.contract-index]
+.Functions
+--
+* {xref-IMembership-isMember-address-}[`++isMember(_account)++`]
+
+--
+
+[.contract-index]
+.Events
+--
+* {xref-IMembership-MembersAdded-address---}[`++MembersAdded(members)++`]
+* {xref-IMembership-MembersRemoved-address---}[`++MembersRemoved(members)++`]
+* {xref-IMembership-MembershipContractAnnounced-address-}[`++MembershipContractAnnounced(definingContract)++`]
+
+--
+
+[.contract-item]
+[[IMembership-isMember-address-]]
+==== `[.contract-item-name]#++isMember++#++(address _account) → bool++` [.item-kind]#external#
+
+Checks if an account is a member of the DAO.
+
+This function must be implemented in the plugin contract that introduces the members to the DAO.
+
+[.contract-item]
+[[IMembership-MembersAdded-address---]]
+==== `[.contract-item-name]#++MembersAdded++#++(address[] members)++` [.item-kind]#event#
+
+Emitted when members are added to the DAO plugin.
+
+[.contract-item]
+[[IMembership-MembersRemoved-address---]]
+==== `[.contract-item-name]#++MembersRemoved++#++(address[] members)++` [.item-kind]#event#
+
+Emitted when members are removed from the DAO plugin.
+
+[.contract-item]
+[[IMembership-MembershipContractAnnounced-address-]]
+==== `[.contract-item-name]#++MembershipContractAnnounced++#++(address indexed definingContract)++` [.item-kind]#event#
+
+Emitted to announce the membership being defined by a contract.
+
+:InvalidAddresslistUpdate: pass:normal[xref:#Addresslist-InvalidAddresslistUpdate-address-[`++InvalidAddresslistUpdate++`]]
+:isListedAtBlock: pass:normal[xref:#Addresslist-isListedAtBlock-address-uint256-[`++isListedAtBlock++`]]
+:isListed: pass:normal[xref:#Addresslist-isListed-address-[`++isListed++`]]
+:addresslistLengthAtBlock: pass:normal[xref:#Addresslist-addresslistLengthAtBlock-uint256-[`++addresslistLengthAtBlock++`]]
+:addresslistLength: pass:normal[xref:#Addresslist-addresslistLength--[`++addresslistLength++`]]
+:_addAddresses: pass:normal[xref:#Addresslist-_addAddresses-address---[`++_addAddresses++`]]
+:_removeAddresses: pass:normal[xref:#Addresslist-_removeAddresses-address---[`++_removeAddresses++`]]
+
+[.contract]
+[[Addresslist]]
+=== `++Addresslist++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/plugin/extensions/governance/Addresslist.sol[{github-icon},role=heading-link]
+
+This contract inherits from `MajorityVotingBase` and implements the `IMajorityVoting` interface.
+
+[.contract-index]
+.Functions
+--
+* {xref-Addresslist-isListedAtBlock-address-uint256-}[`++isListedAtBlock(_account, _blockNumber)++`]
+* {xref-Addresslist-isListed-address-}[`++isListed(_account)++`]
+* {xref-Addresslist-addresslistLengthAtBlock-uint256-}[`++addresslistLengthAtBlock(_blockNumber)++`]
+* {xref-Addresslist-addresslistLength--}[`++addresslistLength()++`]
+* {xref-Addresslist-_addAddresses-address---}[`++_addAddresses(_newAddresses)++`]
+* {xref-Addresslist-_removeAddresses-address---}[`++_removeAddresses(_exitingAddresses)++`]
+
+--
+
+[.contract-index]
+.Errors
+--
+
+--
+
+[.contract-item]
+[[Addresslist-isListedAtBlock-address-uint256-]]
+==== `[.contract-item-name]#++isListedAtBlock++#++(address _account, uint256 _blockNumber) → bool++` [.item-kind]#public#
+
+Checks if an account is on the address list at a specific block number.
+
+[.contract-item]
+[[Addresslist-isListed-address-]]
+==== `[.contract-item-name]#++isListed++#++(address _account) → bool++` [.item-kind]#public#
+
+Checks if an account is currently on the address list.
+
+[.contract-item]
+[[Addresslist-addresslistLengthAtBlock-uint256-]]
+==== `[.contract-item-name]#++addresslistLengthAtBlock++#++(uint256 _blockNumber) → uint256++` [.item-kind]#public#
+
+Returns the length of the address list at a specific block number.
+
+[.contract-item]
+[[Addresslist-addresslistLength--]]
+==== `[.contract-item-name]#++addresslistLength++#++() → uint256++` [.item-kind]#public#
+
+Returns the current length of the address list.
+
+[.contract-item]
+[[Addresslist-_addAddresses-address---]]
+==== `[.contract-item-name]#++_addAddresses++#++(address[] _newAddresses)++` [.item-kind]#internal#
+
+Internal function to add new addresses to the address list.
+
+[.contract-item]
+[[Addresslist-_removeAddresses-address---]]
+==== `[.contract-item-name]#++_removeAddresses++#++(address[] _exitingAddresses)++` [.item-kind]#internal#
+
+Internal function to remove existing addresses from the address list.
+
+[.contract-item]
+[[Addresslist-InvalidAddresslistUpdate-address-]]
+==== `[.contract-item-name]#++InvalidAddresslistUpdate++#++(address member)++` [.item-kind]#error#
+
+Thrown when the address list update is invalid, which can be caused by the addition of an existing member or removal of a non-existing member.
+
+== Utils
+
+:SET_METADATA_PERMISSION_ID: pass:normal[xref:#MetadataExtension-SET_METADATA_PERMISSION_ID-bytes32[`++SET_METADATA_PERMISSION_ID++`]]
+:MetadataSet: pass:normal[xref:#MetadataExtension-MetadataSet-bytes-[`++MetadataSet++`]]
+:supportsInterface: pass:normal[xref:#MetadataExtension-supportsInterface-bytes4-[`++supportsInterface++`]]
+:setMetadata: pass:normal[xref:#MetadataExtension-setMetadata-bytes-[`++setMetadata++`]]
+:getMetadata: pass:normal[xref:#MetadataExtension-getMetadata--[`++getMetadata++`]]
+:_setMetadata: pass:normal[xref:#MetadataExtension-_setMetadata-bytes-[`++_setMetadata++`]]
+
+[.contract]
+[[MetadataExtension]]
+=== `++MetadataExtension++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/utils/metadata/MetadataExtension.sol[{github-icon},role=heading-link]
+
+[.contract-index]
+.Functions
+--
+* {xref-MetadataExtension-supportsInterface-bytes4-}[`++supportsInterface(_interfaceId)++`]
+* {xref-MetadataExtension-setMetadata-bytes-}[`++setMetadata(_metadata)++`]
+* {xref-MetadataExtension-getMetadata--}[`++getMetadata()++`]
+* {xref-MetadataExtension-_setMetadata-bytes-}[`++_setMetadata(_metadata)++`]
+* {xref-MetadataExtension-SET_METADATA_PERMISSION_ID-bytes32}[`++SET_METADATA_PERMISSION_ID()++`]
+
+[.contract-subindex-inherited]
+.DaoAuthorizable
+* {xref-DaoAuthorizable-dao--}[`++dao()++`]
+
+[.contract-subindex-inherited]
+.ERC165
+
+[.contract-subindex-inherited]
+.IERC165
+
+--
+
+[.contract-index]
+.Events
+--
+* {xref-MetadataExtension-MetadataSet-bytes-}[`++MetadataSet(metadata)++`]
+
+[.contract-subindex-inherited]
+.DaoAuthorizable
+
+[.contract-subindex-inherited]
+.ERC165
+
+[.contract-subindex-inherited]
+.IERC165
+
+--
+
+[.contract-item]
+[[MetadataExtension-supportsInterface-bytes4-]]
+==== `[.contract-item-name]#++supportsInterface++#++(bytes4 _interfaceId) → bool++` [.item-kind]#public#
+
+Checks if this or the parent contract supports an interface by its ID.
+
+[.contract-item]
+[[MetadataExtension-setMetadata-bytes-]]
+==== `[.contract-item-name]#++setMetadata++#++(bytes _metadata)++` [.item-kind]#public#
+
+Allows to set the metadata.
+
+[.contract-item]
+[[MetadataExtension-getMetadata--]]
+==== `[.contract-item-name]#++getMetadata++#++() → bytes++` [.item-kind]#public#
+
+Returns the metadata currently applied.
+
+[.contract-item]
+[[MetadataExtension-_setMetadata-bytes-]]
+==== `[.contract-item-name]#++_setMetadata++#++(bytes _metadata)++` [.item-kind]#internal#
+
+Internal function to update metadata.
+
+[.contract-item]
+[[MetadataExtension-SET_METADATA_PERMISSION_ID-bytes32]]
+==== `[.contract-item-name]#++SET_METADATA_PERMISSION_ID++#++() → bytes32++` [.item-kind]#public#
+
+The ID of the permission required to call the &#x60;setMetadata&#x60; function.
+
+[.contract-item]
+[[MetadataExtension-MetadataSet-bytes-]]
+==== `[.contract-item-name]#++MetadataSet++#++(bytes metadata)++` [.item-kind]#event#
+
+Emitted when metadata is set.
+
+:SET_METADATA_PERMISSION_ID: pass:normal[xref:#MetadataExtensionUpgradeable-SET_METADATA_PERMISSION_ID-bytes32[`++SET_METADATA_PERMISSION_ID++`]]
+:MetadataSet: pass:normal[xref:#MetadataExtensionUpgradeable-MetadataSet-bytes-[`++MetadataSet++`]]
+:MetadataExtensionStorage: pass:normal[xref:#MetadataExtensionUpgradeable-MetadataExtensionStorage[`++MetadataExtensionStorage++`]]
+:supportsInterface: pass:normal[xref:#MetadataExtensionUpgradeable-supportsInterface-bytes4-[`++supportsInterface++`]]
+:setMetadata: pass:normal[xref:#MetadataExtensionUpgradeable-setMetadata-bytes-[`++setMetadata++`]]
+:getMetadata: pass:normal[xref:#MetadataExtensionUpgradeable-getMetadata--[`++getMetadata++`]]
+:_setMetadata: pass:normal[xref:#MetadataExtensionUpgradeable-_setMetadata-bytes-[`++_setMetadata++`]]
+
+[.contract]
+[[MetadataExtensionUpgradeable]]
+=== `++MetadataExtensionUpgradeable++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/utils/metadata/MetadataExtensionUpgradeable.sol[{github-icon},role=heading-link]
+
+Due to the requirements that already existing upgradeable plugins need to start inheritting from this,
+     we're required to use hardcoded/specific slots for storage instead of sequential slots with gaps.
+
+[.contract-index]
+.Functions
+--
+* {xref-MetadataExtensionUpgradeable-supportsInterface-bytes4-}[`++supportsInterface(_interfaceId)++`]
+* {xref-MetadataExtensionUpgradeable-setMetadata-bytes-}[`++setMetadata(_metadata)++`]
+* {xref-MetadataExtensionUpgradeable-getMetadata--}[`++getMetadata()++`]
+* {xref-MetadataExtensionUpgradeable-_setMetadata-bytes-}[`++_setMetadata(_metadata)++`]
+* {xref-MetadataExtensionUpgradeable-SET_METADATA_PERMISSION_ID-bytes32}[`++SET_METADATA_PERMISSION_ID()++`]
+
+[.contract-subindex-inherited]
+.DaoAuthorizableUpgradeable
+* {xref-DaoAuthorizableUpgradeable-__DaoAuthorizableUpgradeable_init-contract-IDAO-}[`++__DaoAuthorizableUpgradeable_init(_dao)++`]
+* {xref-DaoAuthorizableUpgradeable-dao--}[`++dao()++`]
+
+[.contract-subindex-inherited]
+.ContextUpgradeable
+
+[.contract-subindex-inherited]
+.ERC165Upgradeable
+
+[.contract-subindex-inherited]
+.IERC165Upgradeable
+
+[.contract-subindex-inherited]
+.Initializable
+
+--
+
+[.contract-index]
+.Events
+--
+* {xref-MetadataExtensionUpgradeable-MetadataSet-bytes-}[`++MetadataSet(metadata)++`]
+
+[.contract-subindex-inherited]
+.DaoAuthorizableUpgradeable
+
+[.contract-subindex-inherited]
+.ContextUpgradeable
+
+[.contract-subindex-inherited]
+.ERC165Upgradeable
+
+[.contract-subindex-inherited]
+.IERC165Upgradeable
+
+[.contract-subindex-inherited]
+.Initializable
+
+--
+
+[.contract-item]
+[[MetadataExtensionUpgradeable-supportsInterface-bytes4-]]
+==== `[.contract-item-name]#++supportsInterface++#++(bytes4 _interfaceId) → bool++` [.item-kind]#public#
+
+Checks if this or the parent contract supports an interface by its ID.
+
+[.contract-item]
+[[MetadataExtensionUpgradeable-setMetadata-bytes-]]
+==== `[.contract-item-name]#++setMetadata++#++(bytes _metadata)++` [.item-kind]#public#
+
+Allows to update only the metadata.
+
+[.contract-item]
+[[MetadataExtensionUpgradeable-getMetadata--]]
+==== `[.contract-item-name]#++getMetadata++#++() → bytes++` [.item-kind]#public#
+
+Returns the metadata currently applied.
+
+[.contract-item]
+[[MetadataExtensionUpgradeable-_setMetadata-bytes-]]
+==== `[.contract-item-name]#++_setMetadata++#++(bytes _metadata)++` [.item-kind]#internal#
+
+Internal function to update metadata.
+
+[.contract-item]
+[[MetadataExtensionUpgradeable-SET_METADATA_PERMISSION_ID-bytes32]]
+==== `[.contract-item-name]#++SET_METADATA_PERMISSION_ID++#++() → bytes32++` [.item-kind]#public#
+
+The ID of the permission required to call the &#x60;setMetadata&#x60; function.
+
+[.contract-item]
+[[MetadataExtensionUpgradeable-MetadataSet-bytes-]]
+==== `[.contract-item-name]#++MetadataSet++#++(bytes metadata)++` [.item-kind]#event#
+
+Emitted when metadata is updated.
+
+:protocolVersion: pass:normal[xref:#ProtocolVersion-protocolVersion--[`++protocolVersion++`]]
+
+[.contract]
+[[ProtocolVersion]]
+=== `++ProtocolVersion++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/utils/versioning/ProtocolVersion.sol[{github-icon},role=heading-link]
+
+Do not add any new variables to this contract that would shift down storage in the inheritance chain.
+
+[.contract-index]
+.Functions
+--
+* {xref-ProtocolVersion-protocolVersion--}[`++protocolVersion()++`]
+
+[.contract-subindex-inherited]
+.IProtocolVersion
+
+--
+
+[.contract-item]
+[[ProtocolVersion-protocolVersion--]]
+==== `[.contract-item-name]#++protocolVersion++#++() → uint8[3]++` [.item-kind]#public#
+
+Returns the semantic Aragon OSx protocol version number that the implementing contract is associated with.
+
+This version number is not to be confused with the &#x60;release&#x60; and &#x60;build&#x60; numbers found in the &#x60;Version.Tag&#x60; struct inside the &#x60;PluginRepo&#x60; contract being used to version plugin setup and associated plugin implementation contracts.
+
+:IMPLEMENTATION: pass:normal[xref:#ProxyFactory-IMPLEMENTATION-address[`++IMPLEMENTATION++`]]
+:ProxyCreated: pass:normal[xref:#ProxyFactory-ProxyCreated-address-[`++ProxyCreated++`]]
+:constructor: pass:normal[xref:#ProxyFactory-constructor-address-[`++constructor++`]]
+:deployUUPSProxy: pass:normal[xref:#ProxyFactory-deployUUPSProxy-bytes-[`++deployUUPSProxy++`]]
+:deployMinimalProxy: pass:normal[xref:#ProxyFactory-deployMinimalProxy-bytes-[`++deployMinimalProxy++`]]
+:implementation: pass:normal[xref:#ProxyFactory-implementation--[`++implementation++`]]
+
+[.contract]
+[[ProxyFactory]]
+=== `++ProxyFactory++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/utils/deployment/ProxyFactory.sol[{github-icon},role=heading-link]
+
+[.contract-index]
+.Functions
+--
+* {xref-ProxyFactory-constructor-address-}[`++constructor(_implementation)++`]
+* {xref-ProxyFactory-deployUUPSProxy-bytes-}[`++deployUUPSProxy(_data)++`]
+* {xref-ProxyFactory-deployMinimalProxy-bytes-}[`++deployMinimalProxy(_data)++`]
+* {xref-ProxyFactory-implementation--}[`++implementation()++`]
+
+--
+
+[.contract-index]
+.Events
+--
+* {xref-ProxyFactory-ProxyCreated-address-}[`++ProxyCreated(proxy)++`]
+
+--
+
+[.contract-index]
+.Internal Variables
+--
+
+--
+
+[.contract-item]
+[[ProxyFactory-constructor-address-]]
+==== `[.contract-item-name]#++constructor++#++(address _implementation)++` [.item-kind]#public#
+
+Initializes the contract with a logic contract address.
+
+[.contract-item]
+[[ProxyFactory-deployUUPSProxy-bytes-]]
+==== `[.contract-item-name]#++deployUUPSProxy++#++(bytes _data) → address proxy++` [.item-kind]#external#
+
+Creates an [ERC-1967](https://eips.ethereum.org/EIPS/eip-1967) proxy contract pointing to the pre-set logic contract.
+
+If &#x60;_data&#x60; is non-empty, it is used in a delegate call to the &#x60;_implementation&#x60; contract. This will typically be an encoded function call initializing the proxy (see [OpenZeppelin ERC1967Proxy-constructor](https://docs.openzeppelin.com/contracts/4.x/api/proxy#ERC1967Proxy-constructor-address-bytes-)).
+
+[.contract-item]
+[[ProxyFactory-deployMinimalProxy-bytes-]]
+==== `[.contract-item-name]#++deployMinimalProxy++#++(bytes _data) → address proxy++` [.item-kind]#external#
+
+Creates an [ERC-1167](https://eips.ethereum.org/EIPS/eip-1167) minimal proxy contract pointing to the pre-set logic contract.
+
+If &#x60;_data&#x60; is non-empty, it is used in a call to the clone contract. This will typically be an encoded function call initializing the storage of the contract.
+
+[.contract-item]
+[[ProxyFactory-implementation--]]
+==== `[.contract-item-name]#++implementation++#++() → address++` [.item-kind]#public#
+
+Returns the implementation contract address.
+
+The implementation can be cloned via the minimal proxy pattern (see [ERC-1167](https://eips.ethereum.org/EIPS/eip-1167)), or proxied via the UUPS proxy pattern (see [ERC-1822](https://eips.ethereum.org/EIPS/eip-1822)).
+
+[.contract-item]
+[[ProxyFactory-ProxyCreated-address-]]
+==== `[.contract-item-name]#++ProxyCreated++#++(address proxy)++` [.item-kind]#event#
+
+Emitted when an proxy contract is created.
+
+[.contract-item]
+[[ProxyFactory-IMPLEMENTATION-address]]
+==== `address [.contract-item-name]#++IMPLEMENTATION++#` [.item-kind]#internal#
+
+The immutable logic contract address.
+
+:deployUUPSProxy: pass:normal[xref:#ProxyLib-deployUUPSProxy-address-bytes-[`++deployUUPSProxy++`]]
+:deployMinimalProxy: pass:normal[xref:#ProxyLib-deployMinimalProxy-address-bytes-[`++deployMinimalProxy++`]]
+
+[.contract]
+[[ProxyLib]]
+=== `++ProxyLib++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/utils/deployment/ProxyLib.sol[{github-icon},role=heading-link]
+
+[.contract-index]
+.Functions
+--
+* {xref-ProxyLib-deployUUPSProxy-address-bytes-}[`++deployUUPSProxy(_logic, _initCalldata)++`]
+* {xref-ProxyLib-deployMinimalProxy-address-bytes-}[`++deployMinimalProxy(_logic, _initCalldata)++`]
+
+--
+
+[.contract-item]
+[[ProxyLib-deployUUPSProxy-address-bytes-]]
+==== `[.contract-item-name]#++deployUUPSProxy++#++(address _logic, bytes _initCalldata) → address uupsProxy++` [.item-kind]#internal#
+
+Creates an [ERC-1967](https://eips.ethereum.org/EIPS/eip-1967) UUPS proxy contract pointing to a logic contract and allows to immediately initialize it.
+
+If &#x60;_initCalldata&#x60; is non-empty, it is used in a delegate call to the &#x60;_logic&#x60; contract. This will typically be an encoded function call initializing the storage of the proxy (see [OpenZeppelin ERC1967Proxy-constructor](https://docs.openzeppelin.com/contracts/4.x/api/proxy#ERC1967Proxy-constructor-address-bytes-)).
+
+[.contract-item]
+[[ProxyLib-deployMinimalProxy-address-bytes-]]
+==== `[.contract-item-name]#++deployMinimalProxy++#++(address _logic, bytes _initCalldata) → address minimalProxy++` [.item-kind]#internal#
+
+Creates an [ERC-1167](https://eips.ethereum.org/EIPS/eip-1167) minimal proxy contract, also known as clones, pointing to a logic contract and allows to immediately initialize it.
+
+If &#x60;_initCalldata&#x60; is non-empty, it is used in a call to the clone contract. This will typically be an encoded function call initializing the storage of the contract.
+
+== Conditions
+
+:supportsInterface: pass:normal[xref:#PermissionCondition-supportsInterface-bytes4-[`++supportsInterface++`]]
+
+[.contract]
+[[PermissionCondition]]
+=== `++PermissionCondition++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/permission/condition/PermissionCondition.sol[{github-icon},role=heading-link]
+
+[.contract-index]
+.Functions
+--
+* {xref-PermissionCondition-supportsInterface-bytes4-}[`++supportsInterface(_interfaceId)++`]
+
+[.contract-subindex-inherited]
+.ProtocolVersion
+* {xref-ProtocolVersion-protocolVersion--}[`++protocolVersion()++`]
+
+[.contract-subindex-inherited]
+.IProtocolVersion
+
+[.contract-subindex-inherited]
+.IPermissionCondition
+* {xref-IPermissionCondition-isGranted-address-address-bytes32-bytes-}[`++isGranted(_where, _who, _permissionId, _data)++`]
+
+[.contract-subindex-inherited]
+.ERC165
+
+[.contract-subindex-inherited]
+.IERC165
+
+--
+
+[.contract-item]
+[[PermissionCondition-supportsInterface-bytes4-]]
+==== `[.contract-item-name]#++supportsInterface++#++(bytes4 _interfaceId) → bool++` [.item-kind]#public#
+
+Checks if an interface is supported by this or its parent contract.
+
+:supportsInterface: pass:normal[xref:#PermissionConditionUpgradeable-supportsInterface-bytes4-[`++supportsInterface++`]]
+
+[.contract]
+[[PermissionConditionUpgradeable]]
+=== `++PermissionConditionUpgradeable++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/permission/condition/PermissionConditionUpgradeable.sol[{github-icon},role=heading-link]
+
+[.contract-index]
+.Functions
+--
+* {xref-PermissionConditionUpgradeable-supportsInterface-bytes4-}[`++supportsInterface(_interfaceId)++`]
+
+[.contract-subindex-inherited]
+.ProtocolVersion
+* {xref-ProtocolVersion-protocolVersion--}[`++protocolVersion()++`]
+
+[.contract-subindex-inherited]
+.IProtocolVersion
+
+[.contract-subindex-inherited]
+.IPermissionCondition
+* {xref-IPermissionCondition-isGranted-address-address-bytes32-bytes-}[`++isGranted(_where, _who, _permissionId, _data)++`]
+
+[.contract-subindex-inherited]
+.ERC165Upgradeable
+
+[.contract-subindex-inherited]
+.IERC165Upgradeable
+
+[.contract-subindex-inherited]
+.Initializable
+
+--
+
+[.contract-index]
+.Events
+--
+
+[.contract-subindex-inherited]
+.ProtocolVersion
+
+[.contract-subindex-inherited]
+.IProtocolVersion
+
+[.contract-subindex-inherited]
+.IPermissionCondition
+
+[.contract-subindex-inherited]
+.ERC165Upgradeable
+
+[.contract-subindex-inherited]
+.IERC165Upgradeable
+
+[.contract-subindex-inherited]
+.Initializable
+
+--
+
+[.contract-item]
+[[PermissionConditionUpgradeable-supportsInterface-bytes4-]]
+==== `[.contract-item-name]#++supportsInterface++#++(bytes4 _interfaceId) → bool++` [.item-kind]#public#
+
+Checks if an interface is supported by this or its parent contract.
+
+:BLOCK_NUMBER_RULE_ID: pass:normal[xref:#RuledCondition-BLOCK_NUMBER_RULE_ID-uint8[`++BLOCK_NUMBER_RULE_ID++`]]
+:TIMESTAMP_RULE_ID: pass:normal[xref:#RuledCondition-TIMESTAMP_RULE_ID-uint8[`++TIMESTAMP_RULE_ID++`]]
+:CONDITION_RULE_ID: pass:normal[xref:#RuledCondition-CONDITION_RULE_ID-uint8[`++CONDITION_RULE_ID++`]]
+:LOGIC_OP_RULE_ID: pass:normal[xref:#RuledCondition-LOGIC_OP_RULE_ID-uint8[`++LOGIC_OP_RULE_ID++`]]
+:VALUE_RULE_ID: pass:normal[xref:#RuledCondition-VALUE_RULE_ID-uint8[`++VALUE_RULE_ID++`]]
+:RulesUpdated: pass:normal[xref:#RuledCondition-RulesUpdated-struct-RuledCondition-Rule---[`++RulesUpdated++`]]
+:Rule: pass:normal[xref:#RuledCondition-Rule[`++Rule++`]]
+:Op: pass:normal[xref:#RuledCondition-Op[`++Op++`]]
+:supportsInterface: pass:normal[xref:#RuledCondition-supportsInterface-bytes4-[`++supportsInterface++`]]
+:getRules: pass:normal[xref:#RuledCondition-getRules--[`++getRules++`]]
+:_updateRules: pass:normal[xref:#RuledCondition-_updateRules-struct-RuledCondition-Rule---[`++_updateRules++`]]
+:_evalRule: pass:normal[xref:#RuledCondition-_evalRule-uint32-address-address-bytes32-uint256---[`++_evalRule++`]]
+:_evalLogic: pass:normal[xref:#RuledCondition-_evalLogic-struct-RuledCondition-Rule-address-address-bytes32-uint256---[`++_evalLogic++`]]
+:_checkCondition: pass:normal[xref:#RuledCondition-_checkCondition-contract-IPermissionCondition-address-address-bytes32-uint256---[`++_checkCondition++`]]
+:_compare: pass:normal[xref:#RuledCondition-_compare-uint256-uint256-enum-RuledCondition-Op-[`++_compare++`]]
+:encodeIfElse: pass:normal[xref:#RuledCondition-encodeIfElse-uint256-uint256-uint256-[`++encodeIfElse++`]]
+:encodeLogicalOperator: pass:normal[xref:#RuledCondition-encodeLogicalOperator-uint256-uint256-[`++encodeLogicalOperator++`]]
+:decodeRuleValue: pass:normal[xref:#RuledCondition-decodeRuleValue-uint256-[`++decodeRuleValue++`]]
+
+[.contract]
+[[RuledCondition]]
+=== `++RuledCondition++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/permission/condition/extensions/RuledCondition.sol[{github-icon},role=heading-link]
+
+[.contract-index]
+.Functions
+--
+* {xref-RuledCondition-supportsInterface-bytes4-}[`++supportsInterface(_interfaceId)++`]
+* {xref-RuledCondition-getRules--}[`++getRules()++`]
+* {xref-RuledCondition-_updateRules-struct-RuledCondition-Rule---}[`++_updateRules(_rules)++`]
+* {xref-RuledCondition-_evalRule-uint32-address-address-bytes32-uint256---}[`++_evalRule(_ruleIndex, _where, _who, _permissionId, _compareList)++`]
+* {xref-RuledCondition-_evalLogic-struct-RuledCondition-Rule-address-address-bytes32-uint256---}[`++_evalLogic(_rule, _where, _who, _permissionId, _compareList)++`]
+* {xref-RuledCondition-_checkCondition-contract-IPermissionCondition-address-address-bytes32-uint256---}[`++_checkCondition(_condition, _where, _who, _permissionId, _compareList)++`]
+* {xref-RuledCondition-_compare-uint256-uint256-enum-RuledCondition-Op-}[`++_compare(_a, _b, _op)++`]
+* {xref-RuledCondition-encodeIfElse-uint256-uint256-uint256-}[`++encodeIfElse(startingRuleIndex, successRuleIndex, failureRuleIndex)++`]
+* {xref-RuledCondition-encodeLogicalOperator-uint256-uint256-}[`++encodeLogicalOperator(ruleIndex1, ruleIndex2)++`]
+* {xref-RuledCondition-decodeRuleValue-uint256-}[`++decodeRuleValue(_x)++`]
+
+[.contract-subindex-inherited]
+.PermissionConditionUpgradeable
+
+[.contract-subindex-inherited]
+.ProtocolVersion
+* {xref-ProtocolVersion-protocolVersion--}[`++protocolVersion()++`]
+
+[.contract-subindex-inherited]
+.IProtocolVersion
+
+[.contract-subindex-inherited]
+.IPermissionCondition
+* {xref-IPermissionCondition-isGranted-address-address-bytes32-bytes-}[`++isGranted(_where, _who, _permissionId, _data)++`]
+
+[.contract-subindex-inherited]
+.ERC165Upgradeable
+
+[.contract-subindex-inherited]
+.IERC165Upgradeable
+
+[.contract-subindex-inherited]
+.Initializable
+
+--
+
+[.contract-index]
+.Events
+--
+* {xref-RuledCondition-RulesUpdated-struct-RuledCondition-Rule---}[`++RulesUpdated(rules)++`]
+
+[.contract-subindex-inherited]
+.PermissionConditionUpgradeable
+
+[.contract-subindex-inherited]
+.ProtocolVersion
+
+[.contract-subindex-inherited]
+.IProtocolVersion
+
+[.contract-subindex-inherited]
+.IPermissionCondition
+
+[.contract-subindex-inherited]
+.ERC165Upgradeable
+
+[.contract-subindex-inherited]
+.IERC165Upgradeable
+
+[.contract-subindex-inherited]
+.Initializable
+
+--
+
+[.contract-index]
+.Internal Variables
+--
+
+[.contract-subindex-inherited]
+.PermissionConditionUpgradeable
+
+[.contract-subindex-inherited]
+.ProtocolVersion
+
+[.contract-subindex-inherited]
+.IProtocolVersion
+
+[.contract-subindex-inherited]
+.IPermissionCondition
+
+[.contract-subindex-inherited]
+.ERC165Upgradeable
+
+[.contract-subindex-inherited]
+.IERC165Upgradeable
+
+[.contract-subindex-inherited]
+.Initializable
+
+--
+
+[.contract-item]
+[[RuledCondition-supportsInterface-bytes4-]]
+==== `[.contract-item-name]#++supportsInterface++#++(bytes4 _interfaceId) → bool++` [.item-kind]#public#
+
+Checks if an interface is supported by this or its parent contract.
+
+[.contract-item]
+[[RuledCondition-getRules--]]
+==== `[.contract-item-name]#++getRules++#++() → struct RuledCondition.Rule[]++` [.item-kind]#public#
+
+Retrieves the current rules stored in this contract.
+
+[.contract-item]
+[[RuledCondition-_updateRules-struct-RuledCondition-Rule---]]
+==== `[.contract-item-name]#++_updateRules++#++(struct RuledCondition.Rule[] _rules)++` [.item-kind]#internal#
+
+Updates the set of rules.
+
+This function deletes the current set of rules and replaces it with a new one.
+
+[.contract-item]
+[[RuledCondition-_evalRule-uint32-address-address-bytes32-uint256---]]
+==== `[.contract-item-name]#++_evalRule++#++(uint32 _ruleIndex, address _where, address _who, bytes32 _permissionId, uint256[] _compareList) → bool++` [.item-kind]#internal#
+
+Evaluates a rule by its index.
+
+[.contract-item]
+[[RuledCondition-_evalLogic-struct-RuledCondition-Rule-address-address-bytes32-uint256---]]
+==== `[.contract-item-name]#++_evalLogic++#++(struct RuledCondition.Rule _rule, address _where, address _who, bytes32 _permissionId, uint256[] _compareList) → bool++` [.item-kind]#internal#
+
+Evaluates logical operations.
+
+[.contract-item]
+[[RuledCondition-_checkCondition-contract-IPermissionCondition-address-address-bytes32-uint256---]]
+==== `[.contract-item-name]#++_checkCondition++#++(contract IPermissionCondition _condition, address _where, address _who, bytes32 _permissionId, uint256[] _compareList) → bool++` [.item-kind]#internal#
+
+Checks an external condition.
+
+[.contract-item]
+[[RuledCondition-_compare-uint256-uint256-enum-RuledCondition-Op-]]
+==== `[.contract-item-name]#++_compare++#++(uint256 _a, uint256 _b, enum RuledCondition.Op _op) → bool++` [.item-kind]#internal#
+
+Compares two values based on the specified operation.
+
+[.contract-item]
+[[RuledCondition-encodeIfElse-uint256-uint256-uint256-]]
+==== `[.contract-item-name]#++encodeIfElse++#++(uint256 startingRuleIndex, uint256 successRuleIndex, uint256 failureRuleIndex) → uint240++` [.item-kind]#public#
+
+Encodes rule indices into a uint240 value.
+
+[.contract-item]
+[[RuledCondition-encodeLogicalOperator-uint256-uint256-]]
+==== `[.contract-item-name]#++encodeLogicalOperator++#++(uint256 ruleIndex1, uint256 ruleIndex2) → uint240++` [.item-kind]#public#
+
+Encodes two rule indexes into a uint240 value. Useful for logical operators such as &#x60;AND/OR/XOR&#x60; and others.
+
+[.contract-item]
+[[RuledCondition-decodeRuleValue-uint256-]]
+==== `[.contract-item-name]#++decodeRuleValue++#++(uint256 _x) → uint32 a, uint32 b, uint32 c++` [.item-kind]#public#
+
+Decodes rule indices into three uint32.
+
+[.contract-item]
+[[RuledCondition-RulesUpdated-struct-RuledCondition-Rule---]]
+==== `[.contract-item-name]#++RulesUpdated++#++(struct RuledCondition.Rule[] rules)++` [.item-kind]#event#
+
+Emitted when the rules are updated.
+
+[.contract-item]
+[[RuledCondition-BLOCK_NUMBER_RULE_ID-uint8]]
+==== `uint8 [.contract-item-name]#++BLOCK_NUMBER_RULE_ID++#` [.item-kind]#internal constant#
+
+Identifier for a rule based on the current block number.
+
+[.contract-item]
+[[RuledCondition-TIMESTAMP_RULE_ID-uint8]]
+==== `uint8 [.contract-item-name]#++TIMESTAMP_RULE_ID++#` [.item-kind]#internal constant#
+
+Identifier for a rule based on the current timestamp.
+
+[.contract-item]
+[[RuledCondition-CONDITION_RULE_ID-uint8]]
+==== `uint8 [.contract-item-name]#++CONDITION_RULE_ID++#` [.item-kind]#internal constant#
+
+Identifier for a rule that evaluates a condition based on another condition contract.
+
+[.contract-item]
+[[RuledCondition-LOGIC_OP_RULE_ID-uint8]]
+==== `uint8 [.contract-item-name]#++LOGIC_OP_RULE_ID++#` [.item-kind]#internal constant#
+
+Identifier for a rule that is based on logical operations (e.g., AND, OR).
+
+[.contract-item]
+[[RuledCondition-VALUE_RULE_ID-uint8]]
+==== `uint8 [.contract-item-name]#++VALUE_RULE_ID++#` [.item-kind]#internal constant#
+
+Identifier for a rule that involves direct value comparison.
+
