@@ -60,6 +60,7 @@
     "@ethersproject/hash": "5.7.0",
     "@ethersproject/logger": "5.7.0",
     "@ethersproject/providers": "5.7.2",
-    "ipfs-http-client": "^51.0.0"
+    "dotenv": "^16.4.5",
+    "undici": "^6.21.0"
   }
 }
