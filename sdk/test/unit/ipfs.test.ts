@@ -1,4 +1,4 @@
-import {isIpfsCid, isIpfsUri} from '../../src';
+import {isIpfsCid, isIpfsUri, uploadToPinata} from '../../src';
 import {
   TEST_INVALID_IPFS_URI,
   TEST_IPFS_CID_V0,
@@ -34,6 +34,14 @@ describe('ipfs', () => {
       for (const input of inputs) {
         expect(isIpfsCid(input.in)).toBe(input.out);
       }
+    });
+  });
+  describe.only('uploadToPinata', () => {
+    it('Should upload the data to pinnata', async () => {
+     const tt = await uploadToPinata(
+        JSON.stringify("METADATA.release", null, 2), 'token-voting'
+      ); 
+      console.log("tt", tt) ;
     });
   });
 });
