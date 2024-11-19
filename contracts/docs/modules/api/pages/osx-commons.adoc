@@ -166,7 +166,7 @@ This is the reference guide for the link:https://github.com/aragon/osx-commons[o
 
 [.contract]
 [[IDAO]]
-=== `++IDAO++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/dao/IDAO.sol[{github-icon},role=heading-link]
+=== `++IDAO++` link:https://github.com/aragon/osx-commons.git/blob/v1.4.0-alpha.6/src/dao/IDAO.sol[{github-icon},role=heading-link]
 
 [.contract-index]
 .Functions
@@ -287,7 +287,7 @@ Emitted when a new TrustedForwarder is set on the DAO.
 
 [.contract]
 [[Executor]]
-=== `++Executor++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/executors/Executor.sol[{github-icon},role=heading-link]
+=== `++Executor++` link:https://github.com/aragon/osx-commons.git/blob/v1.4.0-alpha.6/src/executors/Executor.sol[{github-icon},role=heading-link]
 
 This doesn't use any type of permission for execution and can be called by anyone.
      Most useful use-case is to deploy it as non-upgradeable and call from another contract via delegatecall.
@@ -431,7 +431,7 @@ The internal constant storing the maximal action array length.
 
 [.contract]
 [[PermissionLib]]
-=== `++PermissionLib++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/permission/PermissionLib.sol[{github-icon},role=heading-link]
+=== `++PermissionLib++` link:https://github.com/aragon/osx-commons.git/blob/v1.4.0-alpha.6/src/permission/PermissionLib.sol[{github-icon},role=heading-link]
 
 [.contract-index]
 .Functions
@@ -464,7 +464,7 @@ A constant expressing that no condition is applied to a permission.
 
 [.contract]
 [[Plugin]]
-=== `++Plugin++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/plugin/Plugin.sol[{github-icon},role=heading-link]
+=== `++Plugin++` link:https://github.com/aragon/osx-commons.git/blob/v1.4.0-alpha.6/src/plugin/Plugin.sol[{github-icon},role=heading-link]
 
 [.contract-index]
 .Functions
@@ -649,7 +649,7 @@ Thrown when &#x60;delegatecall&#x60; fails.
 
 [.contract]
 [[PluginCloneable]]
-=== `++PluginCloneable++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/plugin/PluginCloneable.sol[{github-icon},role=heading-link]
+=== `++PluginCloneable++` link:https://github.com/aragon/osx-commons.git/blob/v1.4.0-alpha.6/src/plugin/PluginCloneable.sol[{github-icon},role=heading-link]
 
 [.contract-index]
 .Functions
@@ -865,7 +865,7 @@ Thrown when &#x60;delegatecall&#x60; fails.
 
 [.contract]
 [[PluginUUPSUpgradeable]]
-=== `++PluginUUPSUpgradeable++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/plugin/PluginUUPSUpgradeable.sol[{github-icon},role=heading-link]
+=== `++PluginUUPSUpgradeable++` link:https://github.com/aragon/osx-commons.git/blob/v1.4.0-alpha.6/src/plugin/PluginUUPSUpgradeable.sol[{github-icon},role=heading-link]
 
 [.contract-index]
 .Modifiers
@@ -1146,7 +1146,7 @@ Thrown when initialize is called after it has already been executed.
 
 [.contract]
 [[PluginSetup]]
-=== `++PluginSetup++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/plugin/setup/PluginSetup.sol[{github-icon},role=heading-link]
+=== `++PluginSetup++` link:https://github.com/aragon/osx-commons.git/blob/v1.4.0-alpha.6/src/plugin/setup/PluginSetup.sol[{github-icon},role=heading-link]
 
 [.contract-index]
 .Functions
@@ -1267,7 +1267,7 @@ The address of the plugin implementation contract for initial block explorer ver
 
 [.contract]
 [[Proposal]]
-=== `++Proposal++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/plugin/extensions/proposal/Proposal.sol[{github-icon},role=heading-link]
+=== `++Proposal++` link:https://github.com/aragon/osx-commons.git/blob/v1.4.0-alpha.6/src/plugin/extensions/proposal/Proposal.sol[{github-icon},role=heading-link]
 
 [.contract-index]
 .Functions
@@ -1362,7 +1362,7 @@ In addition to the current interfaceId, also support previous version of the int
 
 [.contract]
 [[ProposalUpgradeable]]
-=== `++ProposalUpgradeable++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/plugin/extensions/proposal/ProposalUpgradeable.sol[{github-icon},role=heading-link]
+=== `++ProposalUpgradeable++` link:https://github.com/aragon/osx-commons.git/blob/v1.4.0-alpha.6/src/plugin/extensions/proposal/ProposalUpgradeable.sol[{github-icon},role=heading-link]
 
 [.contract-index]
 .Functions
@@ -1466,7 +1466,7 @@ In addition to the current interfaceId, also support previous version of the int
 
 [.contract]
 [[IMembership]]
-=== `++IMembership++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/plugin/extensions/membership/IMembership.sol[{github-icon},role=heading-link]
+=== `++IMembership++` link:https://github.com/aragon/osx-commons.git/blob/v1.4.0-alpha.6/src/plugin/extensions/membership/IMembership.sol[{github-icon},role=heading-link]
 
 [.contract-index]
 .Functions
@@ -1520,7 +1520,7 @@ Emitted to announce the membership being defined by a contract.
 
 [.contract]
 [[Addresslist]]
-=== `++Addresslist++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/plugin/extensions/governance/Addresslist.sol[{github-icon},role=heading-link]
+=== `++Addresslist++` link:https://github.com/aragon/osx-commons.git/blob/v1.4.0-alpha.6/src/plugin/extensions/governance/Addresslist.sol[{github-icon},role=heading-link]
 
 This contract inherits from `MajorityVotingBase` and implements the `IMajorityVoting` interface.
 
@@ -1595,7 +1595,7 @@ Thrown when the address list update is invalid, which can be caused by the addit
 
 [.contract]
 [[MetadataExtension]]
-=== `++MetadataExtension++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/utils/metadata/MetadataExtension.sol[{github-icon},role=heading-link]
+=== `++MetadataExtension++` link:https://github.com/aragon/osx-commons.git/blob/v1.4.0-alpha.6/src/utils/metadata/MetadataExtension.sol[{github-icon},role=heading-link]
 
 [.contract-index]
 .Functions
@@ -1680,7 +1680,7 @@ Emitted when metadata is set.
 
 [.contract]
 [[MetadataExtensionUpgradeable]]
-=== `++MetadataExtensionUpgradeable++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/utils/metadata/MetadataExtensionUpgradeable.sol[{github-icon},role=heading-link]
+=== `++MetadataExtensionUpgradeable++` link:https://github.com/aragon/osx-commons.git/blob/v1.4.0-alpha.6/src/utils/metadata/MetadataExtensionUpgradeable.sol[{github-icon},role=heading-link]
 
 Due to the requirements that already existing upgradeable plugins need to start inheritting from this,
      we're required to use hardcoded/specific slots for storage instead of sequential slots with gaps.
@@ -1775,7 +1775,7 @@ Emitted when metadata is updated.
 
 [.contract]
 [[ProtocolVersion]]
-=== `++ProtocolVersion++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/utils/versioning/ProtocolVersion.sol[{github-icon},role=heading-link]
+=== `++ProtocolVersion++` link:https://github.com/aragon/osx-commons.git/blob/v1.4.0-alpha.6/src/utils/versioning/ProtocolVersion.sol[{github-icon},role=heading-link]
 
 Do not add any new variables to this contract that would shift down storage in the inheritance chain.
 
@@ -1806,7 +1806,7 @@ This version number is not to be confused with the &#x60;release&#x60; and &#x60
 
 [.contract]
 [[ProxyFactory]]
-=== `++ProxyFactory++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/utils/deployment/ProxyFactory.sol[{github-icon},role=heading-link]
+=== `++ProxyFactory++` link:https://github.com/aragon/osx-commons.git/blob/v1.4.0-alpha.6/src/utils/deployment/ProxyFactory.sol[{github-icon},role=heading-link]
 
 [.contract-index]
 .Functions
@@ -1878,7 +1878,7 @@ The immutable logic contract address.
 
 [.contract]
 [[ProxyLib]]
-=== `++ProxyLib++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/utils/deployment/ProxyLib.sol[{github-icon},role=heading-link]
+=== `++ProxyLib++` link:https://github.com/aragon/osx-commons.git/blob/v1.4.0-alpha.6/src/utils/deployment/ProxyLib.sol[{github-icon},role=heading-link]
 
 [.contract-index]
 .Functions
@@ -1910,7 +1910,7 @@ If &#x60;_initCalldata&#x60; is non-empty, it is used in a call to the clone con
 
 [.contract]
 [[PermissionCondition]]
-=== `++PermissionCondition++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/permission/condition/PermissionCondition.sol[{github-icon},role=heading-link]
+=== `++PermissionCondition++` link:https://github.com/aragon/osx-commons.git/blob/v1.4.0-alpha.6/src/permission/condition/PermissionCondition.sol[{github-icon},role=heading-link]
 
 [.contract-index]
 .Functions
@@ -1946,7 +1946,7 @@ Checks if an interface is supported by this or its parent contract.
 
 [.contract]
 [[PermissionConditionUpgradeable]]
-=== `++PermissionConditionUpgradeable++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/permission/condition/PermissionConditionUpgradeable.sol[{github-icon},role=heading-link]
+=== `++PermissionConditionUpgradeable++` link:https://github.com/aragon/osx-commons.git/blob/v1.4.0-alpha.6/src/permission/condition/PermissionConditionUpgradeable.sol[{github-icon},role=heading-link]
 
 [.contract-index]
 .Functions
@@ -2026,7 +2026,7 @@ Checks if an interface is supported by this or its parent contract.
 
 [.contract]
 [[RuledCondition]]
-=== `++RuledCondition++` link:https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v/src/permission/condition/extensions/RuledCondition.sol[{github-icon},role=heading-link]
+=== `++RuledCondition++` link:https://github.com/aragon/osx-commons.git/blob/v1.4.0-alpha.6/src/permission/condition/extensions/RuledCondition.sol[{github-icon},role=heading-link]
 
 [.contract-index]
 .Functions

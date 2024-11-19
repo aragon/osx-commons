@@ -19,6 +19,10 @@ generated
 contracts/docs/templates/contract.hbs
 contracts/docs/templates/page.hbs
 
+configs/src/docs/templates/contract.hbs
+configs/src/docs/templates/page.hbs
+
+
 
 # files
 *.env

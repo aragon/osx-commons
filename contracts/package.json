@@ -50,6 +50,10 @@
     "@openzeppelin/contracts": "4.9.6",
     "@openzeppelin/contracts-upgradeable": "4.9.6"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aragon/osx-commons.git"
+  },
   "files": [
     "src/{dao,permission,plugin,utils}/**/*.sol"
   ],

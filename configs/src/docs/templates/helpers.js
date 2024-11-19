@@ -1,6 +1,9 @@
-const {version} = require('../../package.json');
+// Individual repo documentations must override `version` and `github-uri` functions.
+module.exports['version'] = () => '1.0';
 
-module.exports['multisig-version'] = () => version;
+module.exports['github-uri'] = () => {
+  return 'https://github.com/aragon';
+};
 
 module.exports['readme-path'] = opts => {
   return 'README.adoc';

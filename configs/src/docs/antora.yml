@@ -1,7 +1,0 @@
-name: osx-commons-contracts
-title: OSX Commons
-version: 1.x
-prerelease: false
-nav:
-  - modules/ROOT/nav.adoc
-  - modules/api/nav.adoc
