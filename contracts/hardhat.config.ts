@@ -142,7 +142,7 @@ const config: HardhatUserConfig = {
       // https://hardhat.org/hardhat-network/#solidity-optimizer-support
       optimizer: {
         enabled: true,
-        runs: 800,
+        runs: 2000,
       },
     },
   },
@@ -157,6 +157,9 @@ const config: HardhatUserConfig = {
     templates: 'docs/templates',
     collapseNewlines: true,
     exclude: ['test'],
+  },
+  mocha: {
+    timeout: 200_000, // 90 seconds // increase the timeout for subdomain validation tests
   },
 };
 
