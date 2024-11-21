@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
-# shopt -s globstar
-
 
 PACKAGE_NAME="@aragon/osx-commons-configs"
 PACKAGE_PATH=$(node -p "require.resolve('$PACKAGE_NAME')")
@@ -18,10 +16,8 @@ fi
 
 rm -rf "$OUTDIR"
 
-echo $OUTDIR
-
 hardhat docgen
 
 node scripts/gen-nav.js "$OUTDIR" > "$OUTDIR/../nav.adoc"
 
-rm -rf ./docs/templates
+rm -rf ./docs/templates/

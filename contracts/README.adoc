@@ -2,7 +2,11 @@
 
 This is the reference guide for the link:https://github.com/aragon/osx-commons[osx-commons-contracts] package.
 
-== Core
+== Core12123
+
+{{gio}}
+
+{{gio2}}
 
 {{IDAO}}
 

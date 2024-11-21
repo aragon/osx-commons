@@ -52,7 +52,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/aragon/osx-commons.git"
+    "url": "https://github.com/aragon/osx-commons"
   },
   "files": [
     "src/{dao,permission,plugin,utils}/**/*.sol"

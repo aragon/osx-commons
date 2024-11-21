@@ -71,6 +71,7 @@ interface IDAO {
     function getTrustedForwarder() external view returns (address);
 
     /// @notice Emitted when a new TrustedForwarder is set on the DAO.
+    /// @dev Requires {UPDATE_STAGES_PERMISSION_ID}
     /// @param forwarder the new forwarder address.
     event TrustedForwarderSet(address forwarder);
 
