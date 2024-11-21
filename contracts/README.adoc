@@ -2,11 +2,9 @@
 
 This is the reference guide for the link:https://github.com/aragon/osx-commons[osx-commons-contracts] package.
 
-== Core12123
+IMPORTANT: The contracts are currently being audited, DO NOT USE IN PRODUCTION.
 
-{{gio}}
-
-{{gio2}}
+== Core
 
 {{IDAO}}
 
