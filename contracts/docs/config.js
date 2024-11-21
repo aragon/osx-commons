@@ -5,6 +5,8 @@ const { version, repository } = require('../package.json');
 
 const helpers = require(path.resolve(__dirname, './templates/helpers'));
 
+// TODO: yarn test fails because it runs this file anyways 
+// and helpers is not found.
 // overwrite the functions.
 
 // Tags on `osx-commons-contracts` are created as below.
