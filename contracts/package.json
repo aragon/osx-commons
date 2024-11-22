@@ -81,6 +81,6 @@
     "test": "hardhat test",
     "typechain": "cross-env TS_NODE_TRANSPILE_ONLY=true hardhat typechain",
     "clean": "rimraf ./artifacts ./cache ./coverage ./typechain ./types ./coverage.json && yarn typechain",
-    "docs": "scripts/prepare-docs.sh"
+    "docs": "DOCS=true scripts/prepare-docs.sh"
   }
 }

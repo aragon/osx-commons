@@ -150,7 +150,7 @@ const config: HardhatUserConfig = {
     outDir: 'typechain',
     target: 'ethers-v5',
   },
-  docgen: require('./docs/config.js'),
+  docgen: process.env.DOCS ? require('./docs/config.js') : undefined,
 };
 
 export default config;
