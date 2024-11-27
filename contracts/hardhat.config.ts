@@ -159,7 +159,7 @@ const config: HardhatUserConfig = {
     exclude: ['test'],
   },
   mocha: {
-    timeout: 200_000, // 90 seconds // increase the timeout for subdomain validation tests
+    timeout: 200_000, // 200 seconds - increase the timeout for subdomain validation tests
   },
 };
 
