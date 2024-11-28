@@ -38,9 +38,10 @@ describe('ipfs', () => {
   });
   describe('uploadToPinata', () => {
     it('Should upload the data to pinnata', async () => {
-     const ipfsUri = await uploadToPinata(
-        JSON.stringify("METADATA.release", null, 2), 'random-file-name'
-      ); 
+      const ipfsUri = await uploadToPinata(
+        JSON.stringify('METADATA.release', null, 2),
+        'random-file-name'
+      );
       expect(ipfsUri).toBeDefined();
     });
   });

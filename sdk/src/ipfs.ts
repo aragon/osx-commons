@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
-import { fetch } from 'undici';
+import {fetch} from 'undici';
+
 dotenv.config();
 
 const IPFS_CID_REGEX =
@@ -12,7 +13,10 @@ function buildFileName(fileName: string): string {
   return `osx-${fileName}.json`;
 }
 
-export async function uploadToPinata(content: string, fileName: string): Promise<string> {
+export async function uploadToPinata(
+  content: string,
+  fileName: string
+): Promise<string> {
   const body = {
     pinataOptions: {
       cidVersion: 1,
@@ -23,21 +27,24 @@ export async function uploadToPinata(content: string, fileName: string): Promise
     pinataContent: content,
   };
 
-  const res = await fetch("https://api.pinata.cloud/pinning/pinJsonToIPFS", {
-    method: "POST",
-    headers: {Authorization: `Bearer ${process.env.PUB_PINATA_JWT}`, 'Content-Type': 'application/json'},
+  const res = await fetch('https://api.pinata.cloud/pinning/pinJsonToIPFS', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${process.env.PUB_PINATA_JWT}`,
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify(body),
   });
 
-  const resData: { error?: string; IpfsHash?: string } | undefined = await res.json() as any;
+  const resData: {error?: string; IpfsHash?: string} | undefined =
+    (await res.json()) as any;
 
   if (resData?.error)
     throw new Error(`Request failed: ${errorToString(resData.error)}`);
-  else if (!resData?.IpfsHash) throw new Error("Could not pin the metadata");
+  else if (!resData?.IpfsHash) throw new Error('Could not pin the metadata');
 
   return `ipfs://${resData.IpfsHash}`;
 }
-
 
 function errorToString(error: any): string {
   return `${error.reason}: ${error.details}`;
