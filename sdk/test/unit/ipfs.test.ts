@@ -41,7 +41,6 @@ describe('ipfs', () => {
      const tt = await uploadToPinata(
         JSON.stringify("METADATA.release", null, 2), 'token-voting'
       ); 
-      console.log("tt", tt) ;
     });
   });
 });
