@@ -36,7 +36,7 @@ describe('ipfs', () => {
       }
     });
   });
-  describe.only('uploadToPinata', () => {
+  describe('uploadToPinata', () => {
     it('Should upload the data to pinnata', async () => {
      const tt = await uploadToPinata(
         JSON.stringify("METADATA.release", null, 2), 'token-voting'
