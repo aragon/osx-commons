@@ -12,32 +12,36 @@ function buildFileName(fileName: string): string {
   return `osx-${fileName}.json`;
 }
 
-export async function uploadToPinata(content: string, fileName: string) {
-  const blob = new Blob([content], { type: "text/plain" });
-  const file = new File([blob], buildFileName(fileName));
-  const data = new FormData();
-  data.append("file", file);
-  data.append("pinataMetadata", JSON.stringify({ name: buildFileName(fileName) }));
-  data.append("pinataOptions", JSON.stringify({ cidVersion: 1 }));
-
-  const res = await fetch("https://api.pinata.cloud/pinning/pinFileToIPFS", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${process.env.PUB_PINATA_JWT}`,
-
+export async function uploadToPinata(content: string, fileName: string): Promise<string> {
+  const body = {
+    pinataOptions: {
+      cidVersion: 1,
     },
-    body: data as any,
+    pinataMetadata: {
+      name: buildFileName(fileName),
+    },
+    pinataContent: content,
+  };
+
+  const res = await fetch("https://api.pinata.cloud/pinning/pinJsonToIPFS", {
+    method: "POST",
+    headers: {Authorization: `Bearer ${process.env.PUB_PINATA_JWT}`, 'Content-Type': 'application/json'},
+    body: JSON.stringify(body),
   });
 
   const resData: { error?: string; IpfsHash?: string } | undefined = await res.json() as any;
 
   if (resData?.error)
-    throw new Error(`Request failed: ${resData.error}`);
+    throw new Error(`Request failed: ${errorToString(resData.error)}`);
   else if (!resData?.IpfsHash) throw new Error("Could not pin the metadata");
 
   return `ipfs://${resData.IpfsHash}`;
 }
 
+
+function errorToString(error: any): string {
+  return `${error.reason}: ${error.details}`;
+}
 /**
  * Checks if the given string is a valid IPFS CID
  *

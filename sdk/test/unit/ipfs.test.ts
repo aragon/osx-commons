@@ -38,9 +38,10 @@ describe('ipfs', () => {
   });
   describe('uploadToPinata', () => {
     it('Should upload the data to pinnata', async () => {
-     const tt = await uploadToPinata(
-        JSON.stringify("METADATA.release", null, 2), 'token-voting'
+     const ipfsUri = await uploadToPinata(
+        JSON.stringify("METADATA.release", null, 2), 'random-file-name'
       ); 
+      expect(ipfsUri).toBeDefined();
     });
   });
 });
