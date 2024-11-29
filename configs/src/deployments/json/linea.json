@@ -10,6 +10,11 @@
       "blockNumber": 12678699,
       "deploymentTx": "0xe80d5f25162e9ab20792c5d72a64fc38eb51f1815938aba5cfb422d24e02ded9"
     },
+    "ManagementDAOMultisigProxy": {
+      "address": "0x45e24DcDc1ebc2a334dE20eEb114f00f96429AFa",
+      "blockNumber": 12678872,
+      "deploymentTx": "0xd8f789f33334efed9f0db20eee20e9b6caad978f831e60142698159ece87cffb"
+    },
     "ENSRegistry": {
       "address": "0xCe0B4124dea6105bfB85fB4461c4D39f360E9ef3",
       "blockNumber": 12678710,
