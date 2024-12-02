@@ -7,6 +7,8 @@ import * as baseSepolia from './json/baseSepolia.json';
 import * as devSepolia from './json/devSepolia.json';
 import * as goerli from './json/goerli.json';
 import * as holesky from './json/holesky.json';
+import * as linea from './json/linea.json';
+import * as lineaSepolia from './json/lineaSepolia.json';
 import * as mainnet from './json/mainnet.json';
 import * as mumbai from './json/mumbai.json';
 import * as polygon from './json/polygon.json';
@@ -30,6 +32,8 @@ export {
   zksyncSepolia,
   zksyncMainnet,
   devSepolia,
+  linea,
+  lineaSepolia,
 };
 
 export const contracts: {
@@ -51,6 +55,8 @@ export const contracts: {
   zksyncSepolia,
   zksyncMainnet,
   devSepolia,
+  linea,
+  lineaSepolia,
   local: {
     [SupportedVersions.V1_0_0]: {} as NetworkDeployment,
     [SupportedVersions.V1_3_0]: {} as NetworkDeployment,

@@ -19,6 +19,8 @@ export enum SupportedNetworks {
   ARBITRUM_SEPOLIA = 'arbitrumSepolia',
   ZKSYNC_SEPOLIA = 'zksyncSepolia',
   ZKSYNC_MAINNET = 'zksyncMainnet',
+  LINEA_SEPOLIA = 'lineaSepolia',
+  LINEA = 'linea',
   LOCAL = 'local',
 }
 
