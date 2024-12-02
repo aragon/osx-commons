@@ -110,6 +110,18 @@ export const networks: NetworkConfigs = {
     name: SupportedNetworks.ZKSYNC_MAINNET,
     aliases: {},
   },
+  [SupportedNetworks.LINEA_SEPOLIA]: {
+    chainId: 59141,
+    isTestnet: true,
+    name: SupportedNetworks.LINEA_SEPOLIA,
+    aliases: {},
+  },
+  [SupportedNetworks.LINEA]: {
+    chainId: 59144,
+    isTestnet: false,
+    name: SupportedNetworks.LINEA,
+    aliases: {},
+  },
   [SupportedNetworks.LOCAL]: {
     isTestnet: true,
     chainId: 31337,
@@ -135,6 +147,8 @@ export const networksAlchemyRpcUrl: NetworkRpcUrl = {
     'https://zksync-sepolia.g.alchemy.com/v2/',
   [SupportedNetworks.ZKSYNC_MAINNET]:
     'https://zksync-mainnet.g.alchemy.com/v2/',
+  [SupportedNetworks.LINEA]: 'https://linea-mainnet.g.alchemy.com/v2/',
+  [SupportedNetworks.LINEA_SEPOLIA]: 'https://linea-sepolia.g.alchemy.com/v2/',
   [SupportedNetworks.LOCAL]: 'http://localhost:8545',
 };
 
