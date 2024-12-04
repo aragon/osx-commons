@@ -1,11 +1,11 @@
-// Individual repo documentations must override `version` and `github-uri` functions.
+// Individual repo documentations must override `version` and `githubURI` functions.
 module.exports['version'] = () => '1.0';
 
-module.exports['github-uri'] = () => {
+module.exports['githubURI'] = () => {
   return 'https://github.com/aragon';
 };
 
-module.exports['readme-path'] = opts => {
+module.exports['readmePath'] = opts => {
   return 'README.adoc';
 };
 
@@ -29,7 +29,7 @@ module.exports['getExternalLink'] = absolutePath => {
     );
   }
 
-  return 'github.com';
+  return 'https://github.com/aragon';
 };
 
 module.exports.names = params => params?.map(p => p.name).join(', ');

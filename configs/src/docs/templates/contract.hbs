@@ -33,15 +33,13 @@
 [.contract-subindex-inherited]
 .{{contract.name}}
 {{/unless}}
-{{#if (isLocalContract contract.name)}}
 {{#each functions}}
+{{#if (isLocalContract __item_context.contract.name)}}
 * {xref-{{anchor~}} }[`++{{name}}({{names params}})++`]
-{{/each}}
-{{else if (isAragonInherittedContract contract.__item_context.file.absolutePath) }}
-{{#each functions}}
+{{else if (isAragonInherittedContract __item_context.file.absolutePath) }}
 * link:{{getExternalLink __item_context.file.absolutePath}}[{{name}}]
-{{/each}}
 {{/if}}
+{{/each}}
 
 {{/each}}
 --
@@ -57,15 +55,13 @@
 [.contract-subindex-inherited]
 .{{name}}
 {{/unless}}
-{{#if (isLocalContract name)}}
 {{#each events}}
+{{#if (isLocalContract __item_context.contract.name)}}
 * {xref-{{anchor~}} }[`++{{name}}({{names params}})++`]
-{{/each}}
 {{else if (isAragonInherittedContract __item_context.file.absolutePath) }}
-{{#each events}}
 * link:{{getExternalLink __item_context.file.absolutePath}}[{{name}}]
-{{/each}}
 {{/if}}
+{{/each}}
 
 {{/each}}
 --
@@ -80,20 +76,17 @@
 [.contract-subindex-inherited]
 .{{name}}
 {{/unless}}
-{{#if (isLocalContract contract.name)}}
 {{#each errors}}
+{{#if (isLocalContract __item_context.contract.name)}}
 * {xref-{{anchor~}} }[`++{{name}}({{names params}})++`]
-{{/each}}
 {{else if (isAragonInherittedContract __item_context.file.absolutePath) }}
-{{#each errors}}
 * link:{{getExternalLink __item_context.file.absolutePath}}[{{name}}]
-{{/each}}
 {{/if}}
+{{/each}}
 
 {{/each}}
 --
 {{/if}}
-
 
 {{#if has-internal-variables}}
 [.contract-index]
@@ -104,15 +97,13 @@
 [.contract-subindex-inherited]
 .{{name}}
 {{/unless}}
-{{#if (isLocalContract contract.name)}}
 {{#each internal-variables}}
-* {xref-{{anchor~}} }[`++{{typeDescriptions.typeString}} {{#if constant}}constant{{/if}} {{name}}++`]
-{{/each}}
+{{#if (isLocalContract __item_context.contract.name)}}
+* {xref-{{anchor~}} }[`++{{{typeDescriptions.typeString}}} {{#if constant}}constant{{/if}} {{name}}++`]
 {{else if (isAragonInherittedContract __item_context.file.absolutePath) }}
-{{#each errors}}
 * link:{{getExternalLink __item_context.file.absolutePath}}[{{name}}]
-{{/each}}
 {{/if}}
+{{/each}}
 
 {{/each}}
 --
@@ -123,9 +114,9 @@
 [[{{anchor}}]]
 ==== `[.contract-item-name]#++{{name}}++#++({{typed-params params}})++` [.item-kind]#modifier#
 
-{{natspec.notice}}
+{{{natspec.notice}}}
 
-{{natspec.dev}}
+{{{natspec.dev}}}
 
 {{/each}}
 
@@ -134,9 +125,9 @@
 [[{{anchor}}]]
 ==== `[.contract-item-name]#++{{name}}++#++({{typed-params params}}){{#if returns2}} → {{typed-params returns2}}{{/if}}++` [.item-kind]#{{visibility}}#
 
-{{natspec.notice}}
+{{{natspec.notice}}}
 
-{{natspec.dev}}
+{{{natspec.dev}}}
 
 {{/each}}
 
@@ -145,9 +136,9 @@
 [[{{anchor}}]]
 ==== `[.contract-item-name]#++{{name}}++#++({{typed-params params}})++` [.item-kind]#event#
 
-{{natspec.notice}}
+{{{natspec.notice}}}
 
-{{natspec.dev}}
+{{{natspec.dev}}}
 
 {{/each}}
 
@@ -156,9 +147,9 @@
 [[{{anchor}}]]
 ==== `[.contract-item-name]#++{{name}}++#++({{typed-params params}})++` [.item-kind]#error#
 
-{{natspec.notice}}
+{{{natspec.notice}}}
 
-{{natspec.dev}}
+{{{natspec.dev}}}
 
 {{/each}}
 
@@ -167,8 +158,8 @@
 [[{{anchor}}]]
 ==== `{{typeDescriptions.typeString}} [.contract-item-name]#++{{name}}++#` [.item-kind]#internal{{#if constant}} constant{{/if}}#
 
-{{natspec.notice}}
+{{{natspec.notice}}}
 
-{{natspec.dev}}
+{{{natspec.dev}}}
 
 {{/each}}
