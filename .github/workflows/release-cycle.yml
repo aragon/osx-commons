@@ -1,0 +1,199 @@
+name: Release
+on:
+  pull_request:
+    branches:
+      - release-*
+    types:
+      - closed
+  workflow_dispatch:
+    inputs:
+      package:
+        type: choice
+        description: Which package to release(NOTE:Used only when triggered from `main` branch. When triggered from `release-*` branch, it grabs the package folder name from the branch name)
+        options:
+          - 'contracts'
+          - 'configs'
+          - 'sdk'
+          - 'artifacts'
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  state:
+    name: Check state
+    permissions:
+      pull-requests: read
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up environment
+        uses: ./.github/actions/setup
+      - run: bash scripts/release/git-user-config.sh
+      - id: state
+        name: Get state
+        uses: actions/github-script@v7
+        env:
+          TRIGGERING_ACTOR: ${{ github.triggering_actor }}
+          PULL_REQUEST_MERGED: ${{ github.event.pull_request.merged }}
+          HEAD_REF: ${{ github.head_ref }}
+          BASE_REF: ${{ github.base_ref }}
+        with:
+          result-encoding: string
+          script: await require('./scripts/release/state.js')({ github, context, core })
+    outputs:
+      # Job Flags
+      start: ${{ steps.state.outputs.start }}
+      changesets: ${{ steps.state.outputs.changesets }}
+      promote: ${{ steps.state.outputs.promote }}
+      publish: ${{ steps.state.outputs.publish }}
+      merge: ${{ steps.state.outputs.merge }}
+      is_prerelease: ${{ steps.state.outputs.prerelease }}
+
+  ## TODO: 1. might need to add `test` that only runs when `start = true`. `start` should become `dependndent` on `test task`.
+  ## test grabs the package name and goes into that folder and runs yarn build and test.
+  ## We might need to do the same when things are merged into `release-*` branch.
+  ## TODO: 2. workflow_dispatch.inputs is only used for the first time, but when deciding to run dispatch from other branches(other than main),
+  ## inputs are still shown on UI (whatever user chooses though, I don't use it), i get the package from branch name. It might be confusing though
+  ## to still appear `inputs` even if running dispatch from branch other than main, but couldn't find a way to hide it.
+  start:
+    runs-on: ubuntu-latest
+    needs: state
+    name: Start Release Candidate
+    ## Run this job only if Manually triggered by the user on UI of main branch.
+    if: needs.state.outputs.start == 'true'
+    permissions:
+      contents: write
+      actions: write
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up environment
+        uses: ./.github/actions/setup
+      - run: bash scripts/release/git-user-config.sh
+      - name: Create Release Candidate Branch
+        uses: actions/github-script@v7
+        id: start
+        with:
+          script: await require('./scripts/release/start.js')({ github, context, core })
+        env:
+          PACKAGE: ${{ github.event.inputs.package }}
+      - name: Re-run workflow
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const [owner, repo] = '${{ github.repository }}'.split('/');
+            github.rest.actions.createWorkflowDispatch({
+              owner: owner,
+              repo: repo,
+              workflow_id: 'release-cycle.yml',
+              ref: '${{ steps.start.outputs.branch }}',
+            });
+
+  changesets:
+    runs-on: ubuntu-latest
+    name: Update PR to release
+    needs: state
+    if: needs.state.outputs.changesets == 'true'
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up environment
+        uses: ./.github/actions/setup
+      - run: bash scripts/release/git-user-config.sh
+      - name: Create/Update PR
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          version: yarn run version
+          # When a PR is merged to `release-*`, changesets/action uses `ref_name` which
+          # is `<pr_number>/merge` and not the source branch name. Such a PR causes
+          # changeset's new PR creation instead of updating the current one.
+          # For push or workflow dispatch events, `base_ref` is undefined
+          # and `branch` results in `ref_name` which is where push/dispatch happened.
+          branch: ${{ github.base_ref || github.ref_name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REF_NAME: ${{ github.base_ref || github.ref_name }}
+
+  promote:
+    runs-on: ubuntu-latest
+    name: Promote to final release
+    needs: state
+    permissions:
+      contents: write
+      actions: write
+    if: needs.state.outputs.promote == 'true'
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up environment
+        uses: ./.github/actions/setup
+      - run: bash scripts/release/git-user-config.sh
+      - name: Exit prerelease state
+        if: needs.state.outputs.is_prerelease == 'true'
+        run: bash scripts/release/exit-prerelease.sh
+      - name: Re-run workflow
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const [owner, repo] = '${{ github.repository }}'.split('/');
+            github.rest.actions.createWorkflowDispatch({
+              owner: owner,
+              repo: repo,
+              workflow_id: 'release-cycle.yml',
+              ref: '${{ github.ref_name }}'
+            });
+
+  publish:
+    runs-on: ubuntu-latest
+    name: Publish to npm and create a release/tag
+    needs: state
+    if: needs.state.outputs.publish == 'true'
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up environment
+        uses: ./.github/actions/setup
+      - run: bash scripts/release/git-user-config.sh
+      - name: Build the package
+        run: bash scripts/release/build.sh
+        env:
+          REF_NAME: ${{ github.base_ref }}
+      - name: Create temporary .npmrc
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+      - name: Publish to npm
+        uses: actions/github-script@v7
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REF_NAME: ${{ github.base_ref }}
+        with:
+          script: await require('./scripts/release/publish.js')({ github, context })
+
+  merge:
+    needs: [state, publish]
+    name: Create PR back to main
+    permissions:
+      contents: write
+      pull-requests: write
+    if: needs.state.outputs.merge == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # All branches
+      - name: Set up environment
+        uses: ./.github/actions/setup
+      - run: bash scripts/release/git-user-config.sh
+      - name: Create PR back to main
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              head: '${{ github.base_ref }}',
+              base: 'main',
+              title: '${{ format('Merge {0} branch', github.base_ref) }}'
+            });

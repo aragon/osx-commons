@@ -4,7 +4,6 @@
 
 - common helper functionality for
   - web3 interaction
-  - subgraph interaction
   - file storage on IPFS
   - retrieving addresses of deployed Aragon OSx framework contracts
   - contract deployment
