@@ -33,7 +33,7 @@ abstract contract PluginSetup is ERC165, IPluginSetup, ProtocolVersion {
         address _dao,
         uint16 _fromBuild,
         SetupPayload calldata _payload
-    ) external pure returns (bytes memory, PreparedSetupData memory) {
+    ) external returns (bytes memory, PreparedSetupData memory) {
         (_dao, _fromBuild, _payload);
         revert NonUpgradeablePlugin();
     }
