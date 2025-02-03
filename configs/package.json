@@ -15,7 +15,7 @@
     "node": ">=16"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.json && cp -r ./src/docs ./dist",
     "lint:ts": "cd .. && yarn run lint:configs:ts",
     "prepare": "yarn run build",
     "analyze": "size-limit --why",
