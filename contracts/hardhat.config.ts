@@ -151,6 +151,9 @@ const config: HardhatUserConfig = {
     target: 'ethers-v5',
   },
   docgen: process.env.DOCS ? require('./docs/config.js') : undefined,
+  mocha: {
+    timeout: 200_000, // 200 seconds - increase the timeout for subdomain validation tests
+  },
 };
 
 export default config;
