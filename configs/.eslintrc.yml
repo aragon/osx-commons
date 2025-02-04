@@ -6,3 +6,4 @@ parserOptions:
 ignorePatterns:
   # directories
   - dist
+  - src/docs/**/*.js
