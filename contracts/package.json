@@ -2,14 +2,14 @@
   "name": "@aragon/osx-commons-contracts",
   "license": "AGPL-3.0-or-later",
   "description": "The Aragon OSx contracts package containing common utilities",
-  "version": "1.4.0-alpha.6",
+  "version": "1.4.0",
   "author": {
     "name": "aragon",
     "url": "https://github.com/aragon"
   },
   "devDependencies": {
-    "@aragon/osx-commons-sdk": "0.0.1-alpha.11",
-    "@aragon/osx-commons-configs": "0.7.0-alpha.1",
+    "@aragon/osx-commons-sdk": "0.1.0",
+    "@aragon/osx-commons-configs": "0.8.0",
     "@aragon/osx-ethers-v1.0.0": "npm:@aragon/osx-ethers@1.0.0",
     "@aragon/osx-ethers-v1.3.0": "npm:@aragon/osx-ethers@1.3.0",
     "@ethersproject/abi": "5.7.0",
@@ -55,7 +55,7 @@
     "url": "https://github.com/aragon/osx-commons"
   },
   "files": [
-    "src/{dao,permission,plugin,utils}/**/*.sol"
+    "src/{dao,permission,plugin,utils,executors}/**/*.sol"
   ],
   "keywords": [
     "blockchain",
