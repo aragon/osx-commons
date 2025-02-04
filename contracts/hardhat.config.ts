@@ -150,13 +150,9 @@ const config: HardhatUserConfig = {
     outDir: 'typechain',
     target: 'ethers-v5',
   },
-  docgen: {
-    outputDir: 'docs/developer-portal/reference-guide',
-    theme: 'markdown',
-    pages: 'files',
-    templates: 'docs/templates',
-    collapseNewlines: true,
-    exclude: ['test'],
+  docgen: process.env.DOCS ? require('./docs/config.js') : undefined,
+  mocha: {
+    timeout: 200_000, // 200 seconds - increase the timeout for subdomain validation tests
   },
 };
 

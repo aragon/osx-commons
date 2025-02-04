@@ -4,6 +4,7 @@ pragma solidity ^0.8.8;
 
 import {Plugin} from "../../plugin/Plugin.sol";
 import {IDAO} from "../../dao/IDAO.sol";
+import {Action} from "../../executors/IExecutor.sol";
 
 /// @notice A mock plugin to be deployed via the `new` keyword.
 /// v1.1 (Release 1, Build 1)
@@ -13,5 +14,29 @@ contract PluginMockBuild1 is Plugin {
 
     constructor(IDAO _dao) Plugin(_dao) {
         state1 = 1;
+    }
+
+    function execute(
+        uint256 _callId,
+        Action[] memory _actions,
+        uint256 _allowFailureMap
+    ) external returns (bytes[] memory execResults, uint256 failureMap) {
+        (execResults, failureMap) = _execute(bytes32(_callId), _actions, _allowFailureMap);
+    }
+
+    function execute(
+        address _target,
+        uint256 _callId,
+        Action[] memory _actions,
+        uint256 _allowFailureMap,
+        Operation _op
+    ) external returns (bytes[] memory execResults, uint256 failureMap) {
+        (execResults, failureMap) = _execute(
+            _target,
+            bytes32(_callId),
+            _actions,
+            _allowFailureMap,
+            _op
+        );
     }
 }

@@ -11,4 +11,8 @@ export const exceptionalDomains: ENSNetworkDomainsMap = {
     daoEns: 'aragon-dao.eth',
     pluginEns: 'plugin.aragon-dao.eth',
   },
+  [SupportedNetworks.DEV_SEPOLIA]: {
+    daoEns: 'osx-aragon-dao.eth',
+    pluginEns: 'plugin.osx-aragon-dao.eth',
+  },
 };

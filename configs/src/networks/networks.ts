@@ -21,6 +21,12 @@ export const networks: NetworkConfigs = {
     name: SupportedNetworks.SEPOLIA,
     aliases: {},
   },
+  [SupportedNetworks.DEV_SEPOLIA]: {
+    isTestnet: true,
+    chainId: 11155111,
+    name: SupportedNetworks.DEV_SEPOLIA,
+    aliases: {},
+  },
   [SupportedNetworks.HOLESKY]: {
     isTestnet: true,
     chainId: 17000,
@@ -104,6 +110,18 @@ export const networks: NetworkConfigs = {
     name: SupportedNetworks.ZKSYNC_MAINNET,
     aliases: {},
   },
+  [SupportedNetworks.LINEA_SEPOLIA]: {
+    chainId: 59141,
+    isTestnet: true,
+    name: SupportedNetworks.LINEA_SEPOLIA,
+    aliases: {},
+  },
+  [SupportedNetworks.LINEA]: {
+    chainId: 59144,
+    isTestnet: false,
+    name: SupportedNetworks.LINEA,
+    aliases: {},
+  },
   [SupportedNetworks.LOCAL]: {
     isTestnet: true,
     chainId: 31337,
@@ -116,6 +134,7 @@ export const networksAlchemyRpcUrl: NetworkRpcUrl = {
   [SupportedNetworks.MAINNET]: 'https://eth-mainnet.g.alchemy.com/v2/',
   [SupportedNetworks.GOERLI]: 'https://eth-goerli.g.alchemy.com/v2/',
   [SupportedNetworks.SEPOLIA]: 'https://eth-sepolia.g.alchemy.com/v2/',
+  [SupportedNetworks.DEV_SEPOLIA]: 'https://eth-sepolia.g.alchemy.com/v2/',
   [SupportedNetworks.HOLESKY]: 'https://eth-holesky.g.alchemy.com/v2/',
   [SupportedNetworks.POLYGON]: 'https://polygon-mainnet.g.alchemy.com/v2/',
   [SupportedNetworks.MUMBAI]: 'https://polygon-mumbai.g.alchemy.com/v2/',
@@ -128,6 +147,8 @@ export const networksAlchemyRpcUrl: NetworkRpcUrl = {
     'https://zksync-sepolia.g.alchemy.com/v2/',
   [SupportedNetworks.ZKSYNC_MAINNET]:
     'https://zksync-mainnet.g.alchemy.com/v2/',
+  [SupportedNetworks.LINEA]: 'https://linea-mainnet.g.alchemy.com/v2/',
+  [SupportedNetworks.LINEA_SEPOLIA]: 'https://linea-sepolia.g.alchemy.com/v2/',
   [SupportedNetworks.LOCAL]: 'http://localhost:8545',
 };
 

@@ -3,39 +3,28 @@
 pragma solidity ^0.8.8;
 
 import {Proposal} from "../../../../plugin/extensions/proposal/Proposal.sol";
-import {IDAO} from "../../../../dao/IDAO.sol";
+import {Action} from "../../../../executors/IExecutor.sol";
 
-/// @notice A mock contract containing functions to create and execute proposals.
+/// @notice A mock contract.
 /// @dev DO NOT USE IN PRODUCTION!
 contract ProposalMock is Proposal {
-    function createProposalId() external returns (uint256 proposalId) {
-        proposalId = _createProposalId();
-    }
+    // We don't need to test these below functions as they will be tested in the actual plugins.
+    // This mock contract is only used to test `supportsInterface` function.
 
+    // solhint-disable no-empty-blocks
     function createProposal(
-        address _creator,
-        bytes calldata _metadata,
-        uint64 _startDate,
-        uint64 _endDate,
-        IDAO.Action[] calldata _actions,
-        uint256 _allowFailureMap
-    ) external returns (uint256 proposalId) {
-        proposalId = _createProposal(
-            _creator,
-            _metadata,
-            _startDate,
-            _endDate,
-            _actions,
-            _allowFailureMap
-        );
-    }
+        bytes memory data,
+        Action[] memory actions,
+        uint64 startDate,
+        uint64 endDate,
+        bytes memory
+    ) external returns (uint256 proposalId) {}
 
-    function executeProposal(
-        IDAO _dao,
-        uint256 _proposalId,
-        IDAO.Action[] memory _actions,
-        uint256 _allowFailureMap
-    ) external returns (bytes[] memory execResults, uint256 failureMap) {
-        (execResults, failureMap) = _executeProposal(_dao, _proposalId, _actions, _allowFailureMap);
-    }
+    function execute(uint256 proposalId) external view {}
+
+    function canExecute(uint256 _proposalId) external view returns (bool) {}
+
+    function hasSucceeded(uint256 proposalId) external view returns (bool) {}
+
+    function customProposalParamsABI() external view returns (string memory) {}
 }

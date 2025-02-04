@@ -1,7 +1,7 @@
 {
   "name": "@aragon/osx-commons-configs",
   "author": "Aragon X",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "license": "AGPL-3.0-or-later",
   "typings": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -15,7 +15,7 @@
     "node": ">=16"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.json && cp -r ./src/docs ./dist",
     "lint:ts": "cd .. && yarn run lint:configs:ts",
     "prepare": "yarn run build",
     "analyze": "size-limit --why",
