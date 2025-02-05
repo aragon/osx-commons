@@ -1,0 +1,52 @@
+{
+  "repositories": [
+    {
+      "name": "osx",
+      "url": "https://github.com/aragon/osx",
+      "branch": "develop",
+      "projectType": "hardhat",
+      "contractsDir": "packages/contracts",
+      "artifactsDir": "artifacts/src"
+    },
+    {
+      "name": "admin-plugin",
+      "url": "https://github.com/aragon/admin-plugin",
+      "branch": "develop",
+      "projectType": "hardhat",
+      "contractsDir": "packages/contracts",
+      "artifactsDir": "artifacts/src"
+    },
+    {
+      "name": "multisig-plugin",
+      "url": "https://github.com/aragon/multisig-plugin",
+      "branch": "develop",
+      "projectType": "hardhat",
+      "contractsDir": "packages/contracts",
+      "artifactsDir": "artifacts/src"
+    },
+    {
+      "name": "token-voting-plugin",
+      "url": "https://github.com/aragon/token-voting-plugin",
+      "branch": "develop",
+      "projectType": "hardhat",
+      "contractsDir": "packages/contracts",
+      "artifactsDir": "artifacts/src"
+    },
+    {
+      "name": "staged-proposal-processor-plugin",
+      "url": "https://github.com/aragon/staged-proposal-processor-plugin",
+      "branch": "fixed-imports",
+      "projectType": "foundry",
+      "contractsDir": "",
+      "artifactsDir": "out/",
+      "contractFilesToInclude": [
+        "Errors",
+        "Permissions",
+        "SPPRuleCondition",
+        "StagedProposalProcessor",
+        "StagedProposalProcessorSetup",
+        "StagedProposalProcessorSetupZkSync"
+      ]
+    }
+  ]
+}

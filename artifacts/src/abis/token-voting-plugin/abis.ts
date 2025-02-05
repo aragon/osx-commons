@@ -407,7 +407,7 @@ export const governanceErc20Abi = [
     outputs: [{name: '', internalType: 'bool', type: 'bool'}],
     stateMutability: 'nonpayable',
   },
-] as const;
+] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GovernanceWrappedERC20
@@ -795,7 +795,7 @@ export const governanceWrappedErc20Abi = [
     outputs: [{name: '', internalType: 'bool', type: 'bool'}],
     stateMutability: 'nonpayable',
   },
-] as const;
+] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // IERC20MintableUpgradeable
@@ -812,7 +812,7 @@ export const ierc20MintableUpgradeableAbi = [
     outputs: [],
     stateMutability: 'nonpayable',
   },
-] as const;
+] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // IGovernanceWrappedERC20
@@ -839,7 +839,7 @@ export const iGovernanceWrappedErc20Abi = [
     outputs: [{name: '', internalType: 'bool', type: 'bool'}],
     stateMutability: 'nonpayable',
   },
-] as const;
+] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // IMajorityVoting
@@ -920,6 +920,13 @@ export const iMajorityVotingAbi = [
   {
     type: 'function',
     inputs: [{name: '_proposalId', internalType: 'uint256', type: 'uint256'}],
+    name: 'isMinApprovalReached',
+    outputs: [{name: '', internalType: 'bool', type: 'bool'}],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{name: '_proposalId', internalType: 'uint256', type: 'uint256'}],
     name: 'isMinParticipationReached',
     outputs: [{name: '', internalType: 'bool', type: 'bool'}],
     stateMutability: 'view',
@@ -936,6 +943,13 @@ export const iMajorityVotingAbi = [
     inputs: [{name: '_proposalId', internalType: 'uint256', type: 'uint256'}],
     name: 'isSupportThresholdReachedEarly',
     outputs: [{name: '', internalType: 'bool', type: 'bool'}],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'minApproval',
+    outputs: [{name: '', internalType: 'uint256', type: 'uint256'}],
     stateMutability: 'view',
   },
   {
@@ -967,13 +981,14 @@ export const iMajorityVotingAbi = [
     outputs: [],
     stateMutability: 'nonpayable',
   },
-] as const;
+] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // MajorityVotingBase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const majorityVotingBaseAbi = [
+  {type: 'error', inputs: [], name: 'AlreadyInitialized'},
   {
     type: 'error',
     inputs: [
@@ -992,6 +1007,27 @@ export const majorityVotingBaseAbi = [
     ],
     name: 'DateOutOfBounds',
   },
+  {type: 'error', inputs: [], name: 'DelegateCallFailed'},
+  {type: 'error', inputs: [], name: 'FunctionDeprecated'},
+  {
+    type: 'error',
+    inputs: [
+      {
+        name: 'targetConfig',
+        internalType: 'struct IPlugin.TargetConfig',
+        type: 'tuple',
+        components: [
+          {name: 'target', internalType: 'address', type: 'address'},
+          {
+            name: 'operation',
+            internalType: 'enum IPlugin.Operation',
+            type: 'uint8',
+          },
+        ],
+      },
+    ],
+    name: 'InvalidTargetConfig',
+  },
   {
     type: 'error',
     inputs: [
@@ -999,6 +1035,16 @@ export const majorityVotingBaseAbi = [
       {name: 'actual', internalType: 'uint64', type: 'uint64'},
     ],
     name: 'MinDurationOutOfBounds',
+  },
+  {
+    type: 'error',
+    inputs: [{name: 'proposalId', internalType: 'uint256', type: 'uint256'}],
+    name: 'NonexistentProposal',
+  },
+  {
+    type: 'error',
+    inputs: [{name: 'proposalId', internalType: 'uint256', type: 'uint256'}],
+    name: 'ProposalAlreadyExists',
   },
   {
     type: 'error',
@@ -1070,6 +1116,14 @@ export const majorityVotingBaseAbi = [
     type: 'event',
     anonymous: false,
     inputs: [
+      {name: 'metadata', internalType: 'bytes', type: 'bytes', indexed: false},
+    ],
+    name: 'MetadataSet',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
       {
         name: 'proposalId',
         internalType: 'uint256',
@@ -1092,7 +1146,7 @@ export const majorityVotingBaseAbi = [
       {name: 'metadata', internalType: 'bytes', type: 'bytes', indexed: false},
       {
         name: 'actions',
-        internalType: 'struct IDAO.Action[]',
+        internalType: 'struct Action[]',
         type: 'tuple[]',
         components: [
           {name: 'to', internalType: 'address', type: 'address'},
@@ -1122,6 +1176,27 @@ export const majorityVotingBaseAbi = [
       },
     ],
     name: 'ProposalExecuted',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'newTargetConfig',
+        internalType: 'struct IPlugin.TargetConfig',
+        type: 'tuple',
+        components: [
+          {name: 'target', internalType: 'address', type: 'address'},
+          {
+            name: 'operation',
+            internalType: 'enum IPlugin.Operation',
+            type: 'uint8',
+          },
+        ],
+        indexed: false,
+      },
+    ],
+    name: 'TargetSet',
   },
   {
     type: 'event',
@@ -1167,6 +1242,19 @@ export const majorityVotingBaseAbi = [
     anonymous: false,
     inputs: [
       {
+        name: 'minApprovals',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'VotingMinApprovalUpdated',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
         name: 'votingMode',
         internalType: 'enum MajorityVotingBase.VotingMode',
         type: 'uint8',
@@ -1202,6 +1290,34 @@ export const majorityVotingBaseAbi = [
   {
     type: 'function',
     inputs: [],
+    name: 'CREATE_PROPOSAL_PERMISSION_ID',
+    outputs: [{name: '', internalType: 'bytes32', type: 'bytes32'}],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'EXECUTE_PROPOSAL_PERMISSION_ID',
+    outputs: [{name: '', internalType: 'bytes32', type: 'bytes32'}],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'SET_METADATA_PERMISSION_ID',
+    outputs: [{name: '', internalType: 'bytes32', type: 'bytes32'}],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'SET_TARGET_CONFIG_PERMISSION_ID',
+    outputs: [{name: '', internalType: 'bytes32', type: 'bytes32'}],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
     name: 'UPDATE_VOTING_SETTINGS_PERMISSION_ID',
     outputs: [{name: '', internalType: 'bytes32', type: 'bytes32'}],
     stateMutability: 'view',
@@ -1224,7 +1340,7 @@ export const majorityVotingBaseAbi = [
     type: 'function',
     inputs: [
       {name: '_proposalId', internalType: 'uint256', type: 'uint256'},
-      {name: '_voter', internalType: 'address', type: 'address'},
+      {name: '_account', internalType: 'address', type: 'address'},
       {
         name: '_voteOption',
         internalType: 'enum IMajorityVoting.VoteOption',
@@ -1238,31 +1354,10 @@ export const majorityVotingBaseAbi = [
   {
     type: 'function',
     inputs: [
-      {name: 'metadata', internalType: 'bytes', type: 'bytes'},
-      {
-        name: 'actions',
-        internalType: 'struct IDAO.Action[]',
-        type: 'tuple[]',
-        components: [
-          {name: 'to', internalType: 'address', type: 'address'},
-          {name: 'value', internalType: 'uint256', type: 'uint256'},
-          {name: 'data', internalType: 'bytes', type: 'bytes'},
-        ],
-      },
-      {name: 'startDate', internalType: 'uint64', type: 'uint64'},
-      {name: 'endDate', internalType: 'uint64', type: 'uint64'},
-    ],
-    name: 'createProposal',
-    outputs: [{name: 'proposalId', internalType: 'uint256', type: 'uint256'}],
-    stateMutability: 'nonpayable',
-  },
-  {
-    type: 'function',
-    inputs: [
       {name: '_metadata', internalType: 'bytes', type: 'bytes'},
       {
         name: '_actions',
-        internalType: 'struct IDAO.Action[]',
+        internalType: 'struct Action[]',
         type: 'tuple[]',
         components: [
           {name: 'to', internalType: 'address', type: 'address'},
@@ -1286,6 +1381,35 @@ export const majorityVotingBaseAbi = [
   },
   {
     type: 'function',
+    inputs: [
+      {name: '_metadata', internalType: 'bytes', type: 'bytes'},
+      {
+        name: '_actions',
+        internalType: 'struct Action[]',
+        type: 'tuple[]',
+        components: [
+          {name: 'to', internalType: 'address', type: 'address'},
+          {name: 'value', internalType: 'uint256', type: 'uint256'},
+          {name: 'data', internalType: 'bytes', type: 'bytes'},
+        ],
+      },
+      {name: '_startDate', internalType: 'uint64', type: 'uint64'},
+      {name: '_endDate', internalType: 'uint64', type: 'uint64'},
+      {name: '_data', internalType: 'bytes', type: 'bytes'},
+    ],
+    name: 'createProposal',
+    outputs: [{name: 'proposalId', internalType: 'uint256', type: 'uint256'}],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'customProposalParamsABI',
+    outputs: [{name: '', internalType: 'string', type: 'string'}],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
     inputs: [],
     name: 'dao',
     outputs: [{name: '', internalType: 'contract IDAO', type: 'address'}],
@@ -1297,6 +1421,34 @@ export const majorityVotingBaseAbi = [
     name: 'execute',
     outputs: [],
     stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getCurrentTargetConfig',
+    outputs: [
+      {
+        name: '',
+        internalType: 'struct IPlugin.TargetConfig',
+        type: 'tuple',
+        components: [
+          {name: 'target', internalType: 'address', type: 'address'},
+          {
+            name: 'operation',
+            internalType: 'enum IPlugin.Operation',
+            type: 'uint8',
+          },
+        ],
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getMetadata',
+    outputs: [{name: '', internalType: 'bytes', type: 'bytes'}],
+    stateMutability: 'view',
   },
   {
     type: 'function',
@@ -1334,7 +1486,7 @@ export const majorityVotingBaseAbi = [
       },
       {
         name: 'actions',
-        internalType: 'struct IDAO.Action[]',
+        internalType: 'struct Action[]',
         type: 'tuple[]',
         components: [
           {name: 'to', internalType: 'address', type: 'address'},
@@ -1343,6 +1495,40 @@ export const majorityVotingBaseAbi = [
         ],
       },
       {name: 'allowFailureMap', internalType: 'uint256', type: 'uint256'},
+      {
+        name: 'targetConfig',
+        internalType: 'struct IPlugin.TargetConfig',
+        type: 'tuple',
+        components: [
+          {name: 'target', internalType: 'address', type: 'address'},
+          {
+            name: 'operation',
+            internalType: 'enum IPlugin.Operation',
+            type: 'uint8',
+          },
+        ],
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getTargetConfig',
+    outputs: [
+      {
+        name: '',
+        internalType: 'struct IPlugin.TargetConfig',
+        type: 'tuple',
+        components: [
+          {name: 'target', internalType: 'address', type: 'address'},
+          {
+            name: 'operation',
+            internalType: 'enum IPlugin.Operation',
+            type: 'uint8',
+          },
+        ],
+      },
     ],
     stateMutability: 'view',
   },
@@ -1364,9 +1550,23 @@ export const majorityVotingBaseAbi = [
   },
   {
     type: 'function',
+    inputs: [{name: '_proposalId', internalType: 'uint256', type: 'uint256'}],
+    name: 'hasSucceeded',
+    outputs: [{name: '', internalType: 'bool', type: 'bool'}],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
     inputs: [],
     name: 'implementation',
     outputs: [{name: '', internalType: 'address', type: 'address'}],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{name: '_proposalId', internalType: 'uint256', type: 'uint256'}],
+    name: 'isMinApprovalReached',
+    outputs: [{name: '', internalType: 'bool', type: 'bool'}],
     stateMutability: 'view',
   },
   {
@@ -1388,6 +1588,13 @@ export const majorityVotingBaseAbi = [
     inputs: [{name: '_proposalId', internalType: 'uint256', type: 'uint256'}],
     name: 'isSupportThresholdReachedEarly',
     outputs: [{name: '', internalType: 'bool', type: 'bool'}],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'minApproval',
+    outputs: [{name: '', internalType: 'uint256', type: 'uint256'}],
     stateMutability: 'view',
   },
   {
@@ -1443,6 +1650,34 @@ export const majorityVotingBaseAbi = [
   },
   {
     type: 'function',
+    inputs: [{name: '_metadata', internalType: 'bytes', type: 'bytes'}],
+    name: 'setMetadata',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      {
+        name: '_targetConfig',
+        internalType: 'struct IPlugin.TargetConfig',
+        type: 'tuple',
+        components: [
+          {name: 'target', internalType: 'address', type: 'address'},
+          {
+            name: 'operation',
+            internalType: 'enum IPlugin.Operation',
+            type: 'uint8',
+          },
+        ],
+      },
+    ],
+    name: 'setTargetConfig',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
     inputs: [],
     name: 'supportThreshold',
     outputs: [{name: '', internalType: 'uint32', type: 'uint32'}],
@@ -1461,6 +1696,13 @@ export const majorityVotingBaseAbi = [
     name: 'totalVotingPower',
     outputs: [{name: '', internalType: 'uint256', type: 'uint256'}],
     stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{name: '_minApprovals', internalType: 'uint256', type: 'uint256'}],
+    name: 'updateMinApprovals',
+    outputs: [],
+    stateMutability: 'nonpayable',
   },
   {
     type: 'function',
@@ -1537,13 +1779,14 @@ export const majorityVotingBaseAbi = [
     ],
     stateMutability: 'view',
   },
-] as const;
+] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // TokenVoting
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const tokenVotingAbi = [
+  {type: 'error', inputs: [], name: 'AlreadyInitialized'},
   {
     type: 'error',
     inputs: [
@@ -1562,6 +1805,27 @@ export const tokenVotingAbi = [
     ],
     name: 'DateOutOfBounds',
   },
+  {type: 'error', inputs: [], name: 'DelegateCallFailed'},
+  {type: 'error', inputs: [], name: 'FunctionDeprecated'},
+  {
+    type: 'error',
+    inputs: [
+      {
+        name: 'targetConfig',
+        internalType: 'struct IPlugin.TargetConfig',
+        type: 'tuple',
+        components: [
+          {name: 'target', internalType: 'address', type: 'address'},
+          {
+            name: 'operation',
+            internalType: 'enum IPlugin.Operation',
+            type: 'uint8',
+          },
+        ],
+      },
+    ],
+    name: 'InvalidTargetConfig',
+  },
   {
     type: 'error',
     inputs: [
@@ -1571,6 +1835,16 @@ export const tokenVotingAbi = [
     name: 'MinDurationOutOfBounds',
   },
   {type: 'error', inputs: [], name: 'NoVotingPower'},
+  {
+    type: 'error',
+    inputs: [{name: 'proposalId', internalType: 'uint256', type: 'uint256'}],
+    name: 'NonexistentProposal',
+  },
+  {
+    type: 'error',
+    inputs: [{name: 'proposalId', internalType: 'uint256', type: 'uint256'}],
+    name: 'ProposalAlreadyExists',
+  },
   {
     type: 'error',
     inputs: [{name: 'sender', internalType: 'address', type: 'address'}],
@@ -1680,6 +1954,14 @@ export const tokenVotingAbi = [
     type: 'event',
     anonymous: false,
     inputs: [
+      {name: 'metadata', internalType: 'bytes', type: 'bytes', indexed: false},
+    ],
+    name: 'MetadataSet',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
       {
         name: 'proposalId',
         internalType: 'uint256',
@@ -1702,7 +1984,7 @@ export const tokenVotingAbi = [
       {name: 'metadata', internalType: 'bytes', type: 'bytes', indexed: false},
       {
         name: 'actions',
-        internalType: 'struct IDAO.Action[]',
+        internalType: 'struct Action[]',
         type: 'tuple[]',
         components: [
           {name: 'to', internalType: 'address', type: 'address'},
@@ -1732,6 +2014,27 @@ export const tokenVotingAbi = [
       },
     ],
     name: 'ProposalExecuted',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'newTargetConfig',
+        internalType: 'struct IPlugin.TargetConfig',
+        type: 'tuple',
+        components: [
+          {name: 'target', internalType: 'address', type: 'address'},
+          {
+            name: 'operation',
+            internalType: 'enum IPlugin.Operation',
+            type: 'uint8',
+          },
+        ],
+        indexed: false,
+      },
+    ],
+    name: 'TargetSet',
   },
   {
     type: 'event',
@@ -1771,6 +2074,19 @@ export const tokenVotingAbi = [
       },
     ],
     name: 'VoteCast',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'minApprovals',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'VotingMinApprovalUpdated',
   },
   {
     type: 'event',
@@ -1819,6 +2135,27 @@ export const tokenVotingAbi = [
   {
     type: 'function',
     inputs: [],
+    name: 'EXECUTE_PROPOSAL_PERMISSION_ID',
+    outputs: [{name: '', internalType: 'bytes32', type: 'bytes32'}],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'SET_METADATA_PERMISSION_ID',
+    outputs: [{name: '', internalType: 'bytes32', type: 'bytes32'}],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'SET_TARGET_CONFIG_PERMISSION_ID',
+    outputs: [{name: '', internalType: 'bytes32', type: 'bytes32'}],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
     name: 'UPDATE_VOTING_SETTINGS_PERMISSION_ID',
     outputs: [{name: '', internalType: 'bytes32', type: 'bytes32'}],
     stateMutability: 'view',
@@ -1841,7 +2178,7 @@ export const tokenVotingAbi = [
     type: 'function',
     inputs: [
       {name: '_proposalId', internalType: 'uint256', type: 'uint256'},
-      {name: '_voter', internalType: 'address', type: 'address'},
+      {name: '_account', internalType: 'address', type: 'address'},
       {
         name: '_voteOption',
         internalType: 'enum IMajorityVoting.VoteOption',
@@ -1858,28 +2195,7 @@ export const tokenVotingAbi = [
       {name: '_metadata', internalType: 'bytes', type: 'bytes'},
       {
         name: '_actions',
-        internalType: 'struct IDAO.Action[]',
-        type: 'tuple[]',
-        components: [
-          {name: 'to', internalType: 'address', type: 'address'},
-          {name: 'value', internalType: 'uint256', type: 'uint256'},
-          {name: 'data', internalType: 'bytes', type: 'bytes'},
-        ],
-      },
-      {name: '_startDate', internalType: 'uint64', type: 'uint64'},
-      {name: '_endDate', internalType: 'uint64', type: 'uint64'},
-    ],
-    name: 'createProposal',
-    outputs: [{name: 'proposalId', internalType: 'uint256', type: 'uint256'}],
-    stateMutability: 'nonpayable',
-  },
-  {
-    type: 'function',
-    inputs: [
-      {name: '_metadata', internalType: 'bytes', type: 'bytes'},
-      {
-        name: '_actions',
-        internalType: 'struct IDAO.Action[]',
+        internalType: 'struct Action[]',
         type: 'tuple[]',
         components: [
           {name: 'to', internalType: 'address', type: 'address'},
@@ -1903,6 +2219,35 @@ export const tokenVotingAbi = [
   },
   {
     type: 'function',
+    inputs: [
+      {name: '_metadata', internalType: 'bytes', type: 'bytes'},
+      {
+        name: '_actions',
+        internalType: 'struct Action[]',
+        type: 'tuple[]',
+        components: [
+          {name: 'to', internalType: 'address', type: 'address'},
+          {name: 'value', internalType: 'uint256', type: 'uint256'},
+          {name: 'data', internalType: 'bytes', type: 'bytes'},
+        ],
+      },
+      {name: '_startDate', internalType: 'uint64', type: 'uint64'},
+      {name: '_endDate', internalType: 'uint64', type: 'uint64'},
+      {name: '_data', internalType: 'bytes', type: 'bytes'},
+    ],
+    name: 'createProposal',
+    outputs: [{name: 'proposalId', internalType: 'uint256', type: 'uint256'}],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'customProposalParamsABI',
+    outputs: [{name: '', internalType: 'string', type: 'string'}],
+    stateMutability: 'pure',
+  },
+  {
+    type: 'function',
     inputs: [],
     name: 'dao',
     outputs: [{name: '', internalType: 'contract IDAO', type: 'address'}],
@@ -1914,6 +2259,34 @@ export const tokenVotingAbi = [
     name: 'execute',
     outputs: [],
     stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getCurrentTargetConfig',
+    outputs: [
+      {
+        name: '',
+        internalType: 'struct IPlugin.TargetConfig',
+        type: 'tuple',
+        components: [
+          {name: 'target', internalType: 'address', type: 'address'},
+          {
+            name: 'operation',
+            internalType: 'enum IPlugin.Operation',
+            type: 'uint8',
+          },
+        ],
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getMetadata',
+    outputs: [{name: '', internalType: 'bytes', type: 'bytes'}],
+    stateMutability: 'view',
   },
   {
     type: 'function',
@@ -1951,7 +2324,7 @@ export const tokenVotingAbi = [
       },
       {
         name: 'actions',
-        internalType: 'struct IDAO.Action[]',
+        internalType: 'struct Action[]',
         type: 'tuple[]',
         components: [
           {name: 'to', internalType: 'address', type: 'address'},
@@ -1960,6 +2333,40 @@ export const tokenVotingAbi = [
         ],
       },
       {name: 'allowFailureMap', internalType: 'uint256', type: 'uint256'},
+      {
+        name: 'targetConfig',
+        internalType: 'struct IPlugin.TargetConfig',
+        type: 'tuple',
+        components: [
+          {name: 'target', internalType: 'address', type: 'address'},
+          {
+            name: 'operation',
+            internalType: 'enum IPlugin.Operation',
+            type: 'uint8',
+          },
+        ],
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getTargetConfig',
+    outputs: [
+      {
+        name: '',
+        internalType: 'struct IPlugin.TargetConfig',
+        type: 'tuple',
+        components: [
+          {name: 'target', internalType: 'address', type: 'address'},
+          {
+            name: 'operation',
+            internalType: 'enum IPlugin.Operation',
+            type: 'uint8',
+          },
+        ],
+      },
     ],
     stateMutability: 'view',
   },
@@ -1986,6 +2393,13 @@ export const tokenVotingAbi = [
     outputs: [
       {name: '', internalType: 'contract IVotesUpgradeable', type: 'address'},
     ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{name: '_proposalId', internalType: 'uint256', type: 'uint256'}],
+    name: 'hasSucceeded',
+    outputs: [{name: '', internalType: 'bool', type: 'bool'}],
     stateMutability: 'view',
   },
   {
@@ -2024,6 +2438,21 @@ export const tokenVotingAbi = [
         internalType: 'contract IVotesUpgradeable',
         type: 'address',
       },
+      {
+        name: '_targetConfig',
+        internalType: 'struct IPlugin.TargetConfig',
+        type: 'tuple',
+        components: [
+          {name: 'target', internalType: 'address', type: 'address'},
+          {
+            name: 'operation',
+            internalType: 'enum IPlugin.Operation',
+            type: 'uint8',
+          },
+        ],
+      },
+      {name: '_minApprovals', internalType: 'uint256', type: 'uint256'},
+      {name: '_pluginMetadata', internalType: 'bytes', type: 'bytes'},
     ],
     name: 'initialize',
     outputs: [],
@@ -2031,8 +2460,25 @@ export const tokenVotingAbi = [
   },
   {
     type: 'function',
+    inputs: [
+      {name: '_fromBuild', internalType: 'uint16', type: 'uint16'},
+      {name: '_initData', internalType: 'bytes', type: 'bytes'},
+    ],
+    name: 'initializeFrom',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
     inputs: [{name: '_account', internalType: 'address', type: 'address'}],
     name: 'isMember',
+    outputs: [{name: '', internalType: 'bool', type: 'bool'}],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{name: '_proposalId', internalType: 'uint256', type: 'uint256'}],
+    name: 'isMinApprovalReached',
     outputs: [{name: '', internalType: 'bool', type: 'bool'}],
     stateMutability: 'view',
   },
@@ -2055,6 +2501,13 @@ export const tokenVotingAbi = [
     inputs: [{name: '_proposalId', internalType: 'uint256', type: 'uint256'}],
     name: 'isSupportThresholdReachedEarly',
     outputs: [{name: '', internalType: 'bool', type: 'bool'}],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'minApproval',
+    outputs: [{name: '', internalType: 'uint256', type: 'uint256'}],
     stateMutability: 'view',
   },
   {
@@ -2110,8 +2563,29 @@ export const tokenVotingAbi = [
   },
   {
     type: 'function',
-    inputs: [{name: '_forwarder', internalType: 'address', type: 'address'}],
-    name: 'setForwarder',
+    inputs: [{name: '_metadata', internalType: 'bytes', type: 'bytes'}],
+    name: 'setMetadata',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      {
+        name: '_targetConfig',
+        internalType: 'struct IPlugin.TargetConfig',
+        type: 'tuple',
+        components: [
+          {name: 'target', internalType: 'address', type: 'address'},
+          {
+            name: 'operation',
+            internalType: 'enum IPlugin.Operation',
+            type: 'uint8',
+          },
+        ],
+      },
+    ],
+    name: 'setTargetConfig',
     outputs: [],
     stateMutability: 'nonpayable',
   },
@@ -2138,10 +2612,10 @@ export const tokenVotingAbi = [
   },
   {
     type: 'function',
-    inputs: [],
-    name: 'trustedForwarder',
-    outputs: [{name: '', internalType: 'address', type: 'address'}],
-    stateMutability: 'view',
+    inputs: [{name: '_minApprovals', internalType: 'uint256', type: 'uint256'}],
+    name: 'updateMinApprovals',
+    outputs: [],
+    stateMutability: 'nonpayable',
   },
   {
     type: 'function',
@@ -2218,7 +2692,7 @@ export const tokenVotingAbi = [
     ],
     stateMutability: 'view',
   },
-] as const;
+] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // TokenVotingSetup
@@ -2258,18 +2732,6 @@ export const tokenVotingSetupAbi = [
     type: 'error',
     inputs: [{name: 'token', internalType: 'address', type: 'address'}],
     name: 'TokenNotERC20',
-  },
-  {
-    type: 'error',
-    inputs: [{name: 'length', internalType: 'uint256', type: 'uint256'}],
-    name: 'WrongHelpersArrayLength',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'EXECUTE_PERMISSION_ID',
-    outputs: [{name: '', internalType: 'bytes32', type: 'bytes32'}],
-    stateMutability: 'view',
   },
   {
     type: 'function',
@@ -2416,6 +2878,231 @@ export const tokenVotingSetupAbi = [
         ],
       },
     ],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'protocolVersion',
+    outputs: [{name: '', internalType: 'uint8[3]', type: 'uint8[3]'}],
+    stateMutability: 'pure',
+  },
+  {
+    type: 'function',
+    inputs: [{name: 'token', internalType: 'address', type: 'address'}],
+    name: 'supportsIVotesInterface',
+    outputs: [{name: '', internalType: 'bool', type: 'bool'}],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{name: '_interfaceId', internalType: 'bytes4', type: 'bytes4'}],
+    name: 'supportsInterface',
+    outputs: [{name: '', internalType: 'bool', type: 'bool'}],
+    stateMutability: 'view',
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// TokenVotingSetupZkSync
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const tokenVotingSetupZkSyncAbi = [
+  {type: 'constructor', inputs: [], stateMutability: 'nonpayable'},
+  {
+    type: 'error',
+    inputs: [
+      {name: 'fromBuild', internalType: 'uint16', type: 'uint16'},
+      {name: 'thisBuild', internalType: 'uint16', type: 'uint16'},
+    ],
+    name: 'InvalidUpdatePath',
+  },
+  {
+    type: 'error',
+    inputs: [{name: 'token', internalType: 'address', type: 'address'}],
+    name: 'TokenNotContract',
+  },
+  {
+    type: 'error',
+    inputs: [{name: 'token', internalType: 'address', type: 'address'}],
+    name: 'TokenNotERC20',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'implementation',
+    outputs: [{name: '', internalType: 'address', type: 'address'}],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      {name: '_dao', internalType: 'address', type: 'address'},
+      {name: '_data', internalType: 'bytes', type: 'bytes'},
+    ],
+    name: 'prepareInstallation',
+    outputs: [
+      {name: 'plugin', internalType: 'address', type: 'address'},
+      {
+        name: 'preparedSetupData',
+        internalType: 'struct IPluginSetup.PreparedSetupData',
+        type: 'tuple',
+        components: [
+          {name: 'helpers', internalType: 'address[]', type: 'address[]'},
+          {
+            name: 'permissions',
+            internalType: 'struct PermissionLib.MultiTargetPermission[]',
+            type: 'tuple[]',
+            components: [
+              {
+                name: 'operation',
+                internalType: 'enum PermissionLib.Operation',
+                type: 'uint8',
+              },
+              {name: 'where', internalType: 'address', type: 'address'},
+              {name: 'who', internalType: 'address', type: 'address'},
+              {name: 'condition', internalType: 'address', type: 'address'},
+              {name: 'permissionId', internalType: 'bytes32', type: 'bytes32'},
+            ],
+          },
+        ],
+      },
+    ],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      {name: '_dao', internalType: 'address', type: 'address'},
+      {
+        name: '_payload',
+        internalType: 'struct IPluginSetup.SetupPayload',
+        type: 'tuple',
+        components: [
+          {name: 'plugin', internalType: 'address', type: 'address'},
+          {
+            name: 'currentHelpers',
+            internalType: 'address[]',
+            type: 'address[]',
+          },
+          {name: 'data', internalType: 'bytes', type: 'bytes'},
+        ],
+      },
+    ],
+    name: 'prepareUninstallation',
+    outputs: [
+      {
+        name: 'permissions',
+        internalType: 'struct PermissionLib.MultiTargetPermission[]',
+        type: 'tuple[]',
+        components: [
+          {
+            name: 'operation',
+            internalType: 'enum PermissionLib.Operation',
+            type: 'uint8',
+          },
+          {name: 'where', internalType: 'address', type: 'address'},
+          {name: 'who', internalType: 'address', type: 'address'},
+          {name: 'condition', internalType: 'address', type: 'address'},
+          {name: 'permissionId', internalType: 'bytes32', type: 'bytes32'},
+        ],
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      {name: '_dao', internalType: 'address', type: 'address'},
+      {name: '_fromBuild', internalType: 'uint16', type: 'uint16'},
+      {
+        name: '_payload',
+        internalType: 'struct IPluginSetup.SetupPayload',
+        type: 'tuple',
+        components: [
+          {name: 'plugin', internalType: 'address', type: 'address'},
+          {
+            name: 'currentHelpers',
+            internalType: 'address[]',
+            type: 'address[]',
+          },
+          {name: 'data', internalType: 'bytes', type: 'bytes'},
+        ],
+      },
+    ],
+    name: 'prepareUpdate',
+    outputs: [
+      {name: 'initData', internalType: 'bytes', type: 'bytes'},
+      {
+        name: 'preparedSetupData',
+        internalType: 'struct IPluginSetup.PreparedSetupData',
+        type: 'tuple',
+        components: [
+          {name: 'helpers', internalType: 'address[]', type: 'address[]'},
+          {
+            name: 'permissions',
+            internalType: 'struct PermissionLib.MultiTargetPermission[]',
+            type: 'tuple[]',
+            components: [
+              {
+                name: 'operation',
+                internalType: 'enum PermissionLib.Operation',
+                type: 'uint8',
+              },
+              {name: 'where', internalType: 'address', type: 'address'},
+              {name: 'who', internalType: 'address', type: 'address'},
+              {name: 'condition', internalType: 'address', type: 'address'},
+              {name: 'permissionId', internalType: 'bytes32', type: 'bytes32'},
+            ],
+          },
+        ],
+      },
+    ],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'protocolVersion',
+    outputs: [{name: '', internalType: 'uint8[3]', type: 'uint8[3]'}],
+    stateMutability: 'pure',
+  },
+  {
+    type: 'function',
+    inputs: [{name: 'token', internalType: 'address', type: 'address'}],
+    name: 'supportsIVotesInterface',
+    outputs: [{name: '', internalType: 'bool', type: 'bool'}],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{name: '_interfaceId', internalType: 'bytes4', type: 'bytes4'}],
+    name: 'supportsInterface',
+    outputs: [{name: '', internalType: 'bool', type: 'bool'}],
+    stateMutability: 'view',
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// VotingPowerCondition
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const votingPowerConditionAbi = [
+  {
+    type: 'constructor',
+    inputs: [{name: '_tokenVoting', internalType: 'address', type: 'address'}],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      {name: '_where', internalType: 'address', type: 'address'},
+      {name: '_who', internalType: 'address', type: 'address'},
+      {name: '_permissionId', internalType: 'bytes32', type: 'bytes32'},
+      {name: '_data', internalType: 'bytes', type: 'bytes'},
+    ],
+    name: 'isGranted',
+    outputs: [{name: '', internalType: 'bool', type: 'bool'}],
     stateMutability: 'view',
   },
   {
@@ -2432,4 +3119,4 @@ export const tokenVotingSetupAbi = [
     outputs: [{name: '', internalType: 'bool', type: 'bool'}],
     stateMutability: 'view',
   },
-] as const;
+] as const

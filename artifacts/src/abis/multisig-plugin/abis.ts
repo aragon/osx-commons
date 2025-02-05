@@ -61,7 +61,45 @@ export const iMultisigAbi = [
     outputs: [],
     stateMutability: 'nonpayable',
   },
-] as const;
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ListedCheckCondition
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const listedCheckConditionAbi = [
+  {
+    type: 'constructor',
+    inputs: [{name: '_multisig', internalType: 'address', type: 'address'}],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      {name: '_where', internalType: 'address', type: 'address'},
+      {name: '_who', internalType: 'address', type: 'address'},
+      {name: '_permissionId', internalType: 'bytes32', type: 'bytes32'},
+      {name: '_data', internalType: 'bytes', type: 'bytes'},
+    ],
+    name: 'isGranted',
+    outputs: [{name: '', internalType: 'bool', type: 'bool'}],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'protocolVersion',
+    outputs: [{name: '', internalType: 'uint8[3]', type: 'uint8[3]'}],
+    stateMutability: 'pure',
+  },
+  {
+    type: 'function',
+    inputs: [{name: '_interfaceId', internalType: 'bytes4', type: 'bytes4'}],
+    name: 'supportsInterface',
+    outputs: [{name: '', internalType: 'bool', type: 'bool'}],
+    stateMutability: 'view',
+  },
+] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Multisig
@@ -76,6 +114,7 @@ export const multisigAbi = [
     ],
     name: 'AddresslistLengthOutOfBounds',
   },
+  {type: 'error', inputs: [], name: 'AlreadyInitialized'},
   {
     type: 'error',
     inputs: [
@@ -102,6 +141,8 @@ export const multisigAbi = [
     ],
     name: 'DateOutOfBounds',
   },
+  {type: 'error', inputs: [], name: 'DelegateCallFailed'},
+  {type: 'error', inputs: [], name: 'FunctionDeprecated'},
   {
     type: 'error',
     inputs: [{name: 'member', internalType: 'address', type: 'address'}],
@@ -110,10 +151,39 @@ export const multisigAbi = [
   {
     type: 'error',
     inputs: [
+      {
+        name: 'targetConfig',
+        internalType: 'struct IPlugin.TargetConfig',
+        type: 'tuple',
+        components: [
+          {name: 'target', internalType: 'address', type: 'address'},
+          {
+            name: 'operation',
+            internalType: 'enum IPlugin.Operation',
+            type: 'uint8',
+          },
+        ],
+      },
+    ],
+    name: 'InvalidTargetConfig',
+  },
+  {
+    type: 'error',
+    inputs: [
       {name: 'limit', internalType: 'uint16', type: 'uint16'},
       {name: 'actual', internalType: 'uint16', type: 'uint16'},
     ],
     name: 'MinApprovalsOutOfBounds',
+  },
+  {
+    type: 'error',
+    inputs: [{name: 'proposalId', internalType: 'uint256', type: 'uint256'}],
+    name: 'NonexistentProposal',
+  },
+  {
+    type: 'error',
+    inputs: [{name: 'proposalId', internalType: 'uint256', type: 'uint256'}],
+    name: 'ProposalAlreadyExists',
   },
   {
     type: 'error',
@@ -222,6 +292,14 @@ export const multisigAbi = [
     type: 'event',
     anonymous: false,
     inputs: [
+      {name: 'metadata', internalType: 'bytes', type: 'bytes', indexed: false},
+    ],
+    name: 'MetadataSet',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
       {name: 'onlyListed', internalType: 'bool', type: 'bool', indexed: false},
       {
         name: 'minApprovals',
@@ -258,7 +336,7 @@ export const multisigAbi = [
       {name: 'metadata', internalType: 'bytes', type: 'bytes', indexed: false},
       {
         name: 'actions',
-        internalType: 'struct IDAO.Action[]',
+        internalType: 'struct Action[]',
         type: 'tuple[]',
         components: [
           {name: 'to', internalType: 'address', type: 'address'},
@@ -294,6 +372,27 @@ export const multisigAbi = [
     anonymous: false,
     inputs: [
       {
+        name: 'newTargetConfig',
+        internalType: 'struct IPlugin.TargetConfig',
+        type: 'tuple',
+        components: [
+          {name: 'target', internalType: 'address', type: 'address'},
+          {
+            name: 'operation',
+            internalType: 'enum IPlugin.Operation',
+            type: 'uint8',
+          },
+        ],
+        indexed: false,
+      },
+    ],
+    name: 'TargetSet',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
         name: 'implementation',
         internalType: 'address',
         type: 'address',
@@ -306,6 +405,27 @@ export const multisigAbi = [
     type: 'function',
     inputs: [],
     name: 'CREATE_PROPOSAL_PERMISSION_ID',
+    outputs: [{name: '', internalType: 'bytes32', type: 'bytes32'}],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'EXECUTE_PROPOSAL_PERMISSION_ID',
+    outputs: [{name: '', internalType: 'bytes32', type: 'bytes32'}],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'SET_METADATA_PERMISSION_ID',
+    outputs: [{name: '', internalType: 'bytes32', type: 'bytes32'}],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'SET_TARGET_CONFIG_PERMISSION_ID',
     outputs: [{name: '', internalType: 'bytes32', type: 'bytes32'}],
     stateMutability: 'view',
   },
@@ -377,7 +497,7 @@ export const multisigAbi = [
       {name: '_metadata', internalType: 'bytes', type: 'bytes'},
       {
         name: '_actions',
-        internalType: 'struct IDAO.Action[]',
+        internalType: 'struct Action[]',
         type: 'tuple[]',
         components: [
           {name: 'to', internalType: 'address', type: 'address'},
@@ -387,6 +507,7 @@ export const multisigAbi = [
       },
       {name: '_startDate', internalType: 'uint64', type: 'uint64'},
       {name: '_endDate', internalType: 'uint64', type: 'uint64'},
+      {name: '_data', internalType: 'bytes', type: 'bytes'},
     ],
     name: 'createProposal',
     outputs: [{name: 'proposalId', internalType: 'uint256', type: 'uint256'}],
@@ -398,7 +519,7 @@ export const multisigAbi = [
       {name: '_metadata', internalType: 'bytes', type: 'bytes'},
       {
         name: '_actions',
-        internalType: 'struct IDAO.Action[]',
+        internalType: 'struct Action[]',
         type: 'tuple[]',
         components: [
           {name: 'to', internalType: 'address', type: 'address'},
@@ -419,6 +540,13 @@ export const multisigAbi = [
   {
     type: 'function',
     inputs: [],
+    name: 'customProposalParamsABI',
+    outputs: [{name: '', internalType: 'string', type: 'string'}],
+    stateMutability: 'pure',
+  },
+  {
+    type: 'function',
+    inputs: [],
     name: 'dao',
     outputs: [{name: '', internalType: 'contract IDAO', type: 'address'}],
     stateMutability: 'view',
@@ -429,6 +557,34 @@ export const multisigAbi = [
     name: 'execute',
     outputs: [],
     stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getCurrentTargetConfig',
+    outputs: [
+      {
+        name: '',
+        internalType: 'struct IPlugin.TargetConfig',
+        type: 'tuple',
+        components: [
+          {name: 'target', internalType: 'address', type: 'address'},
+          {
+            name: 'operation',
+            internalType: 'enum IPlugin.Operation',
+            type: 'uint8',
+          },
+        ],
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getMetadata',
+    outputs: [{name: '', internalType: 'bytes', type: 'bytes'}],
+    stateMutability: 'view',
   },
   {
     type: 'function',
@@ -450,7 +606,7 @@ export const multisigAbi = [
       },
       {
         name: 'actions',
-        internalType: 'struct IDAO.Action[]',
+        internalType: 'struct Action[]',
         type: 'tuple[]',
         components: [
           {name: 'to', internalType: 'address', type: 'address'},
@@ -459,6 +615,40 @@ export const multisigAbi = [
         ],
       },
       {name: 'allowFailureMap', internalType: 'uint256', type: 'uint256'},
+      {
+        name: 'targetConfig',
+        internalType: 'struct IPlugin.TargetConfig',
+        type: 'tuple',
+        components: [
+          {name: 'target', internalType: 'address', type: 'address'},
+          {
+            name: 'operation',
+            internalType: 'enum IPlugin.Operation',
+            type: 'uint8',
+          },
+        ],
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getTargetConfig',
+    outputs: [
+      {
+        name: '',
+        internalType: 'struct IPlugin.TargetConfig',
+        type: 'tuple',
+        components: [
+          {name: 'target', internalType: 'address', type: 'address'},
+          {
+            name: 'operation',
+            internalType: 'enum IPlugin.Operation',
+            type: 'uint8',
+          },
+        ],
+      },
     ],
     stateMutability: 'view',
   },
@@ -469,6 +659,13 @@ export const multisigAbi = [
       {name: '_account', internalType: 'address', type: 'address'},
     ],
     name: 'hasApproved',
+    outputs: [{name: '', internalType: 'bool', type: 'bool'}],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{name: '_proposalId', internalType: 'uint256', type: 'uint256'}],
+    name: 'hasSucceeded',
     outputs: [{name: '', internalType: 'bool', type: 'bool'}],
     stateMutability: 'view',
   },
@@ -493,8 +690,32 @@ export const multisigAbi = [
           {name: 'minApprovals', internalType: 'uint16', type: 'uint16'},
         ],
       },
+      {
+        name: '_targetConfig',
+        internalType: 'struct IPlugin.TargetConfig',
+        type: 'tuple',
+        components: [
+          {name: 'target', internalType: 'address', type: 'address'},
+          {
+            name: 'operation',
+            internalType: 'enum IPlugin.Operation',
+            type: 'uint8',
+          },
+        ],
+      },
+      {name: '_pluginMetadata', internalType: 'bytes', type: 'bytes'},
     ],
     name: 'initialize',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      {name: '_fromBuild', internalType: 'uint16', type: 'uint16'},
+      {name: '_initData', internalType: 'bytes', type: 'bytes'},
+    ],
+    name: 'initializeFrom',
     outputs: [],
     stateMutability: 'nonpayable',
   },
@@ -578,8 +799,29 @@ export const multisigAbi = [
   },
   {
     type: 'function',
-    inputs: [{name: '_forwarder', internalType: 'address', type: 'address'}],
-    name: 'setForwarder',
+    inputs: [{name: '_metadata', internalType: 'bytes', type: 'bytes'}],
+    name: 'setMetadata',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      {
+        name: '_targetConfig',
+        internalType: 'struct IPlugin.TargetConfig',
+        type: 'tuple',
+        components: [
+          {name: 'target', internalType: 'address', type: 'address'},
+          {
+            name: 'operation',
+            internalType: 'enum IPlugin.Operation',
+            type: 'uint8',
+          },
+        ],
+      },
+    ],
+    name: 'setTargetConfig',
     outputs: [],
     stateMutability: 'nonpayable',
   },
@@ -588,13 +830,6 @@ export const multisigAbi = [
     inputs: [{name: '_interfaceId', internalType: 'bytes4', type: 'bytes4'}],
     name: 'supportsInterface',
     outputs: [{name: '', internalType: 'bool', type: 'bool'}],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'trustedForwarder',
-    outputs: [{name: '', internalType: 'address', type: 'address'}],
     stateMutability: 'view',
   },
   {
@@ -633,45 +868,7 @@ export const multisigAbi = [
     outputs: [],
     stateMutability: 'payable',
   },
-] as const;
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// MultisigCondition
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-export const multisigConditionAbi = [
-  {
-    type: 'constructor',
-    inputs: [{name: '_multisig', internalType: 'address', type: 'address'}],
-    stateMutability: 'nonpayable',
-  },
-  {
-    type: 'function',
-    inputs: [
-      {name: '_where', internalType: 'address', type: 'address'},
-      {name: '_who', internalType: 'address', type: 'address'},
-      {name: '_permissionId', internalType: 'bytes32', type: 'bytes32'},
-      {name: '_data', internalType: 'bytes', type: 'bytes'},
-    ],
-    name: 'isGranted',
-    outputs: [{name: '', internalType: 'bool', type: 'bool'}],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'protocolVersion',
-    outputs: [{name: '', internalType: 'uint8[3]', type: 'uint8[3]'}],
-    stateMutability: 'pure',
-  },
-  {
-    type: 'function',
-    inputs: [{name: '_interfaceId', internalType: 'bytes4', type: 'bytes4'}],
-    name: 'supportsInterface',
-    outputs: [{name: '', internalType: 'bool', type: 'bool'}],
-    stateMutability: 'view',
-  },
-] as const;
+] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // MultisigSetup
@@ -774,7 +971,7 @@ export const multisigSetupAbi = [
     type: 'function',
     inputs: [
       {name: '_dao', internalType: 'address', type: 'address'},
-      {name: '_currentBuild', internalType: 'uint16', type: 'uint16'},
+      {name: '_fromBuild', internalType: 'uint16', type: 'uint16'},
       {
         name: '_payload',
         internalType: 'struct IPluginSetup.SetupPayload',
@@ -834,4 +1031,4 @@ export const multisigSetupAbi = [
     outputs: [{name: '', internalType: 'bool', type: 'bool'}],
     stateMutability: 'view',
   },
-] as const;
+] as const
