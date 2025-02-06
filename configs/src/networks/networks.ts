@@ -41,7 +41,6 @@ export const networks: NetworkConfigs = {
     aliases: {
       ethers5: 'matic',
       ethers6: 'matic',
-      alchemySubgraphs: 'matic',
     },
   },
   [SupportedNetworks.MUMBAI]: {
@@ -52,7 +51,6 @@ export const networks: NetworkConfigs = {
     aliases: {
       ethers5: 'maticmum',
       ethers6: 'matic-mumbai',
-      alchemySubgraphs: 'mumbai',
     },
   },
   [SupportedNetworks.BASE]: {
@@ -60,43 +58,33 @@ export const networks: NetworkConfigs = {
     chainId: 8453,
     gasPrice: 1000,
     name: SupportedNetworks.BASE,
-    aliases: {
-      alchemySubgraphs: 'base',
-    },
+    aliases: {},
   },
   [SupportedNetworks.BASE_GOERLI]: {
     isTestnet: true,
     chainId: 84531,
     gasPrice: 1000000,
     name: SupportedNetworks.BASE_GOERLI,
-    aliases: {
-      alchemySubgraphs: 'base-testnet',
-    },
+    aliases: {},
   },
   [SupportedNetworks.BASE_SEPOLIA]: {
     isTestnet: true,
     chainId: 84532,
     gasPrice: 1000000,
     name: SupportedNetworks.BASE_SEPOLIA,
-    aliases: {
-      alchemySubgraphs: 'base-sepolia',
-    },
+    aliases: {},
   },
   [SupportedNetworks.ARBITRUM]: {
     isTestnet: false,
     chainId: 42161,
     name: SupportedNetworks.ARBITRUM,
-    aliases: {
-      alchemySubgraphs: 'arbitrum-one',
-    },
+    aliases: {},
   },
   [SupportedNetworks.ARBITRUM_SEPOLIA]: {
     isTestnet: true,
     chainId: 421614,
     name: SupportedNetworks.ARBITRUM_SEPOLIA,
-    aliases: {
-      alchemySubgraphs: 'arbitrum-sepolia',
-    },
+    aliases: {},
   },
   [SupportedNetworks.ZKSYNC_SEPOLIA]: {
     chainId: 300,

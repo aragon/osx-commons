@@ -1,4 +1,0 @@
-# DO NOT DELETE OR EDIT. This file needs to be parsed by matchsitck before the test so this is the minimal valid file.
-specVersion: 0.0.5
-schema:
-  file: ./schema.graphql

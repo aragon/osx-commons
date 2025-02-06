@@ -1,7 +1,6 @@
 export enum SupportedAliases {
   ETHERS_5 = 'ethers5',
   ETHERS_6 = 'ethers6',
-  ALCHEMY_SUBGRAPHS = 'alchemySubgraphs',
 }
 
 export enum SupportedNetworks {

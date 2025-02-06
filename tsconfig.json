@@ -18,5 +18,5 @@
   },
   "exclude": ["node_modules"],
   "files": ["./contracts/hardhat.config.ts"],
-  "include": ["contracts/**/*", "subgraph/**/*"]
+  "include": ["contracts/**/*"]
 }
