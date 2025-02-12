@@ -16,7 +16,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          ref: 'develop'
+          ref: 'main'
       - name: Setup Python environment
         uses: actions/setup-python@v4
         with:
@@ -45,7 +45,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          ref: 'develop'
+          ref: 'main'
       - name: Get version from '${{ matrix.package }}' package.json
         id: getver
         working-directory: './${{ matrix.package }}'
