@@ -45,6 +45,7 @@
   "devDependencies": {
     "@size-limit/preset-small-lib": "^11.1.6",
     "@types/node": "^20.17.17",
+    "dotenv": "^16.4.7",
     "dts-cli": "^2.0.5",
     "husky": "^9.1.7",
     "size-limit": "^11.1.6",
@@ -59,7 +60,6 @@
     "@ethersproject/hash": "5.7.0",
     "@ethersproject/logger": "5.7.0",
     "@ethersproject/providers": "5.7.2",
-    "dotenv": "^16.4.7",
     "undici": "^7.3.0"
   }
 }

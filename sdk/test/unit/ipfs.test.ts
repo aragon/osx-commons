@@ -1,3 +1,5 @@
+import path from "path";
+import dotenv from "dotenv";
 import {isIpfsCid, isIpfsUri, uploadToPinata} from '../../src';
 import {
   TEST_INVALID_IPFS_URI,
@@ -6,6 +8,9 @@ import {
   TEST_IPFS_URI_V0,
   TEST_IPFS_URI_V1,
 } from '../constants';
+
+const rootDir = path.join(__dirname, '../../..');
+dotenv.config({path: path.join(rootDir, '.env')});
 
 describe('ipfs', () => {
   describe('isIpfsUri', () => {
@@ -37,7 +42,11 @@ describe('ipfs', () => {
     });
   });
   describe('uploadToPinata', () => {
-    it('Should upload the data to pinnata', async () => {
+    it('Should upload the data to pinata', async () => {
+      if(!process.env.PUB_PINATA_JWT) {
+        throw new Error("PUB_PINATA_JWT needs to be defined")
+      }
+
       const ipfsUri = await uploadToPinata(
         JSON.stringify('METADATA.release', null, 2),
         'random-file-name',
