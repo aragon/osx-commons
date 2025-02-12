@@ -15,7 +15,7 @@ jobs:
     needs: [check_tag]
     if: ${{ needs.check_tag.outputs.package == 'sdk' }}
     uses: ./.github/workflows/sdk-tests.yml
-    secrets:
+    env:
       PUB_PINATA_JWT: ${{ secrets.PUB_PINATA_JWT }}
 
   publish:
