@@ -17,8 +17,6 @@ jobs:
     uses: ./.github/workflows/formatting-linting.yml
   tests:
     runs-on: 'ubuntu-latest'
-    secrets:
-      PUB_PINATA_JWT: ${{ secrets.PUB_PINATA_JWT }}
     defaults:
       run:
         working-directory: sdk
@@ -40,3 +38,5 @@ jobs:
 
       - name: 'Test the sdk'
         run: 'yarn test >> $GITHUB_STEP_SUMMARY'
+        env:
+          PUB_PINATA_JWT: ${{ secrets.PUB_PINATA_JWT }}
