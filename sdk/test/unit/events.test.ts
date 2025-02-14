@@ -1,6 +1,5 @@
 import {findEvent, findEventTopicLog} from '../../src';
 import {getDummyContractReceipt} from '../utils';
-import {DAO__factory} from '@aragon/osx-ethers';
 import {EventFragment, Interface} from '@ethersproject/abi';
 import {Event} from '@ethersproject/contracts';
 import {ContractReceipt} from '@ethersproject/contracts';
@@ -11,8 +10,15 @@ describe('events', () => {
   let iface: Interface;
   const eventArgs = ['https://aragon.org'];
   let receipt: ContractReceipt;
+
   beforeAll(() => {
-    iface = DAO__factory.createInterface();
+    iface = new Interface([
+      // Define the NewURI event
+      'event NewURI(string uri)',
+      // Define the Deposited event (for negative testing)
+      'event Deposited(address sender, uint256 amount)',
+    ]);
+
     event = iface.getEvent('NewURI');
     nonExistingEvent = iface.getEvent('Deposited');
     receipt = getDummyContractReceipt(event, eventArgs);

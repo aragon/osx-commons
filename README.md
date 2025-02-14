@@ -2,6 +2,16 @@
 
 A collection of shared resources and utilities for the Aragon OSx DAO Framework and plugin developers
 
+## Audit
+
+### v1.4.0
+
+**Halborn**: [audit report](https://github.com/aragon/osx/tree/main/audits/Halborn_AragonOSx_v1_4_Smart_Contract_Security_Assessment_Report_2025_01_03.pdf)
+
+- Commit ID: [4eca1de80e60f5f516e8f15b45f91e05ea5348e8](https://github.com/aragon/osx-commons/commit/4eca1de80e60f5f516e8f15b45f91e05ea5348e8)
+- Started: 2024-11-18
+- Finished: 2025-02-13
+
 ## Project
 
 The root folder of the repo includes four subfolders:

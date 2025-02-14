@@ -31,7 +31,7 @@ jobs:
           node-version: 18
 
       - name: 'Install the dependencies'
-        run: 'yarn install --frozen-lockfile'
+        run: 'yarn install --frozen-lockfile --ignore-scripts'
 
       - name: 'Build the configs'
         run: 'yarn build'

@@ -5,7 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [UPCOMING]
+## 0.2.0
+
+### Changed
+
+- Making `uploadToPinata` receive the JWT as an explicit parameter
+
+## 0.1.0
 
 ### Added
 
@@ -16,6 +22,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - SDK 1.0 related code that is not going to be used.
+
+### Changed
+
+- Changed `uploadToIpfs` to `uploadToPinata`. This requires `PUB_PINATA_JWT` to be present in `.env`.
 
 ## v0.0.1
 
