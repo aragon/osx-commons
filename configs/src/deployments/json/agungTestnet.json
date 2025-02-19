@@ -1,7 +1,27 @@
 {
   "v1.4.0": {
+    "StagedProposalProcessorRepoProxy": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "StagedProposalProcessorRepoImplementation": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "StagedProposalProcessorSetup": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "StagedProposalProcessorSetupImplementation": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
     "ENSRegistry": {
-      "address": "0x491f7FBa8B620829eCB2Fd8AC89FC84206509437",
+      "address": "",
       "blockNumber": 0,
       "deploymentTx": ""
     },
