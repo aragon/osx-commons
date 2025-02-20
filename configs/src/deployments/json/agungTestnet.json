@@ -1,7 +1,7 @@
 {
   "v1.4.0": {
     "StagedProposalProcessorRepoProxy": {
-      "address": "",
+      "address": "0xbFDA2cE38e09b434781b52861bD57d69bF8E0176",
       "blockNumber": 0,
       "deploymentTx": ""
     },
@@ -11,17 +11,17 @@
       "deploymentTx": ""
     },
     "StagedProposalProcessorSetup": {
-      "address": "",
+      "address": "0xBeD8978Ab3ff05ad582f9bDbe9f1426E5aB1100b",
       "blockNumber": 0,
       "deploymentTx": ""
     },
     "StagedProposalProcessorSetupImplementation": {
-      "address": "",
+      "address": "0x1aaaaE5542aE0B318f428BaC189b22Fa6f2a17c1",
       "blockNumber": 0,
       "deploymentTx": ""
     },
     "ENSRegistry": {
-      "address": "",
+      "address": "0x491f7FBa8B620829eCB2Fd8AC89FC84206509437",
       "blockNumber": 0,
       "deploymentTx": ""
     },
@@ -46,7 +46,7 @@
       "deploymentTx": ""
     },
     "AdminSetup": {
-      "address": "",
+      "address": "0x40604A764E4Aad0E2D0003D5b5fAab8F60504484",
       "blockNumber": 0,
       "deploymentTx": ""
     },
@@ -81,17 +81,17 @@
       "deploymentTx": ""
     },
     "GovernanceERC20": {
-      "address": "",
+      "address": "0xD5FC8d30Fa94050806add83a475cB2CF7E8dBb9b",
       "blockNumber": 0,
       "deploymentTx": ""
     },
     "GovernanceWrappedERC20": {
-      "address": "",
+      "address": "0x739dc88d4eB9cFbc194AA979e8735a22010DE011",
       "blockNumber": 0,
       "deploymentTx": ""
     },
     "MultisigSetup": {
-      "address": "",
+      "address": "0xe7F98377A5349f277E77dC9C58175655F4384Be6",
       "blockNumber": 0,
       "deploymentTx": ""
     },
@@ -141,7 +141,7 @@
       "deploymentTx": ""
     },
     "TokenVotingSetup": {
-      "address": "",
+      "address": "0x9Fa6CfB53ebf8d50d18330d7C9f0F76C49Ec4F86",
       "blockNumber": 0,
       "deploymentTx": ""
     },
@@ -161,7 +161,7 @@
       "deploymentTx": ""
     },
     "AdminRepoProxy": {
-      "address": "",
+      "address": "0x417C3Aee0742e5FDDBe999Ff4bE25d0d4Cc17D1a",
       "blockNumber": 0,
       "deploymentTx": ""
     },
@@ -181,7 +181,7 @@
       "deploymentTx": ""
     },
     "MultisigRepoProxy": {
-      "address": "",
+      "address": "0xF81206FFDF998292D2C92f309C7E9c2C1D4dF506",
       "blockNumber": 0,
       "deploymentTx": ""
     },
@@ -191,7 +191,7 @@
       "deploymentTx": ""
     },
     "TokenVotingRepoProxy": {
-      "address": "",
+      "address": "0x3ee77c05C9023522322B468aE0364366C1Ec11B5",
       "blockNumber": 0,
       "deploymentTx": ""
     },
