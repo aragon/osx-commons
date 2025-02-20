@@ -26,7 +26,7 @@ export const callbackHandlerAbi = [
     ],
     name: 'CallbackReceived',
   },
-] as const;
+] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // DAO
@@ -39,6 +39,7 @@ export const daoAbi = [
     inputs: [{name: 'index', internalType: 'uint256', type: 'uint256'}],
     name: 'ActionFailed',
   },
+  {type: 'error', inputs: [], name: 'AlreadyInitialized'},
   {type: 'error', inputs: [], name: 'AnyAddressDisallowedForWhoAndWhere'},
   {
     type: 'error',
@@ -188,7 +189,7 @@ export const daoAbi = [
       },
       {
         name: 'actions',
-        internalType: 'struct IDAO.Action[]',
+        internalType: 'struct Action[]',
         type: 'tuple[]',
         components: [
           {name: 'to', internalType: 'address', type: 'address'},
@@ -471,7 +472,7 @@ export const daoAbi = [
       {name: '_callId', internalType: 'bytes32', type: 'bytes32'},
       {
         name: '_actions',
-        internalType: 'struct IDAO.Action[]',
+        internalType: 'struct Action[]',
         type: 'tuple[]',
         components: [
           {name: 'to', internalType: 'address', type: 'address'},
@@ -675,7 +676,7 @@ export const daoAbi = [
     stateMutability: 'payable',
   },
   {type: 'receive', stateMutability: 'payable'},
-] as const;
+] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // DAOFactory
@@ -746,6 +747,42 @@ export const daoFactoryAbi = [
     name: 'createDao',
     outputs: [
       {name: 'createdDao', internalType: 'contract DAO', type: 'address'},
+      {
+        name: 'installedPlugins',
+        internalType: 'struct DAOFactory.InstalledPlugin[]',
+        type: 'tuple[]',
+        components: [
+          {name: 'plugin', internalType: 'address', type: 'address'},
+          {
+            name: 'preparedSetupData',
+            internalType: 'struct IPluginSetup.PreparedSetupData',
+            type: 'tuple',
+            components: [
+              {name: 'helpers', internalType: 'address[]', type: 'address[]'},
+              {
+                name: 'permissions',
+                internalType: 'struct PermissionLib.MultiTargetPermission[]',
+                type: 'tuple[]',
+                components: [
+                  {
+                    name: 'operation',
+                    internalType: 'enum PermissionLib.Operation',
+                    type: 'uint8',
+                  },
+                  {name: 'where', internalType: 'address', type: 'address'},
+                  {name: 'who', internalType: 'address', type: 'address'},
+                  {name: 'condition', internalType: 'address', type: 'address'},
+                  {
+                    name: 'permissionId',
+                    internalType: 'bytes32',
+                    type: 'bytes32',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
     ],
     stateMutability: 'nonpayable',
   },
@@ -792,7 +829,7 @@ export const daoFactoryAbi = [
     outputs: [{name: '', internalType: 'bool', type: 'bool'}],
     stateMutability: 'view',
   },
-] as const;
+] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // DAORegistry
@@ -825,6 +862,7 @@ export const daoRegistryAbi = [
     ],
     name: 'DaoUnauthorized',
   },
+  {type: 'error', inputs: [], name: 'ENSNotSupported'},
   {
     type: 'error',
     inputs: [{name: 'subdomain', internalType: 'string', type: 'string'}],
@@ -1004,7 +1042,7 @@ export const daoRegistryAbi = [
     outputs: [],
     stateMutability: 'payable',
   },
-] as const;
+] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // ENSSubdomainRegistrar
@@ -1189,7 +1227,7 @@ export const ensSubdomainRegistrarAbi = [
     outputs: [],
     stateMutability: 'payable',
   },
-] as const;
+] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // IEIP4824
@@ -1203,7 +1241,7 @@ export const ieip4824Abi = [
     outputs: [{name: '_daoURI', internalType: 'string', type: 'string'}],
     stateMutability: 'view',
   },
-] as const;
+] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // IPluginRepo
@@ -1267,7 +1305,7 @@ export const iPluginRepoAbi = [
     outputs: [],
     stateMutability: 'nonpayable',
   },
-] as const;
+] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // InterfaceBasedRegistry
@@ -1401,7 +1439,7 @@ export const interfaceBasedRegistryAbi = [
     outputs: [],
     stateMutability: 'payable',
   },
-] as const;
+] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // PermissionManager
@@ -1603,7 +1641,7 @@ export const permissionManagerAbi = [
     outputs: [],
     stateMutability: 'nonpayable',
   },
-] as const;
+] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // PlaceholderSetup
@@ -1744,7 +1782,7 @@ export const placeholderSetupAbi = [
         ],
       },
     ],
-    stateMutability: 'pure',
+    stateMutability: 'nonpayable',
   },
   {
     type: 'function',
@@ -1760,7 +1798,7 @@ export const placeholderSetupAbi = [
     outputs: [{name: '', internalType: 'bool', type: 'bool'}],
     stateMutability: 'view',
   },
-] as const;
+] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // PluginRepo
@@ -2289,7 +2327,7 @@ export const pluginRepoAbi = [
     outputs: [],
     stateMutability: 'payable',
   },
-] as const;
+] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // PluginRepoFactory
@@ -2366,7 +2404,7 @@ export const pluginRepoFactoryAbi = [
     outputs: [{name: '', internalType: 'bool', type: 'bool'}],
     stateMutability: 'view',
   },
-] as const;
+] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // PluginRepoRegistry
@@ -2399,7 +2437,7 @@ export const pluginRepoRegistryAbi = [
     ],
     name: 'DaoUnauthorized',
   },
-  {type: 'error', inputs: [], name: 'EmptyPluginRepoSubdomain'},
+  {type: 'error', inputs: [], name: 'ENSNotSupported'},
   {
     type: 'error',
     inputs: [{name: 'subdomain', internalType: 'string', type: 'string'}],
@@ -2577,7 +2615,7 @@ export const pluginRepoRegistryAbi = [
     outputs: [],
     stateMutability: 'payable',
   },
-] as const;
+] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // PluginSetupProcessor
@@ -3359,4 +3397,4 @@ export const pluginSetupProcessorAbi = [
     outputs: [],
     stateMutability: 'view',
   },
-] as const;
+] as const
