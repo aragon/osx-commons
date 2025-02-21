@@ -1,7 +1,7 @@
 {
   "v1.4.0": {
     "StagedProposalProcessorRepoProxy": {
-      "address": "",
+      "address": "0x2784e9500f8f60C1267e819f216682a88A37d56D",
       "blockNumber": 0,
       "deploymentTx": ""
     },
@@ -11,12 +11,12 @@
       "deploymentTx": ""
     },
     "StagedProposalProcessorSetup": {
-      "address": "",
+      "address": "0x03445b197271CB3BE5E453745eD98a05793a4538",
       "blockNumber": 0,
       "deploymentTx": ""
     },
     "StagedProposalProcessorSetupImplementation": {
-      "address": "",
+      "address": "0x7B0189345261375c2dE9185Ca4CEbc1974827C09",
       "blockNumber": 0,
       "deploymentTx": ""
     },
@@ -35,18 +35,8 @@
       "blockNumber": 0,
       "deploymentTx": ""
     },
-    "AddresslistVotingSetup": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
-    },
-    "AddresslistVotingSetupImplementation": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
-    },
     "AdminSetup": {
-      "address": "",
+      "address": "0x754c2e52463EB00CA24673cA07d38a8D7347F98D",
       "blockNumber": 0,
       "deploymentTx": ""
     },
@@ -81,17 +71,17 @@
       "deploymentTx": ""
     },
     "GovernanceERC20": {
-      "address": "",
+      "address": "0xc1da86f2f4E8D381b009B29AF067bF41aC0FaAF8",
       "blockNumber": 0,
       "deploymentTx": ""
     },
     "GovernanceWrappedERC20": {
-      "address": "",
+      "address": "0xC7B9Dc9545df7B0042B5D91D7dF3DFEcf291F811",
       "blockNumber": 0,
       "deploymentTx": ""
     },
     "MultisigSetup": {
-      "address": "",
+      "address": "0xB2CCCB4d7ec56F992219BCF4abe2E7F02003443e",
       "blockNumber": 0,
       "deploymentTx": ""
     },
@@ -141,7 +131,7 @@
       "deploymentTx": ""
     },
     "TokenVotingSetup": {
-      "address": "",
+      "address": "0x12B5df0105c88c3b33f340a66c655A063A39fB5A",
       "blockNumber": 0,
       "deploymentTx": ""
     },
@@ -150,18 +140,8 @@
       "blockNumber": 0,
       "deploymentTx": ""
     },
-    "AddresslistVotingRepoProxy": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
-    },
-    "AddresslistVotingRepoImplementation": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
-    },
     "AdminRepoProxy": {
-      "address": "",
+      "address": "0x86C87Aa7C09a447048adf4197fec7C12eF62A07F",
       "blockNumber": 0,
       "deploymentTx": ""
     },
@@ -181,7 +161,7 @@
       "deploymentTx": ""
     },
     "MultisigRepoProxy": {
-      "address": "",
+      "address": "0x83a977d564349586936f17D9536b2c5702B4Fe20",
       "blockNumber": 0,
       "deploymentTx": ""
     },
@@ -191,7 +171,7 @@
       "deploymentTx": ""
     },
     "TokenVotingRepoProxy": {
-      "address": "",
+      "address": "0xFBFbE98845B4E2751a8A004B5A1759e3A278FC68",
       "blockNumber": 0,
       "deploymentTx": ""
     },
