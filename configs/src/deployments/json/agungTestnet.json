@@ -35,16 +35,6 @@
       "blockNumber": 0,
       "deploymentTx": ""
     },
-    "AddresslistVotingSetup": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
-    },
-    "AddresslistVotingSetupImplementation": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
-    },
     "AdminSetup": {
       "address": "0x40604A764E4Aad0E2D0003D5b5fAab8F60504484",
       "blockNumber": 0,
@@ -146,16 +136,6 @@
       "deploymentTx": ""
     },
     "TokenVotingSetupImplementation": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
-    },
-    "AddresslistVotingRepoProxy": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
-    },
-    "AddresslistVotingRepoImplementation": {
       "address": "",
       "blockNumber": 0,
       "deploymentTx": ""
