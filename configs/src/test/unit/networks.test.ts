@@ -159,6 +159,14 @@ describe('Deployments', () => {
           expect(networks[network].url).toBe(
             networksAlchemyRpcUrl[SupportedNetworks.BASE_GOERLI]
           );
+        } else if (network === SupportedNetworks.PEAQ) {
+          expect(networks[network].url).toBe(
+            networksAlchemyRpcUrl[SupportedNetworks.PEAQ]
+          );
+        } else if (network === SupportedNetworks.AGUNG_TESTNET) {
+          expect(networks[network].url).toBe(
+            networksAlchemyRpcUrl[SupportedNetworks.AGUNG_TESTNET]
+          );
         } else {
           expect(networks[network].url).toBe(
             `${networksAlchemyRpcUrl[network]}${apiKey}`

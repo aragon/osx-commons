@@ -5,6 +5,7 @@ import {SupportedNetworks} from '../networks/types';
 export enum SupportedVersions {
   V1_0_0 = 'v1.0.0',
   V1_3_0 = 'v1.3.0',
+  V1_4_0 = 'v1.4.0',
 }
 
 // this type defines the structure of the network deployments

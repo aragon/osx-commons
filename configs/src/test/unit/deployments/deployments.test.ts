@@ -49,6 +49,7 @@ describe('Deployments', () => {
         return {
           network,
           expected:
+            contracts[network][SupportedVersions.V1_4_0] ||
             contracts[network][SupportedVersions.V1_3_0] ||
             contracts[network][SupportedVersions.V1_0_0] ||
             null,
