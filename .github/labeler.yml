@@ -12,13 +12,6 @@ sdk:
           - 'sdk/*'
           - '.github/workflows/sdk-*.yml'
 
-subgraph:
-  - changed-files:
-      - any-glob-to-any-file:
-          - 'subgraph/**/*'
-          - 'subgraph/*'
-          - '.github/workflows/subgraph-*.yml'
-
 configs:
   - changed-files:
       - any-glob-to-any-file:

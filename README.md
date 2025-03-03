@@ -21,7 +21,6 @@ The root folder of the repo includes four subfolders:
 ├── configs
 ├── contracts
 ├── sdk
-├── subgraph
 ├── ...
 └── package.json
 ```
@@ -31,8 +30,6 @@ The root folder of the repo includes four subfolders:
 - The `contracts` folder contains Solidity smart contracts being used by the OSx framework and for plugin development.
 - The `sdk` folder contains various JS/TS helper functions that can be used in the OSx repo and plugin repos for
   for testing and deployment.
-- The `subgraph` contains various JS/TS helper functions that can be used in the OSx repo and plugin repos for
-  subgraph development.
 
 The root-level `package.json` file contains global `dev-dependencies` for formatting and linting. After installing the dependencies with
 
@@ -71,7 +68,6 @@ yarn lint
 To be able to work on the contracts, make sure that you have created an `.env` file from the `.env.example` file and put in the API keys for
 
 - [Alchemy](https://www.alchemy.com) that we use as the web3 provider
-- [Alchemy Subgraphs](https://www.alchemy.com/subgraphs) that we use as the subgraph provider
 - the block explorer that you want to use depending on the networks that you want to deploy to
 
 You can also change the default hardhat private key (`PRIVATE_KEY="0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80"`).
