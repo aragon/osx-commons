@@ -188,19 +188,19 @@
       "deploymentTx": "0xab0c40ddb1af238de617dc609ad8883e9b9cd7a9d86a2308483c2725aec7277b"
     },
     "ManagementDAOImplementation": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
+      "address": "0xBeb2271224D22BdA388B513268873387E5BfC27f",
+      "blockNumber": 27417757,
+      "deploymentTx": "0x8ba4944bf512f97a3a277c86903064bb934abd9a66c369e6cdd22274cf9b2a28"
     },
     "DAOBase": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
+      "address": "0xBeb2271224D22BdA388B513268873387E5BfC27f",
+      "blockNumber": 27417757,
+      "deploymentTx": "0x8ba4944bf512f97a3a277c86903064bb934abd9a66c369e6cdd22274cf9b2a28"
     },
     "DAOFactory": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
+      "address": "0xcc602EA573a42eBeC290f33F49D4A87177ebB8d2",
+      "blockNumber": 27417757,
+      "deploymentTx": "0x8ba4944bf512f97a3a277c86903064bb934abd9a66c369e6cdd22274cf9b2a28"
     },
     "DAORegistryProxy": {
       "address": "0xeB98a71d69a1e12B62c10368D9dA5364CE0f7178",
@@ -208,9 +208,9 @@
       "deploymentTx": "0x8227cb737bb26146b79a77e8f67545b0db0a7e028d024ba50150ce5b7b401e53"
     },
     "DAORegistryImplementation": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
+      "address": "0xB88fE875623E33BFDa76A517e9d5DC2023995f73",
+      "blockNumber": 27417764,
+      "deploymentTx": "0xf2312b0123f59de4bf1030de14b7b26db92431c8eb4e93f24326643b1d91a224"
     },
     "DAOENSSubdomainRegistrarProxy": {
       "address": "0x91f190a6f6E38042e3398B3f78Eb7e0AF58Ac8c3",
@@ -228,14 +228,14 @@
       "deploymentTx": "0xb1ccece5f997dfb7a5fd43d94c6b68d49588b30bee6cf2219771fd43102ac16f"
     },
     "PluginRepoBase": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
+      "address": "0xa3105BF5ceC6DaA6CB87c6d9EDe12f3cDc1d4aF0",
+      "blockNumber": 27417760,
+      "deploymentTx": "0x256e0256709c04cc6a39c6b8eb65e0b5a5058df09021f1b69206353caa54a2a7"
     },
     "PluginRepoFactory": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
+      "address": "0xAAAb8c6b83a5C7b1462af4427d97b33197388C38",
+      "blockNumber": 27417760,
+      "deploymentTx": "0x256e0256709c04cc6a39c6b8eb65e0b5a5058df09021f1b69206353caa54a2a7"
     },
     "PluginRepoRegistryProxy": {
       "address": "0xB5eB5C011827C9F5787ceE3Abc72d247E36a5a0D",
@@ -243,9 +243,9 @@
       "deploymentTx": "0x99557a0931a644d4c06d3da5cd85b8198da39e596cc97761766585fab2f4e1dc"
     },
     "PluginRepoRegistryImplementation": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
+      "address": "0x9d4669361461443eB25A29b79C68C8AC906D8cC1",
+      "blockNumber": 27417767,
+      "deploymentTx": "0x09d85bfa912d4c87295a6733f7f376716b455b3c07ceaba8900b215efd004be5"
     },
     "PluginSetupProcessor": {
       "address": "0x91a851E9Ed7F2c6d41b15F76e4a88f5A37067cC9",
@@ -288,64 +288,64 @@
       "deploymentTx": "0x5584917071e87521bc59b5a0abce53c94eadcd377b4500cb32b7ff9fcf917427"
     },
     "StagedProposalProcessorRepoProxy": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
+      "address": "0x3C13098D4e2FE9aCb2fCEb3EE4fBBe33405eD39D",
+      "blockNumber": 27418431,
+      "deploymentTx": "0x05e322fdd91a5138876d13544c58e310b8b2cf135c4a042348f9968d8b04f46d"
     },
     "AdminSetup": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
+      "address": "0x246503df057A9a85E0144b6867a828c99676128B",
+      "blockNumber": 27416744,
+      "deploymentTx": "0xc6f8df14d3ca9ac512519e16b5ca71a278b18258b53edd51d855135521b65de6"
     },
     "AdminSetupImplementation": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
+      "address": "0x58C1F7Bc62Bb63fb137bc8F6d8ea6321a0501d29",
+      "blockNumber": 27416744,
+      "deploymentTx": "0xc6f8df14d3ca9ac512519e16b5ca71a278b18258b53edd51d855135521b65de6"
     },
     "MultisigSetup": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
+      "address": "0xcf59C627b7a4052041C4F16B4c635a960e29554A",
+      "blockNumber": 27417003,
+      "deploymentTx": "0x6a0c17a0cd2b602982858e6382b0f5875a6ef930bb1f252a81c245d083dca637"
     },
     "MultisigSetupImplementation": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
+      "address": "0x7E2edBD168f2B62D4e2A42997a94906c3731b8C5",
+      "blockNumber": 27417003,
+      "deploymentTx": "0x6a0c17a0cd2b602982858e6382b0f5875a6ef930bb1f252a81c245d083dca637"
     },
     "TokenVotingSetup": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
+      "address": "0x22AcB9E87f5edC9f52504Fb95d82adD5aae9EC34",
+      "blockNumber": 27417178,
+      "deploymentTx": "0xb2d2f0aec446dfc2ab998dfbe4f125b80885c761b68f60700c1ae176d00b5106"
     },
     "TokenVotingSetupImplementation": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
+      "address": "0x429d2aC7839352091F2d44f8B0b1Ea140F3B95E4",
+      "blockNumber": 27417178,
+      "deploymentTx": "0xb2d2f0aec446dfc2ab998dfbe4f125b80885c761b68f60700c1ae176d00b5106"
     },
     "GovernanceERC20": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
+      "address": "0xF4162790CDB7Fd9335a1e89A457143C28A307410 ",
+      "blockNumber": 27417172,
+      "deploymentTx": "0xad33fd9d39e4c21331b402984b317a8348558964125827a3e63c3df5aa8cb2b3"
     },
     "GovernanceWrappedERC20": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
+      "address": "0xe9e8DD50e5f6a6d49e80E5265591aD89c751CC8e ",
+      "blockNumber": 27417175,
+      "deploymentTx": "0x2bc3cb89ca3e89ea3414e44283f4a777e10bc4cdc974763eec06d551bcf6080c"
     },
     "StagedProposalProcessorSetup": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
+      "address": "0x4391a9c79F901B1c86703D1AE694A04b8624b5c3",
+      "blockNumber": 27418431,
+      "deploymentTx": "0x71bf762995c4ccd1a2865568d7abd49e12585bf8315c0b2dfdce084b50f4530c"
     },
     "StagedProposalProcessorSetupImplementation": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
+      "address": "0x29A253847b97C9C06Fe7FE7E7A0271a5b796334a",
+      "blockNumber": 27418431,
+      "deploymentTx": "0x71bf762995c4ccd1a2865568d7abd49e12585bf8315c0b2dfdce084b50f4530c"
     },
     "Executor": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
+      "address": "0x304eBcA6a98F3a2d4424388814ddbFf8904Bd1cE",
+      "blockNumber": 27417754,
+      "deploymentTx": "0xecbb49db36cc1308b543d4d69cc81ce4765987fb7e53e38d61225b504f9e54e0"
     }
   }
 }
