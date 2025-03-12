@@ -5,11 +5,6 @@
       "blockNumber": 4032890,
       "deploymentTx": "0x0fe819a1a087dd5faa04f0bad2e381da56ecbb15c5afde5b16f0d59943990d8b"
     },
-    "StagedProposalProcessorRepoImplementation": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
-    },
     "StagedProposalProcessorSetup": {
       "address": "0x03445b197271CB3BE5E453745eD98a05793a4538",
       "blockNumber": 4032890,
@@ -17,8 +12,8 @@
     },
     "StagedProposalProcessorSetupImplementation": {
       "address": "0x7B0189345261375c2dE9185Ca4CEbc1974827C09",
-      "blockNumber": 0,
-      "deploymentTx": ""
+      "blockNumber": 4032890,
+      "deploymentTx": "0x8ad3296fc90297049fc611f3b05ec7e88a9f3646a527ca1f4a08e9663571c960"
     },
     "ENSRegistry": {
       "address": "0xc4ddBd0472C2688F5d278dAFC02E66EE176C8DE3",
@@ -41,9 +36,9 @@
       "deploymentTx": "0x78c7273dfdb830483024ce68e17dcde329c3781d90f90603be07f8091293b7f9"
     },
     "AdminSetupImplementation": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
+      "address": "0xC0751d79C2A8B588Ebf42e9a888aF21C7226dFA5",
+      "blockNumber": 4032715,
+      "deploymentTx": "0x78c7273dfdb830483024ce68e17dcde329c3781d90f90603be07f8091293b7f9"
     },
     "DAOFactory": {
       "address": "0x35B62715459cB60bf6dC17fF8cfe138EA305E7Ee",
@@ -86,9 +81,9 @@
       "deploymentTx": "0xfbf5ccb36c031691106e4d3f194c82c4fee64df5d8b2fd8f4e9c82d0f363be8a"
     },
     "MultisigSetupImplementation": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
+      "address": "0xbD9C68950Ab6B7Ec9E3F493Ec701Dd587a056e2a",
+      "blockNumber": 4032543,
+      "deploymentTx": "0xfbf5ccb36c031691106e4d3f194c82c4fee64df5d8b2fd8f4e9c82d0f363be8a"
     },
     "PlaceholderSetup": {
       "address": "0xC24188a73dc09aA7C721f96Ad8857B469C01dC9f",
@@ -96,9 +91,9 @@
       "deploymentTx": "0x208fb87824a306fd4cb033b717be19e93c451e4e07a872c40a9f179fb1fd4552"
     },
     "PluginRepoBase": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
+      "address": "0x70b7cE0ce68a5C87ab829F0Cbcf9341424a082C8",
+      "blockNumber": 4032431,
+      "deploymentTx": "0x331984a21ffbaabd57dba0c61d58150b250a736ce4a02546af188ef7d3ec0707"
     },
     "PluginRepoFactory": {
       "address": "0x308a1DC5020c4B5d992F5543a7236c465997fecB",
@@ -136,19 +131,14 @@
       "deploymentTx": "0xb2d78973bc7c8e5899e94caa694b87a54b2f0d766f60178795d508fce7f1ecae"
     },
     "TokenVotingSetupImplementation": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
+      "address": "0x5bFD034b5a81C91EBa8E8d778ca5abdAA071Cce6",
+      "blockNumber": 4032646,
+      "deploymentTx": "0xb2d78973bc7c8e5899e94caa694b87a54b2f0d766f60178795d508fce7f1ecae"
     },
     "AdminRepoProxy": {
       "address": "0x86C87Aa7C09a447048adf4197fec7C12eF62A07F",
       "blockNumber": 4032714,
       "deploymentTx": "0xeaa8afef694113dbc91aafc4c8ab072768a752150926a6fd42271bbaaa70a901"
-    },
-    "AdminRepoImplementation": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
     },
     "ManagementDAOProxy": {
       "address": "0xB93f5Be5900C2d5fBaE8e4F99B46FfB2Db52ee21",
@@ -165,25 +155,15 @@
       "blockNumber": 4032542,
       "deploymentTx": "0xaf2fff600394b1d37fb3ee8c4db3cf42e67b770bc942c84aef83d007026f72a3"
     },
-    "MultisigRepoImplementation": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
-    },
     "TokenVotingRepoProxy": {
       "address": "0xFBFbE98845B4E2751a8A004B5A1759e3A278FC68",
       "blockNumber": 4032643,
       "deploymentTx": "0x9f98e40ad433af72937c4129f90a57408459f647494f292df9992f92ac19cec2"
     },
-    "TokenVotingRepoImplementation": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
-    },
     "DAOBase": {
-      "address": "",
-      "blockNumber": 0,
-      "deploymentTx": ""
+      "address": "0xa8a4Dc9B6f16BEe4E527CEA47FBeb6e0802030e1",
+      "blockNumber": 4032431,
+      "deploymentTx": "0x653cfc216bcf32635d7c6236c69b6bfeb5e0c445b9c7674b87ffb89119381a37"
     }
   }
 }
