@@ -363,9 +363,9 @@
       "deploymentTx": "0x2ba2f7263ee057204adc07b7b9be1cf69366d92f5bac02df72885a1b2fb50b77"
     },
     "Executor": {
-      "address": "0x619c4C957370CD288D64b46D4cF3a560229b593b",
-      "blockNumber": 6879195,
-      "deploymentTx": "0xaee7e85761c86ca9c3cf8fb3a02e0b9b3d45aa7914a10dbfc16ecd86555ed33e"
+      "address": "0x7a20760b89EF507759DD2c5A0d1f1657614341A9",
+      "blockNumber": 7900962,
+      "deploymentTx": "0xc4d4aef6688364f63cb5fbed74277eb24f8c15ae29fe95d5148e889a783e3df2"
     }
   }
 }
