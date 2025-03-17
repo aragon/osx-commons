@@ -1,0 +1,169 @@
+{
+  "v1.4.0": {
+    "ManagementDAOProxy": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "ManagementDAOImplementation": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "DAOBase": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "DAOFactory": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "DAORegistryProxy": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "DAORegistryImplementation": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "DAOENSSubdomainRegistrarProxy": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "DAOENSSubdomainRegistrarImplementation": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "ENSRegistry": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "PluginRepoBase": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "PluginRepoFactory": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "PluginRepoRegistryProxy": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "PluginRepoRegistryImplementation": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "PluginSetupProcessor": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "PluginENSSubdomainRegistrarProxy": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "PluginENSSubdomainRegistrarImplementation": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "PublicResolver": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "PlaceholderSetup": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "AdminRepoProxy": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "MultisigRepoProxy": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "TokenVotingRepoProxy": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "StagedProposalProcessorRepoProxy": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "AdminSetup": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "AdminSetupImplementation": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "MultisigSetup": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "MultisigSetupImplementation": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "TokenVotingSetup": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "TokenVotingSetupImplementation": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "GovernanceERC20": {
+      "address": " ",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "GovernanceWrappedERC20": {
+      "address": " ",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "StagedProposalProcessorSetup": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "StagedProposalProcessorSetupImplementation": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    },
+    "Executor": {
+      "address": "",
+      "blockNumber": 0,
+      "deploymentTx": ""
+    }
+  }
+}

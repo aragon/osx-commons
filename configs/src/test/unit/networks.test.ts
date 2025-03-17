@@ -167,6 +167,14 @@ describe('Deployments', () => {
           expect(networks[network].url).toBe(
             networksAlchemyRpcUrl[SupportedNetworks.AGUNG_TESTNET]
           );
+        } else if (network === SupportedNetworks.BSC_MAINNET) {
+          expect(networks[network].url).toBe(
+            networksAlchemyRpcUrl[SupportedNetworks.BSC_MAINNET]
+          );
+        } else if (network === SupportedNetworks.BSC_TESTNET) {
+          expect(networks[network].url).toBe(
+            networksAlchemyRpcUrl[SupportedNetworks.BSC_TESTNET]
+          );
         } else if (network === SupportedNetworks.MODE_MAINNET) {
           expect(networks[network].url).toBe(
             networksAlchemyRpcUrl[SupportedNetworks.MODE_MAINNET]

@@ -20,6 +20,8 @@ export enum SupportedNetworks {
   ZKSYNC_MAINNET = 'zksyncMainnet',
   LINEA_SEPOLIA = 'lineaSepolia',
   MODE_MAINNET = 'modeMainnet',
+  BSC_MAINNET = 'bscMainnet',
+  BSC_TESTNET = 'bscTestnet',
   LINEA = 'linea',
   PEAQ = 'peaq',
   AGUNG_TESTNET = 'agungTestnet',
