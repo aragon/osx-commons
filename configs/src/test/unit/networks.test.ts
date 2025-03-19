@@ -159,6 +159,10 @@ describe('Deployments', () => {
           expect(networks[network].url).toBe(
             networksAlchemyRpcUrl[SupportedNetworks.BASE_GOERLI]
           );
+        } else if (network === SupportedNetworks.MODE_MAINNET) {
+          expect(networks[network].url).toBe(
+            networksAlchemyRpcUrl[SupportedNetworks.MODE_MAINNET]
+          );
         } else {
           expect(networks[network].url).toBe(
             `${networksAlchemyRpcUrl[network]}${apiKey}`

@@ -10,6 +10,7 @@ import * as holesky from './json/holesky.json';
 import * as linea from './json/linea.json';
 import * as lineaSepolia from './json/lineaSepolia.json';
 import * as mainnet from './json/mainnet.json';
+import * as modeMainnet from './json/modeMainnet.json';
 import * as mumbai from './json/mumbai.json';
 import * as polygon from './json/polygon.json';
 import * as sepolia from './json/sepolia.json';
@@ -34,6 +35,7 @@ export {
   devSepolia,
   linea,
   lineaSepolia,
+  modeMainnet,
 };
 
 export const contracts: {
@@ -57,6 +59,7 @@ export const contracts: {
   devSepolia,
   linea,
   lineaSepolia,
+  modeMainnet,
   local: {
     [SupportedVersions.V1_0_0]: {} as NetworkDeployment,
     [SupportedVersions.V1_3_0]: {} as NetworkDeployment,
