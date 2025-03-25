@@ -340,7 +340,7 @@
     "StagedProposalProcessorRepoProxy": {
       "address": "0x1f965E73Aa062a161d27f8B0274C14cb06DC70D7",
       "blockNumber": 17121280,
-      "deploymentTx": "0xf2d594F3C93C19D7B1a6F15B5489FFcE4B01f7dA"
+      "deploymentTx": "0x17f04670d3c16db4c01800809d1a6535b65abadfee9b7476e37c485af7732bd1"
     },
     "StagedProposalProcessorSetup": {
       "address": "0x9148970d7C54FEF15565c1b6C41195d92962CA23 ",
