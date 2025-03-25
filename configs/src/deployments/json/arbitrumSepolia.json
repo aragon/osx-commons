@@ -180,5 +180,207 @@
       "blockNumber": 2827172,
       "deploymentTx": "0x80d0b00ee3db979d20e2c3e7d4578786123e3d93f55b892e0fed079c260a1fed"
     }
+  },
+  "v1.4.0": {
+    "AddresslistVotingSetup": {
+      "address": "0xE978942c691e43f65c1B7c7F8f1dc8cDF061B13f",
+      "blockNumber": 2827187,
+      "deploymentTx": "0xd784d9fde9f4654ef668591706631bb1e66771a0853514ed788a77df802ef939"
+    },
+    "AddresslistVotingSetupImplementation": {
+      "address": "0xe015E365572c1d778be7E3ACf16f6a0C06dE86f0",
+      "blockNumber": 2827187,
+      "deploymentTx": "0xd784d9fde9f4654ef668591706631bb1e66771a0853514ed788a77df802ef939"
+    },
+    "AdminSetup": {
+      "address": "0x84790e2b96A56A67905f9630Be81CD93255C998C",
+      "blockNumber": 129585015,
+      "deploymentTx": "0x2f6027eec186a775923f3ec3d451ebc1202d81fc1e94fc6f26863c56fe743305"
+    },
+    "AdminSetupImplementation": {
+      "address": "0x49A5449a1Ce1f3a1261195cE6aB08FAEdC88990f",
+      "blockNumber": 129585015,
+      "deploymentTx": "0x2f6027eec186a775923f3ec3d451ebc1202d81fc1e94fc6f26863c56fe743305"
+    },
+    "DAOBase": {
+      "address": "0x9e896BB1175A304cf97D0E5a5523Eb6cd891196C",
+      "blockNumber": 129612362,
+      "deploymentTx": "0x404e78eea1755d02ccdf777faa12722e0812cf908c049b6c5b634f9e01b00db8"
+    },
+    "DAOFactory": {
+      "address": "0x751927FE5c9dDBee08Ab60BDc449ED1C6bD75562",
+      "blockNumber": 129612362,
+      "deploymentTx": "0x404e78eea1755d02ccdf777faa12722e0812cf908c049b6c5b634f9e01b00db8"
+    },
+    "DAORegistryProxy": {
+      "address": "0x308a1DC5020c4B5d992F5543a7236c465997fecB",
+      "blockNumber": 2827168,
+      "deploymentTx": "0xb42a493132e581327fb5b09637b09d9bf628b9be0df7ae45ea01eb3d13f40fe8"
+    },
+    "DAORegistryImplementation": {
+      "address": "0x2B8C4DD137104d1E869105cd0106e7D9EF955BfE",
+      "blockNumber": 129612377,
+      "deploymentTx": "0x2d18d162d4c17b927b6059704d7a182260c29bc3214d35cc6e73644a6ac5ae3b"
+    },
+    "DAOENSSubdomainRegistrarProxy": {
+      "address": "0xf2d594F3C93C19D7B1a6F15B5489FFcE4B01f7dA",
+      "blockNumber": 2827157,
+      "deploymentTx": "0x5ae40406de2dec7d625b87c20649aef138c4454821ebd88a6515183fdd4edf4d"
+    },
+    "DAOENSSubdomainRegistrarImplementation": {
+      "address": "0x005098056a837c2c4F99C7eCeE976F8D90bdFFF8",
+      "blockNumber": 2827152,
+      "deploymentTx": "0x348000e5299b0159474cdbcf94499b6d5c31e3078b0687f6f8b838fd99ea4d07"
+    },
+    "ENSRegistry": {
+      "address": "0x308fCC274A5dc405feED1e4d10c1dEf265219bCA",
+      "blockNumber": 2827131,
+      "deploymentTx": "0xe24c8eeb2983a35cd57c03663e275b8aa257081892cf831d3f7448f892d19a04"
+    },
+    "GovernanceERC20": {
+      "address": "0x6aA29Df41B4Dc025D345F8F39538F8E536eB59EC",
+      "blockNumber": 129593528,
+      "deploymentTx": "0xa7673421708558403a78edc143c9043343602562679e8fe5e13da479a45efada"
+    },
+    "GovernanceWrappedERC20": {
+      "address": "0x14a07278ce54CCDA6577899f85aA87d9B8Ef6A70",
+      "blockNumber": 129593536,
+      "deploymentTx": "0x712b75d3cad2f4c6c1c28fb96a5198962dcd605fc77513c87b5db9926452cd6a"
+    },
+    "MultisigSetup": {
+      "address": "0x84b068c028d62bdA925FbdE446164D33Ae686Bde",
+      "blockNumber": 129590855,
+      "deploymentTx": "0x51931d8be40c3c49d99f7c5848df61dde49cf0f9fdac77b0d95d3c65107edf5b"
+    },
+    "MultisigSetupImplementation": {
+      "address": "0x7baC4Db6c59f84D40dc634998a675eAbFEe645eB",
+      "blockNumber": 129590855,
+      "deploymentTx": "0x51931d8be40c3c49d99f7c5848df61dde49cf0f9fdac77b0d95d3c65107edf5b"
+    },
+    "PlaceholderSetup": {
+      "address": "0xB2A2b32b9d885C85d5b229C0509341c37CaE7483",
+      "blockNumber": 2827206,
+      "deploymentTx": "0xca1b9e7122ae0394fd8c67ffa9691f9cc2dd6cc8d7de5a5d3b700ead3be6262a"
+    },
+    "PluginRepoBase": {
+      "address": "0x4be76f6e1B30FcB66ED310311BBd1b6AB9a5F405",
+      "blockNumber": 129612368,
+      "deploymentTx": "0x7a94c0e738e80c200926e82f508aafa9c211ac1a2d03cc00ad0a99180cd6c144"
+    },
+    "PluginRepoFactory": {
+      "address": "0xA0c2f591a83CFc3f83dC21586168cBF0aF68925c",
+      "blockNumber": 129612368,
+      "deploymentTx": "0x7a94c0e738e80c200926e82f508aafa9c211ac1a2d03cc00ad0a99180cd6c144"
+    },
+    "PluginRepoRegistryProxy": {
+      "address": "0x35B62715459cB60bf6dC17fF8cfe138EA305E7Ee",
+      "blockNumber": 2827171,
+      "deploymentTx": "0xa6f9c291f6695525d0c3efbc21fe57dcdb5b01bfb5b164f994104d63be1df4a0"
+    },
+    "PluginRepoRegistryImplementation": {
+      "address": "0x04944032AdF202213412cf7FDAE03fd48B2EC5Ea",
+      "blockNumber": 129612384,
+      "deploymentTx": "0x9466ce8727db9138975294533b972138bf54124eb30635d404da06cc5025df5b"
+    },
+    "PluginSetupProcessor": {
+      "address": "0xC24188a73dc09aA7C721f96Ad8857B469C01dC9f",
+      "blockNumber": 2827173,
+      "deploymentTx": "0xc4e46b993520af8c912cce6d2f12deefc8decfcf71942770f637ea14bc0ba371"
+    },
+    "PluginENSSubdomainRegistrarProxy": {
+      "address": "0x95D563382BeD5AcB458759EE05b27DF2CB019Cc7",
+      "blockNumber": 2827162,
+      "deploymentTx": "0xb741913163cca331abd3e8ed9c8df1e6c020e843e3af780e1216e78e39eb1d04"
+    },
+    "PluginENSSubdomainRegistrarImplementation": {
+      "address": "0xB5146Fd572C669ABC353902e43F47fda4609E38A",
+      "blockNumber": 2827158,
+      "deploymentTx": "0x3b5e99d19c3da1cbffb38a12bdb70062b025f3854e002cd6a88c57db66648969"
+    },
+    "PublicResolver": {
+      "address": "0x57e24f85ceAcDa3Ef4F0fd04005589B88dc01A19",
+      "blockNumber": 2827134,
+      "deploymentTx": "0x65561085a207a31710d1554b991e1f6229eaf67c1cfcacf6fa818d4daf5c68dc"
+    },
+    "TokenVotingSetup": {
+      "address": "0xe0E477Ce7f0e1Db1A74363fC1940739bbD2B5F37",
+      "blockNumber": 129593543,
+      "deploymentTx": "0x8f9591ba81938518f71a42e6c15853908f7bafdf85717c2b1549036a1207f37d"
+    },
+    "TokenVotingSetupImplementation": {
+      "address": "0x3537d11635D69e407E3346EceeF752D4919d40a9",
+      "blockNumber": 129593543,
+      "deploymentTx": "0x8f9591ba81938518f71a42e6c15853908f7bafdf85717c2b1549036a1207f37d"
+    },
+    "AddresslistVotingRepoProxy": {
+      "address": "0xdfA1fBeC1Cad92597101A4f4A18e1340c5eA55C1",
+      "blockNumber": 2827207,
+      "deploymentTx": "0xba2ab05216a4c7e213cfc814faececc5212d52e52618ab43720c4185285b9e00"
+    },
+    "AddresslistVotingRepoImplementation": {
+      "address": "0x917c2ab96c40adefd08d240409485d8b606423e3",
+      "blockNumber": 2827172,
+      "deploymentTx": "0x80d0b00ee3db979d20e2c3e7d4578786123e3d93f55b892e0fed079c260a1fed"
+    },
+    "AdminRepoProxy": {
+      "address": "0x152c9E28995E418870b85cbbc0AEE4e53020edb2",
+      "blockNumber": 2827219,
+      "deploymentTx": "0xdf4c27fa6be14f3b42ec5c60096a7cfa0e0ca928b8445bd1b3483532451085b6"
+    },
+    "AdminRepoImplementation": {
+      "address": "0x917c2ab96c40adefd08d240409485d8b606423e3",
+      "blockNumber": 2827172,
+      "deploymentTx": "0x80d0b00ee3db979d20e2c3e7d4578786123e3d93f55b892e0fed079c260a1fed"
+    },
+    "ManagementDAOProxy": {
+      "address": "0xc4ddBd0472C2688F5d278dAFC02E66EE176C8DE3",
+      "blockNumber": 2827118,
+      "deploymentTx": "0xc2e74b18ea66407fd6b4a661d2f71aefb9d1792d0a5609a991e4bc846abea6bc"
+    },
+    "ManagementDAOImplementation": {
+      "address": "0x9e896BB1175A304cf97D0E5a5523Eb6cd891196C",
+      "blockNumber": 129612362,
+      "deploymentTx": "0x404e78eea1755d02ccdf777faa12722e0812cf908c049b6c5b634f9e01b00db8"
+    },
+    "MultisigRepoProxy": {
+      "address": "0x9e7956C8758470dE159481e5DD0d08F8B59217A2",
+      "blockNumber": 2827221,
+      "deploymentTx": "0x5f2779eec6d9a476a2d8ac8c10419f7d2ba701236adf37e479134b13d19e2a13"
+    },
+    "MultisigRepoImplementation": {
+      "address": "0x917c2ab96c40adefd08d240409485d8b606423e3",
+      "blockNumber": 2827172,
+      "deploymentTx": "0x80d0b00ee3db979d20e2c3e7d4578786123e3d93f55b892e0fed079c260a1fed"
+    },
+    "TokenVotingRepoProxy": {
+      "address": "0x424F4cA6FA9c24C03f2396DF0E96057eD11CF7dF",
+      "blockNumber": 2827212,
+      "deploymentTx": "0xc6c67d5d8328c54c1121995003ee93c5a31bbc69635c2f19badb9d3d545943de"
+    },
+    "TokenVotingRepoImplementation": {
+      "address": "0x917c2ab96c40adefd08d240409485d8b606423e3",
+      "blockNumber": 2827172,
+      "deploymentTx": "0x80d0b00ee3db979d20e2c3e7d4578786123e3d93f55b892e0fed079c260a1fed"
+    },
+    "StagedProposalProcessorRepoProxy": {
+      "address": "0x6f6bA3B04F4aF847C5C1bF97C51D3d7Efc026401",
+      "blockNumber": 129604752,
+      "deploymentTx": "0xe79b2997708198f9c71477ffd7544e0f35c76cc0db787253cf456a4dc644ff1e"
+    },
+    "StagedProposalProcessorSetup": {
+      "address": "0x4d8AA48C70092f0A6aB89B5507bb02174003a375",
+      "blockNumber": 129604757,
+      "deploymentTx": "0xd9eac661d6d2698e702dd8a49ad62af556aa0c1bcc88dd96081de6183baf5dec"
+    },
+    "StagedProposalProcessorSetupImplementation": {
+      "address": "0x187019670CFd6bAf4133D71E2A3a607722A138C1",
+      "blockNumber": 129604757,
+      "deploymentTx": "0xd9eac661d6d2698e702dd8a49ad62af556aa0c1bcc88dd96081de6183baf5dec"
+    },
+    "Executor": {
+      "address": "0xA7DD39C0F1107Bdf96e571a9334D2282e943e18d",
+      "blockNumber": 129612350,
+      "deploymentTx": "0x1a45611dd8c54f16ee433986c87491631cf46238268af3e5021fb9cd6d82828d"
+    }
   }
 }
