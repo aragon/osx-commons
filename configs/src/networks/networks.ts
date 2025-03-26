@@ -41,7 +41,6 @@ export const networks: NetworkConfigs = {
     aliases: {
       ethers5: 'matic',
       ethers6: 'matic',
-      alchemySubgraphs: 'matic',
     },
   },
   [SupportedNetworks.MUMBAI]: {
@@ -52,7 +51,6 @@ export const networks: NetworkConfigs = {
     aliases: {
       ethers5: 'maticmum',
       ethers6: 'matic-mumbai',
-      alchemySubgraphs: 'mumbai',
     },
   },
   [SupportedNetworks.BASE]: {
@@ -60,43 +58,33 @@ export const networks: NetworkConfigs = {
     chainId: 8453,
     gasPrice: 1000,
     name: SupportedNetworks.BASE,
-    aliases: {
-      alchemySubgraphs: 'base',
-    },
+    aliases: {},
   },
   [SupportedNetworks.BASE_GOERLI]: {
     isTestnet: true,
     chainId: 84531,
     gasPrice: 1000000,
     name: SupportedNetworks.BASE_GOERLI,
-    aliases: {
-      alchemySubgraphs: 'base-testnet',
-    },
+    aliases: {},
   },
   [SupportedNetworks.BASE_SEPOLIA]: {
     isTestnet: true,
     chainId: 84532,
     gasPrice: 1000000,
     name: SupportedNetworks.BASE_SEPOLIA,
-    aliases: {
-      alchemySubgraphs: 'base-sepolia',
-    },
+    aliases: {},
   },
   [SupportedNetworks.ARBITRUM]: {
     isTestnet: false,
     chainId: 42161,
     name: SupportedNetworks.ARBITRUM,
-    aliases: {
-      alchemySubgraphs: 'arbitrum-one',
-    },
+    aliases: {},
   },
   [SupportedNetworks.ARBITRUM_SEPOLIA]: {
     isTestnet: true,
     chainId: 421614,
     name: SupportedNetworks.ARBITRUM_SEPOLIA,
-    aliases: {
-      alchemySubgraphs: 'arbitrum-sepolia',
-    },
+    aliases: {},
   },
   [SupportedNetworks.ZKSYNC_SEPOLIA]: {
     chainId: 300,
@@ -140,6 +128,12 @@ export const networks: NetworkConfigs = {
     name: SupportedNetworks.LOCAL,
     aliases: {},
   },
+  [SupportedNetworks.MODE_MAINNET]: {
+    isTestnet: false,
+    chainId: 34443,
+    name: SupportedNetworks.MODE_MAINNET,
+    aliases: {},
+  },
 };
 
 export const networksAlchemyRpcUrl: NetworkRpcUrl = {
@@ -163,6 +157,7 @@ export const networksAlchemyRpcUrl: NetworkRpcUrl = {
   [SupportedNetworks.LINEA_SEPOLIA]: 'https://linea-sepolia.g.alchemy.com/v2/',
   [SupportedNetworks.PEAQ]: 'https://mpfn1.peaq.network',
   [SupportedNetworks.AGUNG_TESTNET]: 'https://wss-async.agung.peaq.network',
+  [SupportedNetworks.MODE_MAINNET]: 'https://mainnet.mode.network/',
   [SupportedNetworks.LOCAL]: 'http://localhost:8545',
 };
 
@@ -177,6 +172,7 @@ export function addRpcUrlToNetwork(
       network == SupportedNetworks.BASE_GOERLI ||
       network == SupportedNetworks.PEAQ ||
       network == SupportedNetworks.AGUNG_TESTNET
+      network == SupportedNetworks.MODE_MAINNET
     ) {
       networks[network].url = networksRpcUrl[network];
     } else {

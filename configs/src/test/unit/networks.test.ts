@@ -166,6 +166,9 @@ describe('Deployments', () => {
         } else if (network === SupportedNetworks.AGUNG_TESTNET) {
           expect(networks[network].url).toBe(
             networksAlchemyRpcUrl[SupportedNetworks.AGUNG_TESTNET]
+        } else if (network === SupportedNetworks.MODE_MAINNET) {
+          expect(networks[network].url).toBe(
+            networksAlchemyRpcUrl[SupportedNetworks.MODE_MAINNET]
           );
         } else {
           expect(networks[network].url).toBe(

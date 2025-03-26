@@ -7,7 +7,7 @@ This includes:
 - Networks
   - if it is a testnet or not
   - chain ID
-  - alias for ethers and Alchemy subgraph
+  - alias for ethers
 - Deployments of the OSx protocol grouped by network
   - Version
   - Contract name

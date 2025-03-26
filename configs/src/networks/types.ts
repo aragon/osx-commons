@@ -1,7 +1,6 @@
 export enum SupportedAliases {
   ETHERS_5 = 'ethers5',
   ETHERS_6 = 'ethers6',
-  ALCHEMY_SUBGRAPHS = 'alchemySubgraphs',
 }
 
 export enum SupportedNetworks {
@@ -20,6 +19,7 @@ export enum SupportedNetworks {
   ZKSYNC_SEPOLIA = 'zksyncSepolia',
   ZKSYNC_MAINNET = 'zksyncMainnet',
   LINEA_SEPOLIA = 'lineaSepolia',
+  MODE_MAINNET = 'modeMainnet',
   LINEA = 'linea',
   PEAQ = 'peaq',
   AGUNG_TESTNET = 'agungTestnet',

@@ -22,7 +22,6 @@
     "lint:contracts:sol": "solhint --max-warnings 0 \"contracts/src/**/*.sol\"",
     "lint:contracts:ts": "eslint --ext .js,.ts ./contracts/",
     "lint:sdk:ts": "eslint --ext .js,.ts ./sdk/",
-    "lint:subgraph:ts": "eslint --ext .js,.ts ./subgraph/",
     "prettier:check": "prettier --check \"**/*.{js,json,md,sol,ts,yml}\"",
     "prettier:write": "prettier --write \"**/*.{js,json,md,sol,ts,yml}\""
   }
