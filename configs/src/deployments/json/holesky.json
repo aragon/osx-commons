@@ -41,12 +41,12 @@
       "deploymentTx": "0x8c489dd5f838070daad7ba3691240b46b341270b17f5287d4b87028200b8a17f"
     },
     "GovernanceERC20": {
-      "address": "0x11B0a1b3EB9344827c5A84536E85c372592D53b8 ",
+      "address": "0x11B0a1b3EB9344827c5A84536E85c372592D53b8",
       "blockNumber": 3548928,
       "deploymentTx": "0x9535f333b381bdcd7e4b73596e442ad77d5fe06e76bdb707c811a782cb562dd5"
     },
     "GovernanceWrappedERC20": {
-      "address": "0x00a762a10F1534cbbf7d7Ff1B81eD52158BDc090 ",
+      "address": "0x00a762a10F1534cbbf7d7Ff1B81eD52158BDc090",
       "blockNumber": 3548929,
       "deploymentTx": "0x3174ccd7dbf9f27b76f2b9fa9df278887eb9a9d11643630e307932a0cea356ab"
     },
