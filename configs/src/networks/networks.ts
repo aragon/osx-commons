@@ -116,6 +116,12 @@ export const networks: NetworkConfigs = {
     name: SupportedNetworks.LOCAL,
     aliases: {},
   },
+  [SupportedNetworks.MODE_MAINNET]: {
+    isTestnet: false,
+    chainId: 34443,
+    name: SupportedNetworks.MODE_MAINNET,
+    aliases: {},
+  },
 };
 
 export const networksAlchemyRpcUrl: NetworkRpcUrl = {
@@ -137,6 +143,7 @@ export const networksAlchemyRpcUrl: NetworkRpcUrl = {
     'https://zksync-mainnet.g.alchemy.com/v2/',
   [SupportedNetworks.LINEA]: 'https://linea-mainnet.g.alchemy.com/v2/',
   [SupportedNetworks.LINEA_SEPOLIA]: 'https://linea-sepolia.g.alchemy.com/v2/',
+  [SupportedNetworks.MODE_MAINNET]: 'https://mainnet.mode.network/',
   [SupportedNetworks.LOCAL]: 'http://localhost:8545',
 };
 
@@ -148,7 +155,8 @@ export function addRpcUrlToNetwork(
   for (const network of Object.values(SupportedNetworks)) {
     if (
       network == SupportedNetworks.LOCAL ||
-      network == SupportedNetworks.BASE_GOERLI
+      network == SupportedNetworks.BASE_GOERLI ||
+      network == SupportedNetworks.MODE_MAINNET
     ) {
       networks[network].url = networksRpcUrl[network];
     } else {
