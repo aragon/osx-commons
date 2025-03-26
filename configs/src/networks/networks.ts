@@ -110,6 +110,18 @@ export const networks: NetworkConfigs = {
     name: SupportedNetworks.LINEA,
     aliases: {},
   },
+  [SupportedNetworks.PEAQ]: {
+    chainId: 3338,
+    isTestnet: false,
+    name: SupportedNetworks.PEAQ,
+    aliases: {},
+  },
+  [SupportedNetworks.AGUNG_TESTNET]: {
+    chainId: 9990,
+    isTestnet: false,
+    name: SupportedNetworks.AGUNG_TESTNET,
+    aliases: {},
+  },
   [SupportedNetworks.LOCAL]: {
     isTestnet: true,
     chainId: 31337,
@@ -143,6 +155,8 @@ export const networksAlchemyRpcUrl: NetworkRpcUrl = {
     'https://zksync-mainnet.g.alchemy.com/v2/',
   [SupportedNetworks.LINEA]: 'https://linea-mainnet.g.alchemy.com/v2/',
   [SupportedNetworks.LINEA_SEPOLIA]: 'https://linea-sepolia.g.alchemy.com/v2/',
+  [SupportedNetworks.PEAQ]: 'https://mpfn1.peaq.network',
+  [SupportedNetworks.AGUNG_TESTNET]: 'https://wss-async.agung.peaq.network',
   [SupportedNetworks.MODE_MAINNET]: 'https://mainnet.mode.network/',
   [SupportedNetworks.LOCAL]: 'http://localhost:8545',
 };
@@ -156,6 +170,8 @@ export function addRpcUrlToNetwork(
     if (
       network == SupportedNetworks.LOCAL ||
       network == SupportedNetworks.BASE_GOERLI ||
+      network == SupportedNetworks.PEAQ ||
+      network == SupportedNetworks.AGUNG_TESTNET ||
       network == SupportedNetworks.MODE_MAINNET
     ) {
       networks[network].url = networksRpcUrl[network];

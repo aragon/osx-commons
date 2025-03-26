@@ -1,4 +1,5 @@
 import {SupportedNetworks} from '../networks';
+import * as agungTestnet from './json/agungTestnet.json';
 import * as arbitrum from './json/arbitrum.json';
 import * as arbitrumSepolia from './json/arbitrumSepolia.json';
 import * as baseGoerli from './json/baseGoerli.json';
@@ -12,6 +13,7 @@ import * as lineaSepolia from './json/lineaSepolia.json';
 import * as mainnet from './json/mainnet.json';
 import * as modeMainnet from './json/modeMainnet.json';
 import * as mumbai from './json/mumbai.json';
+import * as peaq from './json/peaq.json';
 import * as polygon from './json/polygon.json';
 import * as sepolia from './json/sepolia.json';
 import * as zksyncMainnet from './json/zksyncMainnet.json';
@@ -35,6 +37,8 @@ export {
   devSepolia,
   linea,
   lineaSepolia,
+  peaq,
+  agungTestnet,
   modeMainnet,
 };
 
@@ -59,6 +63,8 @@ export const contracts: {
   devSepolia,
   linea,
   lineaSepolia,
+  peaq,
+  agungTestnet,
   modeMainnet,
   local: {
     [SupportedVersions.V1_0_0]: {} as NetworkDeployment,

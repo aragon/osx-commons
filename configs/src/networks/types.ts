@@ -21,6 +21,8 @@ export enum SupportedNetworks {
   LINEA_SEPOLIA = 'lineaSepolia',
   MODE_MAINNET = 'modeMainnet',
   LINEA = 'linea',
+  PEAQ = 'peaq',
+  AGUNG_TESTNET = 'agungTestnet',
   LOCAL = 'local',
 }
 
