@@ -171,7 +171,7 @@ export function addRpcUrlToNetwork(
       network == SupportedNetworks.LOCAL ||
       network == SupportedNetworks.BASE_GOERLI ||
       network == SupportedNetworks.PEAQ ||
-      network == SupportedNetworks.AGUNG_TESTNET
+      network == SupportedNetworks.AGUNG_TESTNET ||
       network == SupportedNetworks.MODE_MAINNET
     ) {
       networks[network].url = networksRpcUrl[network];
