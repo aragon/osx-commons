@@ -1,4 +1,4 @@
-import {NetworkConfigs, SupportedNetworks, NetworkRpcUrl} from './types';
+import { NetworkConfigs, SupportedNetworks, NetworkRpcUrl } from './types';
 
 export const networks: NetworkConfigs = {
   [SupportedNetworks.MAINNET]: {
@@ -146,6 +146,24 @@ export const networks: NetworkConfigs = {
     name: SupportedNetworks.MODE_MAINNET,
     aliases: {},
   },
+  [SupportedNetworks.MONAD_TESTNET]: {
+    isTestnet: true,
+    chainId: 10143,
+    name: SupportedNetworks.MONAD_TESTNET,
+    aliases: {}
+  },
+  [SupportedNetworks.UNICHAIN]: {
+    isTestnet: false,
+    chainId: 1301,
+    name: SupportedNetworks.UNICHAIN,
+    aliases: {}
+  },
+  [SupportedNetworks.CORN]: {
+    isTestnet: false,
+    chainId: 21000000,
+    name: SupportedNetworks.CORN,
+    aliases: {}
+  }
 };
 
 export const networksAlchemyRpcUrl: NetworkRpcUrl = {
@@ -172,6 +190,9 @@ export const networksAlchemyRpcUrl: NetworkRpcUrl = {
   [SupportedNetworks.MODE_MAINNET]: 'https://mainnet.mode.network/',
   [SupportedNetworks.BSC_MAINNET]: 'https://bnb-mainnet.g.alchemy.com/v2/',
   [SupportedNetworks.BSC_TESTNET]: 'https://bnb-testnet.g.alchemy.com/v2/',
+  [SupportedNetworks.MONAD_TESTNET]: 'https://testnet-rpc.monad.xyz',
+  [SupportedNetworks.UNICHAIN]: 'https://unichain-rpc.publicnode.com',
+  [SupportedNetworks.CORN]: 'https://mainnet.corn-rpc.com',
   [SupportedNetworks.LOCAL]: 'http://localhost:8545',
 };
 
@@ -188,7 +209,10 @@ export function addRpcUrlToNetwork(
       network == SupportedNetworks.AGUNG_TESTNET ||
       network == SupportedNetworks.BSC_MAINNET ||
       network == SupportedNetworks.BSC_TESTNET ||
-      network == SupportedNetworks.MODE_MAINNET
+      network == SupportedNetworks.MODE_MAINNET ||
+      network == SupportedNetworks.MONAD_TESTNET ||
+      network == SupportedNetworks.UNICHAIN ||
+      network == SupportedNetworks.CORN
     ) {
       networks[network].url = networksRpcUrl[network];
     } else {

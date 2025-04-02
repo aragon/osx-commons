@@ -1,4 +1,4 @@
-import {SupportedNetworks} from '../networks';
+import { SupportedNetworks } from '../networks';
 import * as agungTestnet from './json/agungTestnet.json';
 import * as arbitrum from './json/arbitrum.json';
 import * as arbitrumSepolia from './json/arbitrumSepolia.json';
@@ -20,7 +20,10 @@ import * as polygon from './json/polygon.json';
 import * as sepolia from './json/sepolia.json';
 import * as zksyncMainnet from './json/zksyncMainnet.json';
 import * as zksyncSepolia from './json/zksyncSepolia.json';
-import {NetworkDeployment, SupportedVersions} from './types';
+import * as monadTestnet from './json/monadTestnet.json';
+import * as unichain from './json/unichain.json';
+import * as corn from './json/corn.json';
+import { NetworkDeployment, SupportedVersions } from './types';
 
 export {
   mainnet,
@@ -44,6 +47,9 @@ export {
   modeMainnet,
   bscMainnet,
   bscTestnet,
+  monadTestnet,
+  unichain,
+  corn,
 };
 
 export const contracts: {
@@ -72,6 +78,9 @@ export const contracts: {
   modeMainnet,
   bscMainnet,
   bscTestnet,
+  monadTestnet,
+  unichain,
+  corn,
   local: {
     [SupportedVersions.V1_0_0]: {} as NetworkDeployment,
     [SupportedVersions.V1_3_0]: {} as NetworkDeployment,

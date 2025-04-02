@@ -26,6 +26,9 @@ export enum SupportedNetworks {
   PEAQ = 'peaq',
   AGUNG_TESTNET = 'agungTestnet',
   LOCAL = 'local',
+  MONAD_TESTNET = 'monadTestnet',
+  UNICHAIN = 'unichain',
+  CORN = 'corn'
 }
 
 export type NetworkConfig = {
