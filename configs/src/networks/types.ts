@@ -28,7 +28,7 @@ export enum SupportedNetworks {
   LOCAL = 'local',
   MONAD_TESTNET = 'monadTestnet',
   UNICHAIN = 'unichain',
-  CORN = 'corn'
+  CORN = 'corn',
 }
 
 export type NetworkConfig = {

@@ -1,4 +1,4 @@
-import { NetworkConfigs, SupportedNetworks, NetworkRpcUrl } from './types';
+import {NetworkConfigs, SupportedNetworks, NetworkRpcUrl} from './types';
 
 export const networks: NetworkConfigs = {
   [SupportedNetworks.MAINNET]: {
@@ -150,20 +150,20 @@ export const networks: NetworkConfigs = {
     isTestnet: true,
     chainId: 10143,
     name: SupportedNetworks.MONAD_TESTNET,
-    aliases: {}
+    aliases: {},
   },
   [SupportedNetworks.UNICHAIN]: {
     isTestnet: false,
     chainId: 1301,
     name: SupportedNetworks.UNICHAIN,
-    aliases: {}
+    aliases: {},
   },
   [SupportedNetworks.CORN]: {
     isTestnet: false,
     chainId: 21000000,
     name: SupportedNetworks.CORN,
-    aliases: {}
-  }
+    aliases: {},
+  },
 };
 
 export const networksAlchemyRpcUrl: NetworkRpcUrl = {

@@ -35,7 +35,7 @@ describe('Deployments', () => {
         expected: null,
       });
 
-      inputs.map(({ network, expected }) => {
+      inputs.map(({network, expected}) => {
         if (!expected) {
           expect(getNetwork(network)).toBeNull();
           return;
@@ -52,7 +52,7 @@ describe('Deployments', () => {
           expected: networks[network],
         };
       });
-      inputs.map(({ network, expected }) => {
+      inputs.map(({network, expected}) => {
         expect(getNetworkByNameOrAlias(network)).toMatchObject(expected);
       });
     });
@@ -66,8 +66,8 @@ describe('Deployments', () => {
             };
           });
         })
-        .filter(({ network }) => network !== undefined);
-      inputs.map(({ network, expected }) => {
+        .filter(({network}) => network !== undefined);
+      inputs.map(({network, expected}) => {
         expect(getNetworkByNameOrAlias(network as string)).toMatchObject(
           expected
         );
@@ -85,9 +85,9 @@ describe('Deployments', () => {
             };
           });
         })
-        .filter(({ network }) => network !== undefined);
+        .filter(({network}) => network !== undefined);
 
-      inputs.map(({ network, expected }) => {
+      inputs.map(({network, expected}) => {
         if (!expected) {
           expect(getNetworkByAlias(network as string)).toBeNull();
           return;
@@ -107,9 +107,9 @@ describe('Deployments', () => {
             };
           });
         })
-        .filter(({ network }) => network !== undefined);
+        .filter(({network}) => network !== undefined);
 
-      inputs.map(({ network, expected }) => {
+      inputs.map(({network, expected}) => {
         expect(getNetworkNameByAlias(network as string)).toBe(expected);
       });
     });
@@ -125,7 +125,7 @@ describe('Deployments', () => {
           };
         });
       });
-      inputs.map(({ aliasName, network, expected }) => {
+      inputs.map(({aliasName, network, expected}) => {
         expect(getNetworkAlias(aliasName, network)).toBe(expected);
       });
     });
@@ -141,7 +141,7 @@ describe('Deployments', () => {
           expected: networks[network],
         };
       });
-      inputs.map(({ network, expected }) => {
+      inputs.map(({network, expected}) => {
         expect(getNetworkByChainId(network)).toBe(expected);
       });
     });
