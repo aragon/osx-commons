@@ -7,6 +7,7 @@ import * as baseMainnet from './json/baseMainnet.json';
 import * as baseSepolia from './json/baseSepolia.json';
 import * as bscMainnet from './json/bscMainnet.json';
 import * as bscTestnet from './json/bscTestnet.json';
+import * as corn from './json/corn.json';
 import * as devSepolia from './json/devSepolia.json';
 import * as goerli from './json/goerli.json';
 import * as holesky from './json/holesky.json';
@@ -14,10 +15,12 @@ import * as linea from './json/linea.json';
 import * as lineaSepolia from './json/lineaSepolia.json';
 import * as mainnet from './json/mainnet.json';
 import * as modeMainnet from './json/modeMainnet.json';
+import * as monadTestnet from './json/monadTestnet.json';
 import * as mumbai from './json/mumbai.json';
 import * as peaq from './json/peaq.json';
 import * as polygon from './json/polygon.json';
 import * as sepolia from './json/sepolia.json';
+import * as unichain from './json/unichain.json';
 import * as zksyncMainnet from './json/zksyncMainnet.json';
 import * as zksyncSepolia from './json/zksyncSepolia.json';
 import {NetworkDeployment, SupportedVersions} from './types';
@@ -44,6 +47,9 @@ export {
   modeMainnet,
   bscMainnet,
   bscTestnet,
+  monadTestnet,
+  unichain,
+  corn,
 };
 
 export const contracts: {
@@ -72,6 +78,9 @@ export const contracts: {
   modeMainnet,
   bscMainnet,
   bscTestnet,
+  monadTestnet,
+  unichain,
+  corn,
   local: {
     [SupportedVersions.V1_0_0]: {} as NetworkDeployment,
     [SupportedVersions.V1_3_0]: {} as NetworkDeployment,

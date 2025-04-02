@@ -179,6 +179,18 @@ describe('Deployments', () => {
           expect(networks[network].url).toBe(
             networksAlchemyRpcUrl[SupportedNetworks.MODE_MAINNET]
           );
+        } else if (network === SupportedNetworks.MONAD_TESTNET) {
+          expect(networks[network].url).toBe(
+            networksAlchemyRpcUrl[SupportedNetworks.MONAD_TESTNET]
+          );
+        } else if (network === SupportedNetworks.UNICHAIN) {
+          expect(networks[network].url).toBe(
+            networksAlchemyRpcUrl[SupportedNetworks.UNICHAIN]
+          );
+        } else if (network === SupportedNetworks.CORN) {
+          expect(networks[network].url).toBe(
+            networksAlchemyRpcUrl[SupportedNetworks.CORN]
+          );
         } else {
           expect(networks[network].url).toBe(
             `${networksAlchemyRpcUrl[network]}${apiKey}`
