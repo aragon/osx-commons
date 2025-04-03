@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  publish-artifacts-to-npm:
+  publish-configs-to-npm:
     runs-on: ubuntu-latest
 
     steps:
@@ -37,7 +37,7 @@ jobs:
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           git tag $VERSION-configs
-          git push origin $VERSION
+          git push origin $VERSION-configs
 
       - name: Install Dependencies
         run: |
