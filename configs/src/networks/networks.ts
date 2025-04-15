@@ -1,4 +1,4 @@
-import {NetworkConfigs, SupportedNetworks, NetworkRpcUrl} from './types';
+import { NetworkConfigs, SupportedNetworks, NetworkRpcUrl } from './types';
 
 export const networks: NetworkConfigs = {
   [SupportedNetworks.MAINNET]: {
@@ -164,6 +164,12 @@ export const networks: NetworkConfigs = {
     name: SupportedNetworks.CORN,
     aliases: {},
   },
+  [SupportedNetworks.CELO]: {
+    isTestnet: false,
+    chainId: 42220,
+    name: SupportedNetworks.CELO,
+    aliases: {}
+  }
 };
 
 export const networksAlchemyRpcUrl: NetworkRpcUrl = {
@@ -193,6 +199,7 @@ export const networksAlchemyRpcUrl: NetworkRpcUrl = {
   [SupportedNetworks.MONAD_TESTNET]: 'https://testnet-rpc.monad.xyz',
   [SupportedNetworks.UNICHAIN]: 'https://unichain-rpc.publicnode.com',
   [SupportedNetworks.CORN]: 'https://mainnet.corn-rpc.com',
+  [SupportedNetworks.CELO]: 'https://celo-mainnet.g.alchemy.com/v2/',
   [SupportedNetworks.LOCAL]: 'http://localhost:8545',
 };
 

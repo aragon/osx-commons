@@ -29,6 +29,7 @@ export enum SupportedNetworks {
   MONAD_TESTNET = 'monadTestnet',
   UNICHAIN = 'unichain',
   CORN = 'corn',
+  CELO = 'celo',
 }
 
 export type NetworkConfig = {
