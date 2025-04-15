@@ -1,4 +1,4 @@
-import { NetworkConfigs, SupportedNetworks, NetworkRpcUrl } from './types';
+import {NetworkConfigs, SupportedNetworks, NetworkRpcUrl} from './types';
 
 export const networks: NetworkConfigs = {
   [SupportedNetworks.MAINNET]: {
@@ -168,8 +168,8 @@ export const networks: NetworkConfigs = {
     isTestnet: false,
     chainId: 42220,
     name: SupportedNetworks.CELO,
-    aliases: {}
-  }
+    aliases: {},
+  },
 };
 
 export const networksAlchemyRpcUrl: NetworkRpcUrl = {

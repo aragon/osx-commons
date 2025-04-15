@@ -1,4 +1,4 @@
-import { SupportedNetworks } from '../networks';
+import {SupportedNetworks} from '../networks';
 import * as agungTestnet from './json/agungTestnet.json';
 import * as arbitrum from './json/arbitrum.json';
 import * as arbitrumSepolia from './json/arbitrumSepolia.json';
@@ -24,7 +24,7 @@ import * as sepolia from './json/sepolia.json';
 import * as unichain from './json/unichain.json';
 import * as zksyncMainnet from './json/zksyncMainnet.json';
 import * as zksyncSepolia from './json/zksyncSepolia.json';
-import { NetworkDeployment, SupportedVersions } from './types';
+import {NetworkDeployment, SupportedVersions} from './types';
 
 export {
   mainnet,
