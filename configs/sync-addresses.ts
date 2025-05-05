@@ -28,6 +28,10 @@ const OUTPUT_FILE = Deno.args[2]; // 'network-name.json'
 const OUTPUT_VERSION_KEY = 'v1.4.0';
 const RPC_URL = Deno.env.get('RPC_URL') || 'http://localhost:8545';
 
+// bytes32(uint256(keccak256('eip1967.proxy.implementation')) - 1)
+const EIP_1967_IMPLEMENTATION_SLOT =
+  '0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc';
+
 // Data schemas
 
 const HexStringSchema = z
@@ -79,7 +83,13 @@ const TransactionSchema = z.object({
     nonce: HexStringSchema,
     chainId: HexStringSchema.or(z.number()),
   }),
-  additionalContracts: z.array(z.any()),
+  additionalContracts: z.array(
+    z.object({
+      transactionType: z.string(),
+      address: z.string(),
+      initCode: z.string(),
+    })
+  ),
   isFixedGasLimit: z.boolean(),
 });
 type Transaction = z.infer<typeof TransactionSchema>;
@@ -169,13 +179,17 @@ async function runCastCommand(args: string[]): Promise<string> {
 }
 
 /** Finds transaction details by the deployed contract address */
-function findTxDetailsByAddress(
+function findDeploymentTransactionByAddress(
   runData: FoundryDepoyment,
   address: string
 ): Transaction | undefined {
   const lowerCaseAddress = address.toLowerCase();
   return runData.transactions.find(
-    tx => tx.contractAddress.toLowerCase() === lowerCaseAddress
+    tx =>
+      tx.contractAddress.toLowerCase() === lowerCaseAddress ||
+      tx.additionalContracts.some(
+        c => c.address.toLowerCase() === lowerCaseAddress
+      )
   );
 }
 
@@ -240,65 +254,72 @@ async function getBlockNumber(txHash: string): Promise<number> {
 }
 
 /** Gets the implementation address from a proxy contract */
-async function getImplementationAddress(proxyAddress: string): Promise<string> {
+async function getProxyImplementationAddress(
+  proxyAddress: string
+): Promise<string> {
   console.log(`Fetching implementation for proxy: ${proxyAddress}...`);
+
   try {
-    // Standard EIP-1967 implementation slot query or common function signature
-    // Try common 'implementation()' function first
-    const address = await runCastCommand([
-      'call',
+    const addressRaw = await runCastCommand([
+      'storage',
       proxyAddress,
-      'implementation()(address)',
+      EIP_1967_IMPLEMENTATION_SLOT,
       '--rpc-url',
       RPC_URL,
     ]);
-    if (!address || !address.startsWith('0x')) {
-      throw new Error(`Invalid address format received: ${address}`);
+    // The result is a 32-byte slot, the address is the last 20 bytes (40 hex chars)
+    const address = '0x' + addressRaw.slice(-40);
+    if (!address || address.length !== 42 || !address.startsWith('0x')) {
+      throw new Error(
+        `Invalid address format received from storage slot: ${addressRaw}`
+      );
     }
-    console.log(` -> Found implementation: ${address}`);
+    console.log(` -> Found implementation via storage slot: ${address}`);
+    return address;
+  } catch (nestedError) {
+    console.error(
+      `Error fetching implementation for ${proxyAddress} via both methods:`,
+      nestedError.message
+    );
+    throw new Error(
+      `Could not determine implementation address for ${proxyAddress}`
+    );
+  }
+}
+
+/** Gets the implementation address from a proxy contract using EIP-1967 slot or common functions */
+async function getSetupImplementationAddress(
+  pluginSetupAddress: string
+): Promise<string> {
+  console.log(`Fetching implementation for proxy: ${pluginSetupAddress}...`);
+
+  const sig = 'implementation()(address)';
+
+  try {
+    const address = await runCastCommand([
+      'call',
+      pluginSetupAddress,
+      sig,
+      '--rpc-url',
+      RPC_URL,
+    ]);
+
+    if (!address || !address.startsWith('0x') || address.length !== 42) {
+      throw new Error(
+        `Could not determine implementation address for ${pluginSetupAddress}`
+      );
+    }
+
+    console.log(` -> Found implementation via ${sig}: ${address}`);
     return address;
   } catch (error) {
-    console.warn(
-      `'implementation()' call failed for ${proxyAddress}, trying EIP-1967 storage slot...`
-    );
-    // Fallback to EIP-1967 storage slot if 'implementation()' fails
-    // bytes32(uint256(keccak256('eip1967.proxy.implementation')) - 1)
-    const implementationSlot =
-      '0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc';
-    try {
-      const addressRaw = await runCastCommand([
-        'storage',
-        proxyAddress,
-        implementationSlot,
-        '--rpc-url',
-        RPC_URL,
-      ]);
-      // The result is a 32-byte slot, the address is the last 20 bytes (40 hex chars)
-      const address = '0x' + addressRaw.slice(-40);
-      if (!address || address.length !== 42 || !address.startsWith('0x')) {
-        throw new Error(
-          `Invalid address format received from storage slot: ${addressRaw}`
-        );
-      }
-      console.log(` -> Found implementation via storage slot: ${address}`);
-      return address;
-    } catch (nestedError) {
-      console.error(
-        `Error fetching implementation for ${proxyAddress} via both methods:`,
-        error.message,
-        nestedError.message
-      );
-      throw new Error(
-        `Could not determine implementation address for ${proxyAddress}`
-      );
-    }
+    console.error(error);
+    throw error;
   }
 }
 
 /** Gets the latest plugin setup implementation address from a PluginRepo using getLatestVersion(1) */
-async function getPluginSetupImplementationAddress(
-  repoAddress: string
-): Promise<string> {
+async function getPluginSetupAddress(repoAddress: string): Promise<string> {
   const releaseNumber = 1;
   console.log(
     `Fetching latest plugin setup implementation from repo: ${repoAddress} using getLatestVersion(${releaseNumber})...`
@@ -319,9 +340,8 @@ async function getPluginSetupImplementationAddress(
       '--rpc-url',
       RPC_URL,
     ]);
-    // Example output for Version({ Tag({1, 5}), 0xAddr, 0xMeta }):
-    // "1 5 0xPluginSetupAddress... 0xBytes..."
-    const parts = output.trim().split(/\s+/);
+    // Output: "((1, 5), 0xPluginSetupAddress, 0xBytes)"
+    const parts = output.replace(/ /g, '').trim().split(/,/);
 
     // Basic validation
     if (
@@ -369,8 +389,9 @@ async function getPluginSetupImplementationAddress(
 type MappingSource =
   | {type: 'factory-addresses'; path: string}
   | {type: 'proxy-implementation'; proxyTargetKey: string}
+  | {type: 'setup-implementation'; setupTargetKey: string}
   | {type: 'plugin-setup-from-repo'; repoTargetKey: string}
-  | {type: 'direct-lookup-by-name'; contractName: string};
+  | {type: 'lookup-by-name'; contractName: string};
 
 interface ContractMapping {
   targetKey: string; // output key
@@ -392,6 +413,10 @@ const contractMappings: ContractMapping[] = [
   {
     targetKey: 'ManagementDAOProxy',
     source: {type: 'factory-addresses', path: 'osx.managementDao'},
+  },
+  {
+    targetKey: 'ManagementDAOMultisigProxy',
+    source: {type: 'factory-addresses', path: 'osx.managementDaoMultisig'},
   },
   {
     targetKey: 'DAORegistryProxy',
@@ -419,7 +444,7 @@ const contractMappings: ContractMapping[] = [
   },
   {
     targetKey: 'PlaceholderSetup',
-    source: {type: 'factory-addresses', path: 'osx.placeholderSeup'},
+    source: {type: 'factory-addresses', path: 'osx.placeholderSetup'},
   },
 
   // ENS Registrar Proxies
@@ -462,12 +487,18 @@ const contractMappings: ContractMapping[] = [
   // Note: These might need more robust identification if names clash or deployments are complex
   {
     targetKey: 'DAOBase',
-    source: {type: 'direct-lookup-by-name', contractName: 'DAO'},
-  }, // Based on example run-latest 'DAO'
+    source: {
+      type: 'proxy-implementation',
+      proxyTargetKey: 'ManagementDAOProxy',
+    },
+  },
   {
     targetKey: 'PluginRepoBase',
-    source: {type: 'direct-lookup-by-name', contractName: 'PluginRepo'},
-  }, // Assuming deployment named 'PluginRepo'
+    source: {
+      type: 'proxy-implementation',
+      proxyTargetKey: 'MultisigRepoProxy',
+    },
+  },
 
   // Implementations (depend on Proxies being processed first)
   {
@@ -503,67 +534,85 @@ const contractMappings: ContractMapping[] = [
     },
   },
 
-  // Plugin Setup Proxies (Lookup by name)
+  // Plugin Setup's (depend on Repos being processed first)
   {
     targetKey: 'AdminSetup',
-    source: {type: 'direct-lookup-by-name', contractName: 'AdminSetup'},
-  },
-  {
-    targetKey: 'MultisigSetup',
-    source: {type: 'direct-lookup-by-name', contractName: 'MultisigSetup'},
-  },
-  {
-    targetKey: 'TokenVotingSetup',
-    source: {type: 'direct-lookup-by-name', contractName: 'TokenVotingSetup'},
-  },
-  {
-    targetKey: 'StagedProposalProcessorSetup',
-    source: {
-      type: 'direct-lookup-by-name',
-      contractName: 'StagedProposalProcessorSetup',
-    },
-  },
-
-  // Plugin Setup Implementations (depend on Repos being processed first)
-  {
-    targetKey: 'AdminSetupImplementation',
     source: {type: 'plugin-setup-from-repo', repoTargetKey: 'AdminRepoProxy'},
   },
   {
-    targetKey: 'MultisigSetupImplementation',
+    targetKey: 'MultisigSetup',
     source: {
       type: 'plugin-setup-from-repo',
       repoTargetKey: 'MultisigRepoProxy',
     },
   },
   {
-    targetKey: 'TokenVotingSetupImplementation',
+    targetKey: 'TokenVotingSetup',
     source: {
       type: 'plugin-setup-from-repo',
       repoTargetKey: 'TokenVotingRepoProxy',
     },
   },
   {
-    targetKey: 'StagedProposalProcessorSetupImplementation',
+    targetKey: 'StagedProposalProcessorSetup',
     source: {
       type: 'plugin-setup-from-repo',
       repoTargetKey: 'StagedProposalProcessorRepoProxy',
     },
   },
 
+  // Plugin Setup Implementations (depend on Repos being processed first)
+  {
+    targetKey: 'AdminSetupImplementation',
+    source: {type: 'setup-implementation', setupTargetKey: 'AdminSetup'},
+  },
+  {
+    targetKey: 'MultisigSetupImplementation',
+    source: {
+      type: 'setup-implementation',
+      setupTargetKey: 'MultisigSetup',
+    },
+  },
+  {
+    targetKey: 'TokenVotingSetupImplementation',
+    source: {
+      type: 'setup-implementation',
+      setupTargetKey: 'TokenVotingSetup',
+    },
+  },
+  {
+    targetKey: 'StagedProposalProcessorSetupImplementation',
+    source: {
+      type: 'setup-implementation',
+      setupTargetKey: 'StagedProposalProcessorSetup',
+    },
+  },
+
   // Supporting Contracts (Lookup by name)
   {
     targetKey: 'GovernanceERC20',
-    source: {type: 'direct-lookup-by-name', contractName: 'GovernanceERC20'},
+    source: {type: 'lookup-by-name', contractName: 'GovernanceERC20'},
   },
   {
     targetKey: 'GovernanceWrappedERC20',
     source: {
-      type: 'direct-lookup-by-name',
+      type: 'lookup-by-name',
       contractName: 'GovernanceWrappedERC20',
     },
   },
 ];
+
+function sortedKeys(data: OutputData): OutputData {
+  const result = {[OUTPUT_VERSION_KEY]: {}};
+  const keys = Object.keys(data[OUTPUT_VERSION_KEY]);
+  keys.sort((a, b) => (b > a ? -1 : 1));
+
+  for (const k of keys) {
+    result[OUTPUT_VERSION_KEY][k] = data[OUTPUT_VERSION_KEY][k];
+  }
+
+  return result;
+}
 
 // MAIN
 
@@ -602,47 +651,56 @@ async function main() {
           throw new Error(
             `Path '${source.path}' not found in ${ADDRESSES_FILE}`
           );
+      } else if (source.type === 'proxy-implementation') {
+        const proxyContract = resolvedContracts[source.proxyTargetKey];
+        if (!proxyContract || !proxyContract.address) {
+          throw new Error(
+            `Dependency error: Proxy '${source.proxyTargetKey}' not resolved yet.`
+          );
+        }
+        address = await getProxyImplementationAddress(proxyContract.address);
+        sourceDescription = `implementation of ${source.proxyTargetKey} (${proxyContract.address})`;
+      } else if (source.type === 'setup-implementation') {
+        const setupContract = resolvedContracts[source.setupTargetKey];
+        if (!setupContract || !setupContract.address) {
+          throw new Error(
+            `Dependency error: Proxy '${source.setupTargetKey}' not resolved yet.`
+          );
+        }
+        address = await getSetupImplementationAddress(setupContract.address);
+        sourceDescription = `plugin of ${source.setupTargetKey} (${setupContract.address})`;
+      } else if (source.type === 'plugin-setup-from-repo') {
+        const repoContract = resolvedContracts[source.repoTargetKey];
+        if (!repoContract || !repoContract.address) {
+          throw new Error(
+            `Dependency error: Repo '${source.repoTargetKey}' not resolved yet.`
+          );
+        }
+        address = await getPluginSetupAddress(repoContract.address);
+        sourceDescription = `latest setup from repo ${source.repoTargetKey} (${repoContract.address})`;
+      } else if (source.type === 'lookup-by-name') {
+        const txDetails = findTxDetailsByName(
+          runLatestData,
+          source.contractName
+        );
+        if (!txDetails) {
+          throw new Error(
+            `Could not find deployment transaction for contract name '${source.contractName}' in ${RUN_LATEST_FILE}`
+          );
+        }
+        address = txDetails.contractAddress;
+        sourceDescription = `lookup by name '${source.contractName}' in ${RUN_LATEST_FILE}`;
       }
-      // else if (source.type === 'proxy-implementation') {
-      //   const proxyContract = resolvedContracts[source.proxyTargetKey];
-      //   if (!proxyContract || !proxyContract.address) {
-      //     throw new Error(
-      //       `Dependency error: Proxy '${source.proxyTargetKey}' not resolved yet.`
-      //     );
-      //   }
-      //   address = await getImplementationAddress(proxyContract.address);
-      //   sourceDescription = `implementation of ${source.proxyTargetKey} (${proxyContract.address})`;
-      // } else if (source.type === 'plugin-setup-from-repo') {
-      //   const repoContract = resolvedContracts[source.repoTargetKey];
-      //   if (!repoContract || !repoContract.address) {
-      //     throw new Error(
-      //       `Dependency error: Repo '${source.repoTargetKey}' not resolved yet.`
-      //     );
-      //   }
-      //   address = await getPluginSetupImplementationAddress(
-      //     repoContract.address
-      //   );
-      //   sourceDescription = `latest setup implementation from repo ${source.repoTargetKey} (${repoContract.address})`;
-      // } else if (source.type === 'direct-lookup-by-name') {
-      //   const txDetails = findTxDetailsByName(
-      //     runLatestData,
-      //     source.contractName
-      //   );
-      //   if (!txDetails) {
-      //     throw new Error(
-      //       `Could not find deployment transaction for contract name '${source.contractName}' in ${RUN_LATEST_FILE}`
-      //     );
-      //   }
-      //   address = txDetails.contractAddress;
-      //   sourceDescription = `direct lookup by name '${source.contractName}' in ${RUN_LATEST_FILE}`;
-      // }
 
       if (!address) {
         throw new Error('Failed to determine address.');
       }
 
       // Transaction hash + block number
-      const txDetails = findTxDetailsByAddress(runLatestData, address);
+      const txDetails = findDeploymentTransactionByAddress(
+        runLatestData,
+        address
+      );
       if (!txDetails) {
         throw new Error(
           `Could not find deployment transaction for address ${address} (${sourceDescription}) in ${RUN_LATEST_FILE}`
@@ -668,8 +726,11 @@ async function main() {
   // 4. Write Output File
   console.log(`\nWriting output to ${OUTPUT_FILE}...`);
   try {
-    await Deno.writeTextFile(OUTPUT_FILE, JSON.stringify(outputData, null, 2));
-    console.log('✅ Network config generation complete');
+    await Deno.writeTextFile(
+      OUTPUT_FILE,
+      JSON.stringify(sortedKeys(outputData), null, 2)
+    );
+    console.log('Network config generation complete');
   } catch (error) {
     console.error(`Error writing output file ${OUTPUT_FILE}:`, error);
     Deno.exit(1);

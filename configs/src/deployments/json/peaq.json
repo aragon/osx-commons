@@ -25,7 +25,7 @@
       "blockNumber": 4032407,
       "deploymentTx": "0xfd84cc38da3ab114636d15e7c1da2b0fd34e1f36eb9b4de3f61e0500900d3a2b"
     },
-    "GlobalExecutor": {
+    "Executor": {
       "address": "0x07f49c49Ce2A99CF7C28F66673d406386BDD8Ff4",
       "blockNumber": 4032432,
       "deploymentTx": "0x7baaa75fcaa2ca1121fc1c40a513f66474edc56d986ddfb45197cccf8691e418"
