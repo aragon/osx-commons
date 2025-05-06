@@ -41,6 +41,7 @@ yarn test
 The list of contract artifacts on `src/deployments/json` **is deprecated** and will be removed in the future.
 
 Instead, use the appropriate artifacts package for each component:
+
 - https://www.npmjs.com/package/@aragon/osx-artifacts
 - https://www.npmjs.com/package/@aragon/admin-plugin-artifacts
 - https://www.npmjs.com/package/@aragon/multisig-plugin-artifacts
