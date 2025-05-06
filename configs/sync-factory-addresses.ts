@@ -318,6 +318,33 @@ async function getSetupImplementationAddress(
   }
 }
 
+/** Gets the implementation address from a proxy contract using EIP-1967 slot or common functions */
+async function getDaoBaseAddress(daoFactory: string): Promise<string> {
+  console.log(`Fetching daoBase for factory: ${daoFactory}...`);
+
+  const sig = 'daoBase()(address)';
+
+  try {
+    const address = await runCastCommand([
+      'call',
+      daoFactory,
+      sig,
+      '--rpc-url',
+      RPC_URL,
+    ]);
+
+    if (!address || !address.startsWith('0x') || address.length !== 42) {
+      throw new Error(`Could not determine daoBase address for ${daoFactory}`);
+    }
+
+    console.log(` -> Found daoBase via ${sig}: ${address}`);
+    return address;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
 /** Gets the latest plugin setup implementation address from a PluginRepo using getLatestVersion(1) */
 async function getPluginSetupAddress(repoAddress: string): Promise<string> {
   const releaseNumber = 1;
@@ -391,7 +418,8 @@ type MappingSource =
   | {type: 'proxy-implementation'; proxyTargetKey: string}
   | {type: 'setup-implementation'; setupTargetKey: string}
   | {type: 'plugin-setup-from-repo'; repoTargetKey: string}
-  | {type: 'lookup-by-name'; contractName: string};
+  | {type: 'lookup-by-name'; contractName: string}
+  | {type: 'dao-base'; targetKey: string};
 
 interface ContractMapping {
   targetKey: string; // output key
@@ -481,15 +509,13 @@ const contractMappings: ContractMapping[] = [
     },
   },
 
-  // TODO: Recheck
-
   // Base Contracts (Lookup by name - assuming unique CREATE entries in run-latest)
   // Note: These might need more robust identification if names clash or deployments are complex
   {
     targetKey: 'DAOBase',
     source: {
-      type: 'proxy-implementation',
-      proxyTargetKey: 'ManagementDAOProxy',
+      type: 'dao-base',
+      targetKey: 'DAOFactory',
     },
   },
   {
@@ -506,6 +532,13 @@ const contractMappings: ContractMapping[] = [
     source: {
       type: 'proxy-implementation',
       proxyTargetKey: 'ManagementDAOProxy',
+    },
+  },
+  {
+    targetKey: 'ManagementDAOMultisigImplementation',
+    source: {
+      type: 'proxy-implementation',
+      proxyTargetKey: 'ManagementDAOMultisigProxy',
     },
   },
   {
@@ -690,6 +723,15 @@ async function main() {
         }
         address = txDetails.contractAddress;
         sourceDescription = `lookup by name '${source.contractName}' in ${RUN_LATEST_FILE}`;
+      } else if (source.type === 'dao-base') {
+        const daoFactory = resolvedContracts[source.targetKey];
+        if (!daoFactory || !daoFactory.address) {
+          throw new Error(
+            `Dependency error: Repo '${source.targetKey}' not resolved yet.`
+          );
+        }
+        address = await getDaoBaseAddress(daoFactory.address);
+        sourceDescription = `daoBase() from repo ${source.targetKey} (${daoFactory.address})`;
       }
 
       if (!address) {
