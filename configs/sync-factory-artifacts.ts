@@ -666,6 +666,7 @@ async function main() {
   // Output
   const outputData: OutputData = {[OUTPUT_VERSION_KEY]: {}};
   const resolvedContracts = outputData[OUTPUT_VERSION_KEY];
+  let hasErrors = false;
 
   // Mappings
   console.log('\nProcessing contract mappings...');
@@ -761,8 +762,13 @@ async function main() {
         ` -> Added ${targetKey} (Address: ${address}, Tx: ${deploymentTx}, Block: ${blockNumber})`
       );
     } catch (error) {
-      console.error(` !! FAILED processing ${targetKey}: ${error.message}`);
+      console.error(` 🛑 FAILED processing ${targetKey}: ${error.message}`);
+      hasErrors = true;
     }
+  }
+
+  if (hasErrors) {
+    Deno.exit(1);
   }
 
   // 4. Write Output File
