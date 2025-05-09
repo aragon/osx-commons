@@ -65,6 +65,23 @@ deno run --allow-read --allow-write=./src/deployments/json --allow-env --allow-r
     $SRC_PROTOCOL_ADDRESSES $SRC_DEPLOYMENT_RUN_FILE $OUTPUT_FILE
 ```
 
+You can also generate most of the same file by only sourcing `addreses.json`:
+
+```sh
+# Define your parameters
+export RPC_URL="https://server/api"
+export ETHERSCAN_API_KEY="..."
+export ETHERSCAN_API_URL_BASE="https://api.etherscan.io"
+
+SRC_PROTOCOL_ADDRESSES=".../protocol-factory/artifacts/addresses-<network>-<timestamp>.json"
+OUTPUT_FILE="./src/deployments/json/<network>.json"
+
+# Run the script
+deno run --allow-read --allow-write=./src/deployments/json --allow-net --allow-env --allow-run=cast \
+    sync-factory-artifacts-single.ts \
+    $SRC_PROTOCOL_ADDRESSES $OUTPUT_FILE
+```
+
 Note: Deno and Foundry are required.
 
 ## Security
