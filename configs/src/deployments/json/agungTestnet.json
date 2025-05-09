@@ -30,7 +30,7 @@
       "blockNumber": 0,
       "deploymentTx": ""
     },
-    "GlobalExecutor": {
+    "Executor": {
       "address": "0x1eaecE56660e95006Cb2E31e94e7fB9608ED5B51",
       "blockNumber": 0,
       "deploymentTx": ""
