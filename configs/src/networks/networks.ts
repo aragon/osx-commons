@@ -191,6 +191,7 @@ export const networksAlchemyRpcUrl: NetworkRpcUrl = {
   [SupportedNetworks.BASE_SEPOLIA]: 'https://base-sepolia.g.alchemy.com/v2/',
   [SupportedNetworks.ARBITRUM]: 'https://arb-mainnet.g.alchemy.com/v2/',
   [SupportedNetworks.ARBITRUM_SEPOLIA]: 'https://arb-sepolia.g.alchemy.com/v2/',
+  [SupportedNetworks.OPTIMISM]: 'https://opt-mainnet.g.alchemy.com/v2/',
   [SupportedNetworks.ZKSYNC_SEPOLIA]:
     'https://zksync-sepolia.g.alchemy.com/v2/',
   [SupportedNetworks.ZKSYNC_MAINNET]:
