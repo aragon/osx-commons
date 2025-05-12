@@ -18,6 +18,7 @@ import * as mainnet from './json/mainnet.json';
 import * as modeMainnet from './json/modeMainnet.json';
 import * as monadTestnet from './json/monadTestnet.json';
 import * as mumbai from './json/mumbai.json';
+import * as optimism from './json/optimism.json';
 import * as peaq from './json/peaq.json';
 import * as polygon from './json/polygon.json';
 import * as sepolia from './json/sepolia.json';
@@ -38,6 +39,7 @@ export {
   baseSepolia,
   arbitrum,
   arbitrumSepolia,
+  optimism,
   zksyncSepolia,
   zksyncMainnet,
   devSepolia,
@@ -70,6 +72,7 @@ export const contracts: {
   baseSepolia,
   arbitrum,
   arbitrumSepolia,
+  optimism,
   zksyncSepolia,
   zksyncMainnet,
   devSepolia,

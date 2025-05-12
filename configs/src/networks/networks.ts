@@ -86,6 +86,12 @@ export const networks: NetworkConfigs = {
     name: SupportedNetworks.ARBITRUM_SEPOLIA,
     aliases: {},
   },
+  [SupportedNetworks.OPTIMISM]: {
+    isTestnet: false,
+    chainId: 10,
+    name: SupportedNetworks.OPTIMISM,
+    aliases: {},
+  },
   [SupportedNetworks.ZKSYNC_SEPOLIA]: {
     chainId: 300,
     isTestnet: true,
