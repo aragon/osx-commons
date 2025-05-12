@@ -7,3 +7,10 @@ ignorePatterns:
   # directories
   - dist
   - src/docs/**/*.js
+  # ESLint complains that the 2 generation scripts are not on tsconfig.json
+  # - If added, then tsc complains that they are not on the rootDir, which is expected
+  # - If added, then tsc will fail because they are Deno files (expected)
+  # - If added, then they get compiled, which is useless.
+  # - If removed, then ESLint will not work
+  # There is no way to get around this absurd deadlock, other than ignoring this path
+  - scripts/*

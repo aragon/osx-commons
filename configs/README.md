@@ -61,7 +61,7 @@ OUTPUT_FILE="./src/deployments/json/<network>.json"
 
 # Run the script
 deno run --allow-read --allow-write=./src/deployments/json --allow-env --allow-run=cast \
-    sync-factory-artifacts.ts \
+    scripts/sync-factory-artifacts.ts \
     $SRC_PROTOCOL_ADDRESSES $SRC_DEPLOYMENT_RUN_FILE $OUTPUT_FILE
 ```
 
@@ -78,7 +78,7 @@ OUTPUT_FILE="./src/deployments/json/<network>.json"
 
 # Run the script
 deno run --allow-read --allow-write=./src/deployments/json --allow-net --allow-env --allow-run=cast \
-    sync-factory-artifacts-single.ts \
+    scripts/sync-factory-artifacts-single.ts \
     $SRC_PROTOCOL_ADDRESSES $OUTPUT_FILE
 ```
 
