@@ -1,7 +1,7 @@
 {
   "name": "@aragon/osx-commons-configs",
   "author": "Aragon X",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "license": "AGPL-3.0-or-later",
   "typings": "dist/index.d.ts",
   "main": "dist/index.js",
