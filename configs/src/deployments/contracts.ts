@@ -2,6 +2,7 @@ import {SupportedNetworks} from '../networks';
 import * as agungTestnet from './json/agungTestnet.json';
 import * as arbitrum from './json/arbitrum.json';
 import * as arbitrumSepolia from './json/arbitrumSepolia.json';
+import * as avalancheTestnet from './json/avalanche-testnet.json';
 import * as baseGoerli from './json/baseGoerli.json';
 import * as baseMainnet from './json/baseMainnet.json';
 import * as baseSepolia from './json/baseSepolia.json';
@@ -39,6 +40,7 @@ export {
   baseSepolia,
   arbitrum,
   arbitrumSepolia,
+  avalancheTestnet,
   optimism,
   zksyncSepolia,
   zksyncMainnet,
@@ -72,6 +74,7 @@ export const contracts: {
   baseSepolia,
   arbitrum,
   arbitrumSepolia,
+  avalancheTestnet,
   optimism,
   zksyncSepolia,
   zksyncMainnet,
@@ -90,5 +93,6 @@ export const contracts: {
   local: {
     [SupportedVersions.V1_0_0]: {} as NetworkDeployment,
     [SupportedVersions.V1_3_0]: {} as NetworkDeployment,
+    [SupportedVersions.V1_4_0]: {} as NetworkDeployment,
   },
 };

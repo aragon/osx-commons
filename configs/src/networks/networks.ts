@@ -86,6 +86,12 @@ export const networks: NetworkConfigs = {
     name: SupportedNetworks.ARBITRUM_SEPOLIA,
     aliases: {},
   },
+  [SupportedNetworks.AVALANCHE_TESTNET]: {
+    isTestnet: true,
+    chainId: 43113,
+    name: SupportedNetworks.AVALANCHE_TESTNET,
+    aliases: {},
+  },
   [SupportedNetworks.OPTIMISM]: {
     isTestnet: false,
     chainId: 10,
@@ -191,6 +197,8 @@ export const networksAlchemyRpcUrl: NetworkRpcUrl = {
   [SupportedNetworks.BASE_SEPOLIA]: 'https://base-sepolia.g.alchemy.com/v2/',
   [SupportedNetworks.ARBITRUM]: 'https://arb-mainnet.g.alchemy.com/v2/',
   [SupportedNetworks.ARBITRUM_SEPOLIA]: 'https://arb-sepolia.g.alchemy.com/v2/',
+  [SupportedNetworks.AVALANCHE_TESTNET]:
+    'https://api.avax-test.network/ext/bc/C/rpc',
   [SupportedNetworks.OPTIMISM]: 'https://opt-mainnet.g.alchemy.com/v2/',
   [SupportedNetworks.ZKSYNC_SEPOLIA]:
     'https://zksync-sepolia.g.alchemy.com/v2/',
