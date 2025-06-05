@@ -16,6 +16,7 @@ export enum SupportedNetworks {
   BASE_SEPOLIA = 'baseSepolia',
   ARBITRUM = 'arbitrum',
   ARBITRUM_SEPOLIA = 'arbitrumSepolia',
+  AVALANCHE = 'avalanche',
   AVALANCHE_TESTNET = 'avalancheTestnet',
   OPTIMISM = 'optimism',
   ZKSYNC_SEPOLIA = 'zksyncSepolia',
