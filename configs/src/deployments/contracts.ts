@@ -3,6 +3,7 @@ import * as agungTestnet from './json/agungTestnet.json';
 import * as arbitrum from './json/arbitrum.json';
 import * as arbitrumSepolia from './json/arbitrumSepolia.json';
 import * as avalancheTestnet from './json/avalanche-testnet.json';
+import * as avalanche from './json/avalanche.json';
 import * as baseGoerli from './json/baseGoerli.json';
 import * as baseMainnet from './json/baseMainnet.json';
 import * as baseSepolia from './json/baseSepolia.json';
@@ -40,6 +41,7 @@ export {
   baseSepolia,
   arbitrum,
   arbitrumSepolia,
+  avalanche,
   avalancheTestnet,
   optimism,
   zksyncSepolia,
@@ -74,6 +76,7 @@ export const contracts: {
   baseSepolia,
   arbitrum,
   arbitrumSepolia,
+  avalanche,
   avalancheTestnet,
   optimism,
   zksyncSepolia,
