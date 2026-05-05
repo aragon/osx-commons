@@ -3,6 +3,8 @@ import {
   RuledConditionMock__factory,
   PermissionConditionMock,
   PermissionConditionMock__factory,
+  AddressCheckConditionMock,
+  AddressCheckConditionMock__factory,
   DAOMock,
   DAOMock__factory,
   IPermissionCondition__factory,
@@ -199,6 +201,60 @@ describe('RuledCondition', async () => {
         '0x'
       )
     ).to.be.false;
+  });
+
+  it('passes _where and _who in the correct order to the IF_ELSE starting rule', async () => {
+    const {deployer, daoMock, conditionMock} = await loadFixture(fixture);
+
+    // A sub-condition that returns true only when it receives `_where == daoMock.address`
+    // AND `_who == deployer.address`. If `_evalRule` swaps the args when evaluating the
+    // IF_ELSE starting rule, the sub-condition sees them flipped and returns false,
+    // causing the failure branch (which returns false) to be taken.
+    const addressCheck = await new AddressCheckConditionMock__factory(
+      deployer
+    ).deploy();
+    await addressCheck.setExpected(daoMock.address, deployer.address);
+
+    // Rules:
+    //   0: IF_ELSE(start=1, success=2, failure=3)
+    //   1: CONDITION_RULE_ID -> addressCheck (observes _where/_who)
+    //   2: VALUE_RULE_ID RET 1 (success branch -> true)
+    //   3: VALUE_RULE_ID RET 0 (failure branch -> false)
+    await conditionMock.updateRules([
+      {
+        id: LOGIC_OP_RULE_ID,
+        op: Op.IF_ELSE,
+        value: await conditionMock.encodeIfElse(1, 2, 3),
+        permissionId: DUMMY_PERMISSION_ID,
+      },
+      {
+        id: CONDITION_RULE_ID,
+        op: Op.EQ,
+        value: addressCheck.address,
+        permissionId: DUMMY_PERMISSION_ID,
+      },
+      {
+        id: VALUE_RULE_ID,
+        op: Op.RET,
+        value: 1,
+        permissionId: DUMMY_PERMISSION_ID,
+      },
+      {
+        id: VALUE_RULE_ID,
+        op: Op.RET,
+        value: 0,
+        permissionId: DUMMY_PERMISSION_ID,
+      },
+    ]);
+
+    expect(
+      await conditionMock.isGranted(
+        daoMock.address,
+        deployer.address,
+        DUMMY_PERMISSION_ID,
+        '0x'
+      )
+    ).to.be.true;
   });
 
   it(`evaluates 'if/else' on sub-conditions and only returns true if at least one of them returns true`, async () => {
