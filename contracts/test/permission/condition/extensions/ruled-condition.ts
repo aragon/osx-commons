@@ -3,7 +3,6 @@ import {
   RuledConditionMock__factory,
   PermissionConditionMock,
   PermissionConditionMock__factory,
-  AddressCheckConditionMock,
   AddressCheckConditionMock__factory,
   DAOMock,
   DAOMock__factory,
