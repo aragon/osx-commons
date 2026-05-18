@@ -1,6 +1,15 @@
 # Aragon OSx Commons
 
-A collection of shared resources and utilities for the Aragon OSx DAO Framework and plugin developers
+> [!WARNING]
+> ## This repository is deprecated
+>
+> The contracts, configurations, and tooling have been consolidated into the main Aragon OSx repository.
+>
+> **For all OSx framework code, plugin development resources, deployments, and documentation, please refer to:**
+>
+> ### → [github.com/aragon/osx](https://github.com/aragon/osx) ←
+
+---
 
 ## Audit
 
